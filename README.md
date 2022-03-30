@@ -1,1 +1,7 @@
 # SEP4-Project
+An Embedded system for Art galleries. The main purpose - present the data of the room on an Android app (temperature, humidity, CO2) and act accordingly (open a window, etc.).
+
+## Teams:
+1. IOT team. Responsible for the embedded part of the system.
+2. DataWarehouse team. Responsible for getting the data from embedded system and storing it in a data warehouse. Also making a web service to make the data accesible.
+3. Android team. Responsible for making an android application that will present the data given by data warehouse in various ways.

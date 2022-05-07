@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public interface RoomRepository
     extends JpaRepository<Room, Long> {
 
-        Room findByRoomidIs(Long roomid);
+       // Room findByRoomidIs(Long roomid);
 }
 
 

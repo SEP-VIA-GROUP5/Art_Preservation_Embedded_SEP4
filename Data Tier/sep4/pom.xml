@@ -15,7 +15,7 @@
 	<name>sep4</name>
 	<description>Sep4</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

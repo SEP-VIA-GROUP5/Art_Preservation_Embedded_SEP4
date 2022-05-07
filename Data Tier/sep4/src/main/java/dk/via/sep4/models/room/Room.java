@@ -11,20 +11,20 @@ import java.util.Set;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "roomid")
-    private long roomid;
+    @Column(name = "roomId")
+    private long roomId;
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Sensor> sensors;
 
     public Room() {
     }
 
-    public Long getRoomid() {
-        return roomid;
+    public Long getRoomId() {
+        return roomId;
     }
 
-    public void setRoomid(Long roomid) {
-        this.roomid = roomid;
+    public void setRoomId(Long roomid) {
+        this.roomId = roomid;
     }
 
     public void setSensors(Set<Sensor> sensors) {

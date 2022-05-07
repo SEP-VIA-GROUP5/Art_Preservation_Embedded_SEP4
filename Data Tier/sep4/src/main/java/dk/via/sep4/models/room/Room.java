@@ -14,8 +14,15 @@ public class Room {
     private long id;
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Sensor> sensors;
+    private String name;
+    private String location;
+    private int number;
 
-    public Room() {
+    public Room(String name, String location, int number)
+    {
+        this.name = name;
+        this.location = location;
+        this.number = number;
     }
 
     public Long getId() {

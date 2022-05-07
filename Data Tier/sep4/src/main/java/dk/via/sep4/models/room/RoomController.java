@@ -18,13 +18,13 @@ public class RoomController {
         this.roomRepository = roomRepository;
     }
 
-    @GetMapping("/room")
+    @GetMapping("/rooms")
     List<Room> all(){
         return roomRepository.findAll();
     }
 
-    @GetMapping("/room/{id}")
-    Room one(@PathVariable java.lang.Long id){
+    @GetMapping("/rooms/{id}")
+    Room one(@PathVariable Long id){
     return roomRepository.findById(id).orElseThrow( () -> new RoomNotFoundException(id));
     }
 }

@@ -9,12 +9,21 @@ import javax.persistence.*;
 public class Sensor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "sensor_id")
     private long id;
 
     @ManyToOne
-    @JoinColumn(name="roomid")
+    @JoinColumn(name="room_id")
     private Room room;
     public Sensor(SensorModel co2, String ppm, Room r, int i, int i1) {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public SensorModel getSensorModel() {

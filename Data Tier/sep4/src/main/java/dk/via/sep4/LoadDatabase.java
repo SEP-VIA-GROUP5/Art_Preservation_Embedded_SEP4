@@ -20,7 +20,6 @@ public class LoadDatabase {
 
 
    Room r = new Room();
-   roomRepository.save(r);
 
    Sensor s1 = new Sensor(SensorModel.CO2, "PPM", r, 0, 0);
    Sensor s2 = new Sensor(SensorModel.Humidity, "%", r, 0, 0);

@@ -1,6 +1,8 @@
 package dk.via.sep4.models.charts;
 
-import sun.management.Sensor;
+
+
+import dk.via.sep4.models.Sensor.Sensor;
 
 import java.util.Set;
 

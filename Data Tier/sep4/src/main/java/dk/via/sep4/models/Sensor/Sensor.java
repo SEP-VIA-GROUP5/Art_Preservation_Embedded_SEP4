@@ -2,7 +2,18 @@ package dk.via.sep4.models.Sensor;
 
 import dk.via.sep4.models.room.Room;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name= "sensor")
 public class Sensor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @ManyToOne
+    @JoinColumn(name="roomid")
+    private Room room;
     public Sensor(SensorModel co2, String ppm, Room r, int i, int i1) {
     }
 
@@ -24,7 +35,7 @@ public class Sensor {
 
     private SensorModel sensorModel;
     private String unitType;
-    private Room room;
+
     private double currentvalue;
 
     public Sensor(SensorModel sensormodel, String unitType, Room room) {

@@ -31,7 +31,7 @@ public class Room {
         this.sensors = sensors;
     }
 
-    @JsonManagedReference
+
     public Set<Sensor> getSensors() {
         return sensors;
     }

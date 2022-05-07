@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Sep4Application {
 
 	public static void main(String[] args) {
+		Object SpringApplication = null;
 		SpringApplication.run(Sep4Application.class, args);
 	}
 

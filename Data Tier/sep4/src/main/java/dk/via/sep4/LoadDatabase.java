@@ -3,6 +3,7 @@ package dk.via.sep4;
 import dk.via.sep4.models.Sensor.Sensor;
 import dk.via.sep4.models.Sensor.SensorModel;
 import dk.via.sep4.models.room.Room;
+import dk.via.sep4.models.room.RoomRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

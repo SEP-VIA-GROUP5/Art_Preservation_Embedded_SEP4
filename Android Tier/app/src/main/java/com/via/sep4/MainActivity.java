@@ -27,15 +27,9 @@ private DataViewModel viewModel;
 
         viewModel = new ViewModelProvider(this).get(DataViewModel.class);
 
+// should i make a onclick listern on the button that is gonna update the values?
 
-//to set up the data from the db team
-        toDataBtn.setOnClickListener()
-        {
-temperature.setText();
-CO2.setText();
-humidity.setText();
 
-        }
 
 
 

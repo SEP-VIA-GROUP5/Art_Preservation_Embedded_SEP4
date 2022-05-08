@@ -10,9 +10,13 @@ import com.via.sep4.DataApi;
 import com.via.sep4.DataResponse;
 import com.via.sep4.ServiceGenerator;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.internal.EverythingIsNonNull;
 
 
 public class DataRepository {
@@ -45,13 +49,13 @@ public class DataRepository {
             @Override
             public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
                 if(response.isSuccessful())
-                {{
+                {
                     requestData.setValue(response.body().getData());
-                }}
+                }
             }
-
+            @EverythingIsNonNull
             @Override
-            public void onFailure(Call<DataResponse> call, Response <DataResponse> response) {
+            public void onFailure(Call<DataResponse> call, Throwable t) {
                 Log.i("Retrofit","Something went wrong :(");
             }
         });

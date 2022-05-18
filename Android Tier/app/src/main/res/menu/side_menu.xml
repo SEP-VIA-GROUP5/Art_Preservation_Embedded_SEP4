@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/sideMenu_group1">
+        <item
+            android:id="@+id/sideMenu_room"
+            android:icon="@drawable/ic_room"
+            android:title="@string/sideMenu_room" />
+    </group>
+
+    <item android:title="@string/sideMenu_groupAccount">
+        <menu>
+            <group android:id="@+id/sideMenu_accountGroup">
+                <item
+                    android:id="@+id/sideMenu_accountSetting"
+                    android:icon="@drawable/ic_account"
+                    android:title="@string/sideMenu_account" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/sideMenu_groupAbout">
+        <menu>
+            <group android:id="@+id/sideMenu_group2">
+                <item
+                    android:id="@+id/sideMenu_about"
+                    android:icon="@drawable/ic_about_us"
+                    android:title="@string/sideMenu_about" />
+                <item
+                    android:id="@+id/sideMenu_contact"
+                    android:icon="@drawable/ic_contact"
+                    android:title="@string/sideMenu_contact" />
+            </group>
+        </menu>
+    </item>
+
+    <group>
+        <item
+            android:id="@+id/sideMenu_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/sideMenu_logout" />
+    </group>
+
+</menu>

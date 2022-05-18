@@ -8,4 +8,10 @@
     <string name="sideMenu_about">About us</string>
     <string name="sideMenu_contact">Contact us</string>
     <string name="sideMenu_logout">Logout</string>
+
+
+
+    <!--Make bold-->
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? <b>Sign Up</b> </string>
+    <string name="already_have_an_account_sign_in">Already have an account? <b>Sign in</b> </string>
 </resources>

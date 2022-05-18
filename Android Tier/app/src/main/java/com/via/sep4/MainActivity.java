@@ -29,13 +29,13 @@ public class MainActivity extends AppCompatActivity {
         setupNavigation();
     }
 
-    private void initView(){
+    private void initView() {
         drawerLayout = findViewById(R.id.main_drawer);
         navigationView = findViewById(R.id.side_navmenu);
         toolbar = findViewById(R.id.toolbar);
     }
 
-    private void setupNavigation(){
+    private void setupNavigation() {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         setSupportActionBar(toolbar);
 

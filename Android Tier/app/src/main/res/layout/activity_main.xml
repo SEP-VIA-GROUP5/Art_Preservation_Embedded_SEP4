@@ -13,20 +13,31 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary" />
+        </com.google.android.material.appbar.AppBarLayout>
+
     <LinearLayout
         android:id="@+id/main_container"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize">
 
-    <FrameLayout
+    <fragment
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
         android:layout_weight="0.6"
-        app:navGraph="@navigation/nav_graph" />
+        app:navGraph="@navigation/side_nav_map" />
     </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -36,5 +47,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/sidemenu_header"
+        android:fitsSystemWindows="true"
         app:menu="@menu/side_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>

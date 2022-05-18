@@ -1,4 +1,4 @@
-package com.via.sep4.viewModel;
+package com.via.sep4.ViewModel;
 
 import androidx.lifecycle.ViewModel;
 

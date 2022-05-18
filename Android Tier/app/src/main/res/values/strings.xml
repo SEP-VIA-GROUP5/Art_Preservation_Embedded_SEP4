@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">SEP4</string>
+    
+    <string name="sideMenu_room">Room</string>
+    <string name="sideMenu_groupAbout">Other</string>
+    <string name="sideMenu_groupAccount">Account</string>
+    <string name="sideMenu_account">Account Settings</string>
+    <string name="sideMenu_about">About us</string>
+    <string name="sideMenu_contact">Contact us</string>
+    <string name="sideMenu_logout">Logout</string>
 </resources>

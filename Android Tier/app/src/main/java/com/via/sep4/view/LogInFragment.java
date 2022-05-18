@@ -15,12 +15,12 @@ import android.view.ViewGroup;
 import com.via.sep4.R;
 import com.via.sep4.viewModel.LogInViewModel;
 
-public class LogIn extends Fragment {
+public class LogInFragment extends Fragment {
 
     private LogInViewModel mViewModel;
 
-    public static LogIn newInstance() {
-        return new LogIn();
+    public static LogInFragment newInstance() {
+        return new LogInFragment();
     }
 
     @Override

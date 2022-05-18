@@ -9,8 +9,8 @@
     <string name="sideMenu_contact">Contact us</string>
     <string name="sideMenu_logout">Logout</string>
 
-
-
+    <string name="side_header_username">Username</string>
+    <string name="side_header_email">Email</string>
     <!--Make bold-->
     <string name="don_t_have_an_account_sign_up">Don\'t have an account? <b>Sign Up</b> </string>
     <string name="already_have_an_account_sign_in">Already have an account? <b>Sign in</b> </string>

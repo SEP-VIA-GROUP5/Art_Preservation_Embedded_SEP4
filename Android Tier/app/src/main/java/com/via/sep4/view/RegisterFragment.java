@@ -16,7 +16,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.via.sep4.R;
 import com.via.sep4.viewModel.RegisterViewModel;
 
@@ -31,6 +33,7 @@ public class RegisterFragment extends Fragment {
     private EditText passwordRepeat;
     private Button signup;
     private TextView signIn;
+    public static final String REGEX_EMAIL = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";   //verify email
 
     public static RegisterFragment newInstance() {
         return new RegisterFragment();
@@ -49,7 +52,32 @@ public class RegisterFragment extends Fragment {
         signup = v.findViewById(R.id.signUpBtn);
         signIn = v.findViewById(R.id.signinView);
 
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nameString = name.getText().toString();
+                String usernameString = username.getText().toString();
+                String emailString = email.getText().toString();
+                String phone = phoneNum.getText().toString();
+                String passwordString = password.getText().toString();
+                String passwordStringRepeat = passwordRepeat.getText().toString();
 
+                if (emailValid(emailString)) {
+                    if (passwordSame(passwordString, passwordStringRepeat)) {
+                        if (passwordLength(passwordString, passwordStringRepeat)) {
+                            //continue if everything is ok
+                            Toast.makeText(getContext(), "OK", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Snackbar.make(view, R.string.R_passwordLengthE, Snackbar.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Snackbar.make(view, R.string.R_passwordNotMachE, Snackbar.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Snackbar.make(view, R.string.R_emailNotValidE, Snackbar.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,4 +95,15 @@ public class RegisterFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    private boolean passwordSame(String text1, String text2) {
+        return text1.equals(text2);
+    }
+
+    private boolean emailValid(String emailAddress) {
+        return emailAddress.matches(REGEX_EMAIL);
+    }
+
+    private boolean passwordLength(String text1, String text2) {
+        return text1.length() >= 6 && text2.length() >= 6;
+    }
 }

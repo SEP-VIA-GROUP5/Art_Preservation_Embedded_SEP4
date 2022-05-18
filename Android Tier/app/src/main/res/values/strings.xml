@@ -12,6 +12,11 @@
     <string name="side_header_username">Username</string>
     <string name="side_header_email">Email</string>
 
+    <!-- register error label -->
+    <string name="R_passwordLengthE">Password should be more than 6 characters</string>
+    <string name="R_passwordNotMachE">Password doesn\'t match</string>
+    <string name="R_emailNotValidE">The format of email isn\'t correct</string>
+
     <!-- for nav map label -->
     <string name="navMap_home">Home</string>
     <string name="navMap_register">SignUp</string>

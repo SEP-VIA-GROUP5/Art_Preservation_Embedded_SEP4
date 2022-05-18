@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.via.sep4.ViewModel.DataViewModel;
+import com.via.sep4.viewModel.DataViewModel;
 
 public class MainActivity extends AppCompatActivity {
 private TextView temperature;

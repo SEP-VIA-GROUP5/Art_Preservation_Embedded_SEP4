@@ -19,7 +19,7 @@ public class ServiceGenerator {
     public static DataApi getDataApi() {
 
         if (dataApi == null) {
-            dataApi = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build().create(DataApi.class);
+     //       dataApi = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build().create(DataApi.class);
         }
         return dataApi;
     }

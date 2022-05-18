@@ -8,4 +8,7 @@
     <string name="sideMenu_about">About us</string>
     <string name="sideMenu_contact">Contact us</string>
     <string name="sideMenu_logout">Logout</string>
+
+    <string name="side_header_username">Username</string>
+    <string name="side_header_email">email</string>
 </resources>

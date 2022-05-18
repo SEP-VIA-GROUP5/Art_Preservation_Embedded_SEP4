@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -31,10 +33,10 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputTil"
+        android:id="@+id/nameTil"
         android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
-        android:layout_above="@+id/signUpBtn"
+        android:layout_above="@+id/usernameTil"
         android:layout_height="wrap_content">
 
         <!--Name-->
@@ -47,6 +49,16 @@
             tools:ignore="SpeakableTextPresentCheck"
             android:backgroundTint="#e8fffb"
             />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameTil"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/emailTil"
+        android:layout_height="wrap_content">
 
         <!--Username-->
         <EditText
@@ -58,6 +70,16 @@
             tools:ignore="SpeakableTextPresentCheck"
             android:backgroundTint="#e8fffb"
             />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailTil"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/phonenoTil"
+        android:layout_height="wrap_content">
+
 
         <!--Email-->
         <EditText
@@ -69,6 +91,16 @@
             tools:ignore="SpeakableTextPresentCheck"
             android:backgroundTint="#e8fffb"/>
 
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phonenoTil"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/passwordTil"
+        android:layout_height="wrap_content">
+
         <!--PhoneNo-->
         <EditText
             android:id="@+id/phoneNoEt"
@@ -78,6 +110,14 @@
             android:inputType="phone"
             tools:ignore="SpeakableTextPresentCheck"
             android:backgroundTint="#e8fffb"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordTil"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/confirmpasswordTil"
+        android:layout_height="wrap_content">
 
         <!--Password-->
         <EditText
@@ -88,6 +128,15 @@
             android:inputType="textPassword"
             tools:ignore="SpeakableTextPresentCheck"
             android:backgroundTint="#e8fffb"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/confirmpasswordTil"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/signUpBtn"
+        android:layout_height="wrap_content">
 
         <!--Confirm Password-->
         <EditText
@@ -101,6 +150,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <!--Sign up button-->
 
 
@@ -110,6 +160,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/signinView"
         android:backgroundTint="#00BCD4"
+        android:layout_marginBottom="100dp"
         android:text="Sign Up" />
 
     <TextView

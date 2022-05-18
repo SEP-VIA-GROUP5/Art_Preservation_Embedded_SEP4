@@ -1,0 +1,125 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@drawable/background2"
+    >
+
+    <TextView
+        android:id="@+id/textViewSignUp"
+        style="@style/TextAppearance.MaterialComponents.Headline4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:textAlignment="center"
+        android:textColor="#1682CA"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/textViewSignUpDescription"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewSignUp"
+        android:text="Create new account"
+        android:textAlignment="center"
+        android:textColor="#16AFCA"
+        />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputTil"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/signUpBtn"
+        android:layout_height="wrap_content">
+
+        <!--Name-->
+        <EditText
+            android:id="@+id/nameEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:inputType="text"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:backgroundTint="#e8fffb"
+            />
+
+        <!--Username-->
+        <EditText
+            android:id="@+id/usernameEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:inputType="text"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:backgroundTint="#e8fffb"
+            />
+
+        <!--Email-->
+        <EditText
+            android:id="@+id/emailEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:backgroundTint="#e8fffb"/>
+
+        <!--PhoneNo-->
+        <EditText
+            android:id="@+id/phoneNoEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:backgroundTint="#e8fffb"/>
+
+        <!--Password-->
+        <EditText
+            android:id="@+id/passwordEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:backgroundTint="#e8fffb"/>
+
+        <!--Confirm Password-->
+        <EditText
+            android:id="@+id/confirmPasswordEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:backgroundTint="#e8fffb"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--Sign up button-->
+
+
+    <Button
+        android:id="@+id/signUpBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/signinView"
+        android:backgroundTint="#00BCD4"
+        android:text="Sign Up" />
+
+    <TextView
+        android:id="@+id/signinView"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/already_have_an_account_sign_in"
+        android:textAlignment="center"
+        android:textColor="#16AFCA" />
+
+</RelativeLayout>

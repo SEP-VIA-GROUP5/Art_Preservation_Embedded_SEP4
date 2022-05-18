@@ -1,4 +1,4 @@
-package com.via.sep4.Repository;
+package com.via.sep4.repository;
 
 import android.util.Log;
 
@@ -10,12 +10,9 @@ import com.via.sep4.DataApi;
 import com.via.sep4.DataResponse;
 import com.via.sep4.ServiceGenerator;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import retrofit2.internal.EverythingIsNonNull;
 
 

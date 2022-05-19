@@ -17,6 +17,8 @@
     <string name="R_passwordNotMachE">Password doesn\'t match</string>
     <string name="R_emailNotValidE">The format of email isn\'t correct</string>
 
+    <string name="R_success">Register success !</string>
+
     <!-- for nav map label -->
     <string name="navMap_home">Home</string>
     <string name="navMap_register">SignUp</string>

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +19,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.via.sep4.R;
+import com.via.sep4.model.User;
 import com.via.sep4.viewModel.RegisterViewModel;
 
 public class RegisterFragment extends Fragment {
+
+    private FirebaseAuth auth;
 
     private RegisterViewModel mViewModel;
     private EditText name;
@@ -52,6 +60,8 @@ public class RegisterFragment extends Fragment {
         signup = v.findViewById(R.id.signUpBtn);
         signIn = v.findViewById(R.id.signinView);
 
+        auth = FirebaseAuth.getInstance();
+
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +76,26 @@ public class RegisterFragment extends Fragment {
                     if (passwordSame(passwordString, passwordStringRepeat)) {
                         if (passwordLength(passwordString, passwordStringRepeat)) {
                             //continue if everything is ok
-                            Toast.makeText(getContext(), "OK", Toast.LENGTH_SHORT).show();
+                            try {
+                                auth.createUserWithEmailAndPassword(emailString, passwordString)
+                                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                //TODO add user info to database (after database is done)
+
+                                                User newUser;
+                                                if (phone.equals("") || nameString.equals("") || usernameString.equals("")) {
+                                                    newUser = new User(emailString, passwordString);
+                                                } else {
+                                                    newUser = new User(emailString, passwordString, nameString, phone);
+                                                }
+                                                mViewModel.register(newUser);
+                                                Snackbar.make(view, R.string.R_success, Snackbar.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                Log.e("register error", e.getMessage());
+                            }
                         } else {
                             Snackbar.make(view, R.string.R_passwordLengthE, Snackbar.LENGTH_SHORT).show();
                         }

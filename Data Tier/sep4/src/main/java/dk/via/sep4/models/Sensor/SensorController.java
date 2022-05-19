@@ -1,5 +1,6 @@
 package dk.via.sep4.models.Sensor;
 
+import org.hibernate.EntityMode;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/SEP4")
@@ -16,4 +17,6 @@ public class SensorController {
         //repo.update(id, min, max);
         return "The values has been updated max : " + max + " and min: " + min + "";
     }
+
+    
 }

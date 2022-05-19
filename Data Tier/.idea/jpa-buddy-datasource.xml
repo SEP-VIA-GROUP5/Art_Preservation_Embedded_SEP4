@@ -2,7 +2,7 @@
 <project version="4">
   <component name="JpbDataSourceConfig">
     <data-sources>
-      <data-source id="6b8ba9f0-8123-4c03-ab0a-0152430f45ed" name="Data Tier" url="jdbc:postgresql://localhost/Data Tier" driverClass="org.postgresql.Driver" />
+      <data-source id="6b8ba9f0-8123-4c03-ab0a-0152430f45ed" name="Postgres" url="jdbc:postgresql://sep4data.cuvvqbrgiokt.us-east-1.rds.amazonaws.com/postgres" driverClass="org.postgresql.Driver" />
     </data-sources>
   </component>
 </project>

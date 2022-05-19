@@ -18,6 +18,8 @@ import java.util.ArrayList;
 /**
  * @author $(Alina Chelmus)
  */
+
+/*
 public class ClientHandler implements Runnable
 {
   private Socket socket;
@@ -79,4 +81,4 @@ public class ClientHandler implements Runnable
   }
 
 
-}
+}*/

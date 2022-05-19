@@ -81,7 +81,6 @@ public class RegisterFragment extends Fragment {
                 if (emailValid(emailString)) {
                     if (passwordSame(passwordString, passwordStringRepeat)) {
                         if (passwordLength(passwordString, passwordStringRepeat)) {
-                            //continue if everything is ok
                             try {
                                 auth.createUserWithEmailAndPassword(emailString, passwordString)
                                         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {

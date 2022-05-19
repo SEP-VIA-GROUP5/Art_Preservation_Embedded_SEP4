@@ -2,24 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:background="@color/main1">
+    android:background="@color/menu"
+    android:padding="10dp">
 
     <ImageView
-        android:id="@+id/icon_image"
+        android:id="@+id/icon_menu"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_marginTop="57dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/thermometer" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/username_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/icon_image"
+        android:layout_below="@id/icon_menu"
         android:layout_marginStart="10dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="10dp"
@@ -30,13 +31,16 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/mail"
+        android:id="@+id/email_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/username"
-        android:layout_margin="8dp"
+        android:layout_below="@id/username_menu"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/side_header_email"
-        android:textSize="14sp"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
 
 </RelativeLayout>

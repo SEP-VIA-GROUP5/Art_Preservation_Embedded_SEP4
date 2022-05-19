@@ -6,12 +6,18 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseUser;
+import com.via.sep4.view.HomeFragment;
+import com.via.sep4.view.RegisterFragment;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -57,4 +63,5 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(navController, configuration) || super.onSupportNavigateUp();
     }
+
 }

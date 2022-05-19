@@ -19,6 +19,8 @@
 
     <string name="R_success">Register success !</string>
 
+    <string name="main_login_info">Please login first</string>
+
     <!-- for nav map label -->
     <string name="navMap_home">Home</string>
     <string name="navMap_register">SignUp</string>

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SEP4</string>
-    
+
     <string name="sideMenu_room">Room</string>
     <string name="sideMenu_groupAbout">Other</string>
     <string name="sideMenu_groupAccount">Account</string>
@@ -8,10 +8,24 @@
     <string name="sideMenu_about">About us</string>
     <string name="sideMenu_contact">Contact us</string>
     <string name="sideMenu_logout">Logout</string>
-
+    <string name="side_header_username">username</string>
+    <string name="side_header_email">email</string>
 
 
     <!--Make bold-->
     <string name="don_t_have_an_account_sign_up">Don\'t have an account? <b>Sign Up</b> </string>
     <string name="already_have_an_account_sign_in">Already have an account? <b>Sign in</b> </string>
+    <string name="about_us_description1">An Embedded system for Art galleries. The main purpose - present the data of the room on an Android app (temperature, humidity, CO2) and act accordingly (open a window, etc). </string>
+
+    <string name="about_us_description2"><b>IOT team</b>\nResponsible for the embedded part of the system.\n
+        \n<b>DataWarehouse team</b>\nResponsible for getting the data from embedded system and storing it in a data warehouse. Also making a web service to make the data accesible.\n
+        \n<b>Android team</b>\nResponsible for making an android application that will present the data received from the data warehouse in various ways. </string>
+
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contact_info">Email: sep4@via.dk\n\nPhone no: 81 90 36 94</string>
+    <string name="title_activity_maps2">MapsActivity2</string>
+
+
 </resources>

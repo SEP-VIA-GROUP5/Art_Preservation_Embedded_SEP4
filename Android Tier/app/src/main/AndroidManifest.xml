@@ -10,16 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SEP4">
 
-        <activity
-            android:name=".ActivitySignUp"
-            android:exported="false"
-            android:noHistory="false" />
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}"/>
 
+        <activity
+            android:name=".ActivityContactUs"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityAboutUs"
+            android:exported="false" />
         <activity
             android:name=".ActivitySignIn"
-            android:exported="false"
-            android:noHistory="false"/>
-
+            android:exported="false" />
+        <activity
+            android:name=".ActivitySignUp"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -30,8 +37,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
     </application>
 
 </manifest>

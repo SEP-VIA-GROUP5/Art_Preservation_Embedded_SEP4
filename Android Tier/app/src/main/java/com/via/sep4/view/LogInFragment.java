@@ -28,7 +28,6 @@ import com.via.sep4.viewModel.LogInViewModel;
 public class LogInFragment extends Fragment {
 
 
-
     EditText logEmail, logPassword;
     Button loginBtn;
     TextView toRegister;
@@ -40,7 +39,6 @@ public class LogInFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.login_fragment, container, false);
-
     }
     public onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
         {

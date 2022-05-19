@@ -1,9 +1,7 @@
 package com.via.sep4.viewModel;
 
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModel;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.via.sep4.model.User;
 import com.via.sep4.repository.UserRepository;
 

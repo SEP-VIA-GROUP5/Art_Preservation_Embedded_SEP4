@@ -9,8 +9,6 @@ public class User {
     private String password;
 
 
-
-
     public User(String email, String password, String fullName, String phone) {
         this.email = email;
         this.fullName = fullName;

@@ -1,11 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
     android:background="@drawable/background2"
-    >
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/textViewSignUp"
@@ -15,8 +16,7 @@
         android:text="Sign Up"
         android:textAlignment="center"
         android:textColor="#1682CA"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewSignUpDescription"
@@ -26,80 +26,124 @@
         android:layout_below="@+id/textViewSignUp"
         android:text="Create new account"
         android:textAlignment="center"
-        android:textColor="#16AFCA"
-        />
+        android:textColor="#16AFCA" />
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputTil"
+        android:id="@+id/nameTil"
         android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@+id/signUpBtn"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/usernameTil"
+        android:layout_marginBottom="10dp">
 
         <!--Name-->
         <EditText
             android:id="@+id/nameEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#e8fffb"
             android:hint="Name"
             android:inputType="text"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:backgroundTint="#e8fffb"
-            />
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/emailTil"
+        android:layout_marginBottom="10dp">
 
         <!--Username-->
         <EditText
             android:id="@+id/usernameEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#e8fffb"
             android:hint="Username"
             android:inputType="text"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:backgroundTint="#e8fffb"
-            />
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/phonenoTil"
+        android:layout_marginBottom="10dp">
+
 
         <!--Email-->
         <EditText
             android:id="@+id/emailEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#e8fffb"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:backgroundTint="#e8fffb"/>
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phonenoTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/passwordTil"
+        android:layout_marginBottom="10dp">
 
         <!--PhoneNo-->
         <EditText
             android:id="@+id/phoneNoEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#e8fffb"
             android:hint="Phone Number"
             android:inputType="phone"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:backgroundTint="#e8fffb"/>
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/confirmpasswordTil"
+        android:layout_marginBottom="10dp">
 
         <!--Password-->
         <EditText
             android:id="@+id/passwordEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#e8fffb"
             android:hint="Password"
             android:inputType="textPassword"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:backgroundTint="#e8fffb"/>
+            tools:ignore="SpeakableTextPresentCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/confirmpasswordTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/signUpBtn"
+        android:layout_marginBottom="10dp">
 
         <!--Confirm Password-->
         <EditText
             android:id="@+id/confirmPasswordEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#e8fffb"
             android:hint="Confirm Password"
             android:inputType="textPassword"
-            tools:ignore="SpeakableTextPresentCheck"
-            android:backgroundTint="#e8fffb"/>
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <!--Sign up button-->
 
@@ -109,6 +153,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/signinView"
+        android:layout_marginBottom="100dp"
         android:backgroundTint="#00BCD4"
         android:text="Sign Up" />
 

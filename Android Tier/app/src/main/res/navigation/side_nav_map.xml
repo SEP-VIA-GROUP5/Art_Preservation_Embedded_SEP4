@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/side_nav_map"
+    app:startDestination="@id/nav_home">
+
+    <!-- TODO remove the action between home and register -->
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.via.sep4.view.HomeFragment"
+        android:label="@string/navMap_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_signup_fragment"
+            app:destination="@id/signup_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signup_fragment"
+        android:name="com.via.sep4.view.RegisterFragment"
+        android:label="@string/navMap_register"
+        tools:layout="@layout/activity_signup" >
+        <action
+            android:id="@+id/action_signup_fragment_to_signIn_fragment"
+            app:destination="@id/signIn_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signIn_fragment"
+        android:name="com.via.sep4.view.LogInFragment"
+        android:label="@string/navMap_signIn"
+        tools:layout="@layout/activity_signin" >
+        <action
+            android:id="@+id/action_signIn_fragment_to_signup_fragment"
+            app:destination="@id/signup_fragment" />
+    </fragment>
+</navigation>

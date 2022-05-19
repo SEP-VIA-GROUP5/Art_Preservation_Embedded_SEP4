@@ -36,6 +36,4 @@
     <string name="already_have_an_account_sign_in">Already have an account? <b>Sign in</b> </string>
 
     <string name="firebase_dbLink">https://sep4-ed4e9-default-rtdb.europe-west1.firebasedatabase.app/</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

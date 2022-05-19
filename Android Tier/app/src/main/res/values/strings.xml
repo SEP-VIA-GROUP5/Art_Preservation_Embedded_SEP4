@@ -18,8 +18,14 @@
     <string name="R_emailNotValidE">The format of email isn\'t correct</string>
 
     <string name="R_success">Register success !</string>
-
     <string name="main_login_info">Please login first</string>
+
+    <!-- account settings -->
+    <string name="account_label">Change account info here</string>
+    <string name="account_save">Save changes</string>
+
+    <!-- register -->
+    <string name="signup_label">Create new account</string>
 
     <!-- for nav map label -->
     <string name="navMap_home">Home</string>

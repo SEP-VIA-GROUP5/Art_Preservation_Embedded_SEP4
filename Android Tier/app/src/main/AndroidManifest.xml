@@ -11,6 +11,16 @@
         android:theme="@style/Theme.SEP4">
 
         <activity
+            android:name=".ActivitySignUp"
+            android:exported="false"
+            android:noHistory="false" />
+
+        <activity
+            android:name=".ActivitySignIn"
+            android:exported="false"
+            android:noHistory="false"/>
+
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.SEP4.NoActionBar">

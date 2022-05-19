@@ -24,6 +24,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.via.sep4.DataHandler;
 import com.via.sep4.R;
 import com.via.sep4.model.User;
 import com.via.sep4.viewModel.RegisterViewModel;
@@ -31,6 +34,8 @@ import com.via.sep4.viewModel.RegisterViewModel;
 public class RegisterFragment extends Fragment {
 
     private FirebaseAuth auth;
+    private FirebaseDatabase db;
+    private DatabaseReference dbRef;
 
     private RegisterViewModel mViewModel;
     private EditText name;
@@ -81,14 +86,20 @@ public class RegisterFragment extends Fragment {
                                         .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                                //TODO add user info to database (after database is done)
-
                                                 User newUser;
                                                 if (phone.equals("") || nameString.equals("") || usernameString.equals("")) {
                                                     newUser = new User(emailString, passwordString);
                                                 } else {
                                                     newUser = new User(emailString, passwordString, nameString, phone);
                                                 }
+
+                                                dbRef = db.getReference("FullName");
+                                                dbRef.child(DataHandler.changeDotToComaEmail(emailString)).setValue(nameString);
+                                                dbRef = db.getReference("Phone");
+                                                dbRef.child(DataHandler.changeDotToComaEmail(emailString)).setValue(phone);
+                                                dbRef = db.getReference("Username");
+                                                dbRef.child(DataHandler.changeDotToComaEmail(emailString)).setValue(usernameString);
+
                                                 mViewModel.register(newUser);
                                                 Snackbar.make(view, R.string.R_success, Snackbar.LENGTH_SHORT).show();
                                             }
@@ -121,6 +132,7 @@ public class RegisterFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
+        db = FirebaseDatabase.getInstance(getString(R.string.firebase_dbLink));
         // TODO: Use the ViewModel
     }
 

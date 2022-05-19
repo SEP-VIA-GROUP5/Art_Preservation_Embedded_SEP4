@@ -3,11 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/layout/activity_main.xml" value="0.43844856661045534" />
-        <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_home.xml" value="0.3104166666666667" />
-        <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/layout/sidemenu_header.xml" value="0.5575181159420289" />
-        <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/menu/side_menu.xml" value="0.559375" />
         <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/activity_signin.xml" value="0.5098958333333333" />
+        <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_home.xml" value="0.5098958333333333" />
+        <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_log_in_fragmentt.xml" value="0.5098958333333333" />
+        <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/log_in_fragment.xml" value="0.5098958333333333" />
+        <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/register_fragment.xml" value="0.49583333333333335" />
+        <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/sidemenu_header.xml" value="0.5098958333333333" />
+        <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/menu/side_menu.xml" value="0.5098958333333333" />
       </map>
     </option>
   </component>

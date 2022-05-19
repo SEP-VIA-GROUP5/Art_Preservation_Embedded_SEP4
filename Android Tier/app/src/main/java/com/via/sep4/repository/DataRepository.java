@@ -5,9 +5,9 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.via.sep4.Data;
-import com.via.sep4.DataApi;
-import com.via.sep4.DataResponse;
+//import com.via.sep4.Data;
+//import com.via.sep4.DataApi;
+//import com.via.sep4.DataResponse;
 import com.via.sep4.ServiceGenerator;
 
 import retrofit2.Call;
@@ -21,7 +21,7 @@ public class DataRepository {
     private static DataRepository instance;
 
 
-    private final MutableLiveData<Data> requestData;
+    /*private final MutableLiveData<Data> requestData;
 
     private DataRepository()
     {requestData = new MutableLiveData<>();}
@@ -57,10 +57,9 @@ public class DataRepository {
             }
         });
 
-
     }
 
-
+*/
 
 
 

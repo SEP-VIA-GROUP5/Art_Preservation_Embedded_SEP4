@@ -40,7 +40,9 @@ public class LogInFragment extends Fragment {
 
         return inflater.inflate(R.layout.login_fragment, container, false);
     }
-    public onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+
+
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
         {
             super.onViewCreated(view, savedInstanceState);
 
@@ -75,27 +77,4 @@ public class LogInFragment extends Fragment {
 
         }
 
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}

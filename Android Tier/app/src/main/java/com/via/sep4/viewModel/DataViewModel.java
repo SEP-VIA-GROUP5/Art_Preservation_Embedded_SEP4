@@ -8,7 +8,7 @@ public class DataViewModel extends ViewModel {
     DataRepository repository;
 
     public DataViewModel(){
-        repository = DataRepository.getInstance();
+        //repository = DataRepository.getInstance();
 
     }
 

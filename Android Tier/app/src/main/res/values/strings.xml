@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SEP4</string>
-    
+
     <string name="sideMenu_room">Room</string>
     <string name="sideMenu_groupAbout">Other</string>
     <string name="sideMenu_groupAccount">Account</string>
@@ -17,6 +17,16 @@
     <string name="R_passwordNotMachE">Password doesn\'t match</string>
     <string name="R_emailNotValidE">The format of email isn\'t correct</string>
 
+    <string name="R_success">Register success !</string>
+    <string name="main_login_info">Please login first</string>
+
+    <!-- account settings -->
+    <string name="account_label">Change account info here</string>
+    <string name="account_save">Save changes</string>
+
+    <!-- register -->
+    <string name="signup_label">Create new account</string>
+
     <!-- for nav map label -->
     <string name="navMap_home">Home</string>
     <string name="navMap_register">SignUp</string>
@@ -24,4 +34,6 @@
     <!--Make bold-->
     <string name="don_t_have_an_account_sign_up">Don\'t have an account? <b>Sign Up</b> </string>
     <string name="already_have_an_account_sign_in">Already have an account? <b>Sign in</b> </string>
+
+    <string name="firebase_dbLink">https://sep4-ed4e9-default-rtdb.europe-west1.firebasedatabase.app/</string>
 </resources>

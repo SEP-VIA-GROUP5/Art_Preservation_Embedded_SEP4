@@ -47,7 +47,6 @@ public class AccountFragment extends Fragment {
         super.onCreate(savedInstanceState);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-        db = FirebaseDatabase.getInstance(getString(R.string.firebase_dbLink));
     }
 
     @Override
@@ -67,6 +66,7 @@ public class AccountFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                db = FirebaseDatabase.getInstance(getString(R.string.firebase_dbLink));
                 String emailString = user.getEmail();
                 dbRef = db.getReference("Username/")
                         .child(DataHandler.changeDotToComaEmail(emailString));
@@ -84,7 +84,7 @@ public class AccountFragment extends Fragment {
     }
 
     private void loadInfo() {
-
+        db = FirebaseDatabase.getInstance(getString(R.string.firebase_dbLink));
         String emailString = user.getEmail();
         emailText.setText(emailString);
 

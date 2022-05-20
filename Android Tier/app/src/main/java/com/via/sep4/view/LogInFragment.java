@@ -83,21 +83,24 @@ public class LogInFragment extends Fragment {
     }
 
     private void setupViews() {
-        loginBtn.setOnClickListener(v -> {
-            viewModel.attemptLogin(new User(logEmail.getText().toString(), logPassword.getText().toString()));
-            auth.signInWithEmailAndPassword(logEmail.getText().toString(), logPassword.getText().toString())
-                    .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (!task.isComplete()) {
-                                Log.v("login error", task.getException().toString());
-                                Snackbar.make(v, task.getException().toString(), Snackbar.LENGTH_SHORT).show();
-                            } else {
-                                FirebaseUser user = auth.getCurrentUser();
-                                updateUI(user);
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewModel.attemptLogin(new User(logEmail.getText().toString(), logPassword.getText().toString()));
+                auth.signInWithEmailAndPassword(logEmail.getText().toString(), logPassword.getText().toString())
+                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (!task.isComplete()) {
+                                    Log.v("login error", task.getException().toString());
+                                    Snackbar.make(v, task.getException().toString(), Snackbar.LENGTH_SHORT).show();
+                                } else {
+                                    FirebaseUser user = auth.getCurrentUser();
+                                    updateUI(user);
+                                }
                             }
-                        }
-                    });
+                        });
+            }
         });
 
 
@@ -145,17 +148,6 @@ public class LogInFragment extends Fragment {
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-
 
 
         toRegister.setOnClickListener(v -> {

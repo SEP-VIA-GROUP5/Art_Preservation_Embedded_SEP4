@@ -136,17 +136,6 @@ public class RegisterFragment extends Fragment {
         db = FirebaseDatabase.getInstance(getString(R.string.firebase_dbLink));
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
-    }
-    @Override
-    public void onStop() {
-        super.onStop();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
-    }
-
     private boolean passwordSame(String text1, String text2) {
         return text1.equals(text2);
     }

@@ -32,7 +32,7 @@
         android:id="@+id/signIn_fragment"
         android:name="com.via.sep4.view.LogInFragment"
         android:label="@string/navMap_signIn"
-        tools:layout="@layout/activity_signin" >
+        tools:layout="@layout/login_fragment" >
         <action
             android:id="@+id/action_signIn_fragment_to_signup_fragment"
             app:destination="@id/signup_fragment" />

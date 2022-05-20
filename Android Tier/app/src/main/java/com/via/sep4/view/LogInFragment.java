@@ -124,6 +124,7 @@ public class LogInFragment extends Fragment {
                         user.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
+
                                 // to be added a message
                             }
                         }).addOnFailureListener(new OnFailureListener() {

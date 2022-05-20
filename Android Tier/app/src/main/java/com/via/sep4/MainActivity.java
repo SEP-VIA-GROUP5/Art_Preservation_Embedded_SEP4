@@ -61,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
         email = headerView.findViewById(R.id.email_menu);
     }
 
-    private void loadInfo(){
+    private void loadInfo() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
-        if (user != null){
+        if (user != null) {
             email.setText(user.getEmail());
             FirebaseDatabase db = FirebaseDatabase.getInstance(getString(R.string.firebase_dbLink));
             DatabaseReference dbRef = db.getReference("Username/")

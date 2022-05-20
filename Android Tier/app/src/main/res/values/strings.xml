@@ -26,6 +26,7 @@
     <!-- account settings -->
     <string name="account_label">Change account info here</string>
     <string name="account_save">Save changes</string>
+    <string name="account_save_ok">Change saved!</string>
 
     <!-- register -->
     <string name="signup_label">Create new account</string>

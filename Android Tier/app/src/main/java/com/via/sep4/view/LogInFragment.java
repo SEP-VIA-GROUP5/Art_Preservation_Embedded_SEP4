@@ -68,7 +68,7 @@ public class LogInFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         initView(view);
-        setupViews();
+
     }
 
 
@@ -79,7 +79,7 @@ public class LogInFragment extends Fragment {
         toRegister = view.findViewById(R.id.createAccountView);
         forgotPass = view.findViewById(R.id.forgpasBtn);
         FirebaseUser user;
-
+        setupViews();
     }
 
     private void setupViews() {

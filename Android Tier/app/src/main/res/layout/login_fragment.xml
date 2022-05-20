@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewSignIn"
         android:layout_marginTop="72dp"
-        android:text="Sign In to your existing account"
+        android:text="@string/login_label"
         android:textAlignment="center"
         android:textColor="#16AFCA" />
 
@@ -89,29 +89,41 @@
         android:text="Sign In" />
 
 
-    <TextView
-        android:id="@+id/forgpasBtn"
-        style="@style/TextAppearance.MaterialComponents.Caption"
-        android:layout_width="377dp"
-        android:layout_height="48dp"
-        android:layout_below="@+id/signInBtn"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="28dp"
-        android:layout_marginBottom="204dp"
-        android:text="Forgot password? Click here"
-        android:textAlignment="center"
-        android:textColor="#00BCD4" />
-
-    <TextView
-        android:id="@+id/createAccountView"
-        style="@style/TextAppearance.MaterialComponents.Caption"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/signInBtn"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="159dp"
-        android:text="@string/don_t_have_an_account_sign_up"
-        android:textAlignment="center"
-        android:textColor="#00BCD4" />
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="90dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/forgpasBtn"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login_forgetPassword"
+            android:textAlignment="center"
+            android:textColor="#00BCD4" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="15dp" />
+
+        <TextView
+            android:id="@+id/createAccountView"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/don_t_have_an_account_sign_up"
+            android:textAlignment="center"
+            android:textColor="#00BCD4" />
+    </LinearLayout>
 
 
 </RelativeLayout>

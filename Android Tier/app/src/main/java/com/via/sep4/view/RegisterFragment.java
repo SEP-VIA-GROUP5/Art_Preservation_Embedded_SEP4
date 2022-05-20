@@ -1,5 +1,6 @@
 package com.via.sep4.view;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +20,23 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.via.sep4.DataHandler;
 import com.via.sep4.R;
+import com.via.sep4.model.User;
 import com.via.sep4.viewModel.RegisterViewModel;
 
 public class RegisterFragment extends Fragment {
+
+    private FirebaseAuth auth;
+    private FirebaseDatabase db;
+    private DatabaseReference dbRef;
 
     private RegisterViewModel mViewModel;
     private EditText name;
@@ -52,6 +66,8 @@ public class RegisterFragment extends Fragment {
         signup = v.findViewById(R.id.signUpBtn);
         signIn = v.findViewById(R.id.signinView);
 
+        auth = FirebaseAuth.getInstance();
+
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,8 +81,33 @@ public class RegisterFragment extends Fragment {
                 if (emailValid(emailString)) {
                     if (passwordSame(passwordString, passwordStringRepeat)) {
                         if (passwordLength(passwordString, passwordStringRepeat)) {
-                            //continue if everything is ok
-                            Toast.makeText(getContext(), "OK", Toast.LENGTH_SHORT).show();
+                            try {
+                                auth.createUserWithEmailAndPassword(emailString, passwordString)
+                                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                User newUser;
+                                                if (phone.equals("") || nameString.equals("") || usernameString.equals("")) {
+                                                    newUser = new User(emailString, passwordString);
+                                                } else {
+                                                    newUser = new User(emailString, passwordString, nameString, phone);
+                                                }
+
+                                                dbRef = db.getReference("FullName");
+                                                dbRef.child(DataHandler.changeDotToComaEmail(emailString)).setValue(nameString);
+                                                dbRef = db.getReference("Phone");
+                                                dbRef.child(DataHandler.changeDotToComaEmail(emailString)).setValue(phone);
+                                                dbRef = db.getReference("Username");
+                                                dbRef.child(DataHandler.changeDotToComaEmail(emailString)).setValue(usernameString);
+
+                                                mViewModel.register(newUser);
+                                                Snackbar.make(view, R.string.R_success, Snackbar.LENGTH_SHORT).show();
+                                                getActivity().onBackPressed();
+                                            }
+                                        });
+                            } catch (Exception e) {
+                                Log.e("register error", e.getMessage());
+                            }
                         } else {
                             Snackbar.make(view, R.string.R_passwordLengthE, Snackbar.LENGTH_SHORT).show();
                         }
@@ -82,7 +123,7 @@ public class RegisterFragment extends Fragment {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(RegisterFragment.this).navigate(R.id.action_signup_fragment_to_signIn_fragment);
+                getActivity().onBackPressed();
             }
         });
         return v;
@@ -92,7 +133,7 @@ public class RegisterFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
-        // TODO: Use the ViewModel
+        db = FirebaseDatabase.getInstance(getString(R.string.firebase_dbLink));
     }
 
     private boolean passwordSame(String text1, String text2) {

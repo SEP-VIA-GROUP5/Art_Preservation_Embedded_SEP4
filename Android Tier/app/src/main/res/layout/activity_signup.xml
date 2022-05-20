@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewSignUp"
-        android:text="Create new account"
+        android:text="@string/signup_label"
         android:textAlignment="center"
         android:textColor="#16AFCA" />
 
@@ -155,7 +155,7 @@
         android:layout_above="@+id/signinView"
         android:layout_marginBottom="100dp"
         android:backgroundTint="#00BCD4"
-        android:text="Sign Up" />
+        android:text="@string/sign_up" />
 
     <TextView
         android:id="@+id/signinView"

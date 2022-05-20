@@ -18,13 +18,11 @@ public class HexaConverter {
     this.data = data;
   }
 
-  public Sensor convertFromHexToInt(DataReceivedMessage dataReceivedMessage)
-
+  public Sensor convertFromHexaToInt(DataReceivedMessage data)
   {
     int Co2 ;
     int temperature;
     int humidity;
-
 
     String hexValCo2 = data.getData().substring(0, 4);
     Co2 = Integer.parseInt(hexValCo2, 16);
@@ -38,11 +36,9 @@ public class HexaConverter {
     humidity = Integer.parseInt(hexValHum, 16);
     HumidityMeasurement humidityMeasurement = new HumidityMeasurement(humidity);
 
+    Sensor sensor = new Sensor();
 
-  
-  }
-}
-
+    return sensor;
   }
 }
 

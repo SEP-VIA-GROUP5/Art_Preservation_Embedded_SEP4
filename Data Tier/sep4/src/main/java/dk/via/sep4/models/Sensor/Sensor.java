@@ -1,8 +1,8 @@
 package dk.via.sep4.models.Sensor;
 
-import Measurements.CO2Measurement;
-import Measurements.HumidityMeasurement;
-import Measurements.TempMeasurement;
+import dk.via.sep4.measurements.CO2Measurement;
+import dk.via.sep4.measurements.HumidityMeasurement;
+import dk.via.sep4.measurements.TempMeasurement;
 import dk.via.sep4.models.room.Room;
 
 import javax.persistence.*;
@@ -52,8 +52,8 @@ public class Sensor {
 
     private double currentvalue;
 
-    public Sensor(CO2Measurement sensormodel, TempMeasurement unitType, HumidityMeasurement room) {
-        this.sensorModel = sensormodel;
+    public Sensor(CO2Measurement sensorModel, TempMeasurement unitType, HumidityMeasurement room) {
+        this.sensorModel = sensorModel;
         this.unitType = String.valueOf(unitType);
         this.currentvalue = 0;
         this.room = room;

@@ -8,7 +8,7 @@ import java.net.Socket;
 /**
  * @author $(Alina Chelmus)
  */
-
+/*
 
 public class ClientConnection implements Runnable
 {
@@ -36,4 +36,4 @@ public class ClientConnection implements Runnable
       }
     }
   }
-}
+}*/

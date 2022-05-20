@@ -1,21 +1,43 @@
 package com.via.sep4;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.HeaderViewListAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.via.sep4.view.HomeFragment;
+import com.via.sep4.view.RegisterFragment;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private View headerView;
+    private TextView username;
+    private TextView email;
+
     private NavController navController;
     private AppBarConfiguration configuration;
     private Toolbar toolbar;
@@ -26,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initView();
+        loadInfo();
         setupNavigation();
     }
 
@@ -33,6 +56,28 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.main_drawer);
         navigationView = findViewById(R.id.side_navmenu);
         toolbar = findViewById(R.id.toolbar);
+        headerView = navigationView.getHeaderView(0);
+        username = headerView.findViewById(R.id.username_menu);
+        email = headerView.findViewById(R.id.email_menu);
+    }
+
+    private void loadInfo(){
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null){
+            email.setText(user.getEmail());
+            FirebaseDatabase db = FirebaseDatabase.getInstance(getString(R.string.firebase_dbLink));
+            DatabaseReference dbRef = db.getReference("Username/")
+                    .child(DataHandler.changeDotToComaEmail(user.getEmail()));
+            dbRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    String usernameString = String.valueOf(task.getResult().getValue());
+                    username.setText(usernameString);
+                }
+            });
+        }
+
     }
 
     private void setupNavigation() {
@@ -57,4 +102,5 @@ public class MainActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(navController, configuration) || super.onSupportNavigateUp();
     }
+
 }

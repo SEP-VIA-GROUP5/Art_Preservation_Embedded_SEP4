@@ -1,4 +1,4 @@
-package com.via.sep4.ViewModel;
+package com.via.sep4.viewModel;
 
 import androidx.lifecycle.ViewModel;
 
@@ -8,7 +8,7 @@ public class DataViewModel extends ViewModel {
     DataRepository repository;
 
     public DataViewModel(){
-        repository = DataRepository.getInstance();
+        //repository = DataRepository.getInstance();
 
     }
 

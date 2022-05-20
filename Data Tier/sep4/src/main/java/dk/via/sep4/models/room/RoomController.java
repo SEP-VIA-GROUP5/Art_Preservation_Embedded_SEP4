@@ -1,16 +1,14 @@
 package dk.via.sep4.models.room;
 
 import org.apache.catalina.LifecycleState;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/SEP4")
 @RestController
-public class RoomController {
+public class RoomController
+{
     private final RoomRepository roomRepository;
 
     public RoomController(RoomRepository roomRepository)
@@ -18,13 +16,39 @@ public class RoomController {
         this.roomRepository = roomRepository;
     }
 
-    @GetMapping("/rooms")
-    List<Room> all(){
+    @GetMapping("/rooms") List<Room> all()
+    {
         return roomRepository.findAll();
     }
 
-    @GetMapping("/rooms/{id}")
-    Room one(@PathVariable Long id){
-    return roomRepository.findById(id).orElseThrow( () -> new RoomNotFoundException(id));
+    //-----
+    @PostMapping("/rooms")
+    Room r1(@RequestBody Room r1){
+        return roomRepository.save(r1);
     }
+
+    @GetMapping("/rooms/{room_id}")
+    Room one(@PathVariable Long id)
+    {
+        return roomRepository.findById(id).orElseThrow(() -> new RoomNotFoundException(id));
+    }
+    @PutMapping("/rooms/{id}")
+    Room replaceRoom(@RequestBody Room r1, @PathVariable Long id){
+        return roomRepository.findById(id).map(room -> {
+            room.setSensors(r1.getSensors());
+
+            return roomRepository.save(room);
+        }).orElseGet(() -> {
+            r1.setId(id);
+            return roomRepository.save(r1);
+        });
+    }
+    @DeleteMapping("/rooms/{id}")
+    void deleteRoom(@PathVariable Long id){
+        roomRepository.deleteById(id);
+    }
+
+    // .......
+
+
 }

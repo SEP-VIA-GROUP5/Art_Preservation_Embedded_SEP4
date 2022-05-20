@@ -16,7 +16,7 @@
         <menu>
             <group android:id="@+id/sideMenu_accountGroup">
                 <item
-                    android:id="@+id/sideMenu_accountSetting"
+                    android:id="@+id/accountFragment"
                     android:icon="@drawable/ic_account"
                     android:title="@string/sideMenu_account" />
             </group>

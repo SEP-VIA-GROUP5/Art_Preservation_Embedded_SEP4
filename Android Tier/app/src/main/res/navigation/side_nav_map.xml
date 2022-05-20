@@ -8,6 +8,45 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.via.sep4.view.HomeFragment"
-        android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        android:label="@string/navMap_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_signIn_fragment"
+            app:destination="@id/signIn_fragment" />
+        <action
+            android:id="@+id/action_nav_home_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signup_fragment"
+        android:name="com.via.sep4.view.RegisterFragment"
+        android:label="@string/navMap_register"
+        tools:layout="@layout/activity_signup" >
+        <action
+            android:id="@+id/action_signup_fragment_to_signIn_fragment"
+            app:destination="@id/signIn_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signIn_fragment"
+        android:name="com.via.sep4.view.LogInFragment"
+        android:label="@string/navMap_signIn"
+        tools:layout="@layout/activity_signin" >
+        <action
+            android:id="@+id/action_signIn_fragment_to_signup_fragment"
+            app:destination="@id/signup_fragment" />
+        <action
+            android:id="@+id/action_signIn_fragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.via.sep4.view.AccountFragment"
+        android:label="Account"
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 </navigation>

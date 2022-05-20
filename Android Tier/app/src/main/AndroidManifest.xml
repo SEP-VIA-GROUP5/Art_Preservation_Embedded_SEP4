@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SEP4">
 
+        <!-- the key:MAPS_API_KEY=AIzaSyCCylDpIK77XAdlyOtJgdWlWYo8H3cTowY   please add it to local.properties -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />

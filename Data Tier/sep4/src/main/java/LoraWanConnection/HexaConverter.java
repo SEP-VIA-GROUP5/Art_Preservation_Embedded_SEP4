@@ -37,7 +37,7 @@ public class HexaConverter {
         humidity = Integer.parseInt(hexValHum, 16);
         HumidityMeasurement humidityMeasurement = new HumidityMeasurement(humidity);
 
-        Sensor sensor = new Sensor(co2Measurement,temperatureMeasurement, humidityMeasurement);
+        Sensor sensor = new Sensor(co2Measurement,temperatureMeasurement,humidityMeasurement);
 
         return sensor;
     }

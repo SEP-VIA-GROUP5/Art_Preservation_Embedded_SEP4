@@ -1,25 +1,19 @@
 package dk.via.sep4.models.network;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import dk.via.sep4.SpringConfiguration;
-import dk.via.sep4.models.Sensor.Sensor;
-import dk.via.sep4.models.Sensor.SensorModel;
 import dk.via.sep4.models.Sensor.SensorRepository;
-import dk.via.sep4.services.SensorHistory;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.net.Socket;
-import java.util.ArrayList;
 
 /**
  * @author $(Alina Chelmus)
  */
 
-/*
+
 public class ClientHandler implements Runnable
 {
   private Socket socket;
@@ -81,4 +75,4 @@ public class ClientHandler implements Runnable
   }
 
 
-}*/
+}

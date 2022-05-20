@@ -124,13 +124,13 @@ public class LogInFragment extends Fragment {
                         user.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-
-                                // to be added a message
+                                Snackbar.make(view, getString(R.string.login_forget_ok), Snackbar.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                           //to be added a message
+                           Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_SHORT).show();
+                           Log.e("forget error", e.getMessage());
                             }
                         });
                     }

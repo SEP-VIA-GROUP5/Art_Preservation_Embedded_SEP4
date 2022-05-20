@@ -8,7 +8,7 @@ import javax.persistence.*;
 /**
  * Ravneet
  */
-@Entity(name="CO2")
+@Entity
 @Table(name="co2")
 public class CO2Measurement {
 

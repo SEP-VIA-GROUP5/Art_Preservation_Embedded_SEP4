@@ -8,7 +8,7 @@ import javax.persistence.Table;
 /**
  * Ravneet
  */
-@Entity(name="Temperature")
+@Entity
 @Table(name="temperature")
 public class TempMeasurement {
   @Id

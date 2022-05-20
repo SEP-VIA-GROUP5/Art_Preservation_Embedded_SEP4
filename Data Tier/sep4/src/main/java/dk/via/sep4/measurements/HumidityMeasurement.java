@@ -8,7 +8,7 @@ import javax.persistence.Table;
 /**
  * Ravneet
  */
-@Entity(name = "Humidity")
+@Entity
 @Table(name = "humidity")
 public class HumidityMeasurement {
   @Id

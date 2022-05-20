@@ -9,7 +9,7 @@
     <string name="sideMenu_contact">Contact us</string>
     <string name="sideMenu_logout">Logout</string>
 
-    <string name="side_header_username">Username</string>
+    <string name="side_header_username">Welcome back</string>
     <string name="side_header_email">Email</string>
 
     <!-- register error label -->
@@ -26,6 +26,7 @@
     <!-- account settings -->
     <string name="account_label">Change account info here</string>
     <string name="account_save">Save changes</string>
+    <string name="account_save_ok">Change saved!</string>
 
     <!-- register -->
     <string name="signup_label">Create new account</string>

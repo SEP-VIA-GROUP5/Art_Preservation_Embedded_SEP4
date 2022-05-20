@@ -80,21 +80,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         email = headerView.findViewById(R.id.email_menu);
     }
 
-    private void loadInfo(){
+    private void loadInfo() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
-        if (user != null){
+        if (user != null) {
             email.setText(user.getEmail());
-            FirebaseDatabase db = FirebaseDatabase.getInstance(getString(R.string.firebase_dbLink));
-            DatabaseReference dbRef = db.getReference("Username/")
-                    .child(DataHandler.changeDotToComaEmail(user.getEmail()));
-            dbRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    String usernameString = String.valueOf(task.getResult().getValue());
-                    username.setText(usernameString);
-                }
-            });
         }
 
     }

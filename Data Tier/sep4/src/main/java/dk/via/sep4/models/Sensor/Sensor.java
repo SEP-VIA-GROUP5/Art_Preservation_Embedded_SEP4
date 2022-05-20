@@ -1,5 +1,8 @@
 package dk.via.sep4.models.Sensor;
 
+import Measurements.CO2Measurement;
+import Measurements.HumidityMeasurement;
+import Measurements.TempMeasurement;
 import dk.via.sep4.models.room.Room;
 
 import javax.persistence.*;
@@ -14,7 +17,7 @@ public class Sensor {
 
     @ManyToOne
     @JoinColumn(name="room_id")
-    private Room room;
+    private HumidityMeasurement room;
     public Sensor(SensorModel co2, String ppm, Room r, int i, int i1) {
     }
 
@@ -26,7 +29,7 @@ public class Sensor {
         this.id = id;
     }
 
-    public SensorModel getSensorModel() {
+    public CO2Measurement getSensorModel() {
         return sensorModel;
     }
 
@@ -38,18 +41,20 @@ public class Sensor {
         this.unitType = unitType;
     }
 
-    public void setSensorModel(SensorModel sensorModel) {
+    public void setSensorModel(CO2Measurement sensorModel) {
         this.sensorModel = sensorModel;
     }
 
-    private SensorModel sensorModel;
+    @ManyToOne
+    @JoinColumn(name = "sensor_model_id")
+    private CO2Measurement sensorModel;
     private String unitType;
 
     private double currentvalue;
 
-    public Sensor(SensorModel sensormodel, String unitType, Room room) {
+    public Sensor(CO2Measurement sensormodel, TempMeasurement unitType, HumidityMeasurement room) {
         this.sensorModel = sensormodel;
-        this.unitType = unitType;
+        this.unitType = String.valueOf(unitType);
         this.currentvalue = 0;
         this.room = room;
     }
@@ -68,11 +73,11 @@ public class Sensor {
         this.currentvalue = currentvalue;
     }
 
-    public Room getRoom() {
+    public HumidityMeasurement getRoom() {
         return room;
     }
 
-    public void setRoom(Room room) {
+    public void setRoom(HumidityMeasurement room) {
         this.room = room;
     }
 }

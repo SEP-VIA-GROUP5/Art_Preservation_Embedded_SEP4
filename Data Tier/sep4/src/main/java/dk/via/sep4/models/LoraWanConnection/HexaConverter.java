@@ -7,10 +7,8 @@ import dk.via.sep4.models.Sensor.Sensor;
  */
 public class HexaConverter
 {
-  /*
   public Sensor convertFromHexToInt(DataReceivedMessage dataReceivedMessage)
   {
 
-
-  }*/
+  }
 }

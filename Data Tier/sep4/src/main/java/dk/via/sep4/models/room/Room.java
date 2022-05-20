@@ -17,7 +17,7 @@ public class Room {
     private Set<Sensor> sensors;
     private String name;
     private String location;
-    private int number;
+   private int number;
 
     public Room()
     {

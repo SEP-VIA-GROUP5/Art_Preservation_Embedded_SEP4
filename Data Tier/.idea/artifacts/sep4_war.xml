@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sep4:war">
+    <output-path>$PROJECT_DIR$/sep4/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>sep4</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="sep4-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="sep4:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -8,6 +8,7 @@ import dk.via.sep4.models.Sensor.Sensor;
 /**
  * Ravneet
  */
+
 public class HexaConverter {
 
   private String data;
@@ -17,9 +18,8 @@ public class HexaConverter {
     this.data = data;
   }
 
+  public Sensor convertFromHexToInt(DataReceivedMessage dataReceivedMessage)
 
-
-  public Sensor convertFromHexaToInt(DataReceivedMessage data)
   {
     int Co2 ;
     int temperature;
@@ -38,8 +38,11 @@ public class HexaConverter {
     humidity = Integer.parseInt(hexValHum, 16);
     HumidityMeasurement humidityMeasurement = new HumidityMeasurement(humidity);
 
-    Sensor sensor = new Sensor();
 
-    return sensor;
+  
   }
 }
+
+  }
+}
+

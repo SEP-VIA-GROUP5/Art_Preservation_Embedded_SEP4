@@ -9,4 +9,13 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="menu_header">#3bfc76</color>
+    <color name="main1">#bfdcee</color>
+    <color name="main2">#dbecf4</color>
+    <color name="LightSkyBlue">#87CEFA</color>
+    
+    <color name="Turquoise">#40E0D0</color>
+    <color name="SteelBlue">#4682B4</color>
+    <color name="menu">#9ffff7</color>
+    <color name="Grey">#BEBEBE</color>
+    <color name="DimGrey">#696969</color>
 </resources>

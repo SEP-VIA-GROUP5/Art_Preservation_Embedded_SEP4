@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SEP4</string>
-    
+
     <string name="sideMenu_room">Room</string>
     <string name="sideMenu_groupAbout">Other</string>
     <string name="sideMenu_groupAccount">Account</string>
@@ -9,13 +9,27 @@
     <string name="sideMenu_contact">Contact us</string>
     <string name="sideMenu_logout">Logout</string>
 
-    <string name="side_header_username">Username</string>
+    <string name="side_header_username">Welcome back</string>
     <string name="side_header_email">Email</string>
 
     <!-- register error label -->
     <string name="R_passwordLengthE">Password should be more than 6 characters</string>
     <string name="R_passwordNotMachE">Password doesn\'t match</string>
     <string name="R_emailNotValidE">The format of email isn\'t correct</string>
+
+    <string name="R_success">Register success !</string>
+    <string name="main_login_info">Please login first</string>
+    <string name="login_label">Sign In to your existing account</string>
+    <string name="login_forgetPassword">Forgot password? <b>Click here</b></string>
+    <string name="login_forget_ok">Password reset!</string>
+
+    <!-- account settings -->
+    <string name="account_label">Change account info here</string>
+    <string name="account_save">Save changes</string>
+    <string name="account_save_ok">Change saved!</string>
+
+    <!-- register -->
+    <string name="signup_label">Create new account</string>
 
     <!-- for nav map label -->
     <string name="navMap_home">Home</string>
@@ -24,4 +38,15 @@
     <!--Make bold-->
     <string name="don_t_have_an_account_sign_up">Don\'t have an account? <b>Sign Up</b> </string>
     <string name="already_have_an_account_sign_in">Already have an account? <b>Sign in</b> </string>
+
+    <string name="firebase_dbLink">https://sep4-ed4e9-default-rtdb.europe-west1.firebasedatabase.app/</string>
+    <string name="sign_up">Sign Up</string>
+
+    <string name="contact_info">Email: sep4@via.dk\n\nPhone no: 81 90 36 94</string>
+
+    <string name="about_us_description1"><b>Our Project</b>\nConsists of an embedded system for Art galleries. The main purpose - present the data of the room on an Android app (temperature, humidity, CO2) and act accordingly (open a window, etc). </string>
+
+    <string name="about_us_description2"><b>IOT team </b>\nResponsible for the embedded part of the system.\n
+        \n<b>DataWarehouse team</b>\nResponsible for getting the data from embedded system and storing it in a data warehouse. Also making a web service to make the data accesible.\n
+        \n<b>Android team</b>\nResponsible for making an android application that will present the data received from the data warehouse in various ways. </string>
 </resources>

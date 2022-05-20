@@ -45,7 +45,7 @@
 
     <string name="about_us_description1"><b>Our Project</b>\nConsists of an embedded system for Art galleries. The main purpose - present the data of the room on an Android app (temperature, humidity, CO2) and act accordingly (open a window, etc). </string>
 
-    <string name="about_us_description2"><b>IOT team</b>\nResponsible for the embedded part of the system.\n
+    <string name="about_us_description2"><b>IOT team </b>\nResponsible for the embedded part of the system.\n
         \n<b>DataWarehouse team</b>\nResponsible for getting the data from embedded system and storing it in a data warehouse. Also making a web service to make the data accesible.\n
         \n<b>Android team</b>\nResponsible for making an android application that will present the data received from the data warehouse in various ways. </string>
 </resources>

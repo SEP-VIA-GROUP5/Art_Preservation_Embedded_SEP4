@@ -1,8 +1,10 @@
 package com.via.sep4.view;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -28,6 +30,8 @@ import android.widget.Toast;
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
@@ -41,8 +45,8 @@ public class LogInFragment extends Fragment {
 
 
     EditText logEmail, logPassword;
-    Button loginBtn;
-    TextView toRegister;
+    Button loginBtn ;
+    TextView toRegister, forgotPass;
 
     private LogInViewModel viewModel;
     private FirebaseAuth auth;
@@ -63,16 +67,18 @@ public class LogInFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(LogInViewModel.class);
         navController = Navigation.findNavController(view);
 
-        initializeViews(view);
+        initView(view);
         setupViews();
     }
 
 
-    private void initializeViews(View view) {
+    private void initView(View view) {
         logEmail = view.findViewById(R.id.emailEt);
         logPassword = view.findViewById(R.id.passwordEt);
         loginBtn = view.findViewById(R.id.signInBtn);
         toRegister = view.findViewById(R.id.createAccountView);
+        forgotPass = view.findViewById(R.id.forgpasBtn);
+        FirebaseUser user;
 
     }
 
@@ -93,6 +99,64 @@ public class LogInFragment extends Fragment {
                         }
                     });
         });
+
+
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                EditText resetPassword = new EditText(view.getContext());
+                FirebaseUser user = auth.getCurrentUser();
+                AlertDialog.Builder passwordreesetdiag = new AlertDialog.Builder(view.getContext());
+
+                passwordreesetdiag.setTitle("Password Reset");
+                passwordreesetdiag.setMessage(" Enter the new password ");
+                passwordreesetdiag.setView(resetPassword);
+                passwordreesetdiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //take the email and send reset link
+                        String newPassword = resetPassword.getText().toString();
+
+                        user.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                // to be added a message
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                           //to be added a message
+                            }
+                        });
+                    }
+
+
+                });
+
+                passwordreesetdiag.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                passwordreesetdiag.create().show();
+
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
 
         toRegister.setOnClickListener(v -> {
             NavHostFragment.findNavController(LogInFragment.this).navigate(R.id.action_signIn_fragment_to_signup_fragment);

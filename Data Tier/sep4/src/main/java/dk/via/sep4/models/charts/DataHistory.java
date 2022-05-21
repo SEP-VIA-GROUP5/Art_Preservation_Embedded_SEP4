@@ -1,12 +1,10 @@
 package dk.via.sep4.models.charts;
 
-import dk.via.sep4.models.Sensor.SensorModel;
-
 import java.util.List;
 
 public class DataHistory {
 
-  private  SensorModel sensorModel;
+  //private  SensorModel sensorModel;
   private List<ValueFromSensor> valueSensors;
   private long roomId;
   private long sensorId;
@@ -46,10 +44,10 @@ public class DataHistory {
     this.sensorId = sensorId;
   }
 
-  public SensorModel getModelName(){
-    return sensorModel;
-  }
-  public void setModelName(SensorModel sensorModel){
-    this.sensorModel = sensorModel;
-  }
+//  public SensorModel getModelName(){
+//    return sensorModel;
+//  }
+//  public void setModelName(SensorModel sensorModel){
+//    this.sensorModel = sensorModel;
+//  }
 }

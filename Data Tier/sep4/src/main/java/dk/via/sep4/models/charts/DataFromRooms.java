@@ -2,7 +2,7 @@ package dk.via.sep4.models.charts;
 
 
 
-import dk.via.sep4.models.Sensor.Sensor;
+import dk.via.sep4.models.sensor.Sensor;
 
 import java.util.Set;
 

@@ -1,20 +1,25 @@
 package dk.via.sep4.models.room;
 
-import dk.via.sep4.models.Sensor.Sensor;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "room")
 public class Room {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "room_id")
+    @Column(updatable = false)
+    @GeneratedValue(generator = "sequence-generator")
+    @GenericGenerator(name = "sequence-generator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "sequence_name", value = "room_sequence"),
+                    @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
+                    @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")})
     private  long id;
-    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Sensor> sensors;
+//    @OneToOne(mappedBy = "room")
+//    private Set<Sensor> sensors;
     private String name;
     private String location;
    private int number;
@@ -38,13 +43,13 @@ public class Room {
         this.id = roomid;
     }
 
-    public void setSensors(Set<Sensor> sensors) {
-        this.sensors = sensors;
-    }
+//    public void setSensors(Set<Sensor> sensors) {
+//        this.sensors = sensors;
+//    }
 
-    public Set<Sensor> getSensors() {
-        return sensors;
-    }
+//    public Set<Sensor> getSensors() {
+//        return sensors;
+//    }
 
 
     @Override
@@ -57,18 +62,18 @@ public class Room {
         Room room = (Room) o;
         return Objects.equals(this.id, room.id) && Objects.equals(this.name, room.name)
             && Objects.equals(this.location, room.location)
-            && Objects.equals(this.sensors, room.sensors)
+            //&& Objects.equals(this.sensors, room.sensors)
             && Objects.equals(this.number, room.number);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.location, this.number, this.sensors);
+        return Objects.hash(this.id, this.name, this.location, this.number/*, this.sensors*/);
     }
 
     @Override public String toString()
     {
-        return "Room{" + "id=" + id + ", sensors=" + sensors + ", name='" + name
+        return "Room{" + "id=" + id + /*", sensors=" + sensors +*/ ", name='" + name
             + '\'' + ", location='" + location + '\'' + ", number=" + number
             + '}';
     }

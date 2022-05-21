@@ -1,8 +1,8 @@
 package dk.via.sep4.models.LoraWanConnection;
 
 import com.google.gson.Gson;
-import dk.via.sep4.models.Sensor.Sensor;
-import dk.via.sep4.models.Sensor.SensorRepository;
+import dk.via.sep4.models.sensor.Sensor;
+import dk.via.sep4.models.sensor.SensorRepository;
 
 import java.net.URI;
 import java.net.http.HttpClient;

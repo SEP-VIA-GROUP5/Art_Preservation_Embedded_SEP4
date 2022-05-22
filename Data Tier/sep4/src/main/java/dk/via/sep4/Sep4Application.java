@@ -19,8 +19,5 @@ public class Sep4Application {
 		WebSocketClient webSocketClient = new WebSocketClient
 				("wss://iotnet.cibicom.dk/app?token=vnoUBwAAABFpb3RuZXQuY2liaWNvbS5ka54Zx4fqYp5yzAQtnGzDDUw=");
 
-
-
 	}
-
 }

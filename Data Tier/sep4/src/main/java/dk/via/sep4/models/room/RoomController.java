@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/SEP4")
 @RestController
 public class RoomController
 {
@@ -32,17 +31,17 @@ public class RoomController
     {
         return roomRepository.findById(id).orElseThrow(() -> new RoomNotFoundException(id));
     }
-    @PutMapping("/rooms/{id}")
-    Room replaceRoom(@RequestBody Room r1, @PathVariable Long id){
-        return roomRepository.findById(id).map(room -> {
-            room.setSensors(r1.getSensors());
-
-            return roomRepository.save(room);
-        }).orElseGet(() -> {
-            r1.setId(id);
-            return roomRepository.save(r1);
-        });
-    }
+//    @PutMapping("/rooms/{id}")
+//    Room replaceRoom(@RequestBody Room r1, @PathVariable Long id){
+//        return roomRepository.findById(id).map(room -> {
+//            room.setSensors(r1.getSensors());
+//
+//            return roomRepository.save(room);
+//        }).orElseGet(() -> {
+//            r1.setId(id);
+//            return roomRepository.save(r1);
+//        });
+//    }
     @DeleteMapping("/rooms/{id}")
     void deleteRoom(@PathVariable Long id){
         roomRepository.deleteById(id);

@@ -44,7 +44,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationBlock{
+public class MainActivity extends AppCompatActivity implements  NavigationBlock{
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private View headerView;
@@ -66,11 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         loadInfo();
         setupNavigation();
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
 
-      // mapFragment.getMapAsync(this);
     }
 
     private void initView() {
@@ -101,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         setSupportActionBar(toolbar);
 
         configuration = new AppBarConfiguration.Builder(R.id.nav_home)
+
                 .setOpenableLayout(drawerLayout).build();
         NavigationUI.setupActionBarWithNavController(this, navController, configuration);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -119,19 +116,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         return NavigationUI.navigateUp(navController, configuration) || super.onSupportNavigateUp();
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng VIA = new LatLng(55.8, 9.8);
-        mMap.addMarker(new MarkerOptions()
-                .position(VIA)
-                .title("Marker in VIA"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(VIA));
-    }
 
-// navigation controler
+// navigation controller
 
     public void setDrawerEnabled(boolean enabled) {
         int lockMode = enabled ? DrawerLayout.LOCK_MODE_UNLOCKED :

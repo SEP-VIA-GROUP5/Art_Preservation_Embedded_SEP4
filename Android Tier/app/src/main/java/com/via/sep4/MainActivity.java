@@ -44,7 +44,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationBlock{
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private View headerView;
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private AppBarConfiguration configuration;
     private Toolbar toolbar;
     private GoogleMap mMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+
+      // mapFragment.getMapAsync(this);
     }
 
     private void initView() {
@@ -86,6 +88,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (user != null) {
             email.setText(user.getEmail());
         }
+
+
+
+
+
 
     }
 
@@ -124,4 +131,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.moveCamera(CameraUpdateFactory.newLatLng(VIA));
     }
 
+// navigation controler
+
+    public void setDrawerEnabled(boolean enabled) {
+        int lockMode = enabled ? DrawerLayout.LOCK_MODE_UNLOCKED :
+                DrawerLayout.LOCK_MODE_LOCKED_CLOSED;
+        drawerLayout.setDrawerLockMode(lockMode);
+
+    }
 }
+

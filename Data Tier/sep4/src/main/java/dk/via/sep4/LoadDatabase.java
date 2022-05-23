@@ -1,12 +1,12 @@
 package dk.via.sep4;
 
-import dk.via.sep4.models.CO2.CO2;
-import dk.via.sep4.models.humidity.Humidity;
-import dk.via.sep4.models.temperature.Temperature;
-import dk.via.sep4.models.sensor.Sensor;
-import dk.via.sep4.models.sensor.SensorRepository;
-import dk.via.sep4.models.room.Room;
-import dk.via.sep4.models.room.RoomRepository;
+import dk.via.sep4.models.CO2;
+import dk.via.sep4.models.Humidity;
+import dk.via.sep4.models.Temperature;
+import dk.via.sep4.models.Sensor;
+import dk.via.sep4.repo.SensorRepository;
+import dk.via.sep4.models.Room;
+import dk.via.sep4.repo.RoomRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

@@ -298,12 +298,6 @@ Disassembly of section .text:
      20e:	f8 ce       	rjmp	.-528    	; 0x0 <__vectors>
 
 00000210 <ApplicationTask>:
-{
-	for (;;)
-	{
-		//if(ALL_READY_BITS == ALL_READY_BITS){
-			//Use in the future when we have both sensors = xEventGroupSetBits(measureEventGroup, ALL_MEASURE_BITS);
-			xEventGroupSetBits(measureEventGroup, HUMIDITY_TEMPERATURE_MEASURE_BIT);
      210:	41 e0       	ldi	r20, 0x01	; 1
      212:	50 e0       	ldi	r21, 0x00	; 0
      214:	60 e0       	ldi	r22, 0x00	; 0
@@ -311,10 +305,6 @@ Disassembly of section .text:
      218:	80 91 3c 17 	lds	r24, 0x173C	; 0x80173c <measureEventGroup>
      21c:	90 91 3d 17 	lds	r25, 0x173D	; 0x80173d <measureEventGroup+0x1>
      220:	a4 d1       	rcall	.+840    	; 0x56a <xEventGroupSetBits>
-		//}
-		
-		//Use in the future when we have both sensors = EventBits_t eventBits = xEventGroupWaitBits(dataReadyEventGroup,ALL_READY_BITS,pdTRUE,pdTRUE,portMAX_DELAY);
-		EventBits_t eventBits = xEventGroupWaitBits(dataReadyEventGroup,HUMIDITY_TEMPERATURE_READY_BIT,pdTRUE,pdTRUE,portMAX_DELAY);
      222:	cc 24       	eor	r12, r12
      224:	ca 94       	dec	r12
      226:	dc 2c       	mov	r13, r12
@@ -328,15 +318,11 @@ Disassembly of section .text:
      236:	80 91 3a 17 	lds	r24, 0x173A	; 0x80173a <dataReadyEventGroup>
      23a:	90 91 3b 17 	lds	r25, 0x173B	; 0x80173b <dataReadyEventGroup+0x1>
      23e:	f5 d0       	rcall	.+490    	; 0x42a <xEventGroupWaitBits>
-		if((eventBits &(HUMIDITY_TEMPERATURE_READY_BIT))==(HUMIDITY_TEMPERATURE_READY_BIT))
      240:	61 ff       	sbrs	r22, 1
      242:	1e c0       	rjmp	.+60     	; 0x280 <ApplicationTask+0x70>
-		{
-			printf("ALL DATA COLLECTED\n");
      244:	82 e4       	ldi	r24, 0x42	; 66
      246:	92 e0       	ldi	r25, 0x02	; 2
      248:	0e 94 d5 2b 	call	0x57aa	; 0x57aa <puts>
-			printf("Temperature is: %x, and humidity is: %x\n",getTemperature(),getHumidity());
      24c:	3f d0       	rcall	.+126    	; 0x2cc <getHumidity>
      24e:	c8 2f       	mov	r28, r24
      250:	d9 2f       	mov	r29, r25
@@ -350,8 +336,6 @@ Disassembly of section .text:
      260:	9f 93       	push	r25
      262:	8f 93       	push	r24
      264:	0e 94 c2 2b 	call	0x5784	; 0x5784 <printf>
-			
-			vTaskDelay(pdMS_TO_TICKS(120000));
      268:	60 e1       	ldi	r22, 0x10	; 16
      26a:	7d e1       	ldi	r23, 0x1D	; 29
      26c:	80 e0       	ldi	r24, 0x00	; 0
@@ -363,26 +347,17 @@ Disassembly of section .text:
      27a:	0f 90       	pop	r0
      27c:	0f 90       	pop	r0
      27e:	0f 90       	pop	r0
-			//xSemaphoreGive(tempHumSemaphore);
-		}
-		vTaskDelay(pdMS_TO_TICKS(50));
      280:	63 e0       	ldi	r22, 0x03	; 3
      282:	70 e0       	ldi	r23, 0x00	; 0
      284:	80 e0       	ldi	r24, 0x00	; 0
      286:	90 e0       	ldi	r25, 0x00	; 0
      288:	0e 94 ea 10 	call	0x21d4	; 0x21d4 <vTaskDelay>
-	}
      28c:	c1 cf       	rjmp	.-126    	; 0x210 <ApplicationTask>
 
 0000028e <createApplicationTask>:
-}
-
-void createApplicationTask(UBaseType_t Taskpriority)
-{
      28e:	ef 92       	push	r14
      290:	ff 92       	push	r15
      292:	0f 93       	push	r16
-	xTaskCreate(
      294:	e1 2c       	mov	r14, r1
      296:	f1 2c       	mov	r15, r1
      298:	08 2f       	mov	r16, r24
@@ -395,116 +370,61 @@ void createApplicationTask(UBaseType_t Taskpriority)
      2a6:	88 e0       	ldi	r24, 0x08	; 8
      2a8:	91 e0       	ldi	r25, 0x01	; 1
      2aa:	0e 94 e5 0d 	call	0x1bca	; 0x1bca <xTaskCreate>
-	,  "AppTask"
-	,  configMINIMAL_STACK_SIZE
-	,  NULL
-	,  tskIDLE_PRIORITY + Taskpriority
-	,  NULL );
      2ae:	0f 91       	pop	r16
      2b0:	ff 90       	pop	r15
      2b2:	ef 90       	pop	r14
      2b4:	08 95       	ret
 
 000002b6 <initializeEventGroup>:
-EventGroupHandle_t measureEventGroup;
-EventGroupHandle_t dataReadyEventGroup;
-
-void initializeEventGroup()
-{
-	dataReadyEventGroup = xEventGroupCreate();
      2b6:	a6 d0       	rcall	.+332    	; 0x404 <xEventGroupCreate>
      2b8:	90 93 3b 17 	sts	0x173B, r25	; 0x80173b <dataReadyEventGroup+0x1>
      2bc:	80 93 3a 17 	sts	0x173A, r24	; 0x80173a <dataReadyEventGroup>
-	measureEventGroup = xEventGroupCreate();
      2c0:	a1 d0       	rcall	.+322    	; 0x404 <xEventGroupCreate>
      2c2:	90 93 3d 17 	sts	0x173D, r25	; 0x80173d <measureEventGroup+0x1>
      2c6:	80 93 3c 17 	sts	0x173C, r24	; 0x80173c <measureEventGroup>
      2ca:	08 95       	ret
 
 000002cc <getHumidity>:
-//Do we need const here?
-
-uint16_t getHumidity()
-{
-	return humidity;
-}
      2cc:	80 91 68 07 	lds	r24, 0x0768	; 0x800768 <__data_end>
      2d0:	90 91 69 07 	lds	r25, 0x0769	; 0x800769 <__data_end+0x1>
      2d4:	08 95       	ret
 
 000002d6 <getTemperature>:
-
-uint16_t getTemperature()
-{
-	return temperature;
-}
      2d6:	80 91 6a 07 	lds	r24, 0x076A	; 0x80076a <temperature>
      2da:	90 91 6b 07 	lds	r25, 0x076B	; 0x80076b <temperature+0x1>
      2de:	08 95       	ret
 
 000002e0 <initializeTempAndHumDriver>:
-	
-}
-
-void initializeTempAndHumDriver()
-{
-	hih8120_driverReturnCode_t returnCode = hih8120_initialise();
      2e0:	0e 94 e8 1b 	call	0x37d0	; 0x37d0 <hih8120_initialise>
-
-	if ( HIH8120_OK == returnCode )
      2e4:	81 11       	cpse	r24, r1
      2e6:	05 c0       	rjmp	.+10     	; 0x2f2 <initializeTempAndHumDriver+0x12>
-	{
-		printf("Temp and Hum Driver Initialized ok\n");
      2e8:	86 e8       	ldi	r24, 0x86	; 134
      2ea:	92 e0       	ldi	r25, 0x02	; 2
      2ec:	0c 94 d5 2b 	jmp	0x57aa	; 0x57aa <puts>
      2f0:	08 95       	ret
-	}
-	
-	else {
-		printf("TEMP AND HUM OUT OF HEAP \n");
      2f2:	89 ea       	ldi	r24, 0xA9	; 169
      2f4:	92 e0       	ldi	r25, 0x02	; 2
      2f6:	0c 94 d5 2b 	jmp	0x57aa	; 0x57aa <puts>
      2fa:	08 95       	ret
 
 000002fc <measureTempAndHum>:
-	}
-}
-
-void measureTempAndHum()
-{
-	if ( HIH8120_OK != hih8120_wakeup() )
      2fc:	0e 94 00 1c 	call	0x3800	; 0x3800 <hih8120_wakeup>
      300:	88 23       	and	r24, r24
      302:	21 f0       	breq	.+8      	; 0x30c <measureTempAndHum+0x10>
-	{
-		printf("TEMP AND HUM WAKE UP WENT WRONG\n");
      304:	83 ec       	ldi	r24, 0xC3	; 195
      306:	92 e0       	ldi	r25, 0x02	; 2
      308:	0e 94 d5 2b 	call	0x57aa	; 0x57aa <puts>
-	}
-	
-	vTaskDelay(pdMS_TO_TICKS(50));
      30c:	63 e0       	ldi	r22, 0x03	; 3
      30e:	70 e0       	ldi	r23, 0x00	; 0
      310:	80 e0       	ldi	r24, 0x00	; 0
      312:	90 e0       	ldi	r25, 0x00	; 0
      314:	0e 94 ea 10 	call	0x21d4	; 0x21d4 <vTaskDelay>
-	
-	if ( HIH8120_OK !=  hih8120_measure() )
      318:	0e 94 15 1c 	call	0x382a	; 0x382a <hih8120_measure>
      31c:	88 23       	and	r24, r24
      31e:	21 f0       	breq	.+8      	; 0x328 <measureTempAndHum+0x2c>
-	{
-		printf("TEMP AND HUM MEASURING UP WENT WRONG\n");
      320:	83 ee       	ldi	r24, 0xE3	; 227
      322:	92 e0       	ldi	r25, 0x02	; 2
      324:	0e 94 d5 2b 	call	0x57aa	; 0x57aa <puts>
-	}
-	
-	vTaskDelay(pdMS_TO_TICKS(20));
      328:	61 e0       	ldi	r22, 0x01	; 1
      32a:	70 e0       	ldi	r23, 0x00	; 0
      32c:	80 e0       	ldi	r24, 0x00	; 0
@@ -513,12 +433,6 @@ void measureTempAndHum()
      334:	08 95       	ret
 
 00000336 <TempAndHumTask>:
-{
-	
-	while(1)
-	{
-		//Use it for later when we have both sensors = EventBits_t eventBits = xEventGroupWaitBits(measureEventGroup,ALL_MEASURE_BITS,pdTRUE,pdTRUE,portMAX_DELAY);
-		EventBits_t eventBits = xEventGroupWaitBits(measureEventGroup,HUMIDITY_TEMPERATURE_MEASURE_BIT,pdTRUE,pdTRUE,portMAX_DELAY);
      336:	cc 24       	eor	r12, r12
      338:	ca 94       	dec	r12
      33a:	dc 2c       	mov	r13, r12
@@ -532,28 +446,18 @@ void measureTempAndHum()
      34a:	80 91 3c 17 	lds	r24, 0x173C	; 0x80173c <measureEventGroup>
      34e:	90 91 3d 17 	lds	r25, 0x173D	; 0x80173d <measureEventGroup+0x1>
      352:	6b d0       	rcall	.+214    	; 0x42a <xEventGroupWaitBits>
-		if(eventBits & (HUMIDITY_TEMPERATURE_MEASURE_BIT))
      354:	60 ff       	sbrs	r22, 0
      356:	1a c0       	rjmp	.+52     	; 0x38c <TempAndHumTask+0x56>
-		{
-			puts("Measuring metrics...");
      358:	88 e0       	ldi	r24, 0x08	; 8
      35a:	93 e0       	ldi	r25, 0x03	; 3
      35c:	0e 94 d5 2b 	call	0x57aa	; 0x57aa <puts>
-			measureTempAndHum();
      360:	cd df       	rcall	.-102    	; 0x2fc <measureTempAndHum>
-			temperature = hih8120_getTemperature_x10();
      362:	0e 94 61 1c 	call	0x38c2	; 0x38c2 <hih8120_getTemperature_x10>
      366:	90 93 6b 07 	sts	0x076B, r25	; 0x80076b <temperature+0x1>
      36a:	80 93 6a 07 	sts	0x076A, r24	; 0x80076a <temperature>
-			humidity = hih8120_getHumidityPercent_x10();
      36e:	0e 94 3b 1c 	call	0x3876	; 0x3876 <hih8120_getHumidityPercent_x10>
      372:	90 93 69 07 	sts	0x0769, r25	; 0x800769 <__data_end+0x1>
      376:	80 93 68 07 	sts	0x0768, r24	; 0x800768 <__data_end>
-			//printf("Temperature: %d\n",Temp);
-			//printf("Humidity: %d\n",Humidity);
-			//Use it for later when we have both sensors = xEventGroupSetBits(dataReadyEventGroup,ALL_READY_BIT);
-			xEventGroupSetBits(dataReadyEventGroup,HUMIDITY_TEMPERATURE_READY_BIT);
      37a:	42 e0       	ldi	r20, 0x02	; 2
      37c:	50 e0       	ldi	r21, 0x00	; 0
      37e:	60 e0       	ldi	r22, 0x00	; 0
@@ -561,27 +465,18 @@ void measureTempAndHum()
      382:	80 91 3a 17 	lds	r24, 0x173A	; 0x80173a <dataReadyEventGroup>
      386:	90 91 3b 17 	lds	r25, 0x173B	; 0x80173b <dataReadyEventGroup+0x1>
      38a:	ef d0       	rcall	.+478    	; 0x56a <xEventGroupSetBits>
-		}
-		vTaskDelay(pdMS_TO_TICKS(10));
      38c:	60 e0       	ldi	r22, 0x00	; 0
      38e:	70 e0       	ldi	r23, 0x00	; 0
      390:	cb 01       	movw	r24, r22
      392:	0e 94 ea 10 	call	0x21d4	; 0x21d4 <vTaskDelay>
-	}
      396:	cf cf       	rjmp	.-98     	; 0x336 <TempAndHumTask>
 
 00000398 <createTempAndHumTask>:
-}
-
-void createTempAndHumTask(UBaseType_t Taskpriority)
-{
      398:	ef 92       	push	r14
      39a:	ff 92       	push	r15
      39c:	0f 93       	push	r16
      39e:	08 2f       	mov	r16, r24
-	initializeTempAndHumDriver();
      3a0:	9f df       	rcall	.-194    	; 0x2e0 <initializeTempAndHumDriver>
-	xTaskCreate(
      3a2:	e1 2c       	mov	r14, r1
      3a4:	f1 2c       	mov	r15, r1
      3a6:	20 e0       	ldi	r18, 0x00	; 0
@@ -593,12 +488,6 @@ void createTempAndHumTask(UBaseType_t Taskpriority)
      3b2:	8b e9       	ldi	r24, 0x9B	; 155
      3b4:	91 e0       	ldi	r25, 0x01	; 1
      3b6:	0e 94 e5 0d 	call	0x1bca	; 0x1bca <xTaskCreate>
-	,  "TempAndHumTask"
-	,  configMINIMAL_STACK_SIZE
-	,  NULL
-	,  tskIDLE_PRIORITY + Taskpriority
-	,  NULL );
-}
      3ba:	0f 91       	pop	r16
      3bc:	ff 90       	pop	r15
      3be:	ef 90       	pop	r14
@@ -6895,79 +6784,39 @@ void createTempAndHumTask(UBaseType_t Taskpriority)
     372c:	08 95       	ret
 
 0000372e <initializeUsedData>:
-// Prototype for LoRaWAN handler
-void lora_handler_initialise(UBaseType_t lora_handler_task_priority);
-
-void initializeUsedData()
-{
-	initializeEventGroup();
     372e:	0c 94 5b 01 	jmp	0x2b6	; 0x2b6 <initializeEventGroup>
     3732:	08 95       	ret
 
 00003734 <create_tasks>:
-	//lora_driver_initialise(ser_USART1, downlinkMessageBuffer);
-}
-
-void create_tasks(void)
-{
-	createTempAndHumTask(1);
     3734:	81 e0       	ldi	r24, 0x01	; 1
     3736:	0e 94 cc 01 	call	0x398	; 0x398 <createTempAndHumTask>
-	createApplicationTask(2);
     373a:	82 e0       	ldi	r24, 0x02	; 2
     373c:	0c 94 47 01 	jmp	0x28e	; 0x28e <createApplicationTask>
     3740:	08 95       	ret
 
 00003742 <initialiseSystem>:
-}
-
-void initialiseSystem()
-{
-	// Set output ports for leds used in the example
-	DDRA |= _BV(DDA0) | _BV(DDA7);
     3742:	81 b1       	in	r24, 0x01	; 1
     3744:	81 68       	ori	r24, 0x81	; 129
     3746:	81 b9       	out	0x01, r24	; 1
-
-	// Make it possible to use stdio on COM port 0 (USB) on Arduino board - Setting 57600,8,N,1
-	stdio_initialise(ser_USART0);
     3748:	80 e0       	ldi	r24, 0x00	; 0
     374a:	0e 94 8f 24 	call	0x491e	; 0x491e <stdio_initialise>
-	// Let's create some tasks
-	create_tasks();
     374e:	f2 df       	rcall	.-28     	; 0x3734 <create_tasks>
-
-	// vvvvvvvvvvvvvvvvv BELOW IS LoRaWAN initialisation vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-	// Status Leds driver
-	status_leds_initialise(5); // Priority 5 for internal task
     3750:	85 e0       	ldi	r24, 0x05	; 5
     3752:	0e 94 96 25 	call	0x4b2c	; 0x4b2c <status_leds_initialise>
-	// Initialise the LoRaWAN driver without down-link buffer
-	lora_driver_initialise(1, NULL);
     3756:	60 e0       	ldi	r22, 0x00	; 0
     3758:	70 e0       	ldi	r23, 0x00	; 0
     375a:	81 e0       	ldi	r24, 0x01	; 1
     375c:	dc d1       	rcall	.+952    	; 0x3b16 <lora_driver_initialise>
-	// Create LoRaWAN task and start it up with priority 3
-	lora_handler_initialise(3); 
     375e:	83 e0       	ldi	r24, 0x03	; 3
     3760:	d2 df       	rcall	.-92     	; 0x3706 <lora_handler_initialise>
-	initializeUsedData();
     3762:	e5 cf       	rjmp	.-54     	; 0x372e <initializeUsedData>
     3764:	08 95       	ret
 
 00003766 <main>:
     3766:	ed df       	rcall	.-38     	; 0x3742 <initialiseSystem>
-
-/*-----------------------------------------------------------*/
-int main(void)
-{
-	initialiseSystem(); // Must be done as the very first thing!!
-	printf("Program Started!!\n");
     3768:	82 e8       	ldi	r24, 0x82	; 130
     376a:	94 e0       	ldi	r25, 0x04	; 4
     376c:	0e 94 d5 2b 	call	0x57aa	; 0x57aa <puts>
-	vTaskStartScheduler(); // Initialise and run the freeRTOS scheduler. Execution should never return from here.
     3770:	0e 94 31 0e 	call	0x1c62	; 0x1c62 <vTaskStartScheduler>
     3774:	ff cf       	rjmp	.-2      	; 0x3774 <main+0xe>
 

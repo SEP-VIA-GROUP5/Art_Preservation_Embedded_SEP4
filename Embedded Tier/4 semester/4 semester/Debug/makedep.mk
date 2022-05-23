@@ -4,6 +4,8 @@
 
 Application.c
 
+SensorDataPackageHandler.c
+
 Setup.c
 
 TemperatureHumiditySensor.c

@@ -57,7 +57,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_copy_data.o)
                               Application.o (__do_copy_data)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr6\libgcc.a(_clear_bss.o)
-                              Setup.o (__do_clear_bss)
+                              SensorDataPackageHandler.o (__do_clear_bss)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(malloc.o)
                               ../drivers\libIotLibrary.a(serial.o) (malloc)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(abort.o)
@@ -105,6 +105,7 @@ dataReadyEventGroup
                     0x2               Setup.o
 portTickRateHz      0x4               FreeRTOS/src/port.o
 measureEventGroup   0x2               Setup.o
+co2Ppm              0x2               SensorDataPackageHandler.o
 __flp               0x2               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(malloc.o)
 __iob               0x6               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr6\libc.a(iob.o)
 ticksRemainingInSec
@@ -117,6 +118,28 @@ Discarded input sections
  .text          0x00000000        0x0 Application.o
  .data          0x00000000        0x0 Application.o
  .bss           0x00000000        0x0 Application.o
+ .text          0x00000000        0x0 SensorDataPackageHandler.o
+ .data          0x00000000        0x0 SensorDataPackageHandler.o
+ .bss           0x00000000        0x0 SensorDataPackageHandler.o
+ .text.setHumidity
+                0x00000000        0xa SensorDataPackageHandler.o
+ .text.setTemperature
+                0x00000000        0xa SensorDataPackageHandler.o
+ .text.setCo2Ppm
+                0x00000000        0xa SensorDataPackageHandler.o
+ .text.sensorDataPackageHandler_getLoRaPayload
+                0x00000000       0x58 SensorDataPackageHandler.o
+ .debug_info    0x00000000      0x1f9 SensorDataPackageHandler.o
+ .debug_abbrev  0x00000000      0x11e SensorDataPackageHandler.o
+ .debug_loc     0x00000000       0x90 SensorDataPackageHandler.o
+ .debug_aranges
+                0x00000000       0x38 SensorDataPackageHandler.o
+ .debug_ranges  0x00000000       0x28 SensorDataPackageHandler.o
+ .debug_line    0x00000000      0x171 SensorDataPackageHandler.o
+ .debug_str     0x00000000      0x275 SensorDataPackageHandler.o
+ .comment       0x00000000       0x31 SensorDataPackageHandler.o
+ .debug_frame   0x00000000       0x64 SensorDataPackageHandler.o
+ COMMON         0x00000000        0x2 SensorDataPackageHandler.o
  .text          0x00000000        0x0 Setup.o
  .data          0x00000000        0x0 Setup.o
  .bss           0x00000000        0x0 Setup.o
@@ -587,6 +610,7 @@ Linker script and memory map
 Address of section .data set to 0x800200
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.6.364/gcc/dev/atmega2560/avr6/crtatmega2560.o
 LOAD Application.o
+LOAD SensorDataPackageHandler.o
 LOAD Setup.o
 LOAD TemperatureHumiditySensor.o
 LOAD FreeRTOS/FreeRTOSTraceDriver/FreeRTOSTraceDriver.o

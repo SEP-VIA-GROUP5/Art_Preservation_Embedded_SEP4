@@ -37,9 +37,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.via.sep4.NavigationBlock;
 import com.via.sep4.R;
 import com.via.sep4.model.User;
 import com.via.sep4.viewModel.LogInViewModel;
+
+import java.util.Objects;
 
 public class LogInFragment extends Fragment {
 
@@ -52,12 +55,15 @@ public class LogInFragment extends Fragment {
     private FirebaseAuth auth;
     private NavController navController;
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.login_fragment, container, false);
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         checkUser(user);
-        return inflater.inflate(R.layout.login_fragment, container, false);
+        //((NavigationBlock) getContext()).setDrawerEnabled(false);
+        return v;
     }
 
     @Override
@@ -66,11 +72,9 @@ public class LogInFragment extends Fragment {
 
         viewModel = new ViewModelProvider(getActivity()).get(LogInViewModel.class);
         navController = Navigation.findNavController(view);
-
         initView(view);
 
     }
-
 
     private void initView(View view) {
         logEmail = view.findViewById(R.id.emailEt);
@@ -80,9 +84,11 @@ public class LogInFragment extends Fragment {
         forgotPass = view.findViewById(R.id.forgpasBtn);
         FirebaseUser user;
         setupViews();
+
     }
 
     private void setupViews() {
+
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,19 +1,26 @@
 package com.via.sep4.view;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
@@ -36,7 +43,7 @@ public class AccountFragment extends Fragment {
     private TextView usernameText;
     private TextView emailText;
     private TextView phoneText;
-    private Button saveButton;
+    private Button saveButton, changePasswordBtn;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -59,7 +66,7 @@ public class AccountFragment extends Fragment {
         emailText = v.findViewById(R.id.emailEt);
         phoneText = v.findViewById(R.id.phoneNoEt);
         saveButton = v.findViewById(R.id.saveBtn);
-
+        changePasswordBtn = v.findViewById(R.id.changePass);
         loadInfo();
         editTextListener();
 
@@ -80,6 +87,55 @@ public class AccountFragment extends Fragment {
                 Snackbar.make(v, getString(R.string.account_save_ok), Snackbar.LENGTH_SHORT).show();
             }
         });
+
+
+        changePasswordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                EditText resetPassword = new EditText(view.getContext());
+
+                AlertDialog.Builder passwordreesetdiag = new AlertDialog.Builder(view.getContext());
+
+                passwordreesetdiag.setTitle("Password Reset");
+                passwordreesetdiag.setMessage(" Enter the new password ");
+                passwordreesetdiag.setView(resetPassword);
+                passwordreesetdiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //take the email and send reset link
+                        String newPassword = resetPassword.getText().toString();
+
+                        user.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                // a message to be created
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                               //a message to be created
+                            }
+                        });
+                    }
+
+
+                });
+
+                passwordreesetdiag.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                passwordreesetdiag.create().show();
+
+
+            }
+        });
+
+
+
         return v;
     }
 

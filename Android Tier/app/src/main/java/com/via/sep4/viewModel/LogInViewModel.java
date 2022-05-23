@@ -29,5 +29,4 @@ public class LogInViewModel extends ViewModel {
         repository.login(userLog);
     }
 
-
 }

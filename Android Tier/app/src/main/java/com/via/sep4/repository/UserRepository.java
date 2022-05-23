@@ -26,7 +26,6 @@ public class UserRepository {
     private final FirebaseUserLiveData currentFirebaseUser;
 
     private UserRepository() {
-
         currentFirebaseUser = new FirebaseUserLiveData();
         //  fStore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
@@ -36,13 +35,10 @@ public class UserRepository {
         if (instance == null) {
             instance = new UserRepository();
         }
-
         return instance;
     }
 
     public void register(User user) {
-
-
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(user.getEmail(), user.getPassword()).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 Log.d(TAG, "createUserWithEmail:success");
@@ -51,7 +47,6 @@ public class UserRepository {
     }
 
     public void login(User userLog) {
-
         FirebaseAuth.getInstance().signInWithEmailAndPassword(userLog.getEmail(), userLog.getPassword())
                 .addOnCompleteListener(result -> {
                     if (result.isSuccessful()) {

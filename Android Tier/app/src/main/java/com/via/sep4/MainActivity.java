@@ -65,8 +65,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationBlock{
         initView();
         loadInfo();
         setupNavigation();
-
-
     }
 
     private void initView() {
@@ -85,11 +83,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationBlock{
             email.setText(user.getEmail());
         }
 
-
-
-
-
-
     }
 
     private void setupNavigation() {
@@ -97,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationBlock{
         setSupportActionBar(toolbar);
 
         configuration = new AppBarConfiguration.Builder(R.id.nav_home)
-
                 .setOpenableLayout(drawerLayout).build();
         NavigationUI.setupActionBarWithNavController(this, navController, configuration);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -116,15 +108,11 @@ public class MainActivity extends AppCompatActivity implements  NavigationBlock{
         return NavigationUI.navigateUp(navController, configuration) || super.onSupportNavigateUp();
     }
 
-
-
 // navigation controller
-
     public void setDrawerEnabled(boolean enabled) {
         int lockMode = enabled ? DrawerLayout.LOCK_MODE_UNLOCKED :
                 DrawerLayout.LOCK_MODE_LOCKED_CLOSED;
         drawerLayout.setDrawerLockMode(lockMode);
-
     }
 }
 

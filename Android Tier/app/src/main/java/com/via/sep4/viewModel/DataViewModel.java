@@ -8,8 +8,15 @@ public class DataViewModel extends ViewModel {
     DataRepository repository;
 
     public DataViewModel(){
-        //repository = DataRepository.getInstance();
+        repository = DataRepository.getInstance();
+    }
 
+    public String getRooms(){
+        return repository.connectHttpRooms();
+    }
+
+    public String getSingRoom(int id){
+        return repository.getSingleRoom(id);
     }
 
 }

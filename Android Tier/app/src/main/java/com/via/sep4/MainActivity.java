@@ -114,5 +114,16 @@ public class MainActivity extends AppCompatActivity implements  NavigationBlock{
                 DrawerLayout.LOCK_MODE_LOCKED_CLOSED;
         drawerLayout.setDrawerLockMode(lockMode);
     }
+
+    public void makeNavDrawerInvisible(boolean invisible) {
+        if (invisible) {
+            drawerLayout.setVisibility(View.INVISIBLE);
+
+
+    }}
+
+
+
+
 }
 

@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table
-public class Sensor {
+public class Metrics {
     @Id
     @Column(updatable = false)
     @GeneratedValue(generator = "sequence-generator")
@@ -20,35 +20,35 @@ public class Sensor {
     private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "TemperatureId")
+    @JoinColumn(name = "temperature_value")
     private Temperature temperature;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "HumidityId")
+    @JoinColumn(name = "humidity_value")
     private Humidity humidity;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "CO2Id")
+    @JoinColumn(name = "co2_value")
     private CO2 co2;
 
     @Column
     private Timestamp time;
 
     @ManyToOne
-    @JoinColumn(name="room_id")
+    @JoinColumn(name="room")
     private Room room;
 
-    public Sensor(CO2 co2, Humidity humidity, Temperature temperature, Timestamp time) {
+    public Metrics(CO2 co2, Humidity humidity, Temperature temperature) {
         this.co2 = co2;
         this.humidity = humidity;
         this.temperature = temperature;
-        this.time = time;
+        time = new Timestamp(System.currentTimeMillis());
     }
 
     /**
-     * Instantiates a new Sensor.
+     * Instantiates a new Metrics.
      */
-    public Sensor() {
+    public Metrics() {
     }
 
     public long getId() {
@@ -75,20 +75,12 @@ public class Sensor {
         this.humidity = humidity;
     }
 
-    public CO2 getCO2() {
+    public CO2 getCo2() {
         return co2;
     }
 
-    public void setCO2(CO2 co2) {
+    public void setCo2(CO2 co2) {
         this.co2 = co2;
-    }
-
-    public Timestamp getTime() {
-        return time;
-    }
-
-    public void setTime(Timestamp time) {
-        this.time = time;
     }
 
     public Room getRoom() {

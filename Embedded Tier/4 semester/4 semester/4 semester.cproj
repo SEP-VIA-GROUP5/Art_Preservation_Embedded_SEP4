@@ -147,6 +147,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Application.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Application.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="drivers\display_7seg.h">
       <SubType>compile</SubType>
     </Compile>
@@ -195,9 +201,24 @@
     <Compile Include="drivers\twi.h">
       <SubType>compile</SubType>
     </Compile>
-    <None Include="TemperatureHumiditySensor.c">
+    <None Include="SensorDataPackageHandler.c">
       <SubType>compile</SubType>
     </None>
+    <None Include="SensorDataPackageHandler.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="Setup.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Setup.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TemperatureHumiditySensor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TemperatureHumiditySensor.c">
+      <SubType>compile</SubType>
+    </Compile>
     <None Include="FreeRTOS\Example\main.c">
       <SubType>compile</SubType>
     </None>

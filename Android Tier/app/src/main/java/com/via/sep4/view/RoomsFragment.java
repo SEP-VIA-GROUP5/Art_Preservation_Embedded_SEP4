@@ -26,11 +26,6 @@ public class RoomsFragment extends Fragment {
     private TextView temperature, humidity, CO2;
     private Button toMetricsBtn;
 
-
-
-
-
-
     private RoomsViewModel mViewModel;
 
     public static RoomsFragment newInstance()

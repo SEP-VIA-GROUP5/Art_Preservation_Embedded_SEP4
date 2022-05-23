@@ -58,4 +58,8 @@
             android:id="@+id/action_logOutFragment_to_signIn_fragment"
             app:destination="@id/signIn_fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/roomsFragment"
+        android:name="com.via.sep4.view.RoomsFragment"
+        android:label="Rooms" />
 </navigation>

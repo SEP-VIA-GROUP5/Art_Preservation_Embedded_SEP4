@@ -52,6 +52,10 @@
     <fragment
         android:id="@+id/logOutFragment"
         android:name="com.via.sep4.view.LogOutFragment"
-        android:label="fragment_log_out"
-        tools:layout="@layout/fragment_log_out" />
+        android:label="Logout"
+        tools:layout="@layout/fragment_log_out" >
+        <action
+            android:id="@+id/action_logOutFragment_to_signIn_fragment"
+            app:destination="@id/signIn_fragment" />
+    </fragment>
 </navigation>

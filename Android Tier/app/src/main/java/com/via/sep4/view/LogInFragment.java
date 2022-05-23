@@ -42,6 +42,8 @@ import com.via.sep4.R;
 import com.via.sep4.model.User;
 import com.via.sep4.viewModel.LogInViewModel;
 
+import java.util.Objects;
+
 public class LogInFragment extends Fragment {
 
 
@@ -56,18 +58,12 @@ public class LogInFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
-
-
+        View v = inflater.inflate(R.layout.login_fragment, container, false);
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         checkUser(user);
-
-        return inflater.inflate(R.layout.login_fragment, container, false);
-
-
-
+        //((NavigationBlock) getContext()).setDrawerEnabled(false);
+        return v;
     }
 
     @Override
@@ -79,10 +75,6 @@ public class LogInFragment extends Fragment {
         initView(view);
 
     }
-
-
-
-
 
     private void initView(View view) {
         logEmail = view.findViewById(R.id.emailEt);
@@ -170,11 +162,6 @@ public class LogInFragment extends Fragment {
         });
 
     }
-
-
-
-
-
 
     @Override
     public void onResume() {

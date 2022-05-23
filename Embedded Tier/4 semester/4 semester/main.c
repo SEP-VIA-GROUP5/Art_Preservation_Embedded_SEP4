@@ -24,13 +24,13 @@
 #include "Application.h"
 #include "TemperatureHumiditySensor.h"
 #include "Setup.h"
-
-// Prototype for LoRaWAN handler
-void lora_handler_initialise(UBaseType_t lora_handler_task_priority);
+#include "UpLinkHandler.h"
 
 void initializeUsedData()
 {
 	initializeEventGroup();
+	
+	createUpLinkMessageBuffer();
 	
 	//lora_driver_initialise(ser_USART1, downlinkMessageBuffer);
 }
@@ -39,6 +39,7 @@ void create_tasks(void)
 {
 	createTempAndHumTask(1);
 	createApplicationTask(2);
+    lora_handler_uplink_payload(3);
 }
 
 void initialiseSystem()
@@ -47,6 +48,7 @@ void initialiseSystem()
 	DDRA |= _BV(DDA0) | _BV(DDA7);
 
 	// Make it possible to use stdio on COM port 0 (USB) on Arduino board - Setting 57600,8,N,1
+	initializeUsedData();
 	stdio_initialise(ser_USART0);
 	// Let's create some tasks
 	create_tasks();
@@ -55,10 +57,10 @@ void initialiseSystem()
 	// Status Leds driver
 	status_leds_initialise(5); // Priority 5 for internal task
 	// Initialise the LoRaWAN driver without down-link buffer
-	lora_driver_initialise(1, NULL);
+	//lora_driver_initialise(1, NULL);
 	// Create LoRaWAN task and start it up with priority 3
-	lora_handler_initialise(3); 
-	initializeUsedData();
+	//lora_handler_initialise(3); 
+	
 }
 
 /*-----------------------------------------------------------*/

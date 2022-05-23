@@ -16,6 +16,15 @@ void ApplicationTask(void *pvParameters)
 			printf("ALL DATA COLLECTED\n");
 			printf("Temperature is: %x, and humidity is: %x\n",getTemperature(),getHumidity());
 			
+			setTemperature(getTemperature());
+			setHumidity(getHumidity());
+			
+			//fake data
+			setCo2Ppm(10);
+			
+			lora_driver_payload_t _uplink_payload = sensorDataPackageHandler_getLoRaPayload(2);
+			xMessageBufferSend(upLinkMessageBuffer,&_uplink_payload,sizeof(_uplink_payload),portMAX_DELAY);
+																					
 			vTaskDelay(pdMS_TO_TICKS(120000));
 			//xSemaphoreGive(tempHumSemaphore);
 		}

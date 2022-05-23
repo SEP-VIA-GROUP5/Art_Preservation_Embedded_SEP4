@@ -6,6 +6,8 @@ Application.c
 
 SensorDataPackageHandler.c
 
+UpLinkHandler.c
+
 Setup.c
 
 TemperatureHumiditySensor.c
@@ -31,8 +33,6 @@ FreeRTOS\src\tasks.c
 FreeRTOS\src\timers.c
 
 FreeRTOS\src\variantHooks.c
-
-LoRaWANHandler.c
 
 main.c
 

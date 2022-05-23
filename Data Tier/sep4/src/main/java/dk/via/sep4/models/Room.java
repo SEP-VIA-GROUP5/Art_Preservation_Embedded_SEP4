@@ -1,12 +1,15 @@
 package dk.via.sep4.models;
 
+import com.sun.istack.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "room")
+@Table
 public class Room {
     @Id
     @Column(updatable = false)
@@ -18,39 +21,56 @@ public class Room {
                     @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
                     @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")})
     private  long id;
-//    @OneToOne(mappedBy = "room")
-//    private Set<Sensor> sensors;
+    @OneToMany(mappedBy = "room")
+    private Set<Metrics> metrics;
+    @Column
+    @NotNull
     private String name;
-    private String location;
-   private int number;
+    @Column
+    @NotNull
+    private int number;
 
-    public Room()
-    {
-    }
-
-    public Room(String name, String location, int number)
+    public Room(String name, int number)
     {
         this.name = name;
-        this.location = location;
         this.number = number;
+    }
+
+    public Room() {
+
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long roomid) {
-        this.id = roomid;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-//    public void setSensors(Set<Sensor> sensors) {
-//        this.sensors = sensors;
-//    }
+    public String getName() {
+        return name;
+    }
 
-//    public Set<Sensor> getSensors() {
-//        return sensors;
-//    }
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public void setMetrics(Set<Metrics> metrics) {
+        this.metrics = metrics;
+    }
+
+    public Set<Metrics> getMetrics() {
+        return metrics;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -60,21 +80,14 @@ public class Room {
         if (!(o instanceof Room))
             return false;
         Room room = (Room) o;
-        return Objects.equals(this.id, room.id) && Objects.equals(this.name, room.name)
-            && Objects.equals(this.location, room.location)
-            //&& Objects.equals(this.sensors, room.sensors)
-            && Objects.equals(this.number, room.number);
+        return Objects.equals(this.id, room.id) &&
+                Objects.equals(this.name, room.name) &&
+                Objects.equals(this.metrics, room.metrics) &&
+                Objects.equals(this.number, room.number);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.id, this.name, this.location, this.number/*, this.sensors*/);
-    }
-
-    @Override public String toString()
-    {
-        return "Room{" + "id=" + id + /*", sensors=" + sensors +*/ ", name='" + name
-            + '\'' + ", location='" + location + '\'' + ", number=" + number
-            + '}';
+        return Objects.hash(this.id, this.name, this.number, this.metrics);
     }
 }

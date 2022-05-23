@@ -1,6 +1,6 @@
 package dk.via.sep4.services;
 
-import dk.via.sep4.models.charts.DataToSendHistory;
+import dk.via.sep4.charts.DataToSendHistory;
 
 /**
  * @author $(Alina Chelmus)

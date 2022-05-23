@@ -28,7 +28,7 @@ public class Humidity {
   private double value;
 
   @OneToOne(mappedBy = "humidity")
-  private Sensor sensor;
+  private Metrics metrics;
 
   public Humidity(double value) {
     this.value = value;

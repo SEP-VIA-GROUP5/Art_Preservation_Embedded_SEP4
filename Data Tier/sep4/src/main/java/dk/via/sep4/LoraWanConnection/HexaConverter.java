@@ -2,8 +2,8 @@ package dk.via.sep4.LoraWanConnection;
 
 import dk.via.sep4.models.CO2;
 import dk.via.sep4.models.Humidity;
+import dk.via.sep4.models.Metrics;
 import dk.via.sep4.models.Temperature;
-import dk.via.sep4.models.Sensor;
 
 /**
  * Ravneet
@@ -18,7 +18,7 @@ public class HexaConverter {
     this.data = data;
   }
 
-  public Sensor convertFromHexaToInt(DataReceivedMessage data)
+  public Metrics convertFromHexaToInt(DataReceivedMessage data)
   {
     int Co2 ;
     int temperature;
@@ -36,7 +36,7 @@ public class HexaConverter {
     humidity = Integer.parseInt(hexValHum, 16);
     Humidity humidityMeasurement = new Humidity(humidity);
 
-    Sensor sensor = new Sensor();
+    Metrics sensor = new Metrics();
 
     return sensor;
   }

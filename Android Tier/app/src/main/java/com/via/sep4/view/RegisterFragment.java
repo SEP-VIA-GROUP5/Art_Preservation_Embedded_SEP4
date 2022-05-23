@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.via.sep4.DataHandler;
+import com.via.sep4.NavigationBlock;
 import com.via.sep4.R;
 import com.via.sep4.model.User;
 import com.via.sep4.viewModel.RegisterViewModel;
@@ -67,6 +68,9 @@ public class RegisterFragment extends Fragment {
         signIn = v.findViewById(R.id.signinView);
 
         auth = FirebaseAuth.getInstance();
+
+        ((NavigationBlock) getActivity()).setDrawerEnabled(false);
+
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +132,11 @@ public class RegisterFragment extends Fragment {
         });
         return v;
     }
+
+
+
+
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

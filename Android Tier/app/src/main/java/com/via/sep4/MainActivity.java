@@ -37,8 +37,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.via.sep4.view.HomeFragment;
 import com.via.sep4.view.RegisterFragment;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements  NavigationBlock{
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private View headerView;
@@ -48,6 +54,8 @@ public class MainActivity extends AppCompatActivity{
     private NavController navController;
     private AppBarConfiguration configuration;
     private Toolbar toolbar;
+    private GoogleMap mMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +65,7 @@ public class MainActivity extends AppCompatActivity{
         initView();
         loadInfo();
         setupNavigation();
+
 
     }
 
@@ -76,6 +85,11 @@ public class MainActivity extends AppCompatActivity{
             email.setText(user.getEmail());
         }
 
+
+
+
+
+
     }
 
     private void setupNavigation() {
@@ -83,6 +97,7 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
 
         configuration = new AppBarConfiguration.Builder(R.id.nav_home)
+
                 .setOpenableLayout(drawerLayout).build();
         NavigationUI.setupActionBarWithNavController(this, navController, configuration);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -102,4 +117,14 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
+
+// navigation controller
+
+    public void setDrawerEnabled(boolean enabled) {
+        int lockMode = enabled ? DrawerLayout.LOCK_MODE_UNLOCKED :
+                DrawerLayout.LOCK_MODE_LOCKED_CLOSED;
+        drawerLayout.setDrawerLockMode(lockMode);
+
+    }
 }
+

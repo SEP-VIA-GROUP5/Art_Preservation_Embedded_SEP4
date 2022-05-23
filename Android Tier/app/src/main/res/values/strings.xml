@@ -49,4 +49,6 @@
     <string name="about_us_description2"><b>IOT team </b>\nResponsible for the embedded part of the system.\n
         \n<b>DataWarehouse team</b>\nResponsible for getting the data from embedded system and storing it in a data warehouse. Also making a web service to make the data accesible.\n
         \n<b>Android team</b>\nResponsible for making an android application that will present the data received from the data warehouse in various ways. </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

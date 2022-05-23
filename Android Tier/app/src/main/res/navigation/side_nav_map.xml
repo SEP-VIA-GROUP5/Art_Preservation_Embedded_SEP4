@@ -49,4 +49,9 @@
             android:id="@+id/action_accountFragment_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
+    <fragment
+        android:id="@+id/logOutFragment"
+        android:name="com.via.sep4.view.LogOutFragment"
+        android:label="fragment_log_out"
+        tools:layout="@layout/fragment_log_out" />
 </navigation>

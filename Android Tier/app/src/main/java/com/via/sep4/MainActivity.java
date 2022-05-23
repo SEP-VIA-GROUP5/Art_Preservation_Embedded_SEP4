@@ -44,7 +44,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity implements  NavigationBlock{
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private View headerView;
@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Toolbar toolbar;
     private GoogleMap mMap;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,10 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         loadInfo();
         setupNavigation();
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+
     }
 
     private void initView() {
@@ -87,6 +85,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             email.setText(user.getEmail());
         }
 
+
+
+
+
+
     }
 
     private void setupNavigation() {
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         setSupportActionBar(toolbar);
 
         configuration = new AppBarConfiguration.Builder(R.id.nav_home)
+
                 .setOpenableLayout(drawerLayout).build();
         NavigationUI.setupActionBarWithNavController(this, navController, configuration);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -112,16 +116,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         return NavigationUI.navigateUp(navController, configuration) || super.onSupportNavigateUp();
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng VIA = new LatLng(55.8, 9.8);
-        mMap.addMarker(new MarkerOptions()
-                .position(VIA)
-                .title("Marker in VIA"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(VIA));
+
+// navigation controller
+
+    public void setDrawerEnabled(boolean enabled) {
+        int lockMode = enabled ? DrawerLayout.LOCK_MODE_UNLOCKED :
+                DrawerLayout.LOCK_MODE_LOCKED_CLOSED;
+        drawerLayout.setDrawerLockMode(lockMode);
+
     }
-
 }
+

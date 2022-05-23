@@ -68,6 +68,9 @@
                 android:hint="Username"
                 android:inputType="text"
                 tools:ignore="SpeakableTextPresentCheck" />
+
+
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -116,5 +119,14 @@
             android:backgroundTint="#00BCD4"
             android:enabled="false"
             android:text="@string/account_save" />
+
+        <Button
+            android:id="@+id/changePass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:backgroundTint="#00BCD4"
+            android:enabled="false"
+            android:text="Change Password" />
     </LinearLayout>
 </LinearLayout>

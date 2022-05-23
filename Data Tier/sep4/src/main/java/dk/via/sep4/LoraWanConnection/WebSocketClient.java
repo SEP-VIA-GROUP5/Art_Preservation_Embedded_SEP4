@@ -1,8 +1,8 @@
 package dk.via.sep4.LoraWanConnection;
 
 import com.google.gson.Gson;
-import dk.via.sep4.models.Sensor;
-import dk.via.sep4.repo.SensorRepository;
+import dk.via.sep4.models.Metrics;
+import dk.via.sep4.repo.MetricsRepository;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -21,8 +21,8 @@ public class WebSocketClient implements WebSocket.Listener
 
   private WebSocket server = null;
   private Gson gson = new Gson();
-  private SensorRepository sensorRepository;
-  Sensor sensorToData;
+  private MetricsRepository sensorRepository;
+  Metrics sensorToData;
   HexaConverter convertorHex;
 
 

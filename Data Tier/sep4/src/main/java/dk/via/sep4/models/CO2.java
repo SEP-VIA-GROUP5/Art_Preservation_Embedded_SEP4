@@ -29,7 +29,7 @@ public class CO2 {
   private double value;
 
   @OneToOne(mappedBy = "co2")
-  private Sensor sensor;
+  private Metrics metrics;
 
   public CO2(double level) {
     this.value = level;

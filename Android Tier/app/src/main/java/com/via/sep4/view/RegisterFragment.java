@@ -33,6 +33,7 @@ import com.via.sep4.R;
 import com.via.sep4.model.User;
 import com.via.sep4.viewModel.RegisterViewModel;
 
+@SuppressWarnings("ConstantConditions")
 public class RegisterFragment extends Fragment {
 
     private FirebaseAuth auth;
@@ -68,8 +69,8 @@ public class RegisterFragment extends Fragment {
         signIn = v.findViewById(R.id.signinView);
 
         auth = FirebaseAuth.getInstance();
-
         ((NavigationBlock) getActivity()).setDrawerEnabled(false);
+
 
 
         signup.setOnClickListener(new View.OnClickListener() {

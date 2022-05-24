@@ -153,17 +153,12 @@ public class RoomsFragment extends Fragment {
     }
 
     private void loadSettings(){
-        /*sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         notificationsEnabled = sharedPreferences.getBoolean("enableNotifications", false);
         minTemp = sharedPreferences.getInt("minTemp", 0);
         maxTemp = sharedPreferences.getInt("maxTemp", 0);
         minHumidity = sharedPreferences.getInt("minHumidity", 0);
-        maxHumidity = sharedPreferences.getInt("maxHumidity", 0);*/
-        notificationsEnabled=true;
-        minTemp=0;
-        maxTemp=20;
-        minHumidity=0;
-        maxHumidity=20;
+        maxHumidity = sharedPreferences.getInt("maxHumidity", 0);
     }
 
 

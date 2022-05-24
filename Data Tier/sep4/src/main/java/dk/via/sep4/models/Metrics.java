@@ -84,10 +84,6 @@ public class Metrics {
         this.co2 = co2;
     }
 
-    public Room getRoom() {
-        return rooms;
-    }
-
     public void setRoom(Room rooms) {
         this.rooms = rooms;
     }

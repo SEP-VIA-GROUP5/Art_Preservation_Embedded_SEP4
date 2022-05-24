@@ -51,6 +51,7 @@ public class Building {
     }
     public void addRoom(Room room) {
         rooms.add(room);
+        room.setBuilding(this);
     }
 
     public Room[] getRooms() {

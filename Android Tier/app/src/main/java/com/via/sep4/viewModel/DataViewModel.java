@@ -2,6 +2,8 @@ package com.via.sep4.viewModel;
 
 import androidx.lifecycle.ViewModel;
 
+import com.via.sep4.model.Metrics;
+import com.via.sep4.model.Room;
 import com.via.sep4.repository.DataRepository;
 
 public class DataViewModel extends ViewModel {
@@ -15,8 +17,11 @@ public class DataViewModel extends ViewModel {
         return repository.connectHttpRooms();
     }
 
-    public String getSingRoom(int id){
+    public Room getSingleRoom(int id){
         return repository.getSingleRoom(id);
     }
 
+    public Metrics getMetricsSingleRoom(int number){
+        return repository.getMetricsSingleRoom(number);
+    }
 }

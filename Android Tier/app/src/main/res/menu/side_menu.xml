@@ -7,7 +7,7 @@
             android:icon="@drawable/ic_home"
             android:title="Home" />
         <item
-            android:id="@+id/sideMenu_room"
+            android:id="@+id/roomsFragment"
             android:icon="@drawable/ic_room"
             android:title="@string/sideMenu_room" />
     </group>

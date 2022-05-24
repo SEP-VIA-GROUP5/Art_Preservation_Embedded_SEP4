@@ -13,17 +13,20 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 import com.via.sep4.MainActivity;
 import com.via.sep4.NavigationBlock;
 import com.via.sep4.R;
@@ -37,6 +40,12 @@ import android.support.v4.app.*;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.via.sep4.R;
+import com.via.sep4.model.Metrics;
+import com.via.sep4.model.Room;
+import com.via.sep4.viewModel.DataViewModel;
+
 
 public class RoomsFragment extends Fragment {
     private TextView temperature, humidity, CO2;
@@ -55,6 +64,14 @@ public class RoomsFragment extends Fragment {
 
     SharedPreferences sharedPreferences;
 
+    private DataViewModel mViewModel;
+
+    public static RoomsFragment newInstance() {
+        return new RoomsFragment();
+    }
+
+
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.rooms_fragment, container, false);
@@ -68,11 +85,12 @@ public class RoomsFragment extends Fragment {
         return v;
 
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mViewModel = new ViewModelProvider(getActivity()).get(RoomsViewModel.class);
+        mViewModel = new ViewModelProvider(getActivity()).get(DataViewModel.class);
         initView(view);
     }
 
@@ -82,12 +100,10 @@ public class RoomsFragment extends Fragment {
         CO2 = view.findViewById(R.id.dbCO2);
         toMetricsBtn = view.findViewById(R.id.toMetrics);
 
-
-
-
         FirebaseUser user;
         setupViews();
     }
+
 
  private void setupViews()
  {
@@ -159,6 +175,14 @@ public class RoomsFragment extends Fragment {
         maxTemp = sharedPreferences.getInt("maxTemp", 0);
         minHumidity = sharedPreferences.getInt("minHumidity", 0);
         maxHumidity = sharedPreferences.getInt("maxHumidity", 0);
+    }
+
+
+    private void setupViews() {
+        Metrics metrics = mViewModel.getMetricsSingleRoom(2);
+        temperature.setText(metrics.getTemperature().getValue() + "C");
+        humidity.setText(metrics.getHumidity().getValue() + "%rh");
+        CO2.setText(metrics.getCO2().getValue() + "ppm");
     }
 
 

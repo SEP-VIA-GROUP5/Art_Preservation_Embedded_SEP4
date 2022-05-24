@@ -23,8 +23,7 @@ public class Temperature {
           }
   )
   private Long id;
-  @Column
-  @NotNull
+  @Column(nullable = false)
   private double value;
 
   @OneToOne(mappedBy = "temperature")

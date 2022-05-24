@@ -24,8 +24,7 @@ public class CO2 {
       }
   )
   private Long id;
-  @Column
-  @NotNull
+  @Column(nullable = false)
   private double value;
 
   @OneToOne(mappedBy = "co2")

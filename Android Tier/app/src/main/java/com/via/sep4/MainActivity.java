@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationBlock{
     private NavController navController;
     private AppBarConfiguration configuration;
     private Toolbar toolbar;
-    private GoogleMap mMap;
+
 
 
     @Override

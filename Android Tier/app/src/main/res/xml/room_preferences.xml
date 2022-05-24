@@ -1,0 +1,37 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="Temperature Levels">
+
+
+        <SeekBarPreference
+            app:key="minTemp"
+            app:max="30"
+            app:showSeekBarValue="true"
+            app:title="Minimum Temperature" />
+
+        <SeekBarPreference
+            app:key="maxTemp"
+            app:showSeekBarValue="true"
+            app:title="Maximum Temperature"
+            android:max="50"
+            />
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="Humidity Levels">
+
+        <SeekBarPreference
+            app:key="minHumidity"
+            app:showSeekBarValue="true"
+            app:title="Minimum Humidity" />
+
+        <SeekBarPreference
+            app:key="maxHumidity"
+            app:showSeekBarValue="true"
+            app:title="Maximum Humidity" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

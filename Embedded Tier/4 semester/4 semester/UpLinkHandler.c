@@ -8,6 +8,8 @@
 
 lora_driver_payload_t uplink_payload;
 
+void lora_handler_task( void *pvParameters );
+
 void lora_handler_uplink_payload(UBaseType_t lora_handler_task_priority)
 {
 	xTaskCreate(

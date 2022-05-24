@@ -32,7 +32,7 @@ void initializeUsedData()
 	
 	createUpLinkMessageBuffer();
 	
-	//lora_driver_initialise(ser_USART1, downlinkMessageBuffer);
+	lora_driver_initialise(ser_USART1, NULL);
 }
 
 void create_tasks(void)

@@ -2,66 +2,99 @@ package com.via.sep4.repository;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-//import com.via.sep4.Data;
-//import com.via.sep4.DataApi;
-//import com.via.sep4.DataResponse;
-import com.via.sep4.ServiceGenerator;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.internal.EverythingIsNonNull;
-
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public class DataRepository {
 
     private static DataRepository instance;
+    private final MutableLiveData<String> errors = new MutableLiveData<>("");
 
-
-    /*private final MutableLiveData<Data> requestData;
-
-    private DataRepository()
-    {requestData = new MutableLiveData<>();}
-
-    public static synchronized  DataRepository getInstance()
-    {if(instance == null)
-    {instance = new DataRepository();}
-    return instance;
-
+    public static DataRepository getInstance() {
+        if (instance == null) {
+            instance = new DataRepository();
+        }
+        return instance;
     }
 
-    public LiveData<Data> getData()
-    {return requestData;}
-
-
-    public void requestData (Data data)
-    {
-        DataApi dataApi = ServiceGenerator.getDataApi();
-        Call<DataResponse> call = dataApi.getData();
-
-        call.enqueue(new Callback<DataResponse>() {
+    public String connectHttpRooms() {
+        new Thread(new Runnable() {
             @Override
-            public void onResponse(Call<DataResponse> call, Response<DataResponse> response) {
-                if(response.isSuccessful())
-                {
-                    requestData.setValue(response.body().getData());
+            public void run() {
+                try {
+                    String msg = "";
+                    URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/rooms");
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setDoOutput(false);
+                    connection.setDoInput(true);
+                    connection.setRequestMethod("GET");
+                    connection.setUseCaches(true);
+                    connection.setInstanceFollowRedirects(true);
+                    connection.setConnectTimeout(3000);
+                    connection.connect();
+                    int code = connection.getResponseCode();
+                    if (code == 200) {
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        String line = null;
+                        while ((line = reader.readLine()) != null) { // 循环从流中读取
+                            msg += line + "\n";
+                        }
+                        reader.close();
+                    } else if (code == 500){
+                        msg = "500 error";
+                    }
+                    Log.d("message ", msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
-            @EverythingIsNonNull
-            @Override
-            public void onFailure(Call<DataResponse> call, Throwable t) {
-                Log.i("Retrofit","Something went wrong :(");
-            }
-        });
+        }).start();
 
+        return "null";
     }
 
-*/
+    public String getSingleRoom(int id){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String msg = "";
+                    URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/room/" + id);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setDoOutput(false);
+                    connection.setDoInput(true);
+                    connection.setRequestMethod("GET");
+                    connection.setUseCaches(true);
+                    connection.setInstanceFollowRedirects(true);
+                    connection.setConnectTimeout(3000);
+                    connection.connect();
+                    int code = connection.getResponseCode();
+                    if (code == 200) {
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        String line = null;
+                        while ((line = reader.readLine()) != null) { // 循环从流中读取
+                            msg += line + "\n";
+                        }
+                        reader.close();
+                    } else if (code == 500){
+                        msg = "500 error";
+                    }
+                    Log.d("message ", msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
-
+        return "null";
+    }
 
 
 }

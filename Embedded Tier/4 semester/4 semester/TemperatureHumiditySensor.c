@@ -4,7 +4,31 @@
  * Created: 5/5/2022 8:48:25 PM
  *  Author: titas
  */ 
-#include <hih8120.h>
+#include "TemperatureHumiditySensor.h"
+
+uint16_t temperature = 0;
+uint16_t humidity = 0;
+
+//Do we need const here?
+
+uint16_t getHumidity()
+{
+	return humidity;
+}
+
+uint16_t getTemperature()
+{
+	return temperature;
+}
+
+
+
+void create(UBaseType_t Taskpriority)
+{
+	initializeTempAndHumDriver();
+	createTempAndHumTask(Taskpriority);
+	
+}
 
 void initializeTempAndHumDriver()
 {
@@ -42,23 +66,20 @@ void TempAndHumTask(void* pvpParameter)
 	
 	while(1)
 	{
-		uint16_t Temp = 0;
-		uint16_t Humidity = 0;
-		if(xSemaphoreTake(tempHumSemaphore,portMAX_DELAY)==pdTRUE)
+		//Use it for later when we have both sensors = EventBits_t eventBits = xEventGroupWaitBits(measureEventGroup,ALL_MEASURE_BITS,pdTRUE,pdTRUE,portMAX_DELAY);
+		EventBits_t eventBits = xEventGroupWaitBits(measureEventGroup,HUMIDITY_TEMPERATURE_MEASURE_BIT,pdTRUE,pdTRUE,portMAX_DELAY);
+		if(eventBits & (HUMIDITY_TEMPERATURE_MEASURE_BIT))
 		{
+			puts("Measuring metrics...");
 			measureTempAndHum();
-			Temp = hih8120_getTemperature_x10();
-			Humidity = hih8120_getHumidityPercent_x10();
+			temperature = hih8120_getTemperature_x10();
+			humidity = hih8120_getHumidityPercent_x10();
 			//printf("Temperature: %d\n",Temp);
 			//printf("Humidity: %d\n",Humidity);
-			xQueueSend(sensorDataQueue,&Temp,portMAX_DELAY);
-			xQueueSend(sensorDataQueue,&Humidity,portMAX_DELAY);
-
-			xEventGroupSetBits(dataEventGroup,BIT_HUMIDITY_TEMPERATURE);
-
+			//Use it for later when we have both sensors = xEventGroupSetBits(dataReadyEventGroup,ALL_READY_BIT);
+			xEventGroupSetBits(dataReadyEventGroup,HUMIDITY_TEMPERATURE_READY_BIT);
 		}
 		vTaskDelay(pdMS_TO_TICKS(10));
-		
 	}
 }
 

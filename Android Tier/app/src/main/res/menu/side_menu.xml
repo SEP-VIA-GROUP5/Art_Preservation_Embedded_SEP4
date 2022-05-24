@@ -40,7 +40,7 @@
 
     <group>
         <item
-            android:id="@+id/sideMenu_logout"
+            android:id="@+id/logOutFragment"
             android:icon="@drawable/ic_logout"
             android:title="@string/sideMenu_logout" />
     </group>

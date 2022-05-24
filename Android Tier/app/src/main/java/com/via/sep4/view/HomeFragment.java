@@ -4,22 +4,27 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.via.sep4.DataHandler;
 import com.via.sep4.R;
+import com.via.sep4.viewModel.DataViewModel;
 
 public class HomeFragment extends Fragment {
 
     private FirebaseAuth auth;
+    private DataViewModel viewModel;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -31,6 +36,7 @@ public class HomeFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         checkUser(user, getContext());
+        viewModel = new ViewModelProvider(getActivity()).get(DataViewModel.class);
     }
 
     @Override
@@ -38,7 +44,17 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+        Button button = v.findViewById(R.id.button);
+        EditText editText = v.findViewById(R.id.editTextTextMultiLine);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String result = viewModel.getRooms();
+                editText.setText(result);
+                viewModel.getSingRoom(2);
+            }
+        });
         return v;
     }
 

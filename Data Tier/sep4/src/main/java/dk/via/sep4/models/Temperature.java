@@ -1,7 +1,6 @@
 package dk.via.sep4.models;
 
 import com.sun.istack.NotNull;
-import dk.via.sep4.models.Sensor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -29,7 +28,7 @@ public class Temperature {
   private double value;
 
   @OneToOne(mappedBy = "temperature")
-  private Sensor sensor;
+  private Metrics metrics;
 
   public Temperature() {
   }

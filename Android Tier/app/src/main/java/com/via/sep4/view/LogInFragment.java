@@ -42,6 +42,8 @@ import com.via.sep4.R;
 import com.via.sep4.model.User;
 import com.via.sep4.viewModel.LogInViewModel;
 
+import java.util.Objects;
+
 public class LogInFragment extends Fragment {
 
 
@@ -57,17 +59,15 @@ public class LogInFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-
-
+        View v = inflater.inflate(R.layout.login_fragment, container, false);
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
+      // TODO checkthe next commented method, is the same in Register Fragment but there it s working.
+        //  ((NavigationBlock) getActivity()).setDrawerEnabled(false);
+
         checkUser(user);
 
-        return inflater.inflate(R.layout.login_fragment, container, false);
-
-
-
+        return v;
     }
 
     @Override
@@ -78,11 +78,8 @@ public class LogInFragment extends Fragment {
         navController = Navigation.findNavController(view);
         initView(view);
 
+
     }
-
-
-
-
 
     private void initView(View view) {
         logEmail = view.findViewById(R.id.emailEt);
@@ -90,12 +87,19 @@ public class LogInFragment extends Fragment {
         loginBtn = view.findViewById(R.id.signInBtn);
         toRegister = view.findViewById(R.id.createAccountView);
         forgotPass = view.findViewById(R.id.forgpasBtn);
+
+
+
+
         FirebaseUser user;
         setupViews();
 
     }
 
     private void setupViews() {
+
+
+
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,37 +125,34 @@ public class LogInFragment extends Fragment {
         forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                EditText resetPassword = new EditText(view.getContext());
-                FirebaseUser user = auth.getCurrentUser();
+                EditText resetEmail = new EditText(view.getContext());
                 AlertDialog.Builder passwordreesetdiag = new AlertDialog.Builder(view.getContext());
-
                 passwordreesetdiag.setTitle("Password Reset");
-                passwordreesetdiag.setMessage(" Enter the new password ");
-                passwordreesetdiag.setView(resetPassword);
+                passwordreesetdiag.setMessage(" Enter your email address. ");
+                passwordreesetdiag.setView(resetEmail);
                 passwordreesetdiag.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //take the email and send reset link
-                        String newPassword = resetPassword.getText().toString();
-
-                        user.updatePassword(newPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        String Email = resetEmail.getText().toString();
+                        auth.sendPasswordResetEmail(Email).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                Snackbar.make(view, getString(R.string.login_forget_ok), Snackbar.LENGTH_SHORT).show();
+
+                                Snackbar.make(view, "An email has been sent to reset the password", Snackbar.LENGTH_SHORT).show();
+
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                           Snackbar.make(view, e.getMessage(), Snackbar.LENGTH_SHORT).show();
-                           Log.e("forget error", e.getMessage());
+
+                                Snackbar.make(view, "Something when wrong ", Snackbar.LENGTH_SHORT).show();
                             }
                         });
+
+
                     }
-
-
                 });
-
                 passwordreesetdiag.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -159,9 +160,9 @@ public class LogInFragment extends Fragment {
                     }
                 });
                 passwordreesetdiag.create().show();
-
-
             }
+
+
         });
 
 
@@ -170,11 +171,6 @@ public class LogInFragment extends Fragment {
         });
 
     }
-
-
-
-
-
 
     @Override
     public void onResume() {
@@ -193,6 +189,7 @@ public class LogInFragment extends Fragment {
     }
 
     private void checkUser(FirebaseUser user) {
+
         if (user != null) {
             getActivity().onBackPressed();
         }

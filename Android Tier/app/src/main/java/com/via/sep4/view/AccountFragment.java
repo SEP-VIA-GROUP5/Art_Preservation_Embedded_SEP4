@@ -130,7 +130,6 @@ public class AccountFragment extends Fragment {
                 });
                 passwordreesetdiag.create().show();
 
-
             }
         });
 

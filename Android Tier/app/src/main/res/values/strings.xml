@@ -40,7 +40,8 @@
     <string name="don_t_have_an_account_sign_up">Don\'t have an account? <b>Sign Up</b> </string>
     <string name="already_have_an_account_sign_in">Already have an account? <b>Sign in</b> </string>
 
-    <string name="firebase_dbLink">https://sep4-ed4e9-default-rtdb.europe-west1.firebasedatabase.app/</string>.
+    <string name="firebase_dbLink">https://sep4-ed4e9-default-rtdb.europe-west1.firebasedatabase.app/</string>
+    .
     <string name="api_link">http://sep4data-env.eba-chkw8xme.us-east-1.elasticbeanstalk.com/SEP4</string>
 
     <string name="sign_up">Sign Up</string>

@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.via.sep4.DataHandler;
 import com.via.sep4.R;
+import com.via.sep4.model.Room;
 import com.via.sep4.viewModel.DataViewModel;
 
 public class HomeFragment extends Fragment {
@@ -50,9 +51,8 @@ public class HomeFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String result = viewModel.getRooms();
-                editText.setText(result);
-                viewModel.getSingRoom(2);
+                viewModel.getSingleRoom(2);
+                //viewModel.getMetricsSingleRoom(viewModel.getSingleRoom(2).getNumber());
             }
         });
         return v;

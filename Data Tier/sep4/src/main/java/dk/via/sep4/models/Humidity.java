@@ -23,8 +23,7 @@ public class Humidity {
           }
   )
   private Long id;
-  @Column
-  @NotNull
+  @Column(nullable = false)
   private double value;
 
   @OneToOne(mappedBy = "humidity")

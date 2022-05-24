@@ -20,23 +20,24 @@ public class Metrics {
     private long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "temperature_value")
+    @JoinColumn
     private Temperature temperature;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "humidity_value")
+    @JoinColumn
     private Humidity humidity;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "co2_value")
+    @JoinColumn
     private CO2 co2;
 
     @Column
     private Timestamp time;
 
-    @ManyToOne
-    @JoinColumn(name="room")
-    private Room room;
+    @ManyToOne(targetEntity = Room.class,
+            cascade = CascadeType.ALL)
+    @JoinColumn(name="room_id")
+    private Room rooms;
 
     public Metrics(CO2 co2, Humidity humidity, Temperature temperature) {
         this.co2 = co2;
@@ -84,10 +85,10 @@ public class Metrics {
     }
 
     public Room getRoom() {
-        return room;
+        return rooms;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setRoom(Room rooms) {
+        this.rooms = rooms;
     }
 }

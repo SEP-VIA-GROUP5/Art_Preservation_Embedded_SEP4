@@ -2,25 +2,24 @@ package dk.via.sep4;
 
 import dk.via.sep4.models.*;
 import dk.via.sep4.models.Metrics;
+import dk.via.sep4.repo.BuildingRepository;
 import dk.via.sep4.repo.MetricsRepository;
 import dk.via.sep4.repo.RoomRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Configuration
 public class LoadDatabase {
  private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
 
  @Bean
- CommandLineRunner initDatabase( RoomRepository roomRepository, MetricsRepository metricsRepository) {
+ CommandLineRunner initDatabase( RoomRepository roomRepository, MetricsRepository metricsRepository, BuildingRepository repo) {
   return args -> {
    Humidity humidity = new Humidity(60);
    CO2 co2 = new CO2(400);
@@ -40,29 +39,20 @@ public class LoadDatabase {
 
    Metrics sensorV2 = new Metrics(co2v2, humidityv2, temperaturev2);
 
-   Set<Metrics> s = new HashSet<>();
-   s.add(sensor);
-
-   Set<Metrics> sV1 = new HashSet<>();
-   sV1.add(sensorV2);
-
-   Set<Metrics> sV2 = new HashSet<>();
-   sV2.add(sensorV1);
-
    Room r1 = new Room("Baroque", 1);
-   r1.setMetrics(s);
+   r1.addMetrics(sensor);
    Room r2 = new Room("Cubism", 2);
-   r2.setMetrics(sV2);
+   r2.addMetrics(sensorV2);
    Room r3 = new Room("Fauvism", 3);
-   r3.setMetrics(sV1);
+   r3.addMetrics(sensorV1);
 
-   log.info("Preloading " + roomRepository.save(r1));
-   log.info("Preloading " + roomRepository.save(r2));
-   log.info("Preloading " + roomRepository.save(r3));
+   Building b1 = new Building("Somewhere");
 
-   log.info("Preloading " + metricsRepository.save(sensor));
-   log.info("Preloading " + metricsRepository.save(sensorV2));
-   log.info("Preloading " + metricsRepository.save(sensorV1));
+   b1.addRoom(r1);
+   b1.addRoom(r2);
+   b1.addRoom(r3);
+
+   log.info("Preloading " + repo.save(b1));
 
   };
 

@@ -11,28 +11,29 @@ import java.util.List;
 @RequestMapping("/api")
 public class RoomController
 {
-    private final RoomRepository roomRepository;
+    private final RoomRepository repo;
 
     public RoomController(RoomRepository roomRepository)
     {
-        this.roomRepository = roomRepository;
+        this.repo = roomRepository;
     }
+
 
     @GetMapping("/rooms") List<Room> all()
     {
-        return roomRepository.findAll();
+        return repo.findAll();
     }
 
     //-----
     @PostMapping("/room")
-    Room r1(@RequestBody Room r1){
-        return roomRepository.save(r1);
+    Room create(@RequestBody Room r1){
+        return repo.save(r1);
     }
 
     @GetMapping("/room/{id}")
     Room one(@PathVariable Long id)
     {
-        return roomRepository.findById(id).orElseThrow(() -> new RoomNotFoundException(id));
+        return repo.findById(id).orElseThrow(() -> new RoomNotFoundException(id));
     }
 //    @PutMapping("/rooms/{id}")
 //    RoomController replaceRoom(@RequestBody RoomController r1, @PathVariable Long id){
@@ -47,7 +48,7 @@ public class RoomController
 //    }
     @DeleteMapping("/room/{id}")
     void deleteRoom(@PathVariable Long id){
-        roomRepository.deleteById(id);
+        repo.deleteById(id);
     }
 
     // .......

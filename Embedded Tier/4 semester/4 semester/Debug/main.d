@@ -29,7 +29,7 @@ main.d main.o: .././main.c \
  .././TemperatureHumiditySensor.h ../drivers/hih8120.h .././Setup.h \
  .././SensorDataPackageHandler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
- .././UpLinkHandler.h
+ .././Co2Sensor.h ../drivers/mh_z19.h .././UpLinkHandler.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -116,5 +116,9 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 .././SensorDataPackageHandler.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
+
+.././Co2Sensor.h:
+
+../drivers/mh_z19.h:
 
 .././UpLinkHandler.h:

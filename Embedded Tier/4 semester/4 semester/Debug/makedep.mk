@@ -4,6 +4,8 @@
 
 Application.c
 
+Co2Sensor.c
+
 SensorDataPackageHandler.c
 
 UpLinkHandler.c

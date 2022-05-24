@@ -23,6 +23,7 @@
 
 #include "Application.h"
 #include "TemperatureHumiditySensor.h"
+#include "Co2Sensor.h"
 #include "Setup.h"
 #include "UpLinkHandler.h"
 
@@ -38,6 +39,7 @@ void initializeUsedData()
 void create_tasks(void)
 {
 	createTempAndHumTask(1);
+	createCo2Task(1);
 	createApplicationTask(2);
     lora_handler_uplink_payload(3);
 }

@@ -6,21 +6,20 @@ void ApplicationTask(void *pvParameters)
 	{
 		//if(ALL_READY_BITS == ALL_READY_BITS){
 			//Use in the future when we have both sensors = xEventGroupSetBits(measureEventGroup, ALL_MEASURE_BITS);
-			xEventGroupSetBits(measureEventGroup, HUMIDITY_TEMPERATURE_MEASURE_BIT);
+			xEventGroupSetBits(measureEventGroup, ALL_MEASURE_BITS);
 		//}
 		
 		//Use in the future when we have both sensors = EventBits_t eventBits = xEventGroupWaitBits(dataReadyEventGroup,ALL_READY_BITS,pdTRUE,pdTRUE,portMAX_DELAY);
-		EventBits_t eventBits = xEventGroupWaitBits(dataReadyEventGroup,HUMIDITY_TEMPERATURE_READY_BIT,pdTRUE,pdTRUE,portMAX_DELAY);
-		if((eventBits &(HUMIDITY_TEMPERATURE_READY_BIT))==(HUMIDITY_TEMPERATURE_READY_BIT))
+		EventBits_t eventBits = xEventGroupWaitBits(dataReadyEventGroup,ALL_READY_BITS,pdTRUE,pdTRUE,portMAX_DELAY);
+		if(eventBits & (ALL_READY_BITS))
 		{
 			printf("ALL DATA COLLECTED\n");
-			printf("Temperature is: %x, and humidity is: %x\n",getTemperature(),getHumidity());
+			printf("Temperature is: %x,\n and humidity is: %x, \n CO2 is: %x \n",getTemperature(),getHumidity(),getCo2());
 			
 			setTemperature(getTemperature());
 			setHumidity(getHumidity());
 			
-			//fake data
-			setCo2Ppm(10);
+			setCo2Ppm(getCo2());
 			
 			lora_driver_payload_t _uplink_payload = sensorDataPackageHandler_getLoRaPayload(2);
 			xMessageBufferSend(upLinkMessageBuffer,&_uplink_payload,sizeof(_uplink_payload),portMAX_DELAY);

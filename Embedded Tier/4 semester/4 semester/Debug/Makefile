@@ -44,6 +44,7 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../Application.c \
+../Co2Sensor.c \
 ../SensorDataPackageHandler.c \
 ../UpLinkHandler.c \
 ../Setup.c \
@@ -70,6 +71,7 @@ ASM_SRCS +=
 
 OBJS +=  \
 Application.o \
+Co2Sensor.o \
 SensorDataPackageHandler.o \
 UpLinkHandler.o \
 Setup.o \
@@ -89,6 +91,7 @@ main.o
 
 OBJS_AS_ARGS +=  \
 Application.o \
+Co2Sensor.o \
 SensorDataPackageHandler.o \
 UpLinkHandler.o \
 Setup.o \
@@ -108,6 +111,7 @@ main.o
 
 C_DEPS +=  \
 Application.d \
+Co2Sensor.d \
 SensorDataPackageHandler.d \
 UpLinkHandler.d \
 Setup.d \
@@ -127,6 +131,7 @@ main.d
 
 C_DEPS_AS_ARGS +=  \
 Application.d \
+Co2Sensor.d \
 SensorDataPackageHandler.d \
 UpLinkHandler.d \
 Setup.d \
@@ -159,6 +164,13 @@ LINKER_SCRIPT_DEP+=
 
 # AVR32/GNU C Compiler
 ./Application.o: .././Application.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../drivers" -I"../FreeRTOS/src"  -O0 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./Co2Sensor.o: .././Co2Sensor.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../drivers" -I"../FreeRTOS/src"  -O0 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

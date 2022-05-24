@@ -164,6 +164,9 @@
     <Compile Include="Application.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Co2Sensor.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Co2Sensor.h">
       <SubType>compile</SubType>
     </Compile>

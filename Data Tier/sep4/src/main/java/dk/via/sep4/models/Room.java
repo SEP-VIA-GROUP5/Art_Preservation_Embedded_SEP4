@@ -4,9 +4,7 @@ import com.sun.istack.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table
@@ -21,19 +19,28 @@ public class Room {
                     @org.hibernate.annotations.Parameter(name = "initial_value", value = "1"),
                     @org.hibernate.annotations.Parameter(name = "increment_size", value = "1")})
     private  long id;
-    @OneToMany(mappedBy = "room")
-    private Set<Metrics> metrics;
     @Column
     @NotNull
     private String name;
     @Column
     @NotNull
     private int number;
+    @OneToMany(targetEntity = Metrics.class,
+            mappedBy="rooms",
+            cascade= CascadeType.ALL,
+            orphanRemoval = true)
+    private List<Metrics> metrics;
+
+    @ManyToOne(targetEntity = Building.class,
+            cascade = CascadeType.ALL)
+    @JoinColumn(name="building_id")
+    private Building building;
 
     public Room(String name, int number)
     {
         this.name = name;
         this.number = number;
+        metrics = new ArrayList<>();
     }
 
     public Room() {
@@ -64,12 +71,20 @@ public class Room {
         this.number = number;
     }
 
-    public void setMetrics(Set<Metrics> metrics) {
-        this.metrics = metrics;
+    public Building getBuilding() {
+        return building;
     }
 
-    public Set<Metrics> getMetrics() {
-        return metrics;
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
+    public void addMetrics(Metrics metric) {
+        metrics.add(metric);
+    }
+
+    public Metrics[] getMetrics() {
+        return metrics.toArray(new Metrics[metrics.size()]);
     }
 
     @Override
@@ -89,5 +104,15 @@ public class Room {
     @Override
     public int hashCode() {
         return Objects.hash(this.id, this.name, this.number, this.metrics);
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id: " + id +
+                "\nname: " + name +
+                ", number: " + number +
+                "\n metrics: " + Arrays.toString(getMetrics()) +
+                '}';
     }
 }

@@ -12,6 +12,16 @@
     <string name="side_header_username">Welcome back</string>
     <string name="side_header_email">Email</string>
 
+    <!-- single room -->
+    <string name="single_id">Room id :</string>
+    <string name="single_name">Room name :</string>
+    <string name="single_Temperature">Temperature :</string>
+    <string name="single_humidity">Humidity :</string>
+    <string name="single_co2">CO2 concentration :</string>
+    <string name="single_detail">Detail</string>
+    <string name="single_remove">Delete</string>
+    <string name="single_norm">To Norms</string>
+
     <!-- register error label -->
     <string name="R_passwordLengthE">Password should be more than 6 characters</string>
     <string name="R_passwordNotMachE">Password doesn\'t match</string>
@@ -40,9 +50,9 @@
     <string name="don_t_have_an_account_sign_up">Don\'t have an account? <b>Sign Up</b> </string>
     <string name="already_have_an_account_sign_in">Already have an account? <b>Sign in</b> </string>
 
-    <string name="firebase_dbLink">https://sep4-ed4e9-default-rtdb.europe-west1.firebasedatabase.app/</string>.
-    <string name="api_link">http://sep4data-env.eba-chkw8xme.us-east-1.elasticbeanstalk.com/SEP4</string>
 
+    <string name="firebase_dbLink">https://sep4-ed4e9-default-rtdb.europe-west1.firebasedatabase.app/</string>
+    .
     <string name="sign_up">Sign Up</string>
 
     <string name="contact_info">Email: sep4@via.dk\n\nPhone no: 81 90 36 94</string>
@@ -52,6 +62,5 @@
     <string name="about_us_description2"><b>IOT team </b>\nResponsible for the embedded part of the system.\n
         \n<b>DataWarehouse team</b>\nResponsible for getting the data from embedded system and storing it in a data warehouse. Also making a web service to make the data accesible.\n
         \n<b>Android team</b>\nResponsible for making an android application that will present the data received from the data warehouse in various ways. </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

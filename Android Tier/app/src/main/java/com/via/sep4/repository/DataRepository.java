@@ -1,29 +1,20 @@
 package com.via.sep4.repository;
 
-import android.os.Handler;
-import android.os.Message;
-import android.util.JsonWriter;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.Gson;
-import com.via.sep4.DataHandler;
+import com.google.gson.reflect.TypeToken;
 import com.via.sep4.model.Metrics;
 import com.via.sep4.model.Room;
 
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import okhttp3.Call;
-import okhttp3.Response;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataRepository {
 
@@ -37,12 +28,13 @@ public class DataRepository {
         return instance;
     }
 
-    public String connectHttpRooms() {
+    public ArrayList<Room> connectHttpRooms() {
+        ArrayList<Room> rooms = new ArrayList<>();
+        final String[] msg = {""};
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String msg = "";
                     URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/rooms");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setDoOutput(false);
@@ -56,24 +48,37 @@ public class DataRepository {
                     if (code == 200) {
                         BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                         String line = null;
+                        StringBuffer buffer = new StringBuffer();
                         while ((line = reader.readLine()) != null) { // 循环从流中读取
-                            msg += line + "\n";
+                            buffer.append(line);
+                            buffer.append("\r\n");
                         }
+                        String string = buffer.toString();
+                        Log.d("message 2 ", string);
+                        msg[0] = string;
                         reader.close();
                     } else {
-                        msg = "Code: " + code + ", Error";
+                        msg[0] = "Code: " + code + ", Error";
                     }
-                    //Log.d("message ", msg);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
+        while (msg[0] == "") {
+            try {
+                Thread.sleep(30);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
-        return "null";
+        Gson gson = new Gson();
+        rooms = gson.fromJson(msg[0], new TypeToken<List<Room>>() {
+        }.getType());
+        return rooms;
     }
 
-    //TODO change HttpURLConnection to okhttp
     public Room getSingleRoom(int id) {
         Room[] room = new Room[1];
         new Thread(new Runnable() {
@@ -106,12 +111,6 @@ public class DataRepository {
                         Gson gson = new Gson();
                         room[0] = gson.fromJson(string, Room.class);
                         msg = room[0].toString();
-                        Log.d("room data", String.valueOf(room[0].getNumber()));
-                        Message message = Message.obtain();
-                        message.what = room[0].getId();
-                        message.arg1 = room[0].getNumber();
-                        message.obj = room[0].getName();
-
                         reader.close();
                     } else {
                         msg = "Code: " + code + ", Error";
@@ -186,4 +185,34 @@ public class DataRepository {
         return metrics[0];
     }
 
+    public int deleteARoom(int id) {
+        final int[] code = new int[1];
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/room/" + id);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setDoOutput(false);
+                    connection.setDoInput(true);
+                    connection.setRequestMethod("DELETE");
+                    connection.setUseCaches(true);
+                    connection.setInstanceFollowRedirects(true);
+                    connection.setConnectTimeout(3000);
+                    connection.connect();
+                    code[0] = connection.getResponseCode();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        while (code[0] == 0) {
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return code[0];
+    }
 }

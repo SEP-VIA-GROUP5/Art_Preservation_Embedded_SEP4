@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
@@ -43,7 +44,6 @@ import android.widget.Button;
 
 import com.via.sep4.R;
 import com.via.sep4.model.Metrics;
-import com.via.sep4.model.Room;
 import com.via.sep4.viewModel.DataViewModel;
 
 
@@ -98,7 +98,7 @@ public class RoomsFragment extends Fragment {
         temperature = view.findViewById(R.id.dbtemperature);
         humidity = view.findViewById(R.id.dbhumidity);
         CO2 = view.findViewById(R.id.dbCO2);
-        toMetricsBtn = view.findViewById(R.id.toMetrics);
+        toMetricsBtn = view.findViewById(R.id.toMetricsDetails);
 
         FirebaseUser user;
         setupViews();

@@ -26,24 +26,30 @@ public class TemperatureController {
         return repo.save(newTemperature);
     }
 
+    @PostMapping("/temperature/{norm}")
+    Temperature addNorm(@RequestBody Temperature newTemperature, double norm) {
+        newTemperature.setNorm(norm);
+        return repo.save(newTemperature);
+    }
+
     @GetMapping("/temperature/{id}")
     Temperature one(@PathVariable Long id) {
         return repo.findById(id).orElseThrow(()
                 -> new TemperatureNotFoundException(id));
     }
 
-    @PutMapping("/temperature/{id}")
-    Temperature update(@RequestBody Temperature newTemperature, @PathVariable Long id) {
-        return repo.findById(id)
-                .map(temperature -> {
-                    temperature.setValue(newTemperature.getValue());
-                    return repo.save(temperature);
-                })
-                .orElseGet(() -> {
-                    newTemperature.setId(id);
-                    return repo.save(newTemperature);
-                });
-    }
+//    @PutMapping("/temperature/{id}")
+//    Temperature update(@RequestBody Temperature newTemperature, @PathVariable Long id) {
+//        return repo.findById(id)
+//                .map(temperature -> {
+//                    temperature.setValue(newTemperature.getValue());
+//                    return repo.save(temperature);
+//                })
+//                .orElseGet(() -> {
+//                    newTemperature.setId(id);
+//                    return repo.save(newTemperature);
+//                });
+//    }
 
     @DeleteMapping("temperature/{id}")
     void delete(@PathVariable Long id) {

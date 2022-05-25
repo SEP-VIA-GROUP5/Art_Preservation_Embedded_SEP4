@@ -26,11 +26,15 @@ public class CO2 {
   @Column(nullable = false)
   private double value;
 
+  @Column
+  private double norm;
+
   @OneToOne(mappedBy = "co2")
   private Metrics metrics;
 
   public CO2(double level) {
     this.value = level;
+    norm = 0;
   }
   public CO2() {
   }
@@ -53,5 +57,13 @@ public class CO2 {
   public void setValue(double level)
   {
     this.value = level;
+  }
+
+  public double getNorm() {
+    return norm;
+  }
+
+  public void setNorm(double norm) {
+    this.norm = norm;
   }
 }

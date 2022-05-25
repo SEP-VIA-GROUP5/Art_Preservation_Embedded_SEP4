@@ -25,6 +25,9 @@ public class Temperature {
   @Column(nullable = false)
   private double value;
 
+  @Column
+  private double norm;
+
   @OneToOne(mappedBy = "temperature")
   private Metrics metrics;
 
@@ -33,6 +36,7 @@ public class Temperature {
 
   public Temperature(double value) {
     this.value = value;
+    norm = 0;
   }
 
   public Long getId() {
@@ -50,4 +54,13 @@ public class Temperature {
   public void setValue(double value) {
     this.value = value;
   }
+
+  public double getNorm() {
+    return norm;
+  }
+
+  public void setNorm(double norm) {
+    this.norm = norm;
+  }
+
 }

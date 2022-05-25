@@ -29,11 +29,19 @@ public class DataViewModel extends ViewModel {
         return repository.getMetricsSingleRoom(number);
     }
 
+    public String getMetricsByRoomString(int id){
+        return repository.getMetricsByRoomString(id);
+    }
+
     public int deleteRoom(int id) {
         return repository.deleteARoom(id);
     }
 
     public int addARoom(JSONObject jsonParam){
         return repository.addSingleRoom(jsonParam);
+    }
+
+    public int addMetricsToRoom(int id){
+        return repository.addMetricsToRoom(id);
     }
 }

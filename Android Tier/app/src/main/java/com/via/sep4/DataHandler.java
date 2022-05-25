@@ -1,5 +1,8 @@
 package com.via.sep4;
 
+import android.util.Log;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -27,7 +30,7 @@ public class DataHandler {
     }
 
     public static JSONObject streamToJson(InputStream inputStream) throws Exception {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"UTF-8"));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
         String temp = "";
         StringBuilder stringBuilder = new StringBuilder();
         while ((temp = bufferedReader.readLine()) != null) {
@@ -35,6 +38,15 @@ public class DataHandler {
         }
         JSONObject json = new JSONObject(stringBuilder.toString().trim());
         return json;
+    }
+
+    public static JSONObject transferTimeStamp(JSONObject object) {
+        try {
+            object.put("time", System.currentTimeMillis());
+        } catch (JSONException e) {
+            Log.d("json e", e.toString());
+        }
+        return object;
     }
 
 }

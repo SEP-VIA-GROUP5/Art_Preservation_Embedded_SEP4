@@ -147,7 +147,8 @@ public class RoomsFragment extends Fragment {
                             try {
                                 jsonObject.put("name", roomName);
                                 jsonObject.put("number", Integer.parseInt(roomNumber));
-                                mViewModel.addARoom(jsonObject);
+                                int roomId = mViewModel.addARoom(jsonObject);
+                                mViewModel.addMetricsToRoom(roomId);
                                 loadData();
                                 adapter = new RoomsAdapter(roomList);
                                 rooms.setAdapter(adapter);

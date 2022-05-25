@@ -25,11 +25,15 @@ public class Humidity {
   @Column(nullable = false)
   private double value;
 
+  @Column
+  private double norm;
+
   @OneToOne(mappedBy = "humidity")
   private Metrics metrics;
 
   public Humidity(double value) {
     this.value = value;
+    norm = 0;
   }
 
   public Humidity() {
@@ -49,5 +53,13 @@ public class Humidity {
 
   public void setValue(double value) {
     this.value = value;
+  }
+
+  public double getNorm() {
+    return norm;
+  }
+
+  public void setNorm(double norm) {
+    this.norm = norm;
   }
 }

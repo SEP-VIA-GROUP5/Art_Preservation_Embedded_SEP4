@@ -5,10 +5,11 @@
 
 
         <SeekBarPreference
-            app:key="minTemp"
-            app:max="30"
+            app:key="maxTemp"
             app:showSeekBarValue="true"
-            app:title="Minimum Temperature" />
+            app:title="Maximum Temperature"
+            android:max="30"
+            />
 
         <SeekBarPreference
             app:key="maxTemp"

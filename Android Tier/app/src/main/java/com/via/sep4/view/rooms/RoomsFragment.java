@@ -13,10 +13,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,6 +29,9 @@ import com.google.android.material.snackbar.Snackbar;
 import com.via.sep4.R;
 import com.via.sep4.model.Room;
 import com.via.sep4.viewModel.DataViewModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -52,10 +58,6 @@ public class RoomsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-    }
-
-    private void setDialog(AlertDialog.Builder deleteAlert) {
 
     }
 
@@ -118,6 +120,51 @@ public class RoomsFragment extends Fragment {
                 Log.d("click room", String.valueOf(room.getId()));
             }
 
+        });
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText nameText = new EditText(view.getContext());
+                nameText.setHint(R.string.singleroom_add_name);
+                EditText numberText = new EditText(view.getContext());
+                numberText.setInputType(InputType.TYPE_CLASS_NUMBER);
+                numberText.setHint(R.string.singleroom_add_number);
+                AlertDialog.Builder  addRoomDialog = new AlertDialog.Builder(getContext());
+                LinearLayout linearLayout = new LinearLayout(getContext());
+                linearLayout.addView(nameText);
+                linearLayout.addView(numberText);
+                addRoomDialog.setView(linearLayout);
+                addRoomDialog.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String roomName = nameText.getText().toString();
+                        String roomNumber = numberText.getText().toString();
+                        if (roomName.equals("") || roomNumber.equals("")){
+                            dialogInterface.dismiss();
+                        } else {
+                            JSONObject jsonObject = new JSONObject();
+                            try {
+                                jsonObject.put("name", roomName);
+                                jsonObject.put("number", Integer.parseInt(roomNumber));
+                                mViewModel.addARoom(jsonObject);
+                                loadData();
+                                adapter = new RoomsAdapter(roomList);
+                                rooms.setAdapter(adapter);
+                            } catch (JSONException e){
+                                Log.d("json e", e.toString());
+                            }
+                        }
+                    }
+                });
+                addRoomDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                addRoomDialog.create().show();
+            }
         });
     }
 

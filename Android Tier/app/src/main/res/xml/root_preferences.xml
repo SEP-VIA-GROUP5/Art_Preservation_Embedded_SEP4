@@ -3,13 +3,6 @@
 
     <PreferenceCategory app:title="Temperature and Humidity Levels">
 
-
-        <SeekBarPreference
-            app:key="minTemp"
-            app:max="30"
-            app:showSeekBarValue="true"
-            app:title="Minimum Temperature" />
-
         <SeekBarPreference
             app:key="maxTemp"
             app:showSeekBarValue="true"

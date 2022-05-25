@@ -1,5 +1,11 @@
 package com.via.sep4;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class DataHandler {
     public static String changeDotToComaEmail(String email) {
         return email.replace('.', ',');
@@ -18,6 +24,17 @@ public class DataHandler {
         }
         String string = sb.toString();
         return string;
+    }
+
+    public static JSONObject streamToJson(InputStream inputStream) throws Exception {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,"UTF-8"));
+        String temp = "";
+        StringBuilder stringBuilder = new StringBuilder();
+        while ((temp = bufferedReader.readLine()) != null) {
+            stringBuilder.append(temp);
+        }
+        JSONObject json = new JSONObject(stringBuilder.toString().trim());
+        return json;
     }
 
 }

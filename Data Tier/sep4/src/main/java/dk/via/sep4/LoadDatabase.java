@@ -26,18 +26,21 @@ public class LoadDatabase {
    Temperature temperature = new Temperature(22);
 
    Metrics sensor = new Metrics(co2, humidity, temperature);
+   sensor.setTime();
 
    Humidity humidityv1 = new Humidity(6);
    CO2 co2v1 = new CO2(40);
    Temperature temperaturev1 = new Temperature(12);
 
    Metrics sensorV1 = new Metrics(co2v1, humidityv1, temperaturev1);
+   sensorV1.setTime();
 
    Humidity humidityv2 = new Humidity(6);
    CO2 co2v2 = new CO2(4);
    Temperature temperaturev2 = new Temperature(2);
 
    Metrics sensorV2 = new Metrics(co2v2, humidityv2, temperaturev2);
+   sensorV2.setTime();
 
    Room r1 = new Room("Baroque", 1);
    r1.addMetrics(sensor);

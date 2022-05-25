@@ -3,7 +3,10 @@ package dk.via.sep4.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 @Table
@@ -32,7 +35,7 @@ public class Metrics {
     private CO2 co2;
 
     @Column
-    private Timestamp time;
+    private Date time;
 
     @ManyToOne(targetEntity = Room.class,
             cascade = CascadeType.ALL)
@@ -43,7 +46,7 @@ public class Metrics {
         this.co2 = co2;
         this.humidity = humidity;
         this.temperature = temperature;
-        time = new Timestamp(System.currentTimeMillis());
+        time = Calendar.getInstance().getTime();
     }
 
     /**
@@ -84,7 +87,26 @@ public class Metrics {
         this.co2 = co2;
     }
 
+    public String getTime() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        return dateFormat.format(time);
+    }
+
+    public void setTime() {
+        time = Calendar.getInstance().getTime();
+    }
+
     public void setRoom(Room rooms) {
         this.rooms = rooms;
+    }
+
+    @Override
+    public String toString() {
+        return "Metrics{" +
+                "id: " + id +
+                ", temperature: " + temperature +
+                ", humidity: " + humidity +
+                ", co2: " + co2 +
+                getTime() + '}';
     }
 }

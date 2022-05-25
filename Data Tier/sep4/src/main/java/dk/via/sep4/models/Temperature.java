@@ -1,6 +1,5 @@
 package dk.via.sep4.models;
 
-import com.sun.istack.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

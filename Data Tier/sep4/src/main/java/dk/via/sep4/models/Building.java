@@ -3,7 +3,9 @@ package dk.via.sep4.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
 @Table
@@ -24,11 +26,10 @@ public class Building {
             mappedBy="building",
             cascade= CascadeType.ALL,
             orphanRemoval = true)
-    private List<Room> rooms;
+    private List<Room> rooms = new ArrayList<>();
 
     public Building(String address) {
         this.address = address;
-        rooms = new ArrayList<>();
     }
 
     public Building() {
@@ -52,6 +53,11 @@ public class Building {
     public void addRoom(Room room) {
         rooms.add(room);
         room.setBuilding(this);
+    }
+
+    public void removeRoom(Room room) {
+        rooms.remove(room);
+        room.removeBuilding();
     }
 
     public Room[] getRooms() {

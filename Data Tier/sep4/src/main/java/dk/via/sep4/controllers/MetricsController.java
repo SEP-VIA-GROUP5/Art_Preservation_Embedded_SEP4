@@ -3,6 +3,7 @@ package dk.via.sep4.controllers;
 import dk.via.sep4.models.Metrics;
 import dk.via.sep4.exceptions.MetricsNotFoundException;
 import dk.via.sep4.repo.MetricsRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,11 +23,13 @@ public class MetricsController {
     }
 
     @PostMapping("/metrics")
-    Metrics newValue(@RequestBody Metrics newMetric) {
+    Metrics create(@RequestBody @NotNull Metrics newMetric) {
+        newMetric.setTime();
         return repo.save(newMetric);
     }
+
     @GetMapping("/metrics/{id}")
-    Metrics one(@PathVariable Long id) {
+    Metrics get(@PathVariable Long id) {
         return repo.findById(id).orElseThrow(
                 () -> new MetricsNotFoundException(id)
         );

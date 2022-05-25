@@ -77,7 +77,7 @@ public class LogInFragment extends Fragment {
         viewModel = new ViewModelProvider(getActivity()).get(LogInViewModel.class);
         navController = Navigation.findNavController(view);
         initView(view);
-
+       // ((NavigationBlock) getActivity()).setDrawerEnabled(false);
 
     }
 

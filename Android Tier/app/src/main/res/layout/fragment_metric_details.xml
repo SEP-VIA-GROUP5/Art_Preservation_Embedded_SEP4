@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:background="@drawable/background2"
+    >
+
+
+    <TextView
+
+        android:id="@+id/dbhumidity"
+        android:layout_width="125dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="8dp"
+        android:gravity="left"
+        android:text="N/a"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/humiditysign"
+        app:layout_constraintTop_toBottomOf="@+id/dbtemperature" />
+
+    <TextView
+
+        android:id="@+id/CO2sign"
+        android:layout_width="157dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="8dp"
+        android:gravity="left"
+
+        android:text="CO2"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.232"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/humiditysign" />
+
+    <TextView
+
+        android:id="@+id/dbCO2"
+        android:layout_width="125dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="8dp"
+        android:gravity="left"
+        android:text="N/a"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/CO2sign"
+        app:layout_constraintTop_toBottomOf="@+id/dbhumidity" />
+
+    <TextView
+
+        android:id="@+id/dbtemperature"
+        android:layout_width="125dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="112dp"
+        android:gravity="left"
+        android:text="N/a"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/temperaturesign"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+
+        android:id="@+id/humiditysign"
+        android:layout_width="157dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="8dp"
+        android:gravity="left"
+
+        android:text="Humidity"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.232"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temperaturesign" />
+
+    <TextView
+
+        android:id="@+id/temperaturesign"
+        android:layout_width="157dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="40dp"
+
+        android:gravity="left"
+        android:text="Temperature"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.232"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Set norms for the Room"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CO2sign" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

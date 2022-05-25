@@ -10,15 +10,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.SEP4">
-
+        android:theme="@style/Theme.SEP4"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"
             android:persistableMode="persistAcrossReboots"
-            android:theme="@style/Theme.SEP4.NoActionBar">
+            android:theme="@style/Theme.SEP4.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

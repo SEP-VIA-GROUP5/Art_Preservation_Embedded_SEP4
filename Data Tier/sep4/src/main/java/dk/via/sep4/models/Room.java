@@ -4,7 +4,10 @@ import com.sun.istack.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table
@@ -29,10 +32,9 @@ public class Room {
             mappedBy="rooms",
             cascade= CascadeType.ALL,
             orphanRemoval = true)
-    private List<Metrics> metrics;
+    private List<Metrics> metrics = new ArrayList<>();
 
-    @ManyToOne(targetEntity = Building.class,
-            cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Building.class)
     @JoinColumn(name="building_id")
     private Building building;
 
@@ -40,7 +42,6 @@ public class Room {
     {
         this.name = name;
         this.number = number;
-        metrics = new ArrayList<>();
     }
 
     public Room() {
@@ -73,6 +74,10 @@ public class Room {
 
     public void setBuilding(Building building) {
         this.building = building;
+    }
+
+    public void removeBuilding(){
+        building = null;
     }
 
     public void addMetrics(Metrics metric) {

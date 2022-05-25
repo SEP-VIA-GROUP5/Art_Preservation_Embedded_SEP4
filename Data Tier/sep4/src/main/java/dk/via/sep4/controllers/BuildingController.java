@@ -2,6 +2,7 @@ package dk.via.sep4.controllers;
 
 import dk.via.sep4.exceptions.BuildingNotFoundException;
 import dk.via.sep4.models.Building;
+import dk.via.sep4.models.Room;
 import dk.via.sep4.repo.BuildingRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,39 @@ public class BuildingController {
     Building get(@PathVariable Long id)
     {
         return repo.findById(id).orElseThrow(() -> new BuildingNotFoundException(id));
+    }
+
+    @PostMapping("/addRoom/{id}")
+    Building addRoom(@RequestBody Room room, @PathVariable Long id){
+        return repo.findById(id)
+                .map(building -> {
+                    building.addRoom(room);
+                    return repo.save(building);
+                })
+                .orElseThrow(() -> new BuildingNotFoundException(id));
+    }
+
+    @PutMapping("/building/{id}")
+    Building update(@RequestBody Building building, @PathVariable Long id){
+        return repo.findById(id)
+                .map(b -> {
+                    b.setAddress(building.getAddress());
+                    return repo.save(b);
+                })
+                .orElseGet(() -> {
+                    building.setId(id);
+                    return repo.save(building);
+                });
+    }
+
+    @DeleteMapping("/removeRoom/{id}")
+    Building removeRoom(@RequestBody Room room, @PathVariable Long id){
+        return repo.findById(id)
+                .map(building -> {
+                    building.removeRoom(room);
+                    return repo.save(building);
+                })
+                .orElseThrow(() -> new BuildingNotFoundException(id));
     }
 
     @DeleteMapping("/building/{id}")

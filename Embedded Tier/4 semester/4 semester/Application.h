@@ -8,6 +8,7 @@
 #include "message_buffer.h"
 #include "lora_driver.h"
 #include "Co2Sensor.h"
+#include "Configuration.h"
 
 void createApplicationTask(UBaseType_t Taskpriority);
 void ApplicationTask(void *pvParameters);

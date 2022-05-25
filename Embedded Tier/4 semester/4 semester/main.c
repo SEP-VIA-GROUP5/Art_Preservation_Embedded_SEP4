@@ -26,14 +26,18 @@
 #include "Co2Sensor.h"
 #include "Setup.h"
 #include "UpLinkHandler.h"
+#include "DownLinkHandler.h"
+#include "Configuration.h"
 
 void initializeUsedData()
 {
 	initializeEventGroup();
 	
 	createUpLinkMessageBuffer();
+	createDownLinkMessageBuffer();
+	lora_driver_initialise(ser_USART1, downLinkMessageBuffer);
 	
-	lora_driver_initialise(ser_USART1, NULL);
+	createConfiguration();
 }
 
 void create_tasks(void)

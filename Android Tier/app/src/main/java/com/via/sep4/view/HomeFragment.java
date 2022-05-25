@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ import com.via.sep4.DataHandler;
 import com.via.sep4.R;
 import com.via.sep4.model.Room;
 import com.via.sep4.viewModel.DataViewModel;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
@@ -49,8 +52,8 @@ public class HomeFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.getSingleRoom(2);
-                //viewModel.getMetricsSingleRoom(viewModel.getSingleRoom(2).getNumber());
+                int code = viewModel.deleteRoom(4);
+                Log.d("rooms size", String.valueOf(code));
             }
         });
         return v;

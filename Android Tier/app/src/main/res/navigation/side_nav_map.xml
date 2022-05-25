@@ -60,6 +60,6 @@
     </fragment>
     <fragment
         android:id="@+id/roomsFragment"
-        android:name="com.via.sep4.view.RoomsFragment"
+        android:name="com.via.sep4.view.rooms.RoomsFragment"
         android:label="Rooms" />
 </navigation>

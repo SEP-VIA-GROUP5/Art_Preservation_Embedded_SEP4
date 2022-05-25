@@ -1,0 +1,128 @@
+Index: app/src/main/java/com/via/sep4/view/RoomsFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.via.sep4.view;\r\n\r\nimport androidx.core.app.NotificationCompat;\r\nimport androidx.lifecycle.ViewModelProvider;\r\n\r\nimport android.app.NotificationManager;\r\nimport android.app.PendingIntent;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.content.SharedPreferences;\r\nimport android.os.Bundle;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\n\r\n\r\nimport androidx.navigation.Navigation;\r\nimport androidx.preference.PreferenceManager;\r\n\r\n\r\nimport android.util.Log;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.TextView;\r\n\r\nimport com.google.firebase.auth.FirebaseUser;\r\n\r\nimport com.via.sep4.MainActivity;\r\nimport com.via.sep4.NavigationBlock;\r\nimport com.via.sep4.R;\r\nimport com.via.sep4.viewModel.LogInViewModel;\r\nimport com.via.sep4.viewModel.RoomsViewModel;\r\nimport android.app.NotificationManager;\r\nimport android.app.PendingIntent;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.support.v4.app.*;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\n\r\nimport com.via.sep4.R;\r\nimport com.via.sep4.model.Metrics;\r\nimport com.via.sep4.viewModel.DataViewModel;\r\n\r\n\r\npublic class RoomsFragment extends Fragment {\r\n    private TextView temperature, humidity, CO2;\r\n    private Button toMetricsBtn;\r\n\r\n    private int minTemp, maxTemp, minHumidity, maxHumidity;\r\n    private boolean notificationsEnabled;\r\n\r\n\r\n    private RoomsViewModel mViewModel;\r\n\r\n    public static RoomsFragment newInstance()\r\n    {\r\n        return new RoomsFragment();\r\n    }\r\n\r\n    SharedPreferences sharedPreferences;\r\n\r\n    private DataViewModel mViewModel;\r\n\r\n    public static RoomsFragment newInstance() {\r\n        return new RoomsFragment();\r\n    }\r\n\r\n\r\n\r\n    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,\r\n                             @Nullable Bundle savedInstanceState) {\r\n        View v = inflater.inflate(R.layout.rooms_fragment, container, false);\r\n\r\n        loadSettings();\r\n\r\n            if(notificationsEnabled) {\r\n                addNotification();\r\n            }\r\n\r\n        return v;\r\n\r\n    }\r\n\r\n    @Override\r\n    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {\r\n        super.onViewCreated(view, savedInstanceState);\r\n\r\n        mViewModel = new ViewModelProvider(getActivity()).get(DataViewModel.class);\r\n        initView(view);\r\n    }\r\n\r\n    private void initView(View view) {\r\n        temperature = view.findViewById(R.id.dbtemperature);\r\n        humidity = view.findViewById(R.id.dbhumidity);\r\n        CO2 = view.findViewById(R.id.dbCO2);\r\n        toMetricsBtn = view.findViewById(R.id.toMetricsDetails);\r\n\r\n        FirebaseUser user;\r\n        setupViews();\r\n    }\r\n\r\n\r\n private void setupViews()\r\n {\r\n     /* to make the details button go to another fragment ( that needs to be created to go in the detailed metrics of the room)\r\n\r\n\r\n     temperature.setText();\r\n     humidity.setText();\r\n     CO2.setText();\r\n\r\n\r\n     toMetricsBtn.setOnClickListener();\r\n     {\r\n\r\n\r\n\r\n     }*/\r\n\r\n\r\n }\r\n\r\n    private void addNotification() {\r\n\r\n        NotificationCompat.Builder builder = null;\r\n        \r\n        \r\n            //set the norms correctly !!!!!!!\r\n            if(Integer.parseInt(temperature.toString())>= maxTemp){\r\n                builder = new NotificationCompat.Builder(getContext(), \"temperatureRising\")\r\n                                .setSmallIcon(R.drawable.ic_baseline_notification_important_24)\r\n                                .setContentTitle(\"Warning Temperature Levels Rising\")\r\n                                .setContentText(\"The temperature is currently \"+temperature.toString())\r\n                                .setPriority(NotificationCompat.PRIORITY_HIGH);\r\n            } else if(Integer.parseInt(temperature.toString())<= minTemp){\r\n                builder = new NotificationCompat.Builder(getContext(), \"temperatureLowering\")\r\n                        .setSmallIcon(R.drawable.ic_baseline_notification_important_24)\r\n                        .setContentTitle(\"Warning Temperature Levels Lowering\")\r\n                        .setContentText(\"The temperature is currently \"+temperature.toString())\r\n                        .setPriority(NotificationCompat.PRIORITY_HIGH);\r\n            }else if(Integer.parseInt(humidity.toString())>= maxHumidity){\r\n                builder = new NotificationCompat.Builder(getContext(), \"humidityRising\")\r\n                        .setSmallIcon(R.drawable.ic_baseline_notification_important_24)\r\n                        .setContentTitle(\"Warning Humidity Levels Rising\")\r\n                        .setContentText(\"The humidity is currently \"+humidity.toString())\r\n                        .setPriority(NotificationCompat.PRIORITY_HIGH);\r\n            }else if(Integer.parseInt(humidity.toString())<= minHumidity){\r\n                builder = new NotificationCompat.Builder(getContext(), \"humidityLowering\")\r\n                        .setSmallIcon(R.drawable.ic_baseline_notification_important_24)\r\n                        .setContentTitle(\"Warning Humidity Levels Lowering\")\r\n                        .setContentText(\"The humidity is currently \"+humidity.toString())\r\n                        .setPriority(NotificationCompat.PRIORITY_HIGH);\r\n            }\r\n\r\n\r\n        Intent notificationIntent = new Intent(getContext(), MainActivity.class);\r\n        PendingIntent contentIntent = PendingIntent.getActivity(getContext(), 0, notificationIntent,\r\n                PendingIntent.FLAG_UPDATE_CURRENT);\r\n        builder.setContentIntent(contentIntent);\r\n\r\n        // Add as notification\r\n        NotificationManager manager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);\r\n        manager.notify(0, builder.build());\r\n    }\r\n\r\n    private void loadSettings(){\r\n        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());\r\n        notificationsEnabled = sharedPreferences.getBoolean(\"enableNotifications\", false);\r\n        minTemp = sharedPreferences.getInt(\"minTemp\", 0);\r\n        maxTemp = sharedPreferences.getInt(\"maxTemp\", 0);\r\n        minHumidity = sharedPreferences.getInt(\"minHumidity\", 0);\r\n        maxHumidity = sharedPreferences.getInt(\"maxHumidity\", 0);\r\n    }\r\n\r\n\r\n    private void setupViews() {\r\n        Metrics metrics = mViewModel.getMetricsSingleRoom(2);\r\n        temperature.setText(metrics.getTemperature().getValue() + \"C\");\r\n        humidity.setText(metrics.getHumidity().getValue() + \"%rh\");\r\n        CO2.setText(metrics.getCO2().getValue() + \"ppm\");\r\n    }\r\n\r\n\r\n}\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/via/sep4/view/RoomsFragment.java b/app/src/main/java/com/via/sep4/view/RoomsFragment.java
+--- a/app/src/main/java/com/via/sep4/view/RoomsFragment.java	(revision 10dac51134d80de7fb97507eb0e0d72500a712e2)
++++ b/app/src/main/java/com/via/sep4/view/RoomsFragment.java	(date 1653470093374)
+@@ -52,7 +52,7 @@
+     private Button toMetricsBtn;
+ 
+     private int minTemp, maxTemp, minHumidity, maxHumidity;
+-    private boolean notificationsEnabled;
++    private boolean notificationsEnabled, useImperial;
+ 
+ 
+     private RoomsViewModel mViewModel;
+@@ -66,16 +66,13 @@
+ 
+     private DataViewModel mViewModel;
+ 
+-    public static RoomsFragment newInstance() {
+-        return new RoomsFragment();
+-    }
+-
+ 
+ 
+     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                              @Nullable Bundle savedInstanceState) {
+         View v = inflater.inflate(R.layout.rooms_fragment, container, false);
+ 
++        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+         loadSettings();
+ 
+             if(notificationsEnabled) {
+@@ -99,7 +96,7 @@
+         humidity = view.findViewById(R.id.dbhumidity);
+         CO2 = view.findViewById(R.id.dbCO2);
+         toMetricsBtn = view.findViewById(R.id.toMetricsDetails);
+-
++        useImperial = sharedPreferences.getBoolean("fahrenheitSwitch", false);
+         FirebaseUser user;
+         setupViews();
+     }
+@@ -169,7 +166,6 @@
+     }
+ 
+     private void loadSettings(){
+-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+         notificationsEnabled = sharedPreferences.getBoolean("enableNotifications", false);
+         minTemp = sharedPreferences.getInt("minTemp", 0);
+         maxTemp = sharedPreferences.getInt("maxTemp", 0);
+@@ -180,7 +176,9 @@
+ 
+     private void setupViews() {
+         Metrics metrics = mViewModel.getMetricsSingleRoom(2);
+-        temperature.setText(metrics.getTemperature().getValue() + "C");
++        if(useImperial){
++            temperature.setText(metrics.getTemperature().getValue()*1.8+32 + "°F");
++        }else{ temperature.setText(metrics.getTemperature().getValue() + "°C");}
+         humidity.setText(metrics.getHumidity().getValue() + "%rh");
+         CO2.setText(metrics.getCO2().getValue() + "ppm");
+     }
+Index: app/src/main/res/xml/root_preferences.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><PreferenceScreen xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\">\r\n\r\n    <PreferenceCategory app:title=\"Temperature and Humidity Levels\">\r\n\r\n\r\n        <SeekBarPreference\r\n            app:key=\"minTemp\"\r\n            app:max=\"30\"\r\n            app:showSeekBarValue=\"true\"\r\n            app:title=\"Minimum Temperature\" />\r\n\r\n        <SeekBarPreference\r\n            app:key=\"maxTemp\"\r\n            app:showSeekBarValue=\"true\"\r\n            app:title=\"Maximum Temperature\" />\r\n\r\n        <SeekBarPreference\r\n            app:key=\"minHumidity\"\r\n            app:showSeekBarValue=\"true\"\r\n            app:title=\"Minimum Humidity\" />\r\n\r\n        <SeekBarPreference\r\n            app:key=\"maxHumidity\"\r\n            app:showSeekBarValue=\"true\"\r\n            app:title=\"Maximum Humidity\" />\r\n\r\n    </PreferenceCategory>\r\n\r\n    <PreferenceCategory app:title=\"Notifications\">\r\n\r\n        <SwitchPreferenceCompat\r\n            app:defaultValue=\"true\"\r\n            app:key=\"enableNotifications\"\r\n            app:title=\"Enable temperature and humidity notifications\" />\r\n\r\n    </PreferenceCategory>\r\n\r\n    <PreferenceCategory app:title=\"Temperature Scale\">\r\n\r\n        <SwitchPreferenceCompat\r\n            app:defaultValue=\"true\"\r\n            app:dependency=\"fahrenheit\"\r\n            app:key=\"celcius\"\r\n            app:title=\"Celcius\" />\r\n\r\n        <SwitchPreferenceCompat\r\n            app:dependency=\"celcius\"\r\n            app:key=\"fahrenheit\"\r\n            app:title=\"Fahrenheit\" />\r\n\r\n\r\n    </PreferenceCategory>\r\n\r\n</PreferenceScreen>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/xml/root_preferences.xml b/app/src/main/res/xml/root_preferences.xml
+--- a/app/src/main/res/xml/root_preferences.xml	(revision 10dac51134d80de7fb97507eb0e0d72500a712e2)
++++ b/app/src/main/res/xml/root_preferences.xml	(date 1653469818070)
+@@ -1,31 +1,6 @@
+ <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto">
+ 
+-    <PreferenceCategory app:title="Temperature and Humidity Levels">
+-
+-
+-        <SeekBarPreference
+-            app:key="minTemp"
+-            app:max="30"
+-            app:showSeekBarValue="true"
+-            app:title="Minimum Temperature" />
+-
+-        <SeekBarPreference
+-            app:key="maxTemp"
+-            app:showSeekBarValue="true"
+-            app:title="Maximum Temperature" />
+-
+-        <SeekBarPreference
+-            app:key="minHumidity"
+-            app:showSeekBarValue="true"
+-            app:title="Minimum Humidity" />
+-
+-        <SeekBarPreference
+-            app:key="maxHumidity"
+-            app:showSeekBarValue="true"
+-            app:title="Maximum Humidity" />
+-
+-    </PreferenceCategory>
+ 
+     <PreferenceCategory app:title="Notifications">
+ 
+@@ -39,15 +14,11 @@
+     <PreferenceCategory app:title="Temperature Scale">
+ 
+         <SwitchPreferenceCompat
+-            app:defaultValue="true"
+-            app:dependency="fahrenheit"
+-            app:key="celcius"
+-            app:title="Celcius" />
+-
+-        <SwitchPreferenceCompat
+-            app:dependency="celcius"
+-            app:key="fahrenheit"
+-            app:title="Fahrenheit" />
++            app:key="fahrenheitSwitch"
++            app:title="Fahrenheit"
++            app:summaryOff="Use imperial units"
++            app:summaryOn="Use imperial units"
++            />
+ 
+ 
+     </PreferenceCategory>

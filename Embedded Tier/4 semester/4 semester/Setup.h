@@ -20,4 +20,5 @@ extern MessageBufferHandle_t downLinkMessageBuffer;
 
 void initializeEventGroup();
 void createUpLinkMessageBuffer();
+void createDownLinkMessageBuffer();
  

@@ -70,6 +70,16 @@ public class WebsocketClient implements WebSocket.Listener {
             System.out.println("OnText");
             System.out.println(indented.toString());
             webSocket.request(1);
+            String CO2 = indented.getData().substring(0, 4);
+            int decimal=Integer.parseInt(CO2,16);
+            indented.setCO2((double)decimal/10);
+            String humidity = indented.getData().substring(4, 9);
+            int decimal1=Integer.parseInt(humidity,16);
+            indented.setHumidity((double)decimal1/10);
+            String temp = indented.getData().substring(9);
+            int decimal2=Integer.parseInt(temp,16);
+            indented.setTemperature((double)decimal2/10);
+            System.out.println("CO2: " + indented.getCO2() + " Humidity: " + indented.getHumidity() + " Temp: " + indented.getTemperature());
             return new CompletableFuture().completedFuture("onText() completed.").thenAccept(System.out::println);
         }
         catch (Exception e)

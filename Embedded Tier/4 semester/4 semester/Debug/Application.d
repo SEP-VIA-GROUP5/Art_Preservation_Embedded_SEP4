@@ -25,7 +25,11 @@ Application.d Application.o: .././Application.c .././Application.h \
  ../drivers/hih8120.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  ../FreeRTOS/src/task.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h \
- .././Setup.h
+ .././Setup.h ../drivers/lora_driver.h ../FreeRTOS/src/message_buffer.h \
+ ../FreeRTOS/src/stream_buffer.h ../drivers/serial.h \
+ .././SensorDataPackageHandler.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
+ .././Co2Sensor.h ../drivers/mh_z19.h .././Configuration.h
 
 .././Application.h:
 
@@ -96,3 +100,21 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../FreeRTOS/src/queue.h:
 
 .././Setup.h:
+
+../drivers/lora_driver.h:
+
+../FreeRTOS/src/message_buffer.h:
+
+../FreeRTOS/src/stream_buffer.h:
+
+../drivers/serial.h:
+
+.././SensorDataPackageHandler.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
+
+.././Co2Sensor.h:
+
+../drivers/mh_z19.h:
+
+.././Configuration.h:

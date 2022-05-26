@@ -1,4 +1,5 @@
-LoRaWANHandler.d LoRaWANHandler.o: .././LoRaWANHandler.c \
+UpLinkHandler.d UpLinkHandler.o: .././UpLinkHandler.c \
+ .././UpLinkHandler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -22,7 +23,12 @@ LoRaWANHandler.d LoRaWANHandler.o: .././LoRaWANHandler.c \
  ../FreeRTOS/src/list.h ../drivers/lora_driver.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  ../FreeRTOS/src/message_buffer.h ../FreeRTOS/src/stream_buffer.h \
- ../drivers/serial.h ../drivers/status_leds.h
+ ../drivers/serial.h ../drivers/status_leds.h \
+ .././SensorDataPackageHandler.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
+ .././Setup.h ../FreeRTOS/src/event_groups.h ../FreeRTOS/src/timers.h
+
+.././UpLinkHandler.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
@@ -85,3 +91,13 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../drivers/serial.h:
 
 ../drivers/status_leds.h:
+
+.././SensorDataPackageHandler.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
+
+.././Setup.h:
+
+../FreeRTOS/src/event_groups.h:
+
+../FreeRTOS/src/timers.h:

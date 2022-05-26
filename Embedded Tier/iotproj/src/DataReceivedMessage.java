@@ -12,6 +12,9 @@ public class DataReceivedMessage {
     private String dr;
     private int rssi;
     private double snr;
+    private double CO2;
+    private double humidity;
+    private double temperature;
 
     public DataReceivedMessage(String cmd, String EUI, long ts, boolean ack, int fcnt, int port, String encdata, String data, int freq, String dr, int rssi, double snr) {
         this.cmd = cmd;
@@ -40,6 +43,35 @@ public class DataReceivedMessage {
         return EUI;
     }
 
+    public double getCO2()
+    {
+        return CO2;
+    }
+
+    public double getHumidity()
+    {
+        return humidity;
+    }
+
+    public double getTemperature()
+    {
+        return temperature;
+    }
+
+    public void setCO2(double CO2)
+    {
+        this.CO2 = CO2;
+    }
+
+    public void setHumidity(double humidity)
+    {
+        this.humidity = humidity;
+    }
+
+    public void setTemperature(double temperature)
+    {
+        this.temperature = temperature;
+    }
 
     public void setEUI(String EUI) {
         this.EUI = EUI;

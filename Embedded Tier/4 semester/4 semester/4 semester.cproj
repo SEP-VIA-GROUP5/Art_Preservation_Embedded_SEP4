@@ -41,7 +41,7 @@
       </framework-data>
     </AsfFrameworkConfig>
     <avrtool>com.atmel.avrdbg.tool.atmelice</avrtool>
-    <avrtoolserialnumber>J41800026120</avrtoolserialnumber>
+    <avrtoolserialnumber>J41800046468</avrtoolserialnumber>
     <avrdeviceexpectedsignature>0x1E9801</avrdeviceexpectedsignature>
     <com_atmel_avrdbg_tool_atmelice>
       <ToolOptions>
@@ -51,11 +51,23 @@
         <InterfaceName>JTAG</InterfaceName>
       </ToolOptions>
       <ToolType>com.atmel.avrdbg.tool.atmelice</ToolType>
-      <ToolNumber>J41800026120</ToolNumber>
+      <ToolNumber>J41800046468</ToolNumber>
       <ToolName>Atmel-ICE</ToolName>
     </com_atmel_avrdbg_tool_atmelice>
     <avrtoolinterface>JTAG</avrtoolinterface>
     <avrtoolinterfaceclock>200000</avrtoolinterfaceclock>
+    <com_atmel_avrdbg_tool_simulator>
+      <ToolOptions xmlns="">
+        <InterfaceProperties>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType xmlns="">com.atmel.avrdbg.tool.simulator</ToolType>
+      <ToolNumber xmlns="">
+      </ToolNumber>
+      <ToolName xmlns="">Simulator</ToolName>
+    </com_atmel_avrdbg_tool_simulator>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -121,7 +133,6 @@
             <Value>../FreeRTOS/src</Value>
           </ListValues>
         </avrgcc.compiler.directories.IncludePaths>
-        <avrgcc.compiler.optimization.level>Optimize debugging experience (-Og)</avrgcc.compiler.optimization.level>
         <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
         <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
         <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
@@ -151,6 +162,24 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Application.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Co2Sensor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Co2Sensor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Configuration.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Configuration.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DownLinkHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="DownLinkHandler.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="drivers\display_7seg.h">
@@ -201,9 +230,15 @@
     <Compile Include="drivers\twi.h">
       <SubType>compile</SubType>
     </Compile>
-    <None Include="SensorDataPackageHandler.c">
+    <Compile Include="SensorDataPackageHandler.c">
       <SubType>compile</SubType>
-    </None>
+    </Compile>
+    <Compile Include="UpLinkHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UpLinkHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
     <None Include="SensorDataPackageHandler.h">
       <SubType>compile</SubType>
     </None>
@@ -373,9 +408,9 @@
     <None Include="FreeRTOS\src\LICENSE.md">
       <SubType>compile</SubType>
     </None>
-    <Compile Include="LoRaWANHandler.c">
+    <None Include="LoRaWANHandler.c">
       <SubType>compile</SubType>
-    </Compile>
+    </None>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>

@@ -1,8 +1,11 @@
 package com.via.sep4.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Arrays;
 
-public class Room {
+public class Room implements Parcelable {
     private String name;
     private final int id;
     private Metrics[] metrics;
@@ -19,6 +22,24 @@ public class Room {
         this.number = number;
     }
 
+
+    protected Room(Parcel in) {
+        name = in.readString();
+        id = in.readInt();
+        number = in.readInt();
+    }
+
+    public static final Creator<Room> CREATOR = new Creator<Room>() {
+        @Override
+        public Room createFromParcel(Parcel in) {
+            return new Room(in);
+        }
+
+        @Override
+        public Room[] newArray(int size) {
+            return new Room[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -45,4 +66,19 @@ public class Room {
                 ", number=" + number +
                 '}';
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeInt(id);
+        parcel.writeInt(number);
+    }
+
+
 }

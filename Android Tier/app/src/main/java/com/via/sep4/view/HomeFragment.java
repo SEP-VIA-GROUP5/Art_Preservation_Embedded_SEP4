@@ -1,15 +1,19 @@
 package com.via.sep4.view;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
@@ -42,9 +48,7 @@ public class HomeFragment extends Fragment {
     private TextView temperature, humidity, CO2;
     private Room room;
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
+    public HomeFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,30 +56,51 @@ public class HomeFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         checkUser(user, getContext());
-
-
-
         viewModel = new ViewModelProvider(getActivity()).get(DataViewModel.class);
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // to check later what is the id of the main room
 
         room = viewModel.getSingleRoom(1);
-
-
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         temperature = v.findViewById(R.id.dbtemperature);
         humidity = v.findViewById(R.id.dbhumidity);
         CO2 = v.findViewById(R.id.dbCO2);
-        toNormsSettings = v.findViewById(R.id.phoneNoEt);
-        toDashboard = v.findViewById(R.id.toNorms);
+        toNormsSettings = v.findViewById(R.id.toNorms);
+        toDashboard = v.findViewById(R.id.toDashboradGraph);
 
+        HomeFragment fragment = new HomeFragment();
+        SettingsFragment fragment2 = new SettingsFragment();
+        Bundle sendRoom = new Bundle();
+        sendRoom.putParcelable("keyforroom", room);
+        fragment.setArguments(sendRoom);
+
+
+        toNormsSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+
+
+
+
+
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.nav_host_fragment, fragment2)
+                        .commit();
+
+
+
+            }
+        });
+
+// here i am selecting that the object room to be sent
 
 
         Metrics[] metrics = room.getMetrics();
@@ -85,36 +110,26 @@ public class HomeFragment extends Fragment {
         String co2S;
         int idr = room.getId();
 
-
-
         if (metrics.length == 0) {
-
             tempS = "N/A";
             humS = "N/A";
             co2S = "N/A";
-
-
         } else {
             tempS = String.valueOf(metrics[0].getTemperature().getValue());
             humS = String.valueOf(metrics[0].getHumidity().getValue());
             co2S = String.valueOf(metrics[0].getCO2().getValue());
         }
-
         temperature.setText(tempS);
         humidity.setText(humS);
         CO2.setText(co2S);
-
-
         return v;
 
-        /*Bundle bundle = new Bundle();
-        bundle.put, idr);
-        SettingsFragment nextFragment = new SettingsFragment();
-        nextFragment.setArguments(bundle);
-
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.)   , nextFragment).commit();*/
     }
+
+
+
+
+
 
     private void checkUser(FirebaseUser user, Context context) {
         if (user == null) {
@@ -122,11 +137,6 @@ public class HomeFragment extends Fragment {
             NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_nav_home_to_signIn_fragment);
         }
     }
-
-
-
-
-
 
 
 }

@@ -3,14 +3,11 @@ package com.via.sep4.view;
 import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -19,14 +16,12 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,12 +32,9 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.via.sep4.NavigationBlock;
 import com.via.sep4.R;
 import com.via.sep4.model.User;
 import com.via.sep4.viewModel.LogInViewModel;
-
-import java.util.Objects;
 
 public class LogInFragment extends Fragment {
 
@@ -82,7 +74,7 @@ public class LogInFragment extends Fragment {
     }
 
     private void initView(View view) {
-        logEmail = view.findViewById(R.id.emailEt);
+        logEmail = view.findViewById(R.id.MinH);
         logPassword = view.findViewById(R.id.passwordEt);
         loginBtn = view.findViewById(R.id.signInBtn);
         toRegister = view.findViewById(R.id.createAccountView);

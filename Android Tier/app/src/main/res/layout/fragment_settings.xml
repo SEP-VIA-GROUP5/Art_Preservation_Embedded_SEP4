@@ -154,7 +154,7 @@
                 android:layout_weight="1">
                 <!--Email-->
                 <EditText
-                    android:id="@+id/emailEt"
+                    android:id="@+id/MinH"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#e8fffb"
@@ -226,7 +226,7 @@
                     android:backgroundTint="#e8fffb"
                     android:hint="@string/value"
                     android:inputType="numberDecimal"
-                    android:text=""
+                    android:text="200"
                     tools:ignore="SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 

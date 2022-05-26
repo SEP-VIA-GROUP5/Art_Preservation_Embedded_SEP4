@@ -9,21 +9,18 @@ import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -63,7 +60,7 @@ public class AccountFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_account, container, false);
         nameText = v.findViewById(R.id.nameEt);
         usernameText = v.findViewById(R.id.usernameEt);
-        emailText = v.findViewById(R.id.emailEt);
+        emailText = v.findViewById(R.id.MinH);
         phoneText = v.findViewById(R.id.phoneNoEt);
         saveButton = v.findViewById(R.id.saveBtn);
         changePasswordBtn = v.findViewById(R.id.changePass);

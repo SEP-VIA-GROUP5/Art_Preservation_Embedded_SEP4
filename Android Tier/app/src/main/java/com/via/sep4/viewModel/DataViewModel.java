@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import com.via.sep4.model.Metrics;
 import com.via.sep4.model.Room;
 import com.via.sep4.repository.DataRepository;
+import com.via.sep4.repository.SettingsRepository;
 
 import org.json.JSONObject;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 
 public class DataViewModel extends ViewModel {
     DataRepository repository;
+    SettingsRepository setRepository;
 
     public DataViewModel() {
         repository = DataRepository.getInstance();
@@ -48,4 +50,18 @@ public class DataViewModel extends ViewModel {
     public Room deliveryRoom(Room room){
         return room;
     }
+
+
+    public void setNormsAndNotification(Room room, int minTemp, int maxTemp, int minHum, int maxHum, int minCO2, int maxC02)
+    { }
+
+
+
+
+
+
+
+
+
+
 }

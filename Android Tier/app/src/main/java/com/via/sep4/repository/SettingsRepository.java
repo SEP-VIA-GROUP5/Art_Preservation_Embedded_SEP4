@@ -48,7 +48,6 @@ public class SettingsRepository {
 
 
 
-
         if(temperature>= maxTemp){
             builder = new NotificationCompat.Builder(getContext(), "temperatureRising")
                     .setSmallIcon(R.drawable.ic_baseline_notification_important_24)

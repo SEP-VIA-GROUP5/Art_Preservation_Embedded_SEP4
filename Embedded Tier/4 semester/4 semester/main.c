@@ -34,10 +34,9 @@ void initializeUsedData()
 	initializeEventGroup();
 	
 	createUpLinkMessageBuffer();
+	createConfiguration();
 	createDownLinkMessageBuffer();
 	lora_driver_initialise(ser_USART1, downLinkMessageBuffer);
-	
-	createConfiguration();
 }
 
 void create_tasks(void)
@@ -46,6 +45,7 @@ void create_tasks(void)
 	createCo2Task(1);
 	createApplicationTask(2);
     lora_handler_uplink_payload(3);
+	lora_downlink_handler_create(4);
 }
 
 void initialiseSystem()

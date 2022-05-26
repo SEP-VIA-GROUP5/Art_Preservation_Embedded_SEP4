@@ -30,6 +30,7 @@ void ApplicationTask(void *pvParameters)
 			vTaskDelay(pdMS_TO_TICKS(120000));
 			//xSemaphoreGive(tempHumSemaphore);
 		}
+		
 		vTaskDelay(pdMS_TO_TICKS(50));
 	}
 }

@@ -27,14 +27,14 @@ public class CO2 {
   private double value;
 
   @Column
-  private double norm;
+  private double min, max;
 
   @OneToOne(mappedBy = "co2")
   private Metrics metrics;
 
   public CO2(double level) {
     this.value = level;
-    norm = 0;
+    min = 0;
   }
   public CO2() {
   }
@@ -59,11 +59,18 @@ public class CO2 {
     this.value = level;
   }
 
-  public double getNorm() {
-    return norm;
+  public void setNorm(double min, double max) {
+    this.min = min;
+    this.max = max;
   }
 
-  public void setNorm(double norm) {
-    this.norm = norm;
+  @Override
+  public String toString() {
+    return "CO2{" +
+            "id: " + id +
+            ", value: " + value +
+            ", min: " + min +
+            ", max: " + max +
+            '}';
   }
 }

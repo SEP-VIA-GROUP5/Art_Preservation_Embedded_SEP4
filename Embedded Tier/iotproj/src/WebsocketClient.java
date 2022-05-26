@@ -100,12 +100,13 @@ public class WebsocketClient implements WebSocket.Listener {
             indented.setTemperature((double) decimal2 / 10);
             System.out.println("CO2: " + indented.getCO2() + " Humidity: " + indented.getHumidity() + " Temp: " + indented.getTemperature());
             DownLinkMessage downLinkMessage = new DownLinkMessage(
-                    indented.getData(),
                     "tx",
                     indented.getEUI(),
                     2,
-                    true);
+                    true,
+                indented.getData());
             sendDownLink(gson.toJson(downLinkMessage, DownLinkMessage.class));
+            //System.out.println(gson.toJson(downLinkMessage, DownLinkMessage.class));
             return new CompletableFuture().completedFuture("onText() completed.").thenAccept(System.out::println);
         } catch (Exception e) {
 

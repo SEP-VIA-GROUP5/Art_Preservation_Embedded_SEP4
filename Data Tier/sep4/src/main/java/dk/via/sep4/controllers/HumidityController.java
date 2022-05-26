@@ -22,29 +22,35 @@ public class HumidityController {
     }
 
     @PostMapping("/humidity")
-    Humidity newValue(@RequestBody Humidity newHumidity) {
+    Humidity create(@RequestBody Humidity newHumidity) {
+        return repo.save(newHumidity);
+    }
+
+    @PostMapping("/humidities")
+    Humidity setNorm(@RequestBody Humidity newHumidity, @RequestParam double min, @RequestParam double max) {
+        newHumidity.setNorm(min, max);
         return repo.save(newHumidity);
     }
 
     @GetMapping("/humidity/{id}")
-    Humidity one(@PathVariable Long id) {
+    Humidity get(@PathVariable Long id) {
         return repo.findById(id).orElseThrow(
                 () -> new HumidityNotFoundException(id)
         );
     }
 
-    @PutMapping("/humidity/{id}")
-    Humidity update(@RequestBody Humidity newHumidity, @PathVariable Long id) {
-        return repo.findById(id)
-                .map(humidity -> {
-                    humidity.setValue(newHumidity.getValue());
-                    return humidity;
-                })
-                .orElseGet(() -> {
-                    newHumidity.setId(id);
-                    return repo.save(newHumidity);
-                });
-    }
+//    @PutMapping("/humidity/{id}")
+//    Humidity update(@RequestBody Humidity newHumidity, @PathVariable Long id) {
+//        return repo.findById(id)
+//                .map(humidity -> {
+//                    humidity.setValue(newHumidity.getValue());
+//                    return humidity;
+//                })
+//                .orElseGet(() -> {
+//                    newHumidity.setId(id);
+//                    return repo.save(newHumidity);
+//                });
+//    }
 
     @DeleteMapping("/humidity/{id}")
     void delete(@PathVariable Long id) {

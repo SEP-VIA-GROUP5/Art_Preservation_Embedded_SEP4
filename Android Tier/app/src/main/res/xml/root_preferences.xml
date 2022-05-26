@@ -32,15 +32,11 @@
     <PreferenceCategory app:title="Temperature Scale">
 
         <SwitchPreferenceCompat
-            app:defaultValue="true"
-            app:dependency="fahrenheit"
-            app:key="celcius"
-            app:title="Celcius" />
-
-        <SwitchPreferenceCompat
-            app:dependency="celcius"
-            app:key="fahrenheit"
-            app:title="Fahrenheit" />
+            app:key="fahrenheitSwitch"
+            app:title="Fahrenheit"
+            app:summaryOff="Use imperial units"
+            app:summaryOn="Use imperial units"
+            />
 
 
     </PreferenceCategory>

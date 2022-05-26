@@ -25,6 +25,9 @@ public class Temperature {
   @Column(nullable = false)
   private double value;
 
+  @Column
+  private double min, max;
+
   @OneToOne(mappedBy = "temperature")
   private Metrics metrics;
 
@@ -33,6 +36,8 @@ public class Temperature {
 
   public Temperature(double value) {
     this.value = value;
+    min = 0;
+    max = 0;
   }
 
   public Long getId() {
@@ -49,5 +54,20 @@ public class Temperature {
 
   public void setValue(double value) {
     this.value = value;
+  }
+
+  public void setNorm(double min, double max) {
+    this.min = min;
+    this.max = max;
+  }
+
+  @Override
+  public String toString() {
+    return "Temperature{" +
+            "id: " + id +
+            ", value: " + value +
+            ", min: " + min +
+            ", max: " + max +
+            '}';
   }
 }

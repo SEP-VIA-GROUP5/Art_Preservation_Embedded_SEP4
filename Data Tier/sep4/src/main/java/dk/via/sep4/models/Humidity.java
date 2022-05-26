@@ -26,14 +26,15 @@ public class Humidity {
   private double value;
 
   @Column
-  private double norm;
+  private double min, max;
 
   @OneToOne(mappedBy = "humidity")
   private Metrics metrics;
 
   public Humidity(double value) {
     this.value = value;
-    norm = 0;
+    min = 0;
+    max = 0;
   }
 
   public Humidity() {
@@ -55,11 +56,18 @@ public class Humidity {
     this.value = value;
   }
 
-  public double getNorm() {
-    return norm;
+  public void setNorm(double min, double max) {
+    this.min = min;
+    this.max = max;
   }
 
-  public void setNorm(double norm) {
-    this.norm = norm;
+  @Override
+  public String toString() {
+    return "Humidity{" +
+            "id: " + id +
+            ", value: " + value +
+            ", min: " + min +
+            ", max: " + max +
+            '}';
   }
 }

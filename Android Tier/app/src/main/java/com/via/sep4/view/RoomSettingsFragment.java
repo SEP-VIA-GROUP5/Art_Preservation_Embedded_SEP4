@@ -11,7 +11,7 @@ public class RoomSettingsFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setPreferencesFromResource(R.xml.room_preferences, rootKey);
+        setPreferencesFromResource(R.xml.room_preferences, "room_prefs");
     }
 
 

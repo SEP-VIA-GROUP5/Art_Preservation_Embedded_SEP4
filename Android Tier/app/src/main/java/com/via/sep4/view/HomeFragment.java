@@ -69,6 +69,7 @@ public class HomeFragment extends Fragment {
 
 
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+
         temperature = v.findViewById(R.id.dbtemperature);
         humidity = v.findViewById(R.id.dbhumidity);
         CO2 = v.findViewById(R.id.dbCO2);
@@ -102,6 +103,7 @@ public class HomeFragment extends Fragment {
         temperature.setText(tempS);
         humidity.setText(humS);
         CO2.setText(co2S);
+
 
         return v;
 

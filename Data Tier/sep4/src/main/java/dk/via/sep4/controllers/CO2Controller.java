@@ -26,9 +26,9 @@ public class CO2Controller {
         return repo.save(newCO2);
     }
 
-    @PostMapping("/co2/{norm}")
-    CO2 addNorm(@RequestBody CO2 newCO2, double norm) {
-        newCO2.setNorm(norm);
+    @PostMapping("/co2s")
+    CO2 setNorm(@RequestBody CO2 newCO2, @RequestParam double min, @RequestParam double max) {
+        newCO2.setNorm(min, max);
         return repo.save(newCO2);
     }
 

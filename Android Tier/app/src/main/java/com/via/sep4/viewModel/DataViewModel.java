@@ -6,6 +6,8 @@ import com.via.sep4.model.Metrics;
 import com.via.sep4.model.Room;
 import com.via.sep4.repository.DataRepository;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class DataViewModel extends ViewModel {
@@ -27,7 +29,19 @@ public class DataViewModel extends ViewModel {
         return repository.getMetricsSingleRoom(number);
     }
 
+    public String getMetricsByRoomString(int id){
+        return repository.getMetricsByRoomString(id);
+    }
+
     public int deleteRoom(int id) {
         return repository.deleteARoom(id);
+    }
+
+    public int addARoom(JSONObject jsonParam){
+        return repository.addSingleRoom(jsonParam);
+    }
+
+    public int addMetricsToRoom(int id){
+        return repository.addMetricsToRoom(id);
     }
 }

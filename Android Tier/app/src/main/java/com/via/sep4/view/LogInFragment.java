@@ -138,9 +138,7 @@ public class LogInFragment extends Fragment {
                         auth.sendPasswordResetEmail(Email).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-
                                 Snackbar.make(view, "An email has been sent to reset the password", Snackbar.LENGTH_SHORT).show();
-
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

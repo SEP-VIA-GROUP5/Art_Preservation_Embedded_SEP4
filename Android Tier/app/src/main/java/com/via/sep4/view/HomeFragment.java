@@ -48,14 +48,6 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-        Button button = v.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int code = viewModel.deleteRoom(4);
-                Log.d("rooms size", String.valueOf(code));
-            }
-        });
         return v;
     }
 

@@ -24,6 +24,9 @@
     <string name="singleroom_delete_dialog_title">Delete</string>
     <string name="singleroom_delete_dialog_message">This operation is irreversible. Are you sure you want to delete this image?</string>
     <string name="single_delete_ok">Room deleted !</string>
+    <string name="singleroom_add_title">Add a room</string>
+    <string name="singleroom_add_name">Room name :</string>
+    <string name="singleroom_add_number">Number :</string>
 
     <!-- register error label -->
     <string name="R_passwordLengthE">Password should be more than 6 characters</string>

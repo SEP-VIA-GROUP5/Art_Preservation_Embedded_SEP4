@@ -1,31 +1,19 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:key="room_prefs">
 
     <PreferenceCategory app:title="Temperature Levels">
 
-
- <SeekBarPreference
-
-
         <SeekBarPreference
-
-          app:key="maxTemp"
-
-
-            app:key="minTemp"
-
-            app:showSeekBarValue="true"
-            app:title="Maximum Temperature"
             android:max="30"
-            />
+            app:key="maxTemp"
+            app:showSeekBarValue="true"
+            app:title="Maximum Temperature" />
 
         <SeekBarPreference
             app:key="maxTemp"
             app:showSeekBarValue="true"
-            app:title="Maximum Temperature"
-
-            />
+            app:title="Maximum Temperature" />
 
 
     </PreferenceCategory>

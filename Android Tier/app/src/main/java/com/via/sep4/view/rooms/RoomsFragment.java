@@ -130,7 +130,7 @@ public class RoomsFragment extends Fragment {
                 EditText numberText = new EditText(view.getContext());
                 numberText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 numberText.setHint(R.string.singleroom_add_number);
-                AlertDialog.Builder  addRoomDialog = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder addRoomDialog = new AlertDialog.Builder(getContext());
                 LinearLayout linearLayout = new LinearLayout(getContext());
                 linearLayout.addView(nameText);
                 linearLayout.addView(numberText);
@@ -140,7 +140,7 @@ public class RoomsFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String roomName = nameText.getText().toString();
                         String roomNumber = numberText.getText().toString();
-                        if (roomName.equals("") || roomNumber.equals("")){
+                        if (roomName.equals("") || roomNumber.equals("")) {
                             dialogInterface.dismiss();
                         } else {
                             JSONObject jsonObject = new JSONObject();
@@ -152,7 +152,7 @@ public class RoomsFragment extends Fragment {
                                 loadData();
                                 adapter = new RoomsAdapter(roomList);
                                 rooms.setAdapter(adapter);
-                            } catch (JSONException e){
+                            } catch (JSONException e) {
                                 Log.d("json e", e.toString());
                             }
                         }

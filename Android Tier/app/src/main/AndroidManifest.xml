@@ -16,8 +16,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:persistableMode="persistAcrossReboots"
-            android:theme="@style/Theme.SEP4.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
+            android:theme="@style/Theme.SEP4.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

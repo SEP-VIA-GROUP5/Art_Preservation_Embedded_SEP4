@@ -26,9 +26,9 @@ public class HumidityController {
         return repo.save(newHumidity);
     }
 
-    @PostMapping("/humidity/{norm}")
-    Humidity setNorm(@RequestBody Humidity newHumidity, double norm) {
-        newHumidity.setNorm(norm);
+    @PostMapping("/humidities")
+    Humidity setNorm(@RequestBody Humidity newHumidity, @RequestParam double min, @RequestParam double max) {
+        newHumidity.setNorm(min, max);
         return repo.save(newHumidity);
     }
 

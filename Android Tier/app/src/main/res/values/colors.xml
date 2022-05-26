@@ -18,4 +18,5 @@
     <color name="menu">#9ffff7</color>
     <color name="Grey">#BEBEBE</color>
     <color name="DimGrey">#696969</color>
+    <color name="DeleteButton">#e65b67</color>
 </resources>

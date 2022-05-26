@@ -8,10 +8,6 @@
 
 
         <SeekBarPreference
-
-          app:key="maxTemp"
-            app:showSeekBarValue="true"
-            app:title="Maximum Temperature"
             android:max="30"
             app:key="maxTemp"
             app:showSeekBarValue="true"

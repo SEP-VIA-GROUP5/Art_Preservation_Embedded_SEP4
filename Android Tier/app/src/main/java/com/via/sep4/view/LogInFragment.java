@@ -88,19 +88,12 @@ public class LogInFragment extends Fragment {
         toRegister = view.findViewById(R.id.createAccountView);
         forgotPass = view.findViewById(R.id.forgpasBtn);
 
-
-
-
         FirebaseUser user;
         setupViews();
 
     }
 
     private void setupViews() {
-
-
-
-
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,20 +140,16 @@ public class LogInFragment extends Fragment {
                                 Snackbar.make(view, "Something when wrong ", Snackbar.LENGTH_SHORT).show();
                             }
                         });
-
-
                     }
                 });
                 passwordreesetdiag.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        dialogInterface.dismiss();
                     }
                 });
                 passwordreesetdiag.create().show();
             }
-
-
         });
 
 

@@ -12,14 +12,10 @@
         <entry key="..\:/Users/guest_5z8savg/SEP4-Project/Android Tier/app/src/main/res/layout/about_us_fragment.xml" value="0.38315217391304346" />
         <entry key="..\:/Users/guest_5z8savg/SEP4-Project/Android Tier/app/src/main/res/layout/activity_notification.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/guest_5z8savg/SEP4-Project/Android Tier/app/src/main/res/layout/contact_us_fragment.xml" value="0.38315217391304346" />
-
-        <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/drawable/ic_account.xml" value="0.239" />
-        <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/about_us_fragment.xml" value="0.4473958333333333" />
-
-
         <entry key="..\:/Users/guest_5z8savg/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_account.xml" value="0.2695035460992908" />
         <entry key="..\:/Users/guest_5z8savg/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_blank.xml" value="0.31354166666666666" />
         <entry key="..\:/Users/guest_5z8savg/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_log_out.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/guest_5z8savg/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_single_room.xml" value="0.5086050724637681" />
         <entry key="..\:/Users/guest_5z8savg/SEP4-Project/Android Tier/app/src/main/res/layout/login_fragment.xml" value="0.45652173913043476" />
         <entry key="..\:/Users/guest_5z8savg/SEP4-Project/Android Tier/app/src/main/res/layout/rooms_fragment.xml" value="0.3641304347826087" />
         <entry key="..\:/Users/guest_5z8savg/SEP4-Project/Android Tier/app/src/main/res/layout/settings_activity.xml" value="0.2695035460992908" />
@@ -30,7 +26,6 @@
         <entry key="..\:/Users/guest_5z8savg/SEP4-Project/Android Tier/app/src/main/res/xml/root_preferences.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/drawable/ic_account.xml" value="0.239" />
         <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/about_us_fragment.xml" value="0.4473958333333333" />
-
         <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/activity_signin.xml" value="0.5098958333333333" />
         <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/activity_signup.xml" value="0.23333333333333334" />

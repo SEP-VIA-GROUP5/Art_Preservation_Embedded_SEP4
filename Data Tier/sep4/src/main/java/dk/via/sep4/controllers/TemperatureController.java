@@ -27,7 +27,7 @@ public class TemperatureController {
     }
 
     @PostMapping("/temperature/{norm}")
-    Temperature addNorm(@RequestBody Temperature newTemperature, double norm) {
+    Temperature setNorm(@RequestBody Temperature newTemperature, double norm) {
         newTemperature.setNorm(norm);
         return repo.save(newTemperature);
     }

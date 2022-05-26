@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background2"
+    android:padding="8dp">
+
+    <TextView
+
+        android:id="@+id/idmaxTemp"
+        android:layout_width="157dp"
+        android:layout_height="0dp"
+
+        android:layout_marginTop="44dp"
+        android:gravity="left"
+        android:text="Maximum temperature: "
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+
+        android:id="@+id/idminTemp"
+        android:layout_width="157dp"
+        android:layout_height="0dp"
+
+        android:layout_marginTop="84dp"
+        android:gravity="left"
+        android:text="Minimum temperature: "
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+
+        android:id="@+id/idmaxHum"
+        android:layout_width="157dp"
+        android:layout_height="0dp"
+
+        android:layout_marginTop="128dp"
+        android:gravity="left"
+        android:text="Maximum humidity: "
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+
+        android:id="@+id/idminHum"
+        android:layout_width="157dp"
+        android:layout_height="0dp"
+
+        android:layout_marginTop="164dp"
+        android:gravity="left"
+        android:text="Minimum humidity: "
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+
+        android:id="@+id/idmaxCO2"
+        android:layout_width="157dp"
+        android:layout_height="0dp"
+
+        android:layout_marginTop="212dp"
+        android:gravity="left"
+        android:text="Maximum C02: "
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+
+        android:id="@+id/idminC02"
+        android:layout_width="157dp"
+        android:layout_height="0dp"
+
+        android:layout_marginTop="252dp"
+        android:gravity="left"
+        android:text="Minimum C02: "
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/testRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TestRoom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

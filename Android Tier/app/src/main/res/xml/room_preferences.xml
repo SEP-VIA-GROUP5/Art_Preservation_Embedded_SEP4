@@ -5,16 +5,12 @@
     <PreferenceCategory app:title="Temperature Levels">
 
 
- <SeekBarPreference
+ <SeekBarPreference></SeekBarPreference>
 
 
         <SeekBarPreference
 
           app:key="maxTemp"
-
-
-            app:key="minTemp"
-
             app:showSeekBarValue="true"
             app:title="Maximum Temperature"
             android:max="30"

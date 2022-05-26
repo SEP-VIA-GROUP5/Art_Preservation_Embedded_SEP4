@@ -1,6 +1,9 @@
 #pragma once
 #include <ATMEGA_FreeRTOS.h>
 #include <event_groups.h>
+#include "lora_driver.h"
+#include "message_buffer.h"
+#include "SensorDataPackageHandler.h"
 
 
 #define HUMIDITY_TEMPERATURE_MEASURE_BIT (1<<0)
@@ -12,5 +15,10 @@
 
 extern EventGroupHandle_t measureEventGroup;
 extern EventGroupHandle_t dataReadyEventGroup;
+extern MessageBufferHandle_t upLinkMessageBuffer;
+extern MessageBufferHandle_t downLinkMessageBuffer;
 
 void initializeEventGroup();
+void createUpLinkMessageBuffer();
+void createDownLinkMessageBuffer();
+ 

@@ -4,6 +4,16 @@
 
 Application.c
 
+Co2Sensor.c
+
+Configuration.c
+
+DownLinkHandler.c
+
+SensorDataPackageHandler.c
+
+UpLinkHandler.c
+
 Setup.c
 
 TemperatureHumiditySensor.c
@@ -29,8 +39,6 @@ FreeRTOS\src\tasks.c
 FreeRTOS\src\timers.c
 
 FreeRTOS\src\variantHooks.c
-
-LoRaWANHandler.c
 
 main.c
 

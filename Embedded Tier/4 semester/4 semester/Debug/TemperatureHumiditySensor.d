@@ -23,7 +23,11 @@ TemperatureHumiditySensor.d TemperatureHumiditySensor.o: \
  ../FreeRTOS/src/list.h ../drivers/hih8120.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  ../FreeRTOS/src/task.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h \
- .././Setup.h ../FreeRTOS/src/event_groups.h ../FreeRTOS/src/timers.h
+ .././Setup.h ../FreeRTOS/src/event_groups.h ../FreeRTOS/src/timers.h \
+ ../drivers/lora_driver.h ../FreeRTOS/src/message_buffer.h \
+ ../FreeRTOS/src/stream_buffer.h ../drivers/serial.h \
+ .././SensorDataPackageHandler.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h
 
 .././TemperatureHumiditySensor.h:
 
@@ -92,3 +96,15 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../FreeRTOS/src/event_groups.h:
 
 ../FreeRTOS/src/timers.h:
+
+../drivers/lora_driver.h:
+
+../FreeRTOS/src/message_buffer.h:
+
+../FreeRTOS/src/stream_buffer.h:
+
+../drivers/serial.h:
+
+.././SensorDataPackageHandler.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:

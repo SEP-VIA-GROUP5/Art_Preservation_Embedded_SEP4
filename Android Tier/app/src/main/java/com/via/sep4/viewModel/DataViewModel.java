@@ -18,7 +18,7 @@ public class DataViewModel extends ViewModel {
     }
 
     public ArrayList<Room> getRooms() {
-        return repository.connectHttpRooms();
+        return repository.getAllRooms();
     }
 
     public Room getSingleRoom(int id) {
@@ -43,5 +43,9 @@ public class DataViewModel extends ViewModel {
 
     public int addMetricsToRoom(int id){
         return repository.addMetricsToRoom(id);
+    }
+
+    public Room deliveryRoom(Room room){
+        return room;
     }
 }

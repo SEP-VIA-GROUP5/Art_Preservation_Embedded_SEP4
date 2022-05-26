@@ -39,7 +39,7 @@ public class DataRepository {
         return instance;
     }
 
-    public ArrayList<Room> connectHttpRooms() {
+    public ArrayList<Room> getAllRooms() {
         ArrayList<Room> rooms = new ArrayList<>();
         final String[] msg = {""};
         new Thread(new Runnable() {
@@ -279,12 +279,6 @@ public class DataRepository {
         }
         return code[0];
     }
-
-
-
-
-
-
 
     public int addSingleRoom(JSONObject jsonParam) {
         final int[] roomId = new int[1];

@@ -36,6 +36,7 @@ import com.via.sep4.R;
 import com.via.sep4.model.Metrics;
 import com.via.sep4.model.Room;
 import com.via.sep4.model.User;
+import com.via.sep4.view.rooms.RoomsFragment;
 import com.via.sep4.viewModel.DataViewModel;
 
 import java.util.ArrayList;
@@ -72,31 +73,12 @@ public class HomeFragment extends Fragment {
         toNormsSettings = v.findViewById(R.id.toNorms);
         toDashboard = v.findViewById(R.id.toDashboradGraph);
 
-        HomeFragment fragment = new HomeFragment();
-        SettingsFragment fragment2 = new SettingsFragment();
-        Bundle sendRoom = new Bundle();
-        sendRoom.putParcelable("keyforroom", room);
-        fragment.setArguments(sendRoom);
-
-
         toNormsSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-
-
-
-
-
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.nav_host_fragment, fragment2)
-                        .commit();
-
-
-
+                Bundle id = new Bundle();
+                id.putInt("roomId", room.getId());
+                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_nav_home_to_settingsFragment, id);
             }
         });
 

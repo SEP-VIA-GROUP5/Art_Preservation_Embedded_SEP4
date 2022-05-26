@@ -64,7 +64,11 @@
     <fragment
         android:id="@+id/roomsFragment"
         android:name="com.via.sep4.view.rooms.RoomsFragment"
-        android:label="Rooms" />
+        android:label="Rooms" >
+        <action
+            android:id="@+id/action_roomsFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.via.sep4.view.SettingsFragment"

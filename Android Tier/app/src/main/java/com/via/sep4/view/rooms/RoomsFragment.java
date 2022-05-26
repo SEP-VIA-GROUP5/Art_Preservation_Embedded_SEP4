@@ -4,13 +4,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.InputType;
@@ -20,14 +19,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.via.sep4.R;
 import com.via.sep4.model.Room;
+import com.via.sep4.view.HomeFragment;
+import com.via.sep4.view.LogInFragment;
+import com.via.sep4.view.SettingsFragment;
 import com.via.sep4.viewModel.DataViewModel;
 
 import org.json.JSONException;
@@ -42,7 +41,6 @@ public class RoomsFragment extends Fragment {
     private FloatingActionButton addButton;
     private RoomsAdapter adapter;
     private ArrayList<Room> roomList = new ArrayList<>();
-    private SharedPreferences listPreferences;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -109,7 +107,8 @@ public class RoomsFragment extends Fragment {
                 Log.d("click button", "detail");
                 Log.d("click button position", String.valueOf(position));
                 Room room = roomList.get(position);
-                Log.d("click room", String.valueOf(room.getId()));
+                Bundle id = new Bundle();
+                id.putInt("roomId", room.getId());
             }
 
             @Override
@@ -117,7 +116,9 @@ public class RoomsFragment extends Fragment {
                 Log.d("click button", "norms");
                 Log.d("click button position", String.valueOf(position));
                 Room room = roomList.get(position);
-                Log.d("click room", String.valueOf(room.getId()));
+                Bundle id = new Bundle();
+                id.putInt("roomId", room.getId());
+                NavHostFragment.findNavController(RoomsFragment.this).navigate(R.id.action_roomsFragment_to_settingsFragment, id);
             }
 
         });

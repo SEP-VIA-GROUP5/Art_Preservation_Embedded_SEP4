@@ -27,7 +27,6 @@ public class UserRepository {
 
     private UserRepository() {
         currentFirebaseUser = new FirebaseUserLiveData();
-        //  fStore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
     }
 

@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.via.sep4.DataHandler;
 import com.via.sep4.R;
+import com.via.sep4.model.Room;
 import com.via.sep4.model.User;
 import com.via.sep4.viewModel.DataViewModel;
 
@@ -31,4 +32,5 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
     }
+
 }

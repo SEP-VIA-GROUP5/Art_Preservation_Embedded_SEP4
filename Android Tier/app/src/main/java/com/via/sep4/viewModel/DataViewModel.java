@@ -1,5 +1,7 @@
 package com.via.sep4.viewModel;
 
+import android.content.Context;
+
 import androidx.lifecycle.ViewModel;
 
 import com.via.sep4.model.Metrics;
@@ -17,6 +19,7 @@ public class DataViewModel extends ViewModel {
 
     public DataViewModel() {
         repository = DataRepository.getInstance();
+        setRepository = SettingsRepository.getInstance();
     }
 
     public ArrayList<Room> getRooms() {
@@ -31,7 +34,7 @@ public class DataViewModel extends ViewModel {
         return repository.getMetricsSingleRoom(number);
     }
 
-    public String getMetricsByRoomString(int id){
+    public String getMetricsByRoomString(int id) {
         return repository.getMetricsByRoomString(id);
     }
 
@@ -39,29 +42,21 @@ public class DataViewModel extends ViewModel {
         return repository.deleteARoom(id);
     }
 
-    public int addARoom(JSONObject jsonParam){
+    public int addARoom(JSONObject jsonParam) {
         return repository.addSingleRoom(jsonParam);
     }
 
-    public int addMetricsToRoom(int id){
+    public int addMetricsToRoom(int id) {
         return repository.addMetricsToRoom(id);
     }
 
-    public Room deliveryRoom(Room room){
+    public Room deliveryRoom(Room room) {
         return room;
     }
 
-
-    public void setNormsAndNotification(Room room, int minTemp, int maxTemp, int minHum, int maxHum, int minCO2, int maxC02)
-    { }
-
-
-
-
-
-
-
-
+    public void setNormsAndNotification(Room room, int minTemp, int maxTemp, int minHum, int maxHum, int minCO2, int maxC02, Context context) {
+        setRepository.setNormsAndNotification(room, minTemp, maxTemp, minHum, maxHum, minCO2, maxC02, context);
+    }
 
 
 }

@@ -72,5 +72,5 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.via.sep4.view.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="Notification Settings" />
 </navigation>

@@ -5,9 +5,13 @@
     <PreferenceCategory app:title="Temperature Levels">
 
 
+ <SeekBarPreference
+
+
         <SeekBarPreference
 
           app:key="maxTemp"
+
 
             app:key="minTemp"
 
@@ -20,6 +24,7 @@
             app:key="maxTemp"
             app:showSeekBarValue="true"
             app:title="Maximum Temperature"
+
             />
 
 

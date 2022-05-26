@@ -62,4 +62,8 @@
         android:id="@+id/roomsFragment"
         android:name="com.via.sep4.view.rooms.RoomsFragment"
         android:label="Rooms" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.via.sep4.view.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

@@ -29,7 +29,7 @@ public class Room {
     @NotNull
     private int number;
     @OneToMany(targetEntity = Metrics.class,
-            mappedBy="rooms",
+            mappedBy="room",
             cascade= CascadeType.ALL,
             orphanRemoval = true)
     private List<Metrics> metrics = new ArrayList<>();
@@ -42,6 +42,7 @@ public class Room {
     {
         this.name = name;
         this.number = number;
+        building = new Building();
     }
 
     public Room() {

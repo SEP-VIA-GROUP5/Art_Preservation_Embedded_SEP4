@@ -22,21 +22,17 @@ public class MetricsController {
         return repo.findAll();
     }
 
-    @PostMapping("/metrics")
-    Metrics create(@RequestBody @NotNull Metrics newMetric) {
-        newMetric.setTime();
-        return repo.save(newMetric);
+    @GetMapping("/metrics/{roomId}")
+    List<Metrics> history(@PathVariable Long roomId) {
+        return repo.findMetricsByRoomId(roomId);
     }
 
-    @GetMapping("/metrics/{id}")
-    Metrics get(@PathVariable Long id) {
-        return repo.findById(id).orElseThrow(
-                () -> new MetricsNotFoundException(id)
-        );
-    }
+    @GetMapping("/metric/{roomId)")
+    Metrics get(@PathVariable Long roomId) {
+//        return repo.findById(id).orElseThrow(
+//                () -> new MetricsNotFoundException(id)
+//        );
 
-    @DeleteMapping("metrics/{id}")
-    void delete(@PathVariable Long id) {
-        repo.deleteById(id);
+        return repo.findDistinctLastByRoomId(roomId);
     }
 }

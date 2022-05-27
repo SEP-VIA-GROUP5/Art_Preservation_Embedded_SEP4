@@ -95,13 +95,13 @@ public class WebSocketClient implements WebSocket.Listener
       Metrics metricsDB = convertorHex.convertFromHexaToInt(dataReceivedMessage);
 
       long id= 1;
-      Room roomDB = roomRepository.getById(id);
+     /* Room roomDB = roomRepository.getById(id);
       System.out.println(roomDB.getName());
-      roomDB.addMetrics(metricsDB);
+      roomDB.addMetrics(metricsDB); */
 
       repo.save(metricsDB);
 
-      roomRepository.save(roomDB);
+    //  roomRepository.save(roomDB);
 
     }
     catch (JSONException e)

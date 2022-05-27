@@ -1,6 +1,8 @@
 package dk.via.sep4;
 
 import dk.via.sep4.LoraWanConnection.WebSocketClient;
+import dk.via.sep4.repo.MetricsRepository;
+import dk.via.sep4.repo.RoomRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

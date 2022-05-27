@@ -1,6 +1,7 @@
 package dk.via.sep4.LoraWanConnection;
 
 import com.google.gson.Gson;
+import dk.via.sep4.SpringConfiguration;
 import dk.via.sep4.models.Metrics;
 import dk.via.sep4.models.Room;
 import dk.via.sep4.repo.MetricsRepository;
@@ -26,10 +27,8 @@ public class WebSocketClient implements WebSocket.Listener
   private WebSocket server;
   private Gson gson = new Gson();
   private MetricsRepository repo;
-  Metrics metricsDB;
-  HexaConverter convertorHex;
+  HexaConverter convertorHex = new HexaConverter();
   private RoomRepository roomRepository;
-  private Room roomDB;
 
 
   public WebSocket getServer()
@@ -41,12 +40,12 @@ public class WebSocketClient implements WebSocket.Listener
     server.sendText(jsonTelegram, true);
   }
   public WebSocketClient(String url) {
-
-  HttpClient client = HttpClient.newHttpClient();
-  CompletableFuture<WebSocket> ws = client.newWebSocketBuilder().
-  buildAsync(URI.create(url), this);
-
-  server = ws.join();
+    HttpClient client = HttpClient.newHttpClient();
+    CompletableFuture<WebSocket> ws = client.newWebSocketBuilder().
+            buildAsync(URI.create(url), this);
+    server = ws.join();
+    repo = (MetricsRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("metricsRepository");
+    roomRepository = (RoomRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("roomRepository");
   }
 
   //onOpen()
@@ -93,12 +92,15 @@ public class WebSocketClient implements WebSocket.Listener
     try{
       indented = (new JSONObject(data.toString())).toString(4);
       DataReceivedMessage dataReceivedMessage =  gson.fromJson(indented, DataReceivedMessage.class);
-      metricsDB= convertorHex.convertFromHexaToInt(dataReceivedMessage);
-      repo.save(metricsDB);
+      Metrics metricsDB = convertorHex.convertFromHexaToInt(dataReceivedMessage);
 
       long id= 1;
-      roomDB = roomRepository.getById(id);
+      Room roomDB = roomRepository.getById(id);
+      System.out.println(roomDB.getName());
       roomDB.addMetrics(metricsDB);
+
+      repo.save(metricsDB);
+
       roomRepository.save(roomDB);
 
     }

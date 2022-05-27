@@ -93,12 +93,14 @@ public class WebSocketClient implements WebSocket.Listener
       indented = (new JSONObject(data.toString())).toString(4);
       DataReceivedMessage dataReceivedMessage =  gson.fromJson(indented, DataReceivedMessage.class);
       Metrics metricsDB = convertorHex.convertFromHexaToInt(dataReceivedMessage);
-      repo.save(metricsDB);
 
       long id= 1;
       Room roomDB = roomRepository.getById(id);
       System.out.println(roomDB.getName());
       roomDB.addMetrics(metricsDB);
+
+      repo.save(metricsDB);
+
       roomRepository.save(roomDB);
 
     }

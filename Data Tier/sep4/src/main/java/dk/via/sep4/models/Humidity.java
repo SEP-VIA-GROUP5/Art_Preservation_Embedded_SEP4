@@ -23,7 +23,7 @@ public class Humidity {
   )
   private Long id;
   @Column(nullable = false)
-  private double value;
+  private double humidity;
 
   @Column
   private double min, max;
@@ -31,8 +31,8 @@ public class Humidity {
   @OneToOne(mappedBy = "humidity")
   private Metrics metrics;
 
-  public Humidity(double value) {
-    this.value = value;
+  public Humidity(double humidity) {
+    this.humidity = humidity;
     min = 0;
     max = 0;
   }
@@ -48,12 +48,12 @@ public class Humidity {
     this.id = id;
   }
 
-  public double getValue() {
-    return value;
+  public double getHumidity() {
+    return humidity;
   }
 
-  public void setValue(double value) {
-    this.value = value;
+  public void setHumidity(double humidity) {
+    this.humidity = humidity;
   }
 
   public void setNorm(double min, double max) {
@@ -65,7 +65,7 @@ public class Humidity {
   public String toString() {
     return "Humidity{" +
             "id: " + id +
-            ", value: " + value +
+            ", value: " + humidity +
             ", min: " + min +
             ", max: " + max +
             '}';

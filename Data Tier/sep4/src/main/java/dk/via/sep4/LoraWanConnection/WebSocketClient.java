@@ -5,20 +5,10 @@ import dk.via.sep4.models.Metrics;
 import dk.via.sep4.models.Room;
 import dk.via.sep4.repo.MetricsRepository;
 import dk.via.sep4.repo.RoomRepository;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.WebSocket;
 import java.nio.ByteBuffer;
@@ -58,17 +48,22 @@ public class WebSocketClient implements WebSocket.Listener
 
   server = ws.join();
   }
-    // onOpen
-  public void onOpen(WebSocket webSocket){
-  webSocket.request(1);
-  System.out.println("WebSocket is open for request");
+
+  //onOpen()
+  public void onOpen(WebSocket webSocket) {
+    webSocket.request(1);
+    System.out.println("WebSocket Listener has been opened" +
+            " for requests.");
   }
 
-  //onError
-  public void onError(WebSocket webSocket, Throwable error){
+  //onError()
+  public void onError(WebSocket webSocket, Throwable error) {
+    System.out.println("A " + error.getCause() + " exception was thrown.");
+    System.out.println("Message: " + error.getLocalizedMessage());
+    webSocket.abort();
   }
 
-  // onClose
+  // onClose()
   public CompletionStage<?> onClose(WebSocket webSocket, int statusCode, String reason) {
     System.out.println("WebSocket closed!");
     System.out.println("Status:" + statusCode + " Reason: " + reason);
@@ -79,7 +74,7 @@ public class WebSocketClient implements WebSocket.Listener
   public CompletionStage<?> onPing(WebSocket webSocket, ByteBuffer message) {
     webSocket.request(1);
     System.out.println("Ping: Client ---> Server");
-    System.out.println(message.asCharBuffer().toString());
+    System.out.println(message.asCharBuffer());
     return new CompletableFuture().completedFuture("Ping completed.").thenAccept(System.out::println);
   }
 
@@ -87,13 +82,14 @@ public class WebSocketClient implements WebSocket.Listener
   public CompletionStage<?> onPong(WebSocket webSocket, ByteBuffer message) {
     webSocket.request(1);
     System.out.println("Pong: Client ---> Server");
-    System.out.println(message.asCharBuffer().toString());
+    System.out.println(message.asCharBuffer());
     return new CompletableFuture().completedFuture("Pong completed.").thenAccept(System.out::println);
   }
 
   //onText()
-  public CompletionStage<?> onText​(WebSocket webSocket, CharSequence data, boolean last) {
-      String indented = null;
+  public CompletionStage<?> onText(WebSocket webSocket, CharSequence data, boolean last) {
+      String indented;
+
     try{
       indented = (new JSONObject(data.toString())).toString(4);
       DataReceivedMessage dataReceivedMessage =  gson.fromJson(indented, DataReceivedMessage.class);
@@ -104,9 +100,6 @@ public class WebSocketClient implements WebSocket.Listener
       roomDB = roomRepository.getById(id);
       roomDB.addMetrics(metricsDB);
       roomRepository.save(roomDB);
-
-      System.out.println("OnText");
-      System.out.println(indented);
 
     }
     catch (JSONException e)

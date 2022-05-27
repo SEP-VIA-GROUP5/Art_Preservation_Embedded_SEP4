@@ -39,14 +39,15 @@ public class Metrics {
 
     @ManyToOne(targetEntity = Room.class,
             cascade = CascadeType.ALL)
-    @JoinColumn(name="room_id")
-    private Room rooms;
+    @JoinColumn(name="room")
+    private Room room;
 
     public Metrics(CO2 co2, Humidity humidity, Temperature temperature) {
         this.co2 = co2;
         this.humidity = humidity;
         this.temperature = temperature;
         time = Calendar.getInstance().getTime();
+        room = new Room();
     }
 
     /**
@@ -96,8 +97,8 @@ public class Metrics {
         time = Calendar.getInstance().getTime();
     }
 
-    public void setRoom(Room rooms) {
-        this.rooms = rooms;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     @Override

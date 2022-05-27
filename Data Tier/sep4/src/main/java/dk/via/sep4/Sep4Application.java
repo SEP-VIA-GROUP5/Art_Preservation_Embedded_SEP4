@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Sep4Application {
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		SpringApplication.run(Sep4Application.class, args);
 		WebSocketClient webSocketClient = new WebSocketClient
 				("wss://iotnet.cibicom.dk/app?token=vnoUBwAAABFpb3RuZXQuY2liaWNvbS5ka54Zx4fqYp5yzAQtnGzDDUw=");

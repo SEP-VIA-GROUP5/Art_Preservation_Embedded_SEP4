@@ -1,5 +1,7 @@
 package dk.via.sep4.LoraWanConnection;
 
+import org.apache.catalina.Service;
+
 /**
  * @author $(Alina Chelmus)
  */
@@ -131,7 +133,7 @@ public class DataReceivedMessage {
 
   @Override
   public String toString() {
-    return "{" +
+    return "Service.DataReceivedMessage{" +
         "cmd='" + cmd + '\'' +
         ", EUI='" + EUI + '\'' +
         ", ts=" + ts +

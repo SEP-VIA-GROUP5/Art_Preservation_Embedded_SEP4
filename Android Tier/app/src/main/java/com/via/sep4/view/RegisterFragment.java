@@ -1,6 +1,5 @@
 package com.via.sep4.view;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -8,8 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -61,7 +57,7 @@ public class RegisterFragment extends Fragment {
         View v = inflater.inflate(R.layout.activity_signup, container, false);
         name = v.findViewById(R.id.nameEt);
         username = v.findViewById(R.id.usernameEt);
-        email = v.findViewById(R.id.emailEt);
+        email = v.findViewById(R.id.MinH);
         phoneNum = v.findViewById(R.id.phoneNoEt);
         password = v.findViewById(R.id.passwordEt);
         passwordRepeat = v.findViewById(R.id.confirmPasswordEt);

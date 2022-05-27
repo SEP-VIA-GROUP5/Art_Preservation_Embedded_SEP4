@@ -39,7 +39,7 @@ public class DataRepository {
         return instance;
     }
 
-    public ArrayList<Room> connectHttpRooms() {
+    public ArrayList<Room> getAllRooms() {
         ArrayList<Room> rooms = new ArrayList<>();
         final String[] msg = {""};
         new Thread(new Runnable() {
@@ -84,6 +84,9 @@ public class DataRepository {
             }
         }
 
+
+
+        
         Gson gson = new Gson();
         rooms = gson.fromJson(msg[0], new TypeToken<List<Room>>() {
         }.getType());
@@ -280,12 +283,6 @@ public class DataRepository {
         return code[0];
     }
 
-
-
-
-
-
-
     public int addSingleRoom(JSONObject jsonParam) {
         final int[] roomId = new int[1];
         new Thread(new Runnable() {
@@ -348,7 +345,7 @@ public class DataRepository {
     public int addMetricsToRoom(int id) {
         //TODO only get metrics (id=3), change it in the future
         final int[] code = new int[1];
-        String metricsGet = getMetricsByRoomString(3);
+        String metricsGet = getMetricsByRoomString(4);
         new Thread(new Runnable() {
             @Override
             public void run() {

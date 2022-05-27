@@ -28,7 +28,7 @@ public class RoomController
         return repo.save(room);
     }
 
-    @PostMapping("/addMetrics/{id}")
+    @PutMapping("/addMetrics/{id}")
     Room addMetrics(@RequestBody Metrics metrics, @PathVariable Long id){
         return repo.findById(id)
                 .map(room -> {

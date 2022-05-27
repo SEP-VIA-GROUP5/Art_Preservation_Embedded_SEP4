@@ -5,6 +5,7 @@ import dk.via.sep4.models.Metrics;
 import dk.via.sep4.models.Room;
 import dk.via.sep4.repo.MetricsRepository;
 import dk.via.sep4.repo.RoomRepository;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -98,10 +99,12 @@ public class WebSocketClient implements WebSocket.Listener
       DataReceivedMessage dataReceivedMessage =  gson.fromJson(indented, DataReceivedMessage.class);
       metricsDB= convertorHex.convertFromHexaToInt(dataReceivedMessage);
       repo.save(metricsDB);
+
       long id= 1;
       roomDB = roomRepository.getById(id);
       roomDB.addMetrics(metricsDB);
       roomRepository.save(roomDB);
+
       System.out.println("OnText");
       System.out.println(indented);
 

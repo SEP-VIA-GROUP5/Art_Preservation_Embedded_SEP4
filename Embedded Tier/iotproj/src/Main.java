@@ -6,7 +6,7 @@ public class Main {
         WebsocketClient websocketClient = new WebsocketClient("wss://iotnet.cibicom.dk/app?token=vnoUBwAAABFpb3RuZXQuY2liaWNvbS5ka54Zx4fqYp5yzAQtnGzDDUw=");
         while(true)
         {
-            websocketClient.sendDownLink(gson.toJson("dog",String.class));
+
         }
     }
 }

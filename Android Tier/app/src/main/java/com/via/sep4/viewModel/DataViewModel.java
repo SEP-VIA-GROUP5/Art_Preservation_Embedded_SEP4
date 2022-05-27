@@ -1,10 +1,13 @@
 package com.via.sep4.viewModel;
 
+import android.content.Context;
+
 import androidx.lifecycle.ViewModel;
 
 import com.via.sep4.model.Metrics;
 import com.via.sep4.model.Room;
 import com.via.sep4.repository.DataRepository;
+import com.via.sep4.repository.SettingsRepository;
 
 import org.json.JSONObject;
 
@@ -12,13 +15,15 @@ import java.util.ArrayList;
 
 public class DataViewModel extends ViewModel {
     DataRepository repository;
+    SettingsRepository setRepository;
 
     public DataViewModel() {
         repository = DataRepository.getInstance();
+        setRepository = SettingsRepository.getInstance();
     }
 
     public ArrayList<Room> getRooms() {
-        return repository.connectHttpRooms();
+        return repository.getAllRooms();
     }
 
     public Room getSingleRoom(int id) {
@@ -29,7 +34,7 @@ public class DataViewModel extends ViewModel {
         return repository.getMetricsSingleRoom(number);
     }
 
-    public String getMetricsByRoomString(int id){
+    public String getMetricsByRoomString(int id) {
         return repository.getMetricsByRoomString(id);
     }
 
@@ -37,11 +42,21 @@ public class DataViewModel extends ViewModel {
         return repository.deleteARoom(id);
     }
 
-    public int addARoom(JSONObject jsonParam){
+    public int addARoom(JSONObject jsonParam) {
         return repository.addSingleRoom(jsonParam);
     }
 
-    public int addMetricsToRoom(int id){
+    public int addMetricsToRoom(int id) {
         return repository.addMetricsToRoom(id);
     }
+
+    public Room deliveryRoom(Room room) {
+        return room;
+    }
+
+    public void setNormsAndNotification(Room room, int minTemp, int maxTemp, int minHum, int maxHum, int minCO2, int maxC02, Context context) {
+        setRepository.setNormsAndNotification(room, minTemp, maxTemp, minHum, maxHum, minCO2, maxC02, context);
+    }
+
+
 }

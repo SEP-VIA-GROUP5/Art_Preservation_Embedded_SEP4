@@ -40,7 +40,7 @@
         android:layout_height="wrap_content">
         <!--Email-->
         <EditText
-            android:id="@+id/emailEt"
+            android:id="@+id/MinH"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"

@@ -28,6 +28,16 @@
     <string name="singleroom_add_name">Room name :</string>
     <string name="singleroom_add_number">Number :</string>
 
+    <!-- settings -->
+    <string name="value">Value</string>
+    <string name="MaxT">Maximum temperature (C):</string>
+    <string name="MinT">Minimum temperature (C):</string>
+    <string name="MaxH">Maximum humidity (%rh):</string>
+    <string name="MinH">Minimum humidity (%rh):</string>
+    <string name="MaxC">Maximum C02 (ppm):</string>
+    <string name="MinC">Minimum C02 (ppm):</string>
+    <string name="settings_saveChange">Save changes</string>
+
     <!-- register error label -->
     <string name="R_passwordLengthE">Password should be more than 6 characters</string>
     <string name="R_passwordNotMachE">Password doesn\'t match</string>
@@ -82,5 +92,7 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

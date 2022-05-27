@@ -14,9 +14,8 @@ public class HexaConverter {
   private String data;
 
 
-  public HexaConverter(String data)
-  {
-    this.data = data;
+
+  public HexaConverter() {
   }
 
   public Metrics convertFromHexaToInt(DataReceivedMessage data)

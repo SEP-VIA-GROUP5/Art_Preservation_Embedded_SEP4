@@ -83,23 +83,22 @@ public class DataRepository {
                 e.printStackTrace();
             }
         }
-
-
-
-        
-        Gson gson = new Gson();
-        rooms = gson.fromJson(msg[0], new TypeToken<List<Room>>() {
-        }.getType());
+        if (!msg[0].contains("Code")){
+            Gson gson = new Gson();
+            rooms = gson.fromJson(msg[0], new TypeToken<List<Room>>() {
+            }.getType());
+        }
         return rooms;
     }
 
     public Room getSingleRoom(int id) {
         Room[] room = new Room[1];
+        final String[] msg = {""};
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String msg = "";
+
                     URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/room/" + id);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setDoOutput(false);
@@ -121,38 +120,42 @@ public class DataRepository {
                         String string = buffer.toString();
                         if (string != null && string.startsWith("\ufeff")) {
                             string = string.substring(1);
+                            msg[0] = string;
                         }
-                        Gson gson = new Gson();
-                        room[0] = gson.fromJson(string, Room.class);
-                        msg = room[0].toString();
                         reader.close();
                     } else {
-                        msg = "Code: " + code + ", Error";
+                        msg[0] = "Code: " + code + ", Error";
                     }
-                    Log.d("message ", msg);
+                    Log.d("message ", msg[0]);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
-        while (room[0] == null) {
+        while (msg[0] == ""){
             try {
                 Thread.sleep(30);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        Log.d("room data", String.valueOf(room[0].getNumber()));
+        if (!msg[0].contains("Code")){
+            Gson gson = new Gson();
+            room[0] = gson.fromJson(msg[0], Room.class);
+            msg[0] = room[0].toString();
+            Log.d("room data", String.valueOf(room[0].getNumber()));
+        }
+
         return room[0];
     }
 
     public Metrics getMetricsSingleRoom(int number) {
         final Metrics[] metrics = new Metrics[1];
+        final String[] msg = {""};
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String msg = "";
                     URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/metrics/" + number);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setDoOutput(false);
@@ -177,19 +180,19 @@ public class DataRepository {
                         }
                         Gson gson = new Gson();
                         metrics[0] = gson.fromJson(string, Metrics.class);
-                        msg = metrics[0].toString();
+                        msg[0] = metrics[0].toString();
                         reader.close();
                     } else {
-                        msg = "Code: " + code + ", Error";
+                        msg[0] = "Code: " + code + ", Error";
                     }
-                    Log.d("message ", msg);
+                    Log.d("message ", msg[0]);
                     Log.d("humidity value", String.valueOf(metrics[0].getHumidity().getValue()));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
-        while (metrics[0] == null) {
+        while (msg[0] == null) {
             try {
                 Thread.sleep(30);
             } catch (InterruptedException e) {
@@ -232,7 +235,7 @@ public class DataRepository {
                         reader.close();
                         connection.disconnect();
                     } else {
-                        msg = "Code: " + code + ", Error";
+                        strings[0] = "Code: " + code + ", Error";
                     }
                     Log.d("message ", msg);
                 } catch (Exception e) {

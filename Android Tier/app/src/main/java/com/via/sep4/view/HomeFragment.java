@@ -49,7 +49,8 @@ public class HomeFragment extends Fragment {
     private TextView temperature, humidity, CO2;
     private Room room;
 
-    public HomeFragment() {}
+    public HomeFragment() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        room = viewModel.getSingleRoom(1);
+
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         temperature = v.findViewById(R.id.dbtemperature);
@@ -73,44 +74,38 @@ public class HomeFragment extends Fragment {
         toNormsSettings = v.findViewById(R.id.toNorms);
         toDashboard = v.findViewById(R.id.toDashboradGraph);
 
-        toNormsSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle id = new Bundle();
-                id.putInt("roomId", room.getId());
-                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_nav_home_to_settingsFragment, id);
-            }
-        });
-
 // here i am selecting that the object room to be sent
-
-
-        Metrics[] metrics = room.getMetrics();
-        String idOfRoom = String.valueOf(room.getId());
-        String tempS;
-        String humS;
-        String co2S;
-        int idr = room.getId();
-
-        if (metrics.length == 0) {
-            tempS = "N/A";
-            humS = "N/A";
-            co2S = "N/A";
+        String tempS = "N/A";
+        String humS = "N/A";
+        String co2S = "N/A";
+        if (viewModel.getSingleRoom(1) == null) {
+            Toast.makeText(getContext(), R.string.fail_connectServer, Toast.LENGTH_LONG).show();
+            toNormsSettings.setVisibility(View.GONE);
+            toDashboard.setVisibility(View.GONE);
         } else {
-            tempS = String.valueOf(metrics[0].getTemperature().getValue());
-            humS = String.valueOf(metrics[0].getHumidity().getValue());
-            co2S = String.valueOf(metrics[0].getCO2().getValue());
+            room = viewModel.getSingleRoom(1);
+            Metrics[] metrics = room.getMetrics();
+            if (metrics.length != 0) {
+                tempS = String.valueOf(metrics[0].getTemperature().getValue());
+                humS = String.valueOf(metrics[0].getHumidity().getValue());
+                co2S = String.valueOf(metrics[0].getCO2().getValue());
+            }
+            toNormsSettings.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle id = new Bundle();
+                    id.putInt("roomId", room.getId());
+                    NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_nav_home_to_settingsFragment, id);
+                }
+            });
         }
+
         temperature.setText(tempS);
         humidity.setText(humS);
         CO2.setText(co2S);
         return v;
 
     }
-
-
-
-
 
 
     private void checkUser(FirebaseUser user, Context context) {

@@ -21,7 +21,7 @@ public class LoadDatabase {
  @Bean
  CommandLineRunner initDatabase( RoomRepository roomRepository, MetricsRepository metricsRepository, BuildingRepository repo) {
   return args -> {
-  /* Humidity humidity = new Humidity(60);
+   Humidity humidity = new Humidity(60);
    CO2 co2 = new CO2(400);
    Temperature temperature = new Temperature(22);
 
@@ -43,8 +43,8 @@ public class LoadDatabase {
    sensorV2.setTime();
 
    Room r1 = new Room("Baroque", 1);
-   r1.addMetrics(sensor);
    Room r2 = new Room("Cubism", 2);
+   r2.addMetrics(sensor);
    r2.addMetrics(sensorV2);
    Room r3 = new Room("Fauvism", 3);
    r3.addMetrics(sensorV1);
@@ -57,7 +57,7 @@ public class LoadDatabase {
 
    log.info("Preloading " + repo.save(b1));
 
-   */
+
 
   };
 

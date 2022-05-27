@@ -97,6 +97,7 @@ public class WebSocketClient implements WebSocket.Listener
 
       long id= 1;
       Room roomDB = roomRepository.getById(id);
+      System.out.println(roomDB.getName());
       roomDB.addMetrics(metricsDB);
       roomRepository.save(roomDB);
 

@@ -8,10 +8,9 @@
 #pragma once
 
 #include <stdio.h>
+#include <ATMEGA_FreeRTOS.h>
 #include <task.h>
 #include <stdint.h>
-
-#include <ATMEGA_FreeRTOS.h>
 
 #include "rc_servo.h"
 #include "Configuration.h"
@@ -19,9 +18,9 @@
 #include "TemperatureHumiditySensor.h"
 
 void createWindowController();
-void windowControllerTask(void *pvpParameter);
-void createWindowControllerTask(UBaseType_t TaskPriority);
 void openWindow();
 void closeWindow();
+void windowControllerTask(void *pvpParameter);
+void createWindowControllerTask(UBaseType_t TaskPriority);
 
 

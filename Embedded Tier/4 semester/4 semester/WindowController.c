@@ -5,6 +5,8 @@
  *  Author: rytis
  */ 
 
+#include "WindowController.h"
+
 int isOpen = 0;
 
 void createWindowController(){
@@ -43,7 +45,7 @@ void windowControllerTask(void *pvpParameter){
 }
 void createWindowControllerTask(UBaseType_t TaskPriority){
 	xTaskCreate(
-	windowControllerTask();
+		windowControllerTask
 	,  "WindowControllerTask"
 	,  configMINIMAL_STACK_SIZE
 	,  NULL

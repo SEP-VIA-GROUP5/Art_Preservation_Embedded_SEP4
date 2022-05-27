@@ -34,7 +34,7 @@ public class BuildingController {
         return repo.findById(id).orElseThrow(() -> new BuildingNotFoundException(id));
     }
 
-    @PostMapping("/addRoom/{id}")
+    @PutMapping("/addRoom/{id}")
     Building addRoom(@RequestBody Room room, @PathVariable Long id){
         return repo.findById(id)
                 .map(building -> {

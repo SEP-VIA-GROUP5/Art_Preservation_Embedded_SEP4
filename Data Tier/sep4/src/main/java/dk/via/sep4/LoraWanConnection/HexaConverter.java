@@ -13,6 +13,7 @@ public class HexaConverter {
 
   private String data;
 
+
   public HexaConverter(String data)
   {
     this.data = data;
@@ -35,10 +36,9 @@ public class HexaConverter {
     String hexValHum = data.getData().substring(8,12);
     humidity = Integer.parseInt(hexValHum, 16);
     Humidity humidityMeasurement = new Humidity(humidity);
+    Metrics metrics = new Metrics(co2Measurement, humidityMeasurement, temperatureMeasurement);
 
-    Metrics sensor = new Metrics();
-
-    return sensor;
+    return metrics;
   }
 }
 

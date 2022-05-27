@@ -43,8 +43,8 @@ public class LoadDatabase {
    sensorV2.setTime();
 
    Room r1 = new Room("Baroque", 1);
-   r1.addMetrics(sensor);
    Room r2 = new Room("Cubism", 2);
+   r2.addMetrics(sensor);
    r2.addMetrics(sensorV2);
    Room r3 = new Room("Fauvism", 3);
    r3.addMetrics(sensorV1);
@@ -56,6 +56,8 @@ public class LoadDatabase {
    b1.addRoom(r3);
 
    log.info("Preloading " + repo.save(b1));
+
+
 
   };
 

@@ -42,7 +42,6 @@ public class Room {
     {
         this.name = name;
         this.number = number;
-        building = new Building();
     }
 
     public Room() {

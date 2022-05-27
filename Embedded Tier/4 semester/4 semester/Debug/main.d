@@ -30,7 +30,8 @@ main.d main.o: .././main.c \
  .././SensorDataPackageHandler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  .././Co2Sensor.h ../drivers/mh_z19.h .././Configuration.h \
- .././UpLinkHandler.h .././DownLinkHandler.h
+ .././UpLinkHandler.h .././DownLinkHandler.h .././WindowController.h \
+ ../drivers/rc_servo.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
@@ -127,3 +128,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././UpLinkHandler.h:
 
 .././DownLinkHandler.h:
+
+.././WindowController.h:
+
+../drivers/rc_servo.h:

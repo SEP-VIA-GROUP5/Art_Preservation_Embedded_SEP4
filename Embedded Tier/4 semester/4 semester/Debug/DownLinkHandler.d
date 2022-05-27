@@ -27,7 +27,7 @@ DownLinkHandler.d DownLinkHandler.o: .././DownLinkHandler.c \
  ../drivers/serial.h .././Setup.h ../FreeRTOS/src/event_groups.h \
  ../FreeRTOS/src/timers.h .././SensorDataPackageHandler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
- .././configuration.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h
+ .././Configuration.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h
 
 .././DownlinkHandler.h:
 
@@ -103,7 +103,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 
-.././configuration.h:
+.././Configuration.h:
 
 ../FreeRTOS/src/semphr.h:
 

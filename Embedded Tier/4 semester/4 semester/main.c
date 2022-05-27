@@ -28,6 +28,7 @@
 #include "UpLinkHandler.h"
 #include "DownLinkHandler.h"
 #include "Configuration.h"
+#include "WindowController.h"
 
 void initializeUsedData()
 {
@@ -37,6 +38,7 @@ void initializeUsedData()
 	createConfiguration();
 	createDownLinkMessageBuffer();
 	lora_driver_initialise(ser_USART1, downLinkMessageBuffer);
+	createWindowController();
 }
 
 void create_tasks(void)
@@ -46,6 +48,7 @@ void create_tasks(void)
 	createApplicationTask(2);
     lora_handler_uplink_payload(3);
 	lora_downlink_handler_create(4);
+	createWindowControllerTask(3);
 }
 
 void initialiseSystem()

@@ -23,7 +23,7 @@ public class Temperature {
   )
   private Long id;
   @Column(nullable = false)
-  private double value;
+  private double temperature;
 
   @Column
   private double min, max;
@@ -34,8 +34,8 @@ public class Temperature {
   public Temperature() {
   }
 
-  public Temperature(double value) {
-    this.value = value;
+  public Temperature(double temperature) {
+    this.temperature = temperature;
     min = 0;
     max = 0;
   }
@@ -48,12 +48,12 @@ public class Temperature {
     this.id = id;
   }
 
-  public double getValue() {
-    return value;
+  public double getTemperature() {
+    return temperature;
   }
 
-  public void setValue(double value) {
-    this.value = value;
+  public void setTemperature(double temperature) {
+    this.temperature = temperature;
   }
 
   public void setNorm(double min, double max) {
@@ -65,7 +65,7 @@ public class Temperature {
   public String toString() {
     return "Temperature{" +
             "id: " + id +
-            ", value: " + value +
+            ", value: " + temperature +
             ", min: " + min +
             ", max: " + max +
             '}';

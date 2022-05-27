@@ -47,7 +47,6 @@ public class Metrics {
         this.humidity = humidity;
         this.temperature = temperature;
         time = Calendar.getInstance().getTime();
-        room = new Room();
     }
 
     /**

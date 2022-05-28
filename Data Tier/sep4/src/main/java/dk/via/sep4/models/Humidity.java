@@ -65,7 +65,7 @@ public class Humidity {
   public String toString() {
     return "Humidity{" +
             "id: " + id +
-            ", value: " + humidity +
+            ", humidity: " + humidity +
             ", min: " + min +
             ", max: " + max +
             '}';

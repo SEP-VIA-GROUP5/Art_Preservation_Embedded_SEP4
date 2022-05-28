@@ -68,7 +68,7 @@ public class CO2 {
   public String toString() {
     return "CO2{" +
             "id: " + id +
-            ", value: " + CO2 +
+            ", CO2: " + CO2 +
             ", min: " + min +
             ", max: " + max +
             '}';

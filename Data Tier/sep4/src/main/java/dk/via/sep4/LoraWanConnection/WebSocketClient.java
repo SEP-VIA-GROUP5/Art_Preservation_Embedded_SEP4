@@ -30,6 +30,8 @@ public class WebSocketClient implements WebSocket.Listener
   HexaConverter convertorHex = new HexaConverter();
   private RoomRepository roomRepository;
 
+  private Room roomDB;
+
 
   public WebSocket getServer()
   {
@@ -46,6 +48,7 @@ public class WebSocketClient implements WebSocket.Listener
     server = ws.join();
     repo = (MetricsRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("metricsRepository");
     roomRepository = (RoomRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("roomRepository");
+    roomDB = new Room();
   }
 
   //onOpen()
@@ -93,15 +96,13 @@ public class WebSocketClient implements WebSocket.Listener
       indented = (new JSONObject(data.toString())).toString(4);
       DataReceivedMessage dataReceivedMessage =  gson.fromJson(indented, DataReceivedMessage.class);
       Metrics metricsDB = convertorHex.convertFromHexaToInt(dataReceivedMessage);
-
-      long id= 1;
-     /* Room roomDB = roomRepository.getById(id);
-      System.out.println(roomDB.getName());
-      roomDB.addMetrics(metricsDB); */
-
       repo.save(metricsDB);
 
-    //  roomRepository.save(roomDB);
+      roomDB = roomRepository.getById((long)1);
+      System.out.println(roomDB.getName());
+      roomDB.addMetrics(metricsDB);
+
+      roomRepository.save(roomDB);
 
     }
     catch (JSONException e)

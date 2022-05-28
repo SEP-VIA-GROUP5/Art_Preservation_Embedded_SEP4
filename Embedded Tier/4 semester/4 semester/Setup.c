@@ -4,14 +4,14 @@ EventGroupHandle_t dataReadyEventGroup;
 MessageBufferHandle_t upLinkMessageBuffer;
 MessageBufferHandle_t downLinkMessageBuffer;
 
-void initializeEventGroup()
+void initializeEventGroup() //Initializing every event group
 {
 	dataReadyEventGroup = xEventGroupCreate();
 	measureEventGroup = xEventGroupCreate();
 }
 
 
-void createUpLinkMessageBuffer()
+void createUpLinkMessageBuffer() //Created a buffer for messages so it can be uploaded and send in websockets
 {
 	
 	upLinkMessageBuffer = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2);
@@ -21,11 +21,11 @@ void createUpLinkMessageBuffer()
 	}
 	else
 	{
-		printf("Uplink message buffer created succesffully");
+		printf("Uplink message buffer created successfully");
 	}
 }
 
-void createDownLinkMessageBuffer()
+void createDownLinkMessageBuffer() //Created a buffer for messages so it can be received from websockets
 {
 	
 	downLinkMessageBuffer = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2);
@@ -35,6 +35,6 @@ void createDownLinkMessageBuffer()
 	}
 	else
 	{
-		printf("Downlink message buffer created succesffully");
+		printf("Downlink message buffer created successfully");
 	}
 }

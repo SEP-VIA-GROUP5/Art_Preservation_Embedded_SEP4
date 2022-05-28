@@ -28,7 +28,9 @@
 #include "UpLinkHandler.h"
 #include "DownLinkHandler.h"
 #include "Configuration.h"
+#include "WindowController.h"
 
+//Initializing the essential data
 void initializeUsedData()
 {
 	initializeEventGroup();
@@ -37,8 +39,10 @@ void initializeUsedData()
 	createConfiguration();
 	createDownLinkMessageBuffer();
 	lora_driver_initialise(ser_USART1, downLinkMessageBuffer);
+	createWindowController();
 }
 
+//Creating tasks and assigning priorities
 void create_tasks(void)
 {
 	createTempAndHumTask(1);
@@ -46,27 +50,22 @@ void create_tasks(void)
 	createApplicationTask(2);
     lora_handler_uplink_payload(3);
 	lora_downlink_handler_create(4);
+	createWindowControllerTask(2);
 }
 
 void initialiseSystem()
 {
-	// Set output ports for leds used in the example
+	// Set output ports for leds
 	DDRA |= _BV(DDA0) | _BV(DDA7);
 
 	// Make it possible to use stdio on COM port 0 (USB) on Arduino board - Setting 57600,8,N,1
 	initializeUsedData();
 	stdio_initialise(ser_USART0);
-	// Let's create some tasks
 	create_tasks();
 
 	// vvvvvvvvvvvvvvvvv BELOW IS LoRaWAN initialisation vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 	// Status Leds driver
 	status_leds_initialise(5); // Priority 5 for internal task
-	// Initialise the LoRaWAN driver without down-link buffer
-	//lora_driver_initialise(1, NULL);
-	// Create LoRaWAN task and start it up with priority 3
-	//lora_handler_initialise(3); 
-	
 }
 
 /*-----------------------------------------------------------*/
@@ -76,7 +75,6 @@ int main(void)
 	printf("Program Started!!\n");
 	vTaskStartScheduler(); // Initialise and run the freeRTOS scheduler. Execution should never return from here.
 
-	/* Replace with your application code */
 	while (1)
 	{
 	}

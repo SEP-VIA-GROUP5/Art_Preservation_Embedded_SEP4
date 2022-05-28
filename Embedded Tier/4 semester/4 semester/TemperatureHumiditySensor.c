@@ -1,28 +1,27 @@
-/*
- * TemperatureHumiditySensor.c
- *
- * Created: 5/5/2022 8:48:25 PM
- *  Author: titas
- */ 
+//A class that handles temperature and humidity measuring.
+
+ 
 #include "TemperatureHumiditySensor.h"
 
+//Initializing temperature and humidity as 0. 
 uint16_t temperature = 0;
 uint16_t humidity = 0;
 
-//Do we need const here?
-
+//Getter for humidity.
 uint16_t getHumidity()
 {
 	return humidity;
 }
 
+//Getter for tempearature.
 uint16_t getTemperature()
 {
 	return temperature;
 }
 
-
-
+/*
+A function that initializes the temp and hum driver and creates temperature and humidity task.
+*/
 void create(UBaseType_t Taskpriority)
 {
 	initializeTempAndHumDriver();
@@ -30,6 +29,10 @@ void create(UBaseType_t Taskpriority)
 	
 }
 
+/*
+A function that initializes temperature and humidity driver and depending on the response of the driver
+returns a code.
+*/
 void initializeTempAndHumDriver()
 {
 	hih8120_driverReturnCode_t returnCode = hih8120_initialise();
@@ -44,6 +47,9 @@ void initializeTempAndHumDriver()
 	}
 }
 
+/*
+A function that wakes up the driver and measures temperature and humidity.
+*/
 void measureTempAndHum()
 {
 	if ( HIH8120_OK != hih8120_wakeup() )
@@ -61,12 +67,16 @@ void measureTempAndHum()
 	vTaskDelay(pdMS_TO_TICKS(20));
 }
 
+/*
+ A function, that waits until Application asks for measurements through event group,
+ When the measurements are needed, the measure function is called, temperature and humidity,
+ are measured and temperature and humidty are set to those measurements. 
+*/
 void TempAndHumTask(void* pvpParameter)
 {
 	
 	while(1)
 	{
-		//Use it for later when we have both sensors = EventBits_t eventBits = xEventGroupWaitBits(measureEventGroup,ALL_MEASURE_BITS,pdTRUE,pdTRUE,portMAX_DELAY);
 		EventBits_t eventBits = xEventGroupWaitBits(measureEventGroup,HUMIDITY_TEMPERATURE_MEASURE_BIT,pdTRUE,pdTRUE,portMAX_DELAY);
 		if(eventBits & (HUMIDITY_TEMPERATURE_MEASURE_BIT))
 		{
@@ -74,7 +84,7 @@ void TempAndHumTask(void* pvpParameter)
 			measureTempAndHum();
 			temperature = hih8120_getTemperature_x10();
 			humidity = hih8120_getHumidityPercent_x10();
-			//printf("Temperature: %d\n",Temp);
+			printf("Temperature: %d\n",temperature);
 			//printf("Humidity: %d\n",Humidity);
 			//Use it for later when we have both sensors = xEventGroupSetBits(dataReadyEventGroup,ALL_READY_BIT);
 			xEventGroupSetBits(dataReadyEventGroup,HUMIDITY_TEMPERATURE_READY_BIT);
@@ -83,6 +93,7 @@ void TempAndHumTask(void* pvpParameter)
 	}
 }
 
+// A function that creates temperature and humidity task.
 void createTempAndHumTask(UBaseType_t Taskpriority)
 {
 	initializeTempAndHumDriver();

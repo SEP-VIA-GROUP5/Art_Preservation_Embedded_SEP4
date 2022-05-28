@@ -239,6 +239,12 @@
     <Compile Include="UpLinkHandler.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="WindowController.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="WindowController.h">
+      <SubType>compile</SubType>
+    </Compile>
     <None Include="SensorDataPackageHandler.h">
       <SubType>compile</SubType>
     </None>

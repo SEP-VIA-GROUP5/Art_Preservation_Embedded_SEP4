@@ -1,15 +1,18 @@
 package com.via.sep4.repository;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
 import com.via.sep4.MainActivity;
 import com.via.sep4.R;
+import com.via.sep4.model.CO2;
 import com.via.sep4.model.Metrics;
 import com.via.sep4.model.Room;
 
@@ -32,6 +35,18 @@ public class SettingsRepository {
 
 
     public void setNormsAndNotification(Room room, int minTemp, int maxTemp, int minHum, int maxHum, int minCO2, int maxC02, Context context) {
+
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                CharSequence name = "temperatureRisingChannel";
+                String description = "Channel for rising temp notifications";
+                int importance = NotificationManager.IMPORTANCE_HIGH;
+                NotificationChannel channel = new NotificationChannel("temperatureRising", name, importance);
+                channel.setDescription(description);
+
+                NotificationManager notificationManager = (NotificationManager) context.getSystemService(NotificationManager.class);
+                notificationManager.createNotificationChannel(channel);
+
+            }
 
         NotificationCompat.Builder builder = null;
 
@@ -93,5 +108,6 @@ public class SettingsRepository {
         manager.notify(0, builder.build());
 
     }
+
 
 }

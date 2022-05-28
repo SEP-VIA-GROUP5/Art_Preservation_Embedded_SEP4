@@ -18,7 +18,7 @@ void createConfiguration(){
 	printf("Mutex was created\n");
 	
 	co2Norm = 1000;
-	tempNorm = 0x1b;
+	tempNorm = 0x1A;
 	printf("Config norm: %x\n", tempNorm);
 	humNorm = 1000;
 	configMutex = xSemaphoreCreateMutex();

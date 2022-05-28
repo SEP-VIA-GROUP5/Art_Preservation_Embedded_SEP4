@@ -15,10 +15,14 @@ uint16_t humNorm;
 SemaphoreHandle_t configMutex;
 
 void createConfiguration(){
+	printf("Mutex was created\n");
+	
+	co2Norm = 1000;
+	tempNorm = 0x1b;
+	printf("Config norm: %x\n", tempNorm);
+	humNorm = 1000;
 	configMutex = xSemaphoreCreateMutex();
-	co2Norm = 0;
-	tempNorm = 0;
-	humNorm = 0;
+	xSemaphoreGive(configMutex);
 }
 
 uint16_t getCo2Norm(){

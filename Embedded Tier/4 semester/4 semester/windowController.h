@@ -7,15 +7,18 @@
 
 #pragma once
 
-#include <stdio.h>
 #include <ATMEGA_FreeRTOS.h>
 #include <task.h>
-#include <stdint.h>
+#include <event_groups.h>
 
+#include "TemperatureHumiditySensor.h"
 #include "rc_servo.h"
 #include "Configuration.h"
 #include "Co2Sensor.h"
-#include "TemperatureHumiditySensor.h"
+#include "Setup.h"
+
+
+int isOpen;
 
 void createWindowController();
 void openWindow();

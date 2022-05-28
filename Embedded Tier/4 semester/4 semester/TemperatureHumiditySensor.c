@@ -74,7 +74,7 @@ void TempAndHumTask(void* pvpParameter)
 			measureTempAndHum();
 			temperature = hih8120_getTemperature_x10();
 			humidity = hih8120_getHumidityPercent_x10();
-			//printf("Temperature: %d\n",Temp);
+			printf("Temperature: %d\n",temperature);
 			//printf("Humidity: %d\n",Humidity);
 			//Use it for later when we have both sensors = xEventGroupSetBits(dataReadyEventGroup,ALL_READY_BIT);
 			xEventGroupSetBits(dataReadyEventGroup,HUMIDITY_TEMPERATURE_READY_BIT);

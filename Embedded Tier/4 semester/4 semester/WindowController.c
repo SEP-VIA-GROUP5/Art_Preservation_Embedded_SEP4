@@ -13,7 +13,7 @@ void createWindowController(){
 	rc_servo_initialise();
 }
 void openWindow(){
-	rc_servo_setPosition(0,60);
+	rc_servo_setPosition(0,80);
 	isOpen = 1;
 }
 void closeWindow(){
@@ -21,26 +21,34 @@ void closeWindow(){
 	isOpen = 0;
 }
 void windowControllerTask(void *pvpParameter){
-	while(1)
+	for(;;)
 	{
-		if( xSemaphoreTake( configMutex, ( TickType_t ) 10 ) == pdTRUE )
+		if( xSemaphoreTake( configMutex, ( TickType_t ) 50 ) == pdTRUE )
 		{
+			EventBits_t eventBits = xEventGroupWaitBits(dataReadyEventGroup,ALL_READY_BITS,pdTRUE,pdTRUE,portMAX_DELAY);
+		if(eventBits & (ALL_READY_BITS))
+		{
+		printf("Norm: %u, Actual temp: %u\n", (unsigned int)getTempNorm(), (unsigned int)getTemperature());	
 			if(getCo2Norm()<=getCo2() || getHumNorm()<=getHumidity() || getTempNorm()<=getTemperature()){
 				openWindow();
+				
 				printf("Window is opened");
 			}
 			else{
 				if(isOpen==1){
-					closeWindow();
+					//closeWindow();
 					printf("Window is closed");
 				}
 			}
+			xSemaphoreGive(configMutex);
 		}
 		//if configuration is taken by someone else
 		else{
-			printf("We could not access the shared resource: configMutex");
+			printf("We could not access the shared resource: configMutex\n");
 		}
-		vTaskDelay(pdMS_TO_TICKS(10));
+		vTaskDelay(pdMS_TO_TICKS(60000));
+		}
+			
 	}
 }
 void createWindowControllerTask(UBaseType_t TaskPriority){

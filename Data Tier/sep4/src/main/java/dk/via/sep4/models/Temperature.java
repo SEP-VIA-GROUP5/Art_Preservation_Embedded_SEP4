@@ -65,7 +65,7 @@ public class Temperature {
   public String toString() {
     return "Temperature{" +
             "id: " + id +
-            ", value: " + temperature +
+            ", temperature: " + temperature +
             ", min: " + min +
             ", max: " + max +
             '}';

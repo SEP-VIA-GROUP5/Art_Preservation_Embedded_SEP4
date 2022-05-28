@@ -49,6 +49,7 @@ C_SRCS +=  \
 ../DownLinkHandler.c \
 ../SensorDataPackageHandler.c \
 ../UpLinkHandler.c \
+../WindowController.c \
 ../Setup.c \
 ../TemperatureHumiditySensor.c \
 ../FreeRTOS/FreeRTOSTraceDriver/FreeRTOSTraceDriver.c \
@@ -78,6 +79,7 @@ Configuration.o \
 DownLinkHandler.o \
 SensorDataPackageHandler.o \
 UpLinkHandler.o \
+WindowController.o \
 Setup.o \
 TemperatureHumiditySensor.o \
 FreeRTOS/FreeRTOSTraceDriver/FreeRTOSTraceDriver.o \
@@ -100,6 +102,7 @@ Configuration.o \
 DownLinkHandler.o \
 SensorDataPackageHandler.o \
 UpLinkHandler.o \
+WindowController.o \
 Setup.o \
 TemperatureHumiditySensor.o \
 FreeRTOS/FreeRTOSTraceDriver/FreeRTOSTraceDriver.o \
@@ -122,6 +125,7 @@ Configuration.d \
 DownLinkHandler.d \
 SensorDataPackageHandler.d \
 UpLinkHandler.d \
+WindowController.d \
 Setup.d \
 TemperatureHumiditySensor.d \
 FreeRTOS/FreeRTOSTraceDriver/FreeRTOSTraceDriver.d \
@@ -144,6 +148,7 @@ Configuration.d \
 DownLinkHandler.d \
 SensorDataPackageHandler.d \
 UpLinkHandler.d \
+WindowController.d \
 Setup.d \
 TemperatureHumiditySensor.d \
 FreeRTOS/FreeRTOSTraceDriver/FreeRTOSTraceDriver.d \
@@ -209,6 +214,13 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./UpLinkHandler.o: .././UpLinkHandler.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../drivers" -I"../FreeRTOS/src"  -O0 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./WindowController.o: .././WindowController.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../drivers" -I"../FreeRTOS/src"  -O0 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

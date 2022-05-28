@@ -29,11 +29,13 @@ void lora_downLink_task()
 			//if no one is using configuration
 			if( xSemaphoreTake( configMutex, ( TickType_t ) 10 ) == pdTRUE )
 			{
+				printf("Mutex was taken");
 				setCo2Norm(lora_downlink_payload->bytes[0] + lora_downlink_payload->bytes[1]);
 				setHumNorm(lora_downlink_payload->bytes[2] + lora_downlink_payload->bytes[3]);
 				setTempNorm(lora_downlink_payload->bytes[4] + lora_downlink_payload->bytes[4]);
 				
 				printf("The CO2: %d, humidity: %d, temperature: %d",getCo2Norm(),getHumNorm(),getTempNorm());	
+				xSemaphoreGive(configMutex);
 			}
 			//if configuration is taken by someone else
 			else{

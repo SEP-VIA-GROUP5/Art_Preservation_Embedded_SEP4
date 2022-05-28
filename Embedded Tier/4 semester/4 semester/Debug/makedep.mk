@@ -14,6 +14,8 @@ SensorDataPackageHandler.c
 
 UpLinkHandler.c
 
+WindowController.c
+
 Setup.c
 
 TemperatureHumiditySensor.c

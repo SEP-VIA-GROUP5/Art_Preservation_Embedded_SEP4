@@ -2,15 +2,15 @@ package com.via.sep4.model;
 
 public class Temperature {
     private final int id;
-    private final int value;
+    private final int temperature;
 
-    public Temperature(int id, int value){
+    public Temperature(int id, int temperature){
         this.id = id;
-        this.value = value;
+        this.temperature = temperature;
     }
 
-    public int getValue() {
-        return value;
+    public int getTemperature() {
+        return temperature;
     }
 
     public int getId() {
@@ -21,7 +21,7 @@ public class Temperature {
     public String toString() {
         return "Temperature{" +
                 "id=" + id +
-                ", value=" + value +
+                ", value=" + temperature +
                 '}';
     }
 }

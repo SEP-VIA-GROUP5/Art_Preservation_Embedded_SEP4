@@ -1,45 +1,25 @@
 package com.via.sep4.view;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.via.sep4.DataHandler;
 import com.via.sep4.R;
 import com.via.sep4.model.Metrics;
 import com.via.sep4.model.Room;
-import com.via.sep4.model.User;
-import com.via.sep4.view.rooms.RoomsFragment;
 import com.via.sep4.viewModel.DataViewModel;
-
-import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
@@ -86,9 +66,9 @@ public class HomeFragment extends Fragment {
             room = viewModel.getSingleRoom(1);
             Metrics[] metrics = room.getMetrics();
             if (metrics.length != 0) {
-                tempS = String.valueOf(metrics[0].getTemperature().getValue());
-                humS = String.valueOf(metrics[0].getHumidity().getValue());
-                co2S = String.valueOf(metrics[0].getCO2().getValue());
+                tempS = String.valueOf(metrics[0].getTemperature().getTemperature());
+                humS = String.valueOf(metrics[0].getHumidity().getHumidity());
+                co2S = String.valueOf(metrics[0].getCO2().getCo2());
             }
             toNormsSettings.setOnClickListener(new View.OnClickListener() {
                 @Override

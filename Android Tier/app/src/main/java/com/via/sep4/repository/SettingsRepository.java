@@ -12,7 +12,6 @@ import androidx.core.app.NotificationCompat;
 
 import com.via.sep4.MainActivity;
 import com.via.sep4.R;
-import com.via.sep4.model.CO2;
 import com.via.sep4.model.Metrics;
 import com.via.sep4.model.Room;
 
@@ -52,9 +51,9 @@ public class SettingsRepository {
 
 
         Metrics[] metrics = room.getMetrics();
-        temperature = metrics[0].getTemperature().getValue();
-        humidity = metrics[0].getHumidity().getValue();
-        CO2 = metrics[0].getCO2().getValue();
+        temperature = metrics[0].getTemperature().getTemperature();
+        humidity = metrics[0].getHumidity().getHumidity();
+        CO2 = metrics[0].getCO2().getCo2();
 
         Log.d("values", String.valueOf(temperature));
         Log.d("value set", String.valueOf(maxTemp));

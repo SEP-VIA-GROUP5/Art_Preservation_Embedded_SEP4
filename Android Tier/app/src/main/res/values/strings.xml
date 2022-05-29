@@ -12,6 +12,8 @@
     <string name="side_header_username">Welcome back</string>
     <string name="side_header_email">Email</string>
 
+    <string name="fail_connectServer">Fail to connect to server</string>
+
     <!-- single room -->
     <string name="single_id">Room id :</string>
     <string name="single_name">Room name :</string>

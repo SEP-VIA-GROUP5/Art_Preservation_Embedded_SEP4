@@ -19,4 +19,9 @@
     <color name="Grey">#BEBEBE</color>
     <color name="DimGrey">#696969</color>
     <color name="DeleteButton">#e65b67</color>
+
+    <!-- for refresh -->
+    <color name="r_red">#e75a62</color>
+    <color name="r_blue">#51acf0</color>
+    <color name="r_green">#68f894</color>
 </resources>

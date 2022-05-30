@@ -49,5 +49,7 @@ public class DataHandler {
         return object;
     }
 
-
+    public static int CelsiusToFahrenheit(int c){
+        return (int) (c * 1.8 + 32);
+    }
 }

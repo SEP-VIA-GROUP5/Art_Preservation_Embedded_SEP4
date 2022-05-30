@@ -35,7 +35,7 @@ public class SettingsRepository {
 
 
 
-    public void setNormsAndNotification(Room room, int minTemp, int maxTemp, int minHum, int maxHum, int minCO2, int maxC02, Context context) {
+    public void setNorms(Room room, int minTemp, int maxTemp, int minHum, int maxHum, int minCO2, int maxC02) {
 
 
 
@@ -60,35 +60,17 @@ public class SettingsRepository {
                     .setContentTitle("Warning Temperature Levels Rising")
                     .setContentText("The temperature is currently " + temperature)
                     .setPriority(NotificationCompat.PRIORITY_HIGH);
-        } else if (temperature <= minTemp) {
-            builder = new NotificationCompat.Builder(context, "temperatureLowering")
-                    .setSmallIcon(R.drawable.ic_baseline_notification_important_24)
-                    .setContentTitle("Warning Temperature Levels Lowering")
-                    .setContentText("The temperature is currently " + temperature)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH);
         } else if (humidity >= maxHum) {
             builder = new NotificationCompat.Builder(context, "humidityRising")
                     .setSmallIcon(R.drawable.ic_baseline_notification_important_24)
                     .setContentTitle("Warning Humidity Levels Rising")
                     .setContentText("The humidity is currently " + humidity)
                     .setPriority(NotificationCompat.PRIORITY_HIGH);
-        } else if (humidity <= minHum) {
-            builder = new NotificationCompat.Builder(context, "humidityLowering")
-                    .setSmallIcon(R.drawable.ic_baseline_notification_important_24)
-                    .setContentTitle("Warning Humidity Levels Lowering")
-                    .setContentText("The humidity is currently " + humidity)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH);
-        } else if (CO2 <= minCO2) {
-            builder = new NotificationCompat.Builder(context, "CO2Lowering")
-                    .setSmallIcon(R.drawable.ic_baseline_notification_important_24)
-                    .setContentTitle("Warning Humidity Levels Lowering")
-                    .setContentText("The humidity is currently " + humidity)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH);
-        } else if (CO2 <= maxC02) {
+        }  else if (CO2 >= maxC02) {
             builder = new NotificationCompat.Builder(context, "CO2Rising")
                     .setSmallIcon(R.drawable.ic_baseline_notification_important_24)
-                    .setContentTitle("Warning Humidity Levels Lowering")
-                    .setContentText("The humidity is currently " + humidity)
+                    .setContentTitle("Warning CO2 Levels Rising")
+                    .setContentText("The CO2 is currently " + CO2)
                     .setPriority(NotificationCompat.PRIORITY_HIGH);
         }
 

@@ -33,21 +33,17 @@ public class SettingsRepository {
     }
 
 
+
+
     public void setNormsAndNotification(Room room, int minTemp, int maxTemp, int minHum, int maxHum, int minCO2, int maxC02, Context context) {
 
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                CharSequence name = "temperatureRisingChannel";
-                String description = "Channel for rising temp notifications";
-                int importance = NotificationManager.IMPORTANCE_HIGH;
-                NotificationChannel channel = new NotificationChannel("temperatureRising", name, importance);
-                channel.setDescription(description);
 
-                NotificationManager notificationManager = (NotificationManager) context.getSystemService(NotificationManager.class);
-                notificationManager.createNotificationChannel(channel);
-
-            }
 
         NotificationCompat.Builder builder = null;
+
+
+
+//TODO send norms to Db team
 
 
         Metrics[] metrics = room.getMetrics();

@@ -10,97 +10,30 @@
     android:padding="8dp">
 
 
-    <TextView
-
-        android:id="@+id/dbhumidity"
-        android:layout_width="125dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="4dp"
-        android:gravity="left"
-        android:text="N/a"
-        android:textSize="15dp"
-        android:textStyle="bold"
+    <Button
+        android:id="@+id/toNorms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To Norms"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/humiditysign"
-        app:layout_constraintTop_toBottomOf="@+id/dbtemperature" />
-
-    <TextView
-
-        android:id="@+id/dbtemperature"
-        android:layout_width="125dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="164dp"
-        android:layout_marginEnd="112dp"
-        android:gravity="left"
-        android:text="N/a"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/temperaturesign"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-
-        android:id="@+id/humiditysign"
-        android:layout_width="157dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="4dp"
-        android:gravity="left"
-
-        android:text="Humidity"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.188"
+        app:layout_constraintHorizontal_bias="0.628"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temperaturesign" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.417" />
 
     <TextView
 
         android:id="@+id/room"
         android:layout_width="103dp"
         android:layout_height="36dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="76dp"
         android:gravity="left"
         android:text="Main Room"
         android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.165"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-
-        android:id="@+id/CO2sign"
-        android:layout_width="157dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="4dp"
-        android:gravity="left"
-
-        android:text="CO2"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.188"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/humiditysign" />
-
-    <TextView
-
-        android:id="@+id/temperaturesign"
-        android:layout_width="157dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="180dp"
-
-        android:gravity="left"
-        android:text="Temperature"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.188"
+        app:layout_constraintHorizontal_bias="0.198"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -119,17 +52,84 @@
         app:layout_constraintStart_toEndOf="@+id/CO2sign"
         app:layout_constraintTop_toBottomOf="@+id/dbhumidity" />
 
-    <Button
-        android:id="@+id/toNorms"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="To Norms"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+
+        android:id="@+id/dbtemperature"
+        android:layout_width="125dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="112dp"
+        android:gravity="left"
+        android:text="N/a"
+        android:textSize="15dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.648"
+        app:layout_constraintHorizontal_bias="0.088"
+        app:layout_constraintStart_toEndOf="@+id/temperaturesign"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+
+        android:id="@+id/humiditysign"
+        android:layout_width="157dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="4dp"
+        android:gravity="left"
+
+        android:text="Humidity"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.553" />
+        app:layout_constraintTop_toBottomOf="@+id/temperaturesign" />
+
+    <TextView
+
+        android:id="@+id/CO2sign"
+        android:layout_width="157dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="4dp"
+        android:gravity="left"
+
+        android:text="CO2"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.228"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/humiditysign" />
+
+    <TextView
+
+        android:id="@+id/dbhumidity"
+        android:layout_width="125dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="4dp"
+        android:gravity="left"
+        android:text="N/a"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/humiditysign"
+        app:layout_constraintTop_toBottomOf="@+id/dbtemperature" />
+
+    <TextView
+
+        android:id="@+id/temperaturesign"
+        android:layout_width="157dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="128dp"
+
+        android:gravity="left"
+        android:text="Temperature"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.228"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/toDashboradGraph"
@@ -138,10 +138,67 @@
         android:text="Details"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.225"
+        app:layout_constraintHorizontal_bias="0.257"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.551" />
+        app:layout_constraintVertical_bias="0.415" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Turn On or Off the notifications"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.748" />
+
+    <Switch
+        android:id="@+id/notSw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:switchMinWidth="56dp"
+        android:text="On/Off:"
+        android:textOff="OFF"
+        android:textOn="ON"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.788" />
+
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Display temperature in C or F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.748" />
+
+    <Switch
+        android:id="@+id/CtoFSw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:switchMinWidth="56dp"
+        android:text="C/F"
+        android:textOff="OFF"
+        android:textOn="ON"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.788" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

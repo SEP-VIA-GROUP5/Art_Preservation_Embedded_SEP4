@@ -2,7 +2,7 @@
 #include "FreeRTOS_MOCK_FFF.h"
 
 extern "C" {
-#include <Setup.h>
+#include "Setup.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "semphr.h"

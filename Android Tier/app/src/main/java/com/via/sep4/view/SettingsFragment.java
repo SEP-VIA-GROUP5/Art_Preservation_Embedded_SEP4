@@ -55,7 +55,7 @@ public class SettingsFragment extends Fragment {
          setBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.setNormsAndNotification(room,toInt(minTemp), toInt(maxTemp), toInt(minHum), toInt(maxHum), toInt(minCO2), toInt(maxCO2), getActivity());
+                viewModel.setNorms(room,toInt(minTemp), toInt(maxTemp), toInt(minHum), toInt(maxHum), toInt(minCO2), toInt(maxCO2));
             }
         });
 

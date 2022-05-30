@@ -54,8 +54,8 @@ public class DataViewModel extends ViewModel {
         return room;
     }
 
-    public void setNormsAndNotification(Room room, int minTemp, int maxTemp, int minHum, int maxHum, int minCO2, int maxC02, Context context) {
-        setRepository.setNormsAndNotification(room, minTemp, maxTemp, minHum, maxHum, minCO2, maxC02, context);
+    public void setNorms(Room room, int minTemp, int maxTemp, int minHum, int maxHum, int minCO2, int maxC02) {
+        setRepository.setNorms(room, minTemp, maxTemp, minHum, maxHum, minCO2, maxC02);
     }
 
 

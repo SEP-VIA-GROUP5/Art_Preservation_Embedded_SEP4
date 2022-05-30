@@ -1,5 +1,6 @@
 package com.via.sep4.view.rooms;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,9 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Room room = rooms.get(position);
         Metrics[] metrics = room.getMetrics();
+        Log.d("metrics rooms", metrics[0].toString());
+        Log.d("metrics rooms", metrics[1].toString());
+        Log.d("metrics rooms", metrics[2].toString());
         String idS = String.valueOf(room.getId());
 
         String tS;
@@ -49,9 +53,9 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.ViewHolder> 
             hS = "N/A";
             co2S = "N/A";
         } else {
-            tS = String.valueOf(metrics[0].getTemperature().getValue());
-            hS = String.valueOf(metrics[0].getHumidity().getValue());
-            co2S = String.valueOf(metrics[0].getCO2().getValue());
+            tS = String.valueOf(metrics[0].getTemperature().getTemperature());
+            hS = String.valueOf(metrics[0].getHumidity().getHumidity());
+            co2S = String.valueOf(metrics[0].getCO2().getCo2());
         }
 
         holder.id.setText(idS);

@@ -2,15 +2,15 @@ package com.via.sep4.model;
 
 public class Humidity {
     private final int id;
-    private final int value;
+    private final int humidity;
 
-    public Humidity(int id, int value){
+    public Humidity(int id, int humidity){
         this.id = id;
-        this.value = value;
+        this.humidity = humidity;
     }
 
-    public int getValue() {
-        return value;
+    public int getHumidity() {
+        return humidity;
     }
 
     public int getId() {
@@ -21,7 +21,7 @@ public class Humidity {
     public String toString() {
         return "Humidity{" +
                 "id=" + id +
-                ", value=" + value +
+                ", value=" + humidity +
                 '}';
     }
 }

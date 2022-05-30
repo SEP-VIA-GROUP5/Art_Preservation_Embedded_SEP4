@@ -11,7 +11,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -39,6 +43,7 @@ public class RoomsFragment extends Fragment {
     private DataViewModel mViewModel;
     private RecyclerView rooms;
     private FloatingActionButton addButton;
+    private SwipeRefreshLayout refreshLayout;
     private RoomsAdapter adapter;
     private ArrayList<Room> roomList = new ArrayList<>();
 
@@ -48,8 +53,10 @@ public class RoomsFragment extends Fragment {
         mViewModel = new ViewModelProvider(getActivity()).get(DataViewModel.class);
         rooms = v.findViewById(R.id.roomListView);
         addButton = v.findViewById(R.id.rooms_add_button);
+        refreshLayout = v.findViewById(R.id.rooms_refresh);
+        refresh();
+
         loadData();
-        initListAndClick();
         return v;
     }
 
@@ -59,16 +66,37 @@ public class RoomsFragment extends Fragment {
 
     }
 
+    private void refresh() {
+        refreshLayout.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.white));
+        refreshLayout.setColorSchemeResources(R.color.r_red, R.color.r_blue, R.color.r_green);
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        loadData();
+                        refreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+        });
+    }
+
     private void loadData() {
         roomList.clear();
-        roomList = mViewModel.getRooms();
-        roomList.remove(0);
+        if (mViewModel.getRooms().size() == 0) {
+            Toast.makeText(getContext(), R.string.fail_connectServer, Toast.LENGTH_LONG).show();
+        } else {
+            roomList = mViewModel.getRooms();
+            roomList.remove(0);
+            adapter = new RoomsAdapter(roomList);
+            rooms.setAdapter(adapter);
+            initListAndClick();
+        }
     }
 
     private void initListAndClick() {
-        adapter = new RoomsAdapter(roomList);
-        rooms.setAdapter(adapter);
-
         adapter.setOnClickListener(new RoomsAdapter.OnClickListener() {
             @Override
             public void onDeleteClick(View view, int position) {

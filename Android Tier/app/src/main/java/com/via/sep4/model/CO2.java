@@ -2,15 +2,15 @@ package com.via.sep4.model;
 
 public class CO2 {
     private final int id;
-    private final int value;
+    private final int co2;
 
-    public CO2(int id, int value){
+    public CO2(int id, int co2){
         this.id = id;
-        this.value = value;
+        this.co2 = co2;
     }
 
-    public int getValue() {
-        return value;
+    public int getCo2() {
+        return co2;
     }
 
     public int getId() {
@@ -21,7 +21,7 @@ public class CO2 {
     public String toString() {
         return "CO2{" +
                 "id=" + id +
-                ", value=" + value +
+                ", value=" + co2 +
                 '}';
     }
 }

@@ -69,23 +69,16 @@ public class RoomsFragment extends Fragment {
     private void refresh() {
         refreshLayout.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.white));
         refreshLayout.setColorSchemeResources(R.color.r_red, R.color.r_blue, R.color.r_green);
-        final Handler handler = new Handler(Looper.getMainLooper());
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
-            public void onRefresh() {
-                new Thread() {
+            public void run() {
+                refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
-                    public void run() {
-                        super.run();
+                    public void onRefresh() {
                         loadData();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                refreshLayout.setRefreshing(false);
-                            }
-                        }, 500);
+                        refreshLayout.setRefreshing(false);
                     }
-                }.start();
+                });
             }
         });
     }

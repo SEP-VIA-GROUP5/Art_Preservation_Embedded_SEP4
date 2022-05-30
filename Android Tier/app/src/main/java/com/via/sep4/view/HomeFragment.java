@@ -112,12 +112,9 @@ public class HomeFragment extends Fragment {
                 }
             });
         }
-
-
         humidity.setText(humS);
         CO2.setText(co2S);
         return v;
-
     }
 
     private void checkUser(FirebaseUser user, Context context) {
@@ -138,8 +135,8 @@ public class HomeFragment extends Fragment {
         loadTemp(setting, temperature);
     }
 
-    private void loadTemp(boolean setting, Temperature temperature){
-        if (setting){
+    private void loadTemp(boolean setting, Temperature temperature) {
+        if (setting) {
             temperatureTextView.setText(String.valueOf(temperature.getTemperature()));
         } else {
             temperatureTextView

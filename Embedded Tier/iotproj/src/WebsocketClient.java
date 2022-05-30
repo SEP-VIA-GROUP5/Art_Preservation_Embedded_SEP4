@@ -18,6 +18,7 @@ public class WebsocketClient implements WebSocket.Listener {
     // Send down-link message to device
     // Must be in Json format according to https://github.com/ihavn/IoT_Semester_project/blob/master/LORA_NETWORK_SERVER.md
     public void sendDownLink(String jsonTelegram) {
+        System.out.println(jsonTelegram);
         server.sendText(jsonTelegram, true);
     }
 
@@ -99,13 +100,6 @@ public class WebsocketClient implements WebSocket.Listener {
             int decimal2 = Integer.parseInt(temp, 16);
             indented.setTemperature((double) decimal2 / 10);
             System.out.println("CO2: " + indented.getCO2() + " Humidity: " + indented.getHumidity() + " Temp: " + indented.getTemperature());
-            DownLinkMessage downLinkMessage = new DownLinkMessage(
-                    "tx",
-                    indented.getEUI(),
-                    2,
-                    true,
-                indented.getData());
-            sendDownLink(gson.toJson(downLinkMessage, DownLinkMessage.class));
             //System.out.println(gson.toJson(downLinkMessage, DownLinkMessage.class));
             return new CompletableFuture().completedFuture("onText() completed.").thenAccept(System.out::println);
         } catch (Exception e) {

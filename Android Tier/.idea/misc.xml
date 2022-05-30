@@ -10,10 +10,8 @@
         <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_account.xml" value="0.4" />
         <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_home.xml" value="0.2672239108409321" />
         <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/layout/login_fragment.xml" value="0.3182291666666667" />
-        <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/layout/rooms_fragment.xml" value="0.39809782608695654" />
         <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/layout/sidemenu_header.xml" value="0.2672239108409321" />
         <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/menu/side_menu.xml" value="0.33611111111111114" />
-        <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/xml/room_preferences.xml" value="0.19166666666666668" />
         <entry key="..\:/Users/guest_5z8savg/SEP4-Project/Android Tier/app/src/main/res/layout/about_us_fragment.xml" value="0.38315217391304346" />
         <entry key="..\:/Users/guest_5z8savg/SEP4-Project/Android Tier/app/src/main/res/layout/contact_us_fragment.xml" value="0.38315217391304346" />
         <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/drawable/ic_account.xml" value="0.239" />
@@ -23,7 +21,7 @@
         <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/activity_signup.xml" value="0.23333333333333334" />
         <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/contact_us_fragment.xml" value="0.4473958333333333" />
         <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_account.xml" value="0.4473958333333333" />
-        <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_appsettings.xml" value="0.4390625" />
+        <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_appsettings.xml" value="0.5" />
         <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_contact_us.xml" value="0.4473958333333333" />
         <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Users/stanf/Desktop/SEP4/SEP4-Project/Android Tier/app/src/main/res/layout/fragment_log_in_fragmentt.xml" value="0.5098958333333333" />

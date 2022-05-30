@@ -88,12 +88,12 @@ public class HomeFragment extends Fragment {
     }
 
 
+
     private void checkUser(FirebaseUser user, Context context) {
         if (user == null) {
             Toast.makeText(context, R.string.main_login_info, Toast.LENGTH_SHORT).show();
             NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_nav_home_to_signIn_fragment);
         }
     }
-
 
 }

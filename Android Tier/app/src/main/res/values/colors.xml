@@ -24,4 +24,6 @@
     <color name="r_red">#e75a62</color>
     <color name="r_blue">#51acf0</color>
     <color name="r_green">#68f894</color>
+
+    <color name="mainTextColor">#1682CA</color>
 </resources>

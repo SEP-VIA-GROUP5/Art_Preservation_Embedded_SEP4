@@ -14,6 +14,10 @@
 
     <string name="fail_connectServer">Fail to connect to server</string>
 
+    <string name="home_notification">Turn On or Off the notifications</string>
+    <string name="home_tC">Display temperature in C</string>
+    <string name="home_tF">Display temperature in F</string>
+
     <!-- single room -->
     <string name="single_id">Room id :</string>
     <string name="single_name">Room name :</string>

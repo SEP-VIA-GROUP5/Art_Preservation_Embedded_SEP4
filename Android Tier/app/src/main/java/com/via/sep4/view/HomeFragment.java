@@ -1,7 +1,14 @@
 package com.via.sep4.view;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
+
 import android.content.SharedPreferences;
+
+import android.hardware.SensorManager;
+import android.os.Build;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -23,6 +30,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.via.sep4.DataHandler;
 import com.via.sep4.R;
 import com.via.sep4.model.Metrics;
+import com.via.sep4.model.Notification;
 import com.via.sep4.model.Room;
 import com.via.sep4.model.Temperature;
 import com.via.sep4.viewModel.DataViewModel;
@@ -37,6 +45,11 @@ public class HomeFragment extends Fragment {
     private Switch temperatureSwitch;
     private TextView tempSettingText;
     private Room room;
+public static final String CHANNEL_1_ID="tempChannel";
+    public static final String CHANNEL_2_ID="humChannel";
+    public static final String CHANNEL_3_ID="CO2Channel";
+
+
 
     private SharedPreferences sharedPreferences;
 
@@ -50,7 +63,42 @@ public class HomeFragment extends Fragment {
         FirebaseUser user = auth.getCurrentUser();
         checkUser(user, getContext());
         viewModel = new ViewModelProvider(getActivity()).get(DataViewModel.class);
+        createNotificationChannels();
     }
+
+    private void createNotificationChannels() {
+        //notification channel is not available on low api levels ( here i check for it)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            NotificationChannel tempChannel = new NotificationChannel(
+                    CHANNEL_1_ID, "Temperature is rising", NotificationManager.IMPORTANCE_HIGH
+            );
+            tempChannel.setDescription("Temperature is high");
+
+            NotificationChannel humChannel = new NotificationChannel(
+            CHANNEL_2_ID, "Humidity is rising", NotificationManager.IMPORTANCE_HIGH
+            );
+            humChannel.setDescription("Humidity is high");
+
+            NotificationChannel CO2Channel = new NotificationChannel(
+                    CHANNEL_3_ID, "C02 is rising", NotificationManager.IMPORTANCE_HIGH
+            );
+            CO2Channel.setDescription("C02 is high");
+
+            sensorManager = (SensorManager)
+                    requireActivity().getSystemService(Context.SENSOR_SERVICE);
+
+            SensorManager sm = (SensorManager) getLayoutInflater().getContext().getSystemService(Context.SENSOR_SERVICE);
+          NotificationManager manager = getSystemService(NotificationManager.class);
+
+            manager.createNotificationChannels(tempChannel);
+            manager.createNotificationChannels(humChannel);
+            manager.createNotificationChannels(CO2Channel);
+
+
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

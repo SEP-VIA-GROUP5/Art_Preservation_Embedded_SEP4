@@ -6,11 +6,14 @@ import android.content.Context;
 
 import android.content.SharedPreferences;
 
+import android.graphics.BitmapFactory;
 import android.hardware.SensorManager;
 import android.os.Build;
 
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
@@ -35,6 +38,9 @@ import com.via.sep4.model.Room;
 import com.via.sep4.model.Temperature;
 import com.via.sep4.viewModel.DataViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeFragment extends Fragment {
 
     private FirebaseAuth auth;
@@ -45,11 +51,10 @@ public class HomeFragment extends Fragment {
     private Switch temperatureSwitch;
     private TextView tempSettingText;
     private Room room;
-public static final String CHANNEL_1_ID="tempChannel";
-    public static final String CHANNEL_2_ID="humChannel";
-    public static final String CHANNEL_3_ID="CO2Channel";
 
-
+    public static final String CHANNEL_1_ID = "tempChannel";
+    public static final String CHANNEL_2_ID = "humChannel";
+    public static final String CHANNEL_3_ID = "CO2Channel";
 
     private SharedPreferences sharedPreferences;
 
@@ -65,40 +70,6 @@ public static final String CHANNEL_1_ID="tempChannel";
         viewModel = new ViewModelProvider(getActivity()).get(DataViewModel.class);
         createNotificationChannels();
     }
-
-    private void createNotificationChannels() {
-        //notification channel is not available on low api levels ( here i check for it)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
-            NotificationChannel tempChannel = new NotificationChannel(
-                    CHANNEL_1_ID, "Temperature is rising", NotificationManager.IMPORTANCE_HIGH
-            );
-            tempChannel.setDescription("Temperature is high");
-
-            NotificationChannel humChannel = new NotificationChannel(
-            CHANNEL_2_ID, "Humidity is rising", NotificationManager.IMPORTANCE_HIGH
-            );
-            humChannel.setDescription("Humidity is high");
-
-            NotificationChannel CO2Channel = new NotificationChannel(
-                    CHANNEL_3_ID, "C02 is rising", NotificationManager.IMPORTANCE_HIGH
-            );
-            CO2Channel.setDescription("C02 is high");
-
-            sensorManager = (SensorManager)
-                    requireActivity().getSystemService(Context.SENSOR_SERVICE);
-
-            SensorManager sm = (SensorManager) getLayoutInflater().getContext().getSystemService(Context.SENSOR_SERVICE);
-          NotificationManager manager = getSystemService(NotificationManager.class);
-
-            manager.createNotificationChannels(tempChannel);
-            manager.createNotificationChannels(humChannel);
-            manager.createNotificationChannels(CO2Channel);
-
-
-        }
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -190,5 +161,53 @@ public static final String CHANNEL_1_ID="tempChannel";
             temperatureTextView
                     .setText(String.valueOf(DataHandler.CelsiusToFahrenheit(temperature.getTemperature())));
         }
+    }
+
+    private void createNotificationChannels() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            List<NotificationChannel> channels = createAllChannels();
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
+            for (NotificationChannel channel : channels) {
+                notificationManager.createNotificationChannel(channel);
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),"channel").setContentTitle("This is content title")
+                        .setContentText("This is content text")
+                        .setWhen(System.currentTimeMillis())
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher));
+                notificationManager.notify(1, builder.build());
+            }
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private List<NotificationChannel> createAllChannels() {
+        List<NotificationChannel> channels = new ArrayList<>();
+
+        CharSequence name1 = getString(R.string.notification_channel1);
+        String description1 = getString(R.string.notification_channel1_desc);
+        int importance1 = NotificationManager.IMPORTANCE_DEFAULT;
+        NotificationChannel channel1 = new NotificationChannel(CHANNEL_1_ID, name1, importance1);
+        channel1.setDescription(description1);
+
+        CharSequence name2 = getString(R.string.notification_channel2);
+        String description2 = getString(R.string.notification_channel2_desc);
+        int importance2 = NotificationManager.IMPORTANCE_DEFAULT;
+        NotificationChannel channel2 = new NotificationChannel(CHANNEL_2_ID, name2, importance2);
+        channel2.setDescription(description2);
+
+        CharSequence name3 = getString(R.string.notification_channel3);
+        String description3 = getString(R.string.notification_channel3_desc);
+        int importance3 = NotificationManager.IMPORTANCE_DEFAULT;
+        NotificationChannel channel3 = new NotificationChannel(CHANNEL_3_ID, name3, importance3);
+        channel3.setDescription(description3);
+
+        channels.add(channel1);
+        channels.add(channel2);
+        channels.add(channel3);
+        return channels;
     }
 }

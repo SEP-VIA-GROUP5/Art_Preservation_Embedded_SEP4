@@ -14,9 +14,16 @@
 
     <string name="fail_connectServer">Fail to connect to server</string>
 
+    <!-- home -->
     <string name="home_notification">Turn On or Off the notifications</string>
     <string name="home_tC">Display temperature in C</string>
     <string name="home_tF">Display temperature in F</string>
+    <string name="notification_channel1">Temperature warning</string>
+    <string name="notification_channel2">Humidity warning</string>
+    <string name="notification_channel3">CO2 warning</string>
+    <string name="notification_channel1_desc">Alerts the user when the temperature exceeds the set value</string>
+    <string name="notification_channel2_desc">Alerts the user when the humidity exceeds the set value</string>
+    <string name="notification_channel3_desc">Alerts the user when the CO2 exceeds the set value</string>
 
     <!-- single room -->
     <string name="single_id">Room id :</string>

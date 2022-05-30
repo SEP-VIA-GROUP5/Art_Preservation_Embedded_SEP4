@@ -36,15 +36,9 @@ public class SettingsRepository {
 
 
     public void setNorms(Room room, int minTemp, int maxTemp, int minHum, int maxHum, int minCO2, int maxC02) {
-
-
-
         NotificationCompat.Builder builder = null;
 
-
-
-//TODO send norms to Db team
-
+        //TODO send norms to Db team
 
         Metrics[] metrics = room.getMetrics();
         temperature = metrics[0].getTemperature().getTemperature();

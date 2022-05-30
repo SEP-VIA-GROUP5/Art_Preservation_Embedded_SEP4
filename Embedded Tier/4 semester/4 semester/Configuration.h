@@ -31,6 +31,6 @@ uint16_t getTempNorm();
 uint16_t getHumNorm();
 
 //Setters for norms
-uint16_t setCo2Norm(uint16_t norm);
-uint16_t setTempNorm(uint16_t norm);
-uint16_t setHumNorm(uint16_t norm);
+void setCo2Norm(uint16_t norm);
+void setTempNorm(uint16_t norm);
+void setHumNorm(uint16_t norm);

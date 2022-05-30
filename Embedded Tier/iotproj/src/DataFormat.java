@@ -1,3 +1,4 @@
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class DataFormat
@@ -22,6 +23,6 @@ public class DataFormat
     bytes[3] = (byte) (TEMP >> 8);
     bytes[4] = (byte) (TEMP & 255);
 
-    return Arrays.toString(bytes);
+    return new String(bytes, StandardCharsets.US_ASCII);
   }
 }

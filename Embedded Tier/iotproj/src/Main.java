@@ -12,10 +12,10 @@ public class Main {
                 "tx",
                 "0004A30B00251001",
                 2,
-                true,
+                false,
                 dataFormat.toBytes());
             websocketClient.sendDownLink(gson.toJson(downLinkMessage, DownLinkMessage.class));
-            Thread.sleep(30000);
+            Thread.sleep(60000);
         }
     }
 }

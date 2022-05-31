@@ -1,14 +1,3 @@
-
-/*
- * DownLinkHandler.h
- *
- * Created: 5/25/2022 11:01:21 AM
- *  Author: ljusk
- * DownLinkHandler.h
- *
- *  Author: Lukas
- */ 
-
 //A header for class DownLinkHandler.c
 
 #pragma once

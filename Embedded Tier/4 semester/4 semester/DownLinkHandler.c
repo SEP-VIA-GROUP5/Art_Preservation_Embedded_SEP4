@@ -1,15 +1,8 @@
-/*
- * DownLinkHandler.c
- *
- * Created: 5/25/2022 11:02:04 AM
- *  Author: Lukas
- */ 
-
 //A class responsible for receiving and handling data via WebSockets
 
 #include "DownLinkHandler.h"
 
-lora_driver_payload_t* lora_downlink_payload;
+lora_driver_payload_t lora_downlink_payload;
 
 
 /*Function for setting the norm values
@@ -21,28 +14,15 @@ void lora_downLink_task()
 {
 	for(;;)
 	{	
-		lora_downlink_payload->portNo=2;
-		lora_downlink_payload->len=6;
-		
 		xMessageBufferReceive(downLinkMessageBuffer, &lora_downlink_payload, sizeof(lora_driver_payload_t), portMAX_DELAY);
-		printf("DOWN LINK<<<<<: from port: %d with %d bytes received!",lora_downlink_payload->portNo, lora_downlink_payload->len);
-		if (lora_downlink_payload->len != 0)
+		if (lora_downlink_payload.len != 0)
 		{
 			if( xSemaphoreTake( configMutex, ( TickType_t ) 10 ) == pdTRUE )
-			{
-				printf("Mutex was taken\n");
-				printf("Byte 0: %x\n", lora_downlink_payload->bytes[0]);
-				printf("Byte 1: %x\n", lora_downlink_payload->bytes[1]);
-				printf("Byte 2: %x\n", lora_downlink_payload->bytes[2]);
-				printf("Byte 3: %x\n", lora_downlink_payload->bytes[3]);
-				printf("Byte 4: %x\n", lora_downlink_payload->bytes[4]);
-				
-				setCo2Norm((lora_downlink_payload->bytes[0]<<8) + (lora_downlink_payload->bytes[1]));
-				setHumNorm(lora_downlink_payload->bytes[2]);
-				setTempNorm((lora_downlink_payload->bytes[3]<<8) + (lora_downlink_payload->bytes[4]));
-				
-				printf("The CO2: %d, humidity: %d, temperature: %d",getCo2Norm(),getHumNorm(),getTempNorm());	
-				
+			{		
+				setCo2Norm((lora_downlink_payload.bytes[0]<<8) + (lora_downlink_payload.bytes[1]));
+				setHumNorm(lora_downlink_payload.bytes[2]);
+				setTempNorm((lora_downlink_payload.bytes[3]<<8) + (lora_downlink_payload.bytes[4]));
+				printf("CO2 norm: %d Hum norm: %d Temp norm: %d", getCo2Norm(), getHumNorm(), getTempNorm());
 				xSemaphoreGive(configMutex);
 			}
 			else{
@@ -69,6 +49,3 @@ void lora_downlink_handler_create(UBaseType_t lora_handler_task_priority)
 	,    tskIDLE_PRIORITY + lora_handler_task_priority
 	, NULL );
 }
-//lora_downlink_payload->portNo=2;
-		//printf("Port number");
-		//lora_downlink_payload->len=6;

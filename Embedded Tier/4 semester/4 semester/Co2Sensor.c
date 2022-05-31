@@ -1,10 +1,3 @@
-/*
- * Co2Sensor.c
- *
- * Created: 05/24/22 3:47:14 PM
- *  Author: rytis
- */ 
-
 #include "Co2Sensor.h"
 
 void myCo2CallBack(uint16_t ppm);

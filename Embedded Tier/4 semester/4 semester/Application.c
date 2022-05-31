@@ -1,6 +1,5 @@
 #include "Application.h"
 
-
 //method for receiving and setting the metrics
 void ApplicationTask(void *pvParameters)
 {

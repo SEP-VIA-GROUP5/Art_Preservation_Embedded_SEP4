@@ -1,10 +1,3 @@
-/*
- * windowController.h
- *
- * Created: 05/27/22 12:35:04 PM
- *  Author: rytis
- */ 
-
 #pragma once
 
 #include <ATMEGA_FreeRTOS.h>

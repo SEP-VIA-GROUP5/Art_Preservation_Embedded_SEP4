@@ -30,19 +30,16 @@
     <ClCompile Include="Configuration.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SensorDataPackageHandler.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Setup.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TemperatureHumiditySensor.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UpLinkHandler.c">
+    <ClCompile Include="WindowController.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WindowController.c">
+    <ClCompile Include="DownLinkHandler.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,16 +53,10 @@
     <ClInclude Include="Configuration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SensorDataPackageHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Setup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TemperatureHumiditySensor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UpLinkHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="windowController.h">
@@ -94,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="..\GoogleTesting\timers.h">
       <Filter>FreeeRTOS\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DownLinkHandler.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

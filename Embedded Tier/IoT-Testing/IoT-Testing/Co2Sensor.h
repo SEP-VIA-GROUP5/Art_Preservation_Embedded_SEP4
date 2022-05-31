@@ -11,12 +11,11 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include <FreeRTOS.h>
-#include <task.h>
-#include <semphr.h>
-#include <task.h>
-#include <stdio.h>
-#include <event_groups.h>
+#include <../GoogleTesting/FreeRTOS.h>
+#include <../GoogleTesting/task.h>
+#include <../GoogleTesting/semphr.h>
+#include <../GoogleTesting/task.h>
+#include <../GoogleTesting/event_groups.h>
 #include "Setup.h"
 
 uint16_t getCo2();

@@ -4,6 +4,17 @@
     <ClCompile Include="setupTesting.cpp" />
     <ClCompile Include="..\IoT-Testing\Setup.c" />
     <ClCompile Include="FreeRTOS_MOCK_FFF.cpp" />
+    <ClCompile Include="applicationTesting.cpp" />
+    <ClCompile Include="..\IoT-Testing\Application.c" />
+    <ClCompile Include="..\IoT-Testing\Co2Sensor.c" />
+    <ClCompile Include="Co2Testing.cpp" />
+    <ClCompile Include="TemperatureAndHumidityTesting.cpp" />
+    <ClCompile Include="..\IoT-Testing\TemperatureHumiditySensor.c" />
+    <ClCompile Include="..\IoT-Testing\Configuration.c" />
+    <ClCompile Include="..\IoT-Testing\WindowController.c" />
+    <ClCompile Include="configurationTesting.cpp" />
+    <ClCompile Include="windowControllerTesting.cpp" />
+    <ClCompile Include="downLinkHandlerTesting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="FreeeRTOS">

@@ -93,8 +93,10 @@ public class WebsocketClient implements WebSocket.Listener {
             String CO2 = indented.getData().substring(0, 4);
             int decimal = Integer.parseInt(CO2, 16);
             indented.setCO2((double) decimal / 10);
-            String humidity = indented.getData().substring(4, 9);
+            String humidity = indented.getData().substring(4, 8);
+            System.out.println("Humidity string :" + humidity);
             int decimal1 = Integer.parseInt(humidity, 16);
+            System.out.println("Humidity decimal: " + decimal1);
             indented.setHumidity((double) decimal1 / 10);
             String temp = indented.getData().substring(9);
             int decimal2 = Integer.parseInt(temp, 16);

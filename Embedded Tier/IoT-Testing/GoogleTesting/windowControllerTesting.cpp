@@ -42,7 +42,7 @@ TEST_F(WindowControllerTesting, OpeningWindow) {
 	ASSERT_EQ(1, xEventGroupWaitBits_fake.call_count);
 	ASSERT_EQ(1, xSemaphoreTake_fake.call_count);
 	ASSERT_EQ(1, getOpen());
-	ASSERT_EQ(2, xSemaphoreGive_fake.call_count);
+	ASSERT_EQ(2, xSemaphoreGive_fake.call_count); //2 because it also calls createConfiguration
 }
 
 TEST_F(WindowControllerTesting, CloseWindow) {
@@ -55,7 +55,7 @@ TEST_F(WindowControllerTesting, CloseWindow) {
 	ASSERT_EQ(1, xEventGroupWaitBits_fake.call_count);
 	ASSERT_EQ(1, xSemaphoreTake_fake.call_count);
 	ASSERT_EQ(0, getOpen());
-	ASSERT_EQ(2, xSemaphoreGive_fake.call_count);
+	ASSERT_EQ(2, xSemaphoreGive_fake.call_count); //2 because it also calls createConfiguration
 }
 
 TEST_F(WindowControllerTesting, BitsNotReady) {

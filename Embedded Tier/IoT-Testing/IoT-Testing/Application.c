@@ -1,19 +1,12 @@
 #include <../GoogleTesting/FreeRTOS.h>
 #include <../GoogleTesting/event_groups.h>
 #include <../GoogleTesting/message_buffer.h>
-#include "TemperatureHumiditySensor.h"
-#include "SensorDataPackageHandler.h"
-
-#include "Co2Sensor.h"
-#include "Configuration.h"
-#include "Application.h"
+#include "Setup.h"
 
 lora_driver_payload_t* _uplink_payload;
 //method for receiving and setting the metrics
 void ApplicationTask()
 {
-	for (;;)
-	{
 		//Application sends a request to each of the sensors to 
 		xEventGroupSetBits(measureEventGroup, ALL_MEASURE_BITS);
 		
@@ -22,13 +15,13 @@ void ApplicationTask()
 		
 		if(eventBits & (ALL_READY_BITS))
 		{
-			printf("ALL DATA COLLECTED\n");
-			printf("Temperature is: %x,\n and humidity is: %x, \n CO2 is: %x \n",getTemperature(),getHumidity(),getCo2());
+			//printf("ALL DATA COLLECTED\n");
+			//printf("Temperature is: %x,\n and humidity is: %x, \n CO2 is: %x \n",getTemperature(),getHumidity(),getCo2());
 			
 			//Data is collected and set for each of the metrics
-			setTemperature(getTemperature());
-			setHumidity(getHumidity());
-			setCo2Ppm(getCo2());
+			//setTemperature(getTemperature());
+			//setHumidity(getHumidity());
+			//setCo2Ppm(getCo2());
 			
 			
 			//When metrics are set, they are sent as a payload package to UpLinkHandler with a MessageBuffer.
@@ -41,7 +34,6 @@ void ApplicationTask()
 		
 		//Application with other 50 milliseconds until the next measurement starts.
 		vTaskDelay(pdMS_TO_TICKS(50));
-	}
 }
 
 

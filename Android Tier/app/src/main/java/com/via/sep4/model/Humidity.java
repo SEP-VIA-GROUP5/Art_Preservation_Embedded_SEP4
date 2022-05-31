@@ -2,7 +2,7 @@ package com.via.sep4.model;
 
 public class Humidity {
     private final int id;
-    private final int max;
+    private int max;
     private final int humidity;
 
     public Humidity(int id, int max, int humidity) {
@@ -21,6 +21,10 @@ public class Humidity {
 
     public int getId() {
         return id;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
     }
 
     @Override

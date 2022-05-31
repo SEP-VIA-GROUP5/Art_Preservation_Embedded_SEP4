@@ -2,7 +2,7 @@ package com.via.sep4.model;
 
 public class Temperature {
     private final int id;
-    private final int max;
+    private int max;
     private final int temperature;
 
     public Temperature(int id, int max, int temperature){
@@ -21,6 +21,10 @@ public class Temperature {
 
     public int getMax() {
         return max;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
     }
 
     @Override

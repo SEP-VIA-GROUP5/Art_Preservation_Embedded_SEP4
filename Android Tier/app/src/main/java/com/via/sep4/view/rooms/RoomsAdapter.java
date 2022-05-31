@@ -40,9 +40,6 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Room room = rooms.get(position);
         Metrics[] metrics = room.getMetrics();
-        Log.d("metrics rooms", metrics[0].toString());
-        Log.d("metrics rooms", metrics[1].toString());
-        Log.d("metrics rooms", metrics[2].toString());
         String idS = String.valueOf(room.getId());
 
         String tS;

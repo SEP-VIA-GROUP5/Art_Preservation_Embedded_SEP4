@@ -50,6 +50,7 @@
     <string name="MaxC">Maximum C02 (ppm):</string>
     <string name="MinC">Minimum C02 (ppm):</string>
     <string name="settings_saveChange">Save changes</string>
+    <string name="set_error">No metric values for this room</string>
 
     <!-- register error label -->
     <string name="R_passwordLengthE">Password should be more than 6 characters</string>

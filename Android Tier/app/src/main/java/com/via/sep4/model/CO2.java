@@ -2,7 +2,7 @@ package com.via.sep4.model;
 
 public class CO2 {
     private final int id;
-    private final int max;
+    private int max;
     private final int co2;
 
     public CO2(int id, int max,  int co2){
@@ -21,6 +21,10 @@ public class CO2 {
 
     public int getId() {
         return id;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
     }
 
     @Override

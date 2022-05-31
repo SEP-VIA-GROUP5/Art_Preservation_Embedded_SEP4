@@ -78,7 +78,7 @@ public class DataRepository {
                 e.printStackTrace();
             }
         }
-        if (!msg[0].contains("Code")){
+        if (!msg[0].contains("Code")) {
             Gson gson = new Gson();
             rooms = gson.fromJson(msg[0], new TypeToken<List<Room>>() {
             }.getType());
@@ -129,14 +129,14 @@ public class DataRepository {
                 }
             }
         }).start();
-        while (msg[0] == ""){
+        while (msg[0] == "") {
             try {
                 Thread.sleep(30);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        if (!msg[0].contains("Code")){
+        if (!msg[0].contains("Code")) {
             Gson gson = new Gson();
             room[0] = gson.fromJson(msg[0], Room.class);
             msg[0] = room[0].toString();
@@ -395,162 +395,159 @@ public class DataRepository {
         return code[0];
     }
 
-    public void addTempNorm(int max) {
-        //TODO only get metrics (id=3), change it in the future
-        final int[] code = new int[1];
-        String metricsGet = getMetricsByRoomString(4);
+    public void setTempNorm(JSONObject jsonParam, int max) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                StringBuffer sb = new StringBuffer();
-                try {
-                    URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/temperatures" + max);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("PUT");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-                    conn.setUseCaches(false);
-                    conn.setRequestProperty("Connection", "Keep-Alive");
-                    conn.setRequestProperty("Charset", "UTF-8");
-                    conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                    conn.setRequestProperty("accept", "application/json");
-                    conn.connect();
-                    JSONObject jsonObject = new JSONObject(new String(metricsGet));
-                    DataHandler.transferTimeStamp(jsonObject);
-                    OutputStream out = new DataOutputStream(conn.getOutputStream());
-                    out.write((jsonObject.toString()).getBytes("UTF-8"));
-                    out.flush();
-                    out.close();
+                synchronized (this) {
+                    HttpURLConnection conn = null;
+                    StringBuffer sb = new StringBuffer();
+                    try {
+                        URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/temperatures?max=" + max);
+                        conn = (HttpURLConnection) url.openConnection();
+                        conn.setRequestMethod("PUT");
+                        conn.setDoOutput(true);
+                        conn.setDoInput(true);
+                        conn.setUseCaches(false);
+                        conn.setRequestProperty("Connection", "Keep-Alive");
+                        conn.setRequestProperty("Charset", "UTF-8");
+                        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        conn.setRequestProperty("accept", "application/json");
+                        conn.connect();
+                        OutputStream out = new DataOutputStream(conn.getOutputStream());
+                        out.write((jsonParam.toString()).getBytes("UTF-8"));
+                        out.flush();
+                        out.close();
 
-                    System.out.println(conn.getResponseCode());
-                    code[0] = conn.getResponseCode();
-                    if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
-                        InputStream in1 = conn.getInputStream();
-                        try {
-                            String readLine = new String();
-                            BufferedReader responseReader = new BufferedReader(new InputStreamReader(in1, "UTF-8"));
-                            while ((readLine = responseReader.readLine()) != null) {
-                                sb.append(readLine).append("\n");
+                        System.out.println(conn.getResponseCode());
+                        if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
+                            InputStream in1 = conn.getInputStream();
+                            try {
+                                String readLine = new String();
+                                BufferedReader responseReader = new BufferedReader(new InputStreamReader(in1, "UTF-8"));
+                                while ((readLine = responseReader.readLine()) != null) {
+                                    sb.append(readLine).append("\n");
+                                }
+                                responseReader.close();
+                                System.out.println(sb.toString());
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
                             }
-
-                            responseReader.close();
-                        } catch (Exception e1) {
-                            e1.printStackTrace();
+                        } else {
+                            System.out.println("error");
                         }
-                    } else {
-                        System.out.println("error");
+
+                    } catch (Exception e) {
+                        Log.d("getString e", e.getMessage());
+                    } finally {
+                        if (conn != null) {
+                            conn.disconnect();
+                        }
                     }
-                } catch (Exception e) {
-                    Log.d("getString e", e.getMessage());
                 }
+
             }
         }).start();
     }
 
 
-    public void addHumNorm(int max) {
-        //TODO only get metrics (id=3), change it in the future
-        final int[] code = new int[1];
-        String metricsGet = getMetricsByRoomString(4);
+    public void setHumNorm(JSONObject jsonParam, int max) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                StringBuffer sb = new StringBuffer();
-                try {
-                    URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/humidities" + max);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("PUT");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-                    conn.setUseCaches(false);
-                    conn.setRequestProperty("Connection", "Keep-Alive");
-                    conn.setRequestProperty("Charset", "UTF-8");
-                    conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                    conn.setRequestProperty("accept", "application/json");
-                    conn.connect();
-                    JSONObject jsonObject = new JSONObject(new String(metricsGet));
-                    DataHandler.transferTimeStamp(jsonObject);
-                    OutputStream out = new DataOutputStream(conn.getOutputStream());
-                    out.write((jsonObject.toString()).getBytes("UTF-8"));
-                    out.flush();
-                    out.close();
+                synchronized (this) {
+                    StringBuffer sb = new StringBuffer();
+                    try {
+                        URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/humidities?max=" + max);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        conn.setRequestMethod("PUT");
+                        conn.setDoOutput(true);
+                        conn.setDoInput(true);
+                        conn.setUseCaches(false);
+                        conn.setRequestProperty("Connection", "Keep-Alive");
+                        conn.setRequestProperty("Charset", "UTF-8");
+                        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        conn.setRequestProperty("accept", "application/json");
+                        conn.connect();
+                        OutputStream out = new DataOutputStream(conn.getOutputStream());
+                        out.write((jsonParam.toString()).getBytes("UTF-8"));
+                        out.flush();
+                        out.close();
 
-                    System.out.println(conn.getResponseCode());
-                    code[0] = conn.getResponseCode();
-                    if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
-                        InputStream in1 = conn.getInputStream();
-                        try {
-                            String readLine = new String();
-                            BufferedReader responseReader = new BufferedReader(new InputStreamReader(in1, "UTF-8"));
-                            while ((readLine = responseReader.readLine()) != null) {
-                                sb.append(readLine).append("\n");
+                        System.out.println(conn.getResponseCode());
+                        if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
+                            InputStream in1 = conn.getInputStream();
+                            try {
+                                String readLine = new String();
+                                BufferedReader responseReader = new BufferedReader(new InputStreamReader(in1, "UTF-8"));
+                                while ((readLine = responseReader.readLine()) != null) {
+                                    sb.append(readLine).append("\n");
+                                }
+                                responseReader.close();
+                                System.out.println(sb.toString());
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
                             }
-
-                            responseReader.close();
-                        } catch (Exception e1) {
-                            e1.printStackTrace();
+                        } else {
+                            System.out.println("error");
                         }
-                    } else {
-                        System.out.println("error");
+                        conn.disconnect();
+                    } catch (Exception e) {
+                        Log.d("getString e", e.getMessage());
                     }
-                } catch (Exception e) {
-                    Log.d("getString e", e.getMessage());
                 }
+
             }
         }).start();
     }
 
 
-    public void addCO2Norm(int max) {
-        //TODO only get metrics (id=3), change it in the future
-        final int[] code = new int[1];
-        String metricsGet = getMetricsByRoomString(4);
+    public void setCO2Norm(JSONObject jsonParam, int max) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                StringBuffer sb = new StringBuffer();
-                try {
+                synchronized (this) {
+                    StringBuffer sb = new StringBuffer();
+                    try {
+                        URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/co2s?max=" + max);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        conn.setRequestMethod("PUT");
+                        conn.setDoOutput(true);
+                        conn.setDoInput(true);
+                        conn.setUseCaches(false);
+                        conn.setRequestProperty("Connection", "Keep-Alive");
+                        conn.setRequestProperty("Charset", "UTF-8");
+                        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        conn.setRequestProperty("accept", "application/json");
+                        conn.connect();
+                        OutputStream out = new DataOutputStream(conn.getOutputStream());
+                        out.write((jsonParam.toString()).getBytes("UTF-8"));
+                        out.flush();
+                        out.close();
 
-
-                    URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/co2s" + max);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-                    conn.setUseCaches(false);
-                    conn.setRequestProperty("Connection", "Keep-Alive");
-                    conn.setRequestProperty("Charset", "UTF-8");
-                    conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                    conn.setRequestProperty("accept", "application/json");
-                    conn.connect();
-                    JSONObject jsonObject = new JSONObject(new String(metricsGet));
-                    DataHandler.transferTimeStamp(jsonObject);
-                    OutputStream out = new DataOutputStream(conn.getOutputStream());
-                    out.write((jsonObject.toString()).getBytes("UTF-8"));
-                    out.flush();
-                    out.close();
-
-                    System.out.println(conn.getResponseCode());
-                    code[0] = conn.getResponseCode();
-                    if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
-                        InputStream in1 = conn.getInputStream();
-                        try {
-                            String readLine = new String();
-                            BufferedReader responseReader = new BufferedReader(new InputStreamReader(in1, "UTF-8"));
-                            while ((readLine = responseReader.readLine()) != null) {
-                                sb.append(readLine).append("\n");
+                        System.out.println(conn.getResponseCode());
+                        if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
+                            InputStream in1 = conn.getInputStream();
+                            try {
+                                String readLine = new String();
+                                BufferedReader responseReader = new BufferedReader(new InputStreamReader(in1, "UTF-8"));
+                                while ((readLine = responseReader.readLine()) != null) {
+                                    sb.append(readLine).append("\n");
+                                }
+                                responseReader.close();
+                                System.out.println(sb.toString());
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
                             }
-
-                            responseReader.close();
-                        } catch (Exception e1) {
-                            e1.printStackTrace();
+                        } else {
+                            System.out.println("error");
                         }
-                    } else {
-                        System.out.println("error");
+                        conn.disconnect();
+                    } catch (Exception e) {
+                        Log.d("getString e", e.getMessage());
                     }
-                } catch (Exception e) {
-                    Log.d("getString e", e.getMessage());
                 }
+
             }
         }).start();
     }

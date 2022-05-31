@@ -91,12 +91,12 @@ public class HomeFragment extends Fragment {
         // here i am selecting that the object room to be sent
         String humS = "N/A";
         String co2S = "N/A";
-        if (viewModel.getSingleRoom(1) == null) {
+        if (viewModel.getSingleRoom(2) == null) {
             Toast.makeText(getContext(), R.string.fail_connectServer, Toast.LENGTH_LONG).show();
             toNormsSettings.setVisibility(View.GONE);
             toDashboard.setVisibility(View.GONE);
         } else {
-            room = viewModel.getSingleRoom(1);
+            room = viewModel.getSingleRoom(2);
             Metrics[] metrics = room.getMetrics();
             Temperature temperature = null;
             if (metrics.length != 0) {
@@ -115,6 +115,7 @@ public class HomeFragment extends Fragment {
                 public void onClick(View view) {
                     Bundle id = new Bundle();
                     id.putInt("roomId", room.getId());
+
                     NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_nav_home_to_settingsFragment, id);
                 }
             });

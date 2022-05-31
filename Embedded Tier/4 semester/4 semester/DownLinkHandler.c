@@ -21,8 +21,8 @@ void lora_downLink_task()
 {
 	for(;;)
 	{	
-		//lora_downlink_payload->portNo=2;
-		//lora_downlink_payload->len=6;
+		lora_downlink_payload->portNo=2;
+		lora_downlink_payload->len=6;
 		
 		xMessageBufferReceive(downLinkMessageBuffer, &lora_downlink_payload, sizeof(lora_driver_payload_t), portMAX_DELAY);
 		printf("DOWN LINK<<<<<: from port: %d with %d bytes received!",lora_downlink_payload->portNo, lora_downlink_payload->len);
@@ -30,10 +30,16 @@ void lora_downLink_task()
 		{
 			if( xSemaphoreTake( configMutex, ( TickType_t ) 10 ) == pdTRUE )
 			{
-				printf("Mutex was taken");
-				setCo2Norm((lora_downlink_payload->bytes[0] << 8) + lora_downlink_payload->bytes[1]);
+				printf("Mutex was taken\n");
+				printf("Byte 0: %x\n", lora_downlink_payload->bytes[0]);
+				printf("Byte 1: %x\n", lora_downlink_payload->bytes[1]);
+				printf("Byte 2: %x\n", lora_downlink_payload->bytes[2]);
+				printf("Byte 3: %x\n", lora_downlink_payload->bytes[3]);
+				printf("Byte 4: %x\n", lora_downlink_payload->bytes[4]);
+				
+				setCo2Norm((lora_downlink_payload->bytes[0]<<8) + (lora_downlink_payload->bytes[1]));
 				setHumNorm(lora_downlink_payload->bytes[2]);
-				setTempNorm((lora_downlink_payload->bytes[3] << 8) + lora_downlink_payload->bytes[4]);
+				setTempNorm((lora_downlink_payload->bytes[3]<<8) + (lora_downlink_payload->bytes[4]));
 				
 				printf("The CO2: %d, humidity: %d, temperature: %d",getCo2Norm(),getHumNorm(),getTempNorm());	
 				

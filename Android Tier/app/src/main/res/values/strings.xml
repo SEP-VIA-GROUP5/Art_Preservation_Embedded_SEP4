@@ -12,7 +12,7 @@
     <string name="side_header_username">Welcome back</string>
     <string name="side_header_email">Email</string>
 
-    <string name="fail_connectServer">Fail to connect to server</string>
+    <string name="home_no_values">No metric values for this room !</string>
 
     <!-- home -->
     <string name="home_notification">Turn On or Off the notifications</string>

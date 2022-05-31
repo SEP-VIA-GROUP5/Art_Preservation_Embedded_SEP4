@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import android.graphics.BitmapFactory;
-import android.hardware.SensorManager;
 import android.os.Build;
 
 import android.os.Bundle;
@@ -18,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +33,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.via.sep4.DataHandler;
 import com.via.sep4.R;
 import com.via.sep4.model.Metrics;
-import com.via.sep4.model.Notification;
 import com.via.sep4.model.Room;
 import com.via.sep4.model.Temperature;
 import com.via.sep4.viewModel.DataViewModel;
@@ -48,9 +47,10 @@ public class HomeFragment extends Fragment {
     private Button toNormsSettings, toDashboard;
     private TextView temperatureTextView, humidity, CO2;
     private Switch notification;
-    private Switch temperatureSwitch , notificationSwitch;
+    private Switch temperatureSwitch, notificationSwitch;
     private TextView tempSettingText;
     private Room room;
+    private Temperature temperature = null;
 
     public static final String CHANNEL_1_ID = "tempChannel";
     public static final String CHANNEL_2_ID = "humChannel";
@@ -88,69 +88,81 @@ public class HomeFragment extends Fragment {
 
         notificationSwitch = v.findViewById(R.id.notSw);
 
-        // here i am selecting that the object room to be sent
-        String humS = "N/A";
-        String co2S = "N/A";
-        if (viewModel.getSingleRoom(2) == null) {
-            Toast.makeText(getContext(), R.string.fail_connectServer, Toast.LENGTH_LONG).show();
-            toNormsSettings.setVisibility(View.GONE);
-            toDashboard.setVisibility(View.GONE);
-        } else {
-            room = viewModel.getSingleRoom(2);
-            Metrics[] metrics = room.getMetrics();
-            Temperature temperature = null;
-            if (metrics.length != 0) {
-                temperature = metrics[0].getTemperature();
-                humS = String.valueOf(metrics[0].getHumidity().getHumidity());
-                co2S = String.valueOf(metrics[0].getCO2().getCo2());
+
+        Handler handler  = new Handler();
+        Runnable runnable = new Runnable(){
+            public void run(){
+                loadDataForMain();
+                handler.postDelayed(this,120000);//set timer
             }
-            boolean settingTemp = sharedPreferences.getBoolean("temperature", true);
-            if (temperature != null){
-                setTempSetting(settingTemp, temperature);
-            }
+        };
+        handler.removeCallbacks(runnable);
+        handler.postDelayed(runnable,1000);
 
-            toNormsSettings.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Bundle id = new Bundle();
-                    id.putInt("roomId", room.getId());
-
-                    NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_nav_home_to_settingsFragment, id);
-                }
-            });
-            Temperature finalTemperature = temperature;
-            temperatureSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-                    if (b) {
-                        setTempSetting(b, finalTemperature);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean("temperature", true);
-                        editor.commit();
-                    } else {
-                        setTempSetting(b, finalTemperature);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean("temperature", false);
-                        editor.commit();
-                    }
-                }
-            });
+        boolean settingTemp = sharedPreferences.getBoolean("temperature", true);
+        if (temperature != null) {
+            setTempSetting(settingTemp, temperature);
         }
-        humidity.setText(humS);
-        CO2.setText(co2S);
+
+        toNormsSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle id = new Bundle();
+                id.putInt("roomId", room.getId());
+
+                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_nav_home_to_settingsFragment, id);
+            }
+        });
+        Temperature finalTemperature = temperature;
+        temperatureSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
+                if (b) {
+                    setTempSetting(b, finalTemperature);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("temperature", true);
+                    editor.commit();
+                } else {
+                    setTempSetting(b, finalTemperature);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("temperature", false);
+                    editor.commit();
+                }
+            }
+        });
 
         notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean onOff) {
-                if(onOff)
-                {
+                if (onOff) {
                     createNotificationChannels();
                 }
             }
         });
 
         return v;
+    }
+
+    private void loadDataForMain() {
+        Log.d("home loading", "load data");
+        room = viewModel.getSingleRoom(1);
+        String humS = "N/A";
+        String co2S = "N/A";
+        if (room.getMetrics().length == 0) {
+            toNormsSettings.setVisibility(View.GONE);
+            toDashboard.setVisibility(View.GONE);
+            Toast.makeText(getContext(), R.string.home_no_values, Toast.LENGTH_LONG).show();
+        } else {
+            Metrics[] metrics = room.getMetrics();
+            if (metrics.length != 0) {
+                temperature = metrics[0].getTemperature();
+                humS = String.valueOf(metrics[0].getHumidity().getHumidity());
+                co2S = String.valueOf(metrics[0].getCO2().getCo2());
+            }
+        }
+        humidity.setText(humS);
+        CO2.setText(co2S);
     }
 
     private void checkUser(FirebaseUser user, Context context) {
@@ -190,11 +202,11 @@ public class HomeFragment extends Fragment {
             NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
             for (NotificationChannel channel : channels) {
                 notificationManager.createNotificationChannel(channel);
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),"channel").setContentTitle("This is content title")
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "channel").setContentTitle("This is content title")
                         .setContentText("This is content text")
                         .setWhen(System.currentTimeMillis())
                         .setSmallIcon(R.mipmap.ic_launcher)
-                        .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher));
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
                 notificationManager.notify(1, builder.build());
             }
         }
@@ -236,6 +248,6 @@ public class HomeFragment extends Fragment {
             createNotificationChannels();
         }
 */
-    }
+}
 
 

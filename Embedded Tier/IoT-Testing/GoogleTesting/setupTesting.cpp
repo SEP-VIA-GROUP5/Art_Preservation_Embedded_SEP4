@@ -13,6 +13,7 @@ protected:
 	void SetUp() override
 	{
 		RESET_FAKE(xMessageBufferCreate);
+		RESET_FAKE(xEventGroupCreate);
 		FFF_RESET_HISTORY();
 
 	}

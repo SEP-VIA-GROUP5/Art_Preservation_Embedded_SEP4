@@ -10,15 +10,14 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#include <FreeRTOS.h>
-#include <task.h>
-#include <message_buffer.h>
+#include <../GoogleTesting/FreeRTOS.h>
+#include <../GoogleTesting/task.h>
+#include <../GoogleTesting/message_buffer.h>
 #include "Setup.h"
 #include "Configuration.h"
 #include "DownLinkHandler.h"
 
 lora_driver_payload_t* lora_downlink_payload;
-
 
 /*Function for setting the norm values
 * If the configuration mutex (shared resource) is not taken by someone else then
@@ -56,15 +55,12 @@ void lora_downLink_task()
 
 
 //Function for down link handler task creation
-void lora_downlink_handler_create(UBaseType_t lora_handler_task_priority)
+void lora_downlink_handler_create()
 {
-	xTaskCreate(
-	lora_downLink_task,
-	"lora_downlink"
-	, configMINIMAL_STACK_SIZE
-	, NULL
-	,    tskIDLE_PRIORITY + lora_handler_task_priority
-	, NULL );
+	while (true)
+	{
+		lora_downlink_task();
+	}
 }
 //lora_downlink_payload->portNo=2;
 		//printf("Port number");

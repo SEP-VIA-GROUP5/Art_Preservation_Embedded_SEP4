@@ -31,15 +31,14 @@
 #include "WindowController.h"
 
 //Initializing the essential data
-void initializeUsedData()
+void initializeUsedData(void)
 {
 	initializeEventGroup();
-	
 	createUpLinkMessageBuffer();
-	createConfiguration();
 	createDownLinkMessageBuffer();
-	lora_driver_initialise(ser_USART1, downLinkMessageBuffer);
+	createConfiguration();
 	createWindowController();
+	lora_driver_initialise(ser_USART1, downLinkMessageBuffer);
 }
 
 //Creating tasks and assigning priorities
@@ -48,12 +47,12 @@ void create_tasks(void)
 	createTempAndHumTask(1);
 	createCo2Task(1);
 	createApplicationTask(2);
-    lora_handler_uplink_payload(3);
-	lora_downlink_handler_create(4);
+    lora_handler_uplink_payload(4);
+	lora_downlink_handler_create(3);
 	createWindowControllerTask(2);
 }
 
-void initialiseSystem()
+void initialiseSystem(void)
 {
 	// Set output ports for leds
 	DDRA |= _BV(DDA0) | _BV(DDA7);

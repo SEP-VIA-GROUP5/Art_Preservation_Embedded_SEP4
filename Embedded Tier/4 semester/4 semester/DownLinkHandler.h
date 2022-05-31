@@ -17,10 +17,10 @@
 #include <stdio.h>
 
 #include <ATMEGA_FreeRTOS.h>
-#include <message_buffer.h>
 #include <task.h>
 #include <lora_driver.h>
 
+#include "message_buffer.h"
 #include "Setup.h"
 #include "Configuration.h"
 

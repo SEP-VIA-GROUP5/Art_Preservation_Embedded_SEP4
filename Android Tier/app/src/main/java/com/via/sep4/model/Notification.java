@@ -27,6 +27,10 @@ public class Notification {
                 ", room=" + room +
                 '}';
     }
+
+
+    // create notifications with mvvm in order to trigger them for the fake rooms also ( not enough resources at the moment)
+
 }
 
 

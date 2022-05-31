@@ -142,7 +142,6 @@ public class DataRepository {
             msg[0] = room[0].toString();
             Log.d("room get", msg[0]);
         }
-
         return room[0];
     }
 
@@ -266,7 +265,6 @@ public class DataRepository {
                     connection.setConnectTimeout(3000);
                     connection.connect();
                     code[0] = connection.getResponseCode();
-
                     connection.disconnect();
                 } catch (Exception e) {
                     e.printStackTrace();

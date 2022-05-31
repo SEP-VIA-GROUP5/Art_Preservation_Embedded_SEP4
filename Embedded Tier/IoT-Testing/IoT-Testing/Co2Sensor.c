@@ -4,12 +4,11 @@
  * Created: 05/24/22 3:47:14 PM
  *  Author: rytis
  */ 
-
-
-#include <FreeRTOS.h>
-#include <task.h>
 #include <stdio.h>
-#include <event_groups.h>
+
+#include <../GoogleTesting/FreeRTOS.h>
+#include <../GoogleTesting/task.h>
+#include <../GoogleTesting/event_groups.h>
 #include "Setup.h"
 #include "Co2Sensor.h"
 
@@ -28,7 +27,6 @@ uint16_t getCo2()
 //Task for handling measurements when Application asks
 void Co2Task()
 {
-	while(1){
 		
 		//EventGroup waits until Application sends MEASURE_BIT and tells each of the sensors to start measuring the metrics
 		EventBits_t eventBits = xEventGroupWaitBits(measureEventGroup,CO2_MEASURE_BIT,pdTRUE,pdTRUE,portMAX_DELAY);
@@ -48,7 +46,6 @@ void Co2Task()
 			//Task is delayed with 10 milliseconds.
 			vTaskDelay(pdMS_TO_TICKS(10));
 		}
-	}
 }
 
 //Callback to set the CO2 data

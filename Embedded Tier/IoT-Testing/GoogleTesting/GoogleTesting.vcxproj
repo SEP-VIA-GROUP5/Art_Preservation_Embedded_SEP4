@@ -37,10 +37,14 @@
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="..\IoT-Testing\Application.c" />
+    <ClCompile Include="..\IoT-Testing\Co2Sensor.c" />
     <ClCompile Include="..\IoT-Testing\Setup.c" />
+    <ClCompile Include="..\IoT-Testing\TemperatureHumiditySensor.c" />
     <ClCompile Include="applicationTesting.cpp" />
+    <ClCompile Include="Co2Testing.cpp" />
     <ClCompile Include="FreeRTOS_MOCK_FFF.cpp" />
     <ClCompile Include="setupTesting.cpp" />
+    <ClCompile Include="TemperatureAndHumidityTesting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

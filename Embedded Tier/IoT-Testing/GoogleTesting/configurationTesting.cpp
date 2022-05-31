@@ -14,10 +14,8 @@ class ConfigurationTesting : public::testing::Test
 protected:
 	void SetUp() override
 	{
-		RESET_FAKE(xEventGroupSetBits);
-		RESET_FAKE(xEventGroupWaitBits);
-		RESET_FAKE(xMessageBufferSend);
-		RESET_FAKE(vTaskDelay);
+		RESET_FAKE(xSemaphoreCreateMutex);
+		RESET_FAKE(xSemaphoreGive);
 		FFF_RESET_HISTORY();
 
 	}
@@ -28,9 +26,12 @@ protected:
 	}
 };
 
-TEST_F(ConfigurationTesting, Initiliase_) {
-	ApplicationTask();
-	ASSERT_EQ(1, xEventGroupSetBits_fake.call_count);
-	ASSERT_EQ(1, xEventGroupWaitBits_fake.call_count);
-	ASSERT_EQ(1, vTaskDelay_fake.call_count);
+TEST_F(ConfigurationTesting, Initiliase_Configuration) {
+	createConfiguration();
+	ASSERT_EQ(1, xSemaphoreCreateMutex_fake.call_count);
+	ASSERT_EQ(1, xSemaphoreGive_fake.call_count);
+	//default norms
+	ASSERT_EQ(1000, getCo2Norm());
+	ASSERT_EQ(0x1A, getTempNorm());
+	ASSERT_EQ(1000, getHumNorm());
 }

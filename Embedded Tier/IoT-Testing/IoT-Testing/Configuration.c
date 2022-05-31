@@ -11,10 +11,10 @@
 
 #include <stdio.h>
 #include <stdint.h>
-#include <FreeRTOS.h>
-#include <semphr.h>
-#include <event_groups.h>
-#include <message_buffer.h>
+#include <../GoogleTesting/FreeRTOS.h>
+#include <../GoogleTesting/semphr.h>
+#include <../GoogleTesting/event_groups.h>
+#include <../GoogleTesting/message_buffer.h>
 
 
 
@@ -36,11 +36,8 @@ SemaphoreHandle_t configMutex;
 * and the norm default values
 */
 void createConfiguration(){
-	
-	printf("Mutex was created\n");
 	co2Norm = 1000;
 	tempNorm = 0x1A;
-	printf("Config norm: %x\n", tempNorm);
 	humNorm = 1000;
 	configMutex = xSemaphoreCreateMutex();
 	xSemaphoreGive(configMutex);

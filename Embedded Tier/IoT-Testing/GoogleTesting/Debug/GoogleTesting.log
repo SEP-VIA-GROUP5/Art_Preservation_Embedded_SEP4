@@ -1,2 +1,3 @@
-﻿  TemperatureAndHumidityTesting.cpp
+﻿  Configuration.c
+  configurationTesting.cpp
   GoogleTesting.vcxproj -> D:\SEM4\SEP\SEP4-Project\Embedded Tier\IoT-Testing\Debug\GoogleTesting.exe

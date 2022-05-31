@@ -11,7 +11,10 @@
     <ClCompile Include="TemperatureAndHumidityTesting.cpp" />
     <ClCompile Include="..\IoT-Testing\TemperatureHumiditySensor.c" />
     <ClCompile Include="..\IoT-Testing\Configuration.c" />
+    <ClCompile Include="..\IoT-Testing\WindowController.c" />
     <ClCompile Include="configurationTesting.cpp" />
+    <ClCompile Include="windowControllerTesting.cpp" />
+    <ClCompile Include="downLinkHandlerTesting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="FreeeRTOS">

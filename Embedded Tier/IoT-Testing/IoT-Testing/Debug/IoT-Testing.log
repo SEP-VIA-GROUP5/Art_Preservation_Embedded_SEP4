@@ -1,12 +1,4 @@
-﻿  Application.c
-  Co2Sensor.c
-  Configuration.c
-  TemperatureHumiditySensor.c
-  WindowController.c
-D:\SEM4\SEP\SEP4-Project\Embedded Tier\IoT-Testing\IoT-Testing\WindowController.c(32,1): warning C4026: function declared with formal parameter list
-D:\SEM4\SEP\SEP4-Project\Embedded Tier\IoT-Testing\IoT-Testing\WindowController.c(69,1): warning C4026: function declared with formal parameter list
-  Generating Code...
-Application.obj : error LNK2019: unresolved external symbol _xEventGroupWaitBits referenced in function _ApplicationTask
+﻿Application.obj : error LNK2019: unresolved external symbol _xEventGroupWaitBits referenced in function _ApplicationTask
 Co2Sensor.obj : error LNK2001: unresolved external symbol _xEventGroupWaitBits
 TemperatureHumiditySensor.obj : error LNK2001: unresolved external symbol _xEventGroupWaitBits
 WindowController.obj : error LNK2001: unresolved external symbol _xEventGroupWaitBits

@@ -14,9 +14,7 @@ void initializeEventGroup() //Initializing every event group
 
 
 void createUpLinkMessageBuffer() //Created a buffer for messages so it can be uploaded and send in websockets
-{
-	
-	
+{	
 	if(upLinkMessageBuffer == NULL )
 	{
 		printf("Not enough heap memory for uplink message buffer");
@@ -29,9 +27,6 @@ void createUpLinkMessageBuffer() //Created a buffer for messages so it can be up
 
 void createDownLinkMessageBuffer() //Created a buffer for messages so it can be received from websockets
 {
-	printf("<<<<<<<<<<<<<<<<Before buffer init\n");
-	
-	printf("<<<<<<<<<<<<<<<<buffer initialized\n");
 	if(downLinkMessageBuffer == NULL )
 	{
 		printf("Not enough heap memory for downlink message buffer");

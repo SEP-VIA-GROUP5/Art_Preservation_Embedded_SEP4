@@ -21,6 +21,6 @@ typedef size_t StaticTask_t;
 
 typedef struct lora_driver_payload {
 	uint8_t portNo;
-	uint8_t len; 
+	uint8_t len;
 	uint8_t bytes[20];
 } lora_driver_payload_t;

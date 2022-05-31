@@ -9,16 +9,15 @@
 
 #include <stdint.h>
 #include <stdio.h>
-
-#include <task.h>
-#include <semphr.h>
 #include <stdbool.h>
+
+#include <../GoogleTesting/FreeRTOS.h>
+#include <../GoogleTesting/task.h>
+#include <../GoogleTesting/semphr.h>
+#include <../GoogleTesting/task.h>
+#include <../GoogleTesting/event_groups.h>
 #include "Setup.h"
-#include <FreeRTOS.h>
-#include <task.h>
-#include <stdio.h>
-#include <event_groups.h>
 
-
+uint16_t getCo2();
 void Co2Task();
 void createCo2Task();

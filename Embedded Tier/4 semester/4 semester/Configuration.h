@@ -1,10 +1,3 @@
-/*
- * Configuration.h
- *
- * Created: 5/25/2022 11:10:32 AM
- *  Author: Lukas
- */
-
 //A header for class Configuration.c
 
 #pragma once

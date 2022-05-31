@@ -1,14 +1,6 @@
-/*
- * Configuration.c
- *
- * Created: 5/25/2022 11:14:41 AM
- *  Author: Lukas
- */ 
-
 /*Configuration.c is a shared resource class that holds the norm
 * values for CO2, Temperature and humidity
 */
-
 #include "Configuration.h"
 
 //Variables for norms of:
@@ -27,11 +19,8 @@ SemaphoreHandle_t configMutex;
 * and the norm default values
 */
 void createConfiguration(){
-	
-	printf("Mutex was created\n");
 	co2Norm = 1000;
-	tempNorm = 0x1A;
-	printf("Config norm: %x\n", tempNorm);
+	tempNorm = 50;
 	humNorm = 1000;
 	configMutex = xSemaphoreCreateMutex();
 	xSemaphoreGive(configMutex);

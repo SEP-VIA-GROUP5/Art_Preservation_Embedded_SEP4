@@ -11,7 +11,7 @@ public class DataFormat
   {
     this.CO2 = co2;
     this.HUM = hum;
-    this.TEMP = temp;
+    this.TEMP = temp*10;
   }
 
   public String toBytes()

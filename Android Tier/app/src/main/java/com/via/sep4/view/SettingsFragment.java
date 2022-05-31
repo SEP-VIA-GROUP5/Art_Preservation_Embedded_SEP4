@@ -58,23 +58,19 @@ public class SettingsFragment extends Fragment {
             public void onClick(View view) {
                 Log.d("metrics", String.valueOf(metrics.length));
                 if (metrics.length > 0) {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            //temperature
-                            metrics[0].getTemperature().setMax(toInt(maxTemp));
-                            viewModel.addTempNorm(metrics[0].getTemperature(), toInt(maxTemp));
+                    //temperature
+                    metrics[0].getTemperature().setMax(toInt(maxTemp));
+                    viewModel.addTempNorm(metrics[0].getTemperature(), toInt(maxTemp));
 
-                            //humidity
-                            metrics[0].getHumidity().setMax(toInt(maxHum));
-                            viewModel.addHumNorm(metrics[0].getHumidity(), toInt(maxHum));
+                    //humidity
+                    metrics[0].getHumidity().setMax(toInt(maxHum));
+                    viewModel.addHumNorm(metrics[0].getHumidity(), toInt(maxHum));
 
-                            //co2
-                            metrics[0].getCO2().setMax(toInt(maxCO2));
-                            viewModel.addCO2Norm(metrics[0].getCO2(), toInt(maxCO2));
-                        }
-                    }).start();
+                    //co2
+                    metrics[0].getCO2().setMax(toInt(maxCO2));
+                    viewModel.addCO2Norm(metrics[0].getCO2(), toInt(maxCO2));
 
+                    Toast.makeText(getContext(), R.string.settings_saveChange, Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getContext(), R.string.set_error, Toast.LENGTH_SHORT).show();
                 }

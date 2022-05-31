@@ -32,6 +32,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.via.sep4.DataHandler;
 import com.via.sep4.R;
+import com.via.sep4.model.CO2;
+import com.via.sep4.model.Humidity;
 import com.via.sep4.model.Metrics;
 import com.via.sep4.model.Room;
 import com.via.sep4.model.Temperature;
@@ -51,6 +53,7 @@ public class HomeFragment extends Fragment {
     private TextView tempSettingText;
     private Room room;
     private Temperature temperature = null;
+    private NotificationManager notificationManager;
 
     public static final String CHANNEL_1_ID = "tempChannel";
     public static final String CHANNEL_2_ID = "humChannel";
@@ -89,20 +92,16 @@ public class HomeFragment extends Fragment {
         notificationSwitch = v.findViewById(R.id.notSw);
 
 
-        Handler handler  = new Handler();
-        Runnable runnable = new Runnable(){
-            public void run(){
+        Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            public void run() {
                 loadDataForMain();
-                handler.postDelayed(this,120000);//set timer
+                handler.postDelayed(this, 120000);//set timer
             }
         };
         handler.removeCallbacks(runnable);
-        handler.postDelayed(runnable,1000);
-
-        boolean settingTemp = sharedPreferences.getBoolean("temperature", true);
-        if (temperature != null) {
-            setTempSetting(settingTemp, temperature);
-        }
+        handler.postDelayed(runnable, 1000);
 
         toNormsSettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +116,6 @@ public class HomeFragment extends Fragment {
         temperatureSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
                 if (b) {
                     setTempSetting(b, finalTemperature);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -144,9 +142,10 @@ public class HomeFragment extends Fragment {
         return v;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void loadDataForMain() {
         Log.d("home loading", "load data");
-        room = viewModel.getSingleRoom(1);
+        room = viewModel.getSingleRoom(2);
         String humS = "N/A";
         String co2S = "N/A";
         if (room.getMetrics().length == 0) {
@@ -156,9 +155,46 @@ public class HomeFragment extends Fragment {
         } else {
             Metrics[] metrics = room.getMetrics();
             if (metrics.length != 0) {
+                Humidity humidity = metrics[0].getHumidity();
+                com.via.sep4.model.CO2 co2 = metrics[0].getCO2();
+
                 temperature = metrics[0].getTemperature();
-                humS = String.valueOf(metrics[0].getHumidity().getHumidity());
-                co2S = String.valueOf(metrics[0].getCO2().getCo2());
+                humS = String.valueOf(humidity.getHumidity());
+                co2S = String.valueOf(co2.getCo2());
+                boolean settingTemp = sharedPreferences.getBoolean("temperature", true);
+                if (temperature != null) {
+                    setTempSetting(settingTemp, temperature);
+                }
+
+                List<NotificationChannel> channels = createAllChannels();
+                if (temperature.getTemperature() > temperature.getMax()) {
+                    notificationManager.createNotificationChannel(channels.get(1));
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), CHANNEL_1_ID)
+                            .setContentTitle(getText(R.string.notification_channel1))
+                            .setContentText(getText(R.string.notification_channel_display_temp))
+                            .setWhen(System.currentTimeMillis())
+                            .setSmallIcon(R.drawable.ic_notification)
+                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.thermometer));
+                    notificationManager.notify(1, builder.build());
+                } else if (humidity.getHumidity() > humidity.getMax()) {
+                    notificationManager.createNotificationChannel(channels.get(2));
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), CHANNEL_2_ID)
+                            .setContentTitle(getText(R.string.notification_channel2))
+                            .setContentText(getText(R.string.notification_channel_display_hum))
+                            .setWhen(System.currentTimeMillis())
+                            .setSmallIcon(R.drawable.ic_notification)
+                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.thermometer));
+                    notificationManager.notify(2, builder.build());
+                } else if (co2.getCo2() > co2.getMax()) {
+                    notificationManager.createNotificationChannel(channels.get(3));
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), CHANNEL_3_ID)
+                            .setContentTitle(getText(R.string.notification_channel3))
+                            .setContentText(getText(R.string.notification_channel_display_co2))
+                            .setWhen(System.currentTimeMillis())
+                            .setSmallIcon(R.drawable.ic_notification)
+                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.thermometer));
+                    notificationManager.notify(3, builder.build());
+                }
             }
         }
         humidity.setText(humS);
@@ -196,19 +232,9 @@ public class HomeFragment extends Fragment {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            List<NotificationChannel> channels = createAllChannels();
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
-            NotificationManager notificationManager = getContext().getSystemService(NotificationManager.class);
-            for (NotificationChannel channel : channels) {
-                notificationManager.createNotificationChannel(channel);
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), "channel").setContentTitle("This is content title")
-                        .setContentText("This is content text")
-                        .setWhen(System.currentTimeMillis())
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
-                notificationManager.notify(1, builder.build());
-            }
+            notificationManager = getContext().getSystemService(NotificationManager.class);
         }
     }
 

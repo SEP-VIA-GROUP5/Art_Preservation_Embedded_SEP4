@@ -21,6 +21,9 @@
     <string name="notification_channel1">Temperature warning</string>
     <string name="notification_channel2">Humidity warning</string>
     <string name="notification_channel3">CO2 warning</string>
+    <string name="notification_channel_display_temp">The temperature is over the warning value!</string>
+    <string name="notification_channel_display_hum">The humidity is over the warning value!</string>
+    <string name="notification_channel_display_co2">The CO2 is over the warning value!</string>
     <string name="notification_channel1_desc">Alerts the user when the temperature exceeds the set value</string>
     <string name="notification_channel2_desc">Alerts the user when the humidity exceeds the set value</string>
     <string name="notification_channel3_desc">Alerts the user when the CO2 exceeds the set value</string>

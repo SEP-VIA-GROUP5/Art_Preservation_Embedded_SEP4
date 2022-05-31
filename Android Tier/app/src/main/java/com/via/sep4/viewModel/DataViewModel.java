@@ -54,8 +54,27 @@ public class DataViewModel extends ViewModel {
         return room;
     }
 
-    public void setNorms(Room room, int minTemp, int maxTemp, int minHum, int maxHum, int minCO2, int maxC02) {
-        setRepository.setNorms(room, minTemp, maxTemp, minHum, maxHum, minCO2, maxC02);
+    public void addTempNorm (int maxTemp)
+    {
+        repository.addTempNorm(maxTemp);
+
+    }
+
+    public void addHumNorm (int maxHum)
+    {
+        repository.addTempNorm(maxHum);
+
+    }
+
+    public void addCO2Norm (int maxTemp)
+    {
+        repository.addTempNorm(maxTemp);
+
+    }
+
+    public void setNorms(Room room, int maxTemp, int maxHum, int maxC02) {
+        setRepository.setNorms(room, maxTemp,maxHum, maxC02);
+
     }
 
 

@@ -169,6 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:text="C or F"
             android:layout_weight="1" />
 
         <Switch

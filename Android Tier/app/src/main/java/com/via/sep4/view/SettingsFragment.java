@@ -55,7 +55,10 @@ public class SettingsFragment extends Fragment {
          setBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.setNorms(room,toInt(minTemp), toInt(maxTemp), toInt(minHum), toInt(maxHum), toInt(minCO2), toInt(maxCO2));
+                viewModel.addTempNorm(toInt(maxTemp) );
+                viewModel.addHumNorm(toInt(maxHum) );
+                viewModel.addCO2Norm(toInt(maxCO2));
+
             }
         });
 
@@ -65,11 +68,11 @@ public class SettingsFragment extends Fragment {
 
     private void initView(View view) {
         maxTemp = view.findViewById(R.id.MaxT);
-        minTemp = view.findViewById(R.id.MinT);
+   //     minTemp = view.findViewById(R.id.MinT);
         maxHum = view.findViewById(R.id.MaxH);
-        minHum = view.findViewById(R.id.MinH);
+     //   minHum = view.findViewById(R.id.MinH);
         maxCO2 = view.findViewById(R.id.MaxC);
-        minCO2 = view.findViewById(R.id.MinC);
+    //    minCO2 = view.findViewById(R.id.MinC);
         setBtn= view.findViewById(R.id.settings_save);
     }
 

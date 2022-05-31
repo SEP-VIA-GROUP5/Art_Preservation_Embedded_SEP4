@@ -35,7 +35,7 @@ public class SettingsRepository {
 
 
 
-    public void setNorms(Room room, int minTemp, int maxTemp, int minHum, int maxHum, int minCO2, int maxC02) {
+    public void setNorms(Room room, int maxTemp, int maxHum, int maxC02) {
         NotificationCompat.Builder builder = null;
 
         //TODO send norms to Db team
@@ -48,35 +48,7 @@ public class SettingsRepository {
         Log.d("values", String.valueOf(temperature));
         Log.d("value set", String.valueOf(maxTemp));
 
-        if (temperature >= maxTemp) {
-            builder = new NotificationCompat.Builder(context, "temperatureRising")
-                    .setSmallIcon(R.drawable.ic_baseline_notification_important_24)
-                    .setContentTitle("Warning Temperature Levels Rising")
-                    .setContentText("The temperature is currently " + temperature)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH);
-        } else if (humidity >= maxHum) {
-            builder = new NotificationCompat.Builder(context, "humidityRising")
-                    .setSmallIcon(R.drawable.ic_baseline_notification_important_24)
-                    .setContentTitle("Warning Humidity Levels Rising")
-                    .setContentText("The humidity is currently " + humidity)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH);
-        }  else if (CO2 >= maxC02) {
-            builder = new NotificationCompat.Builder(context, "CO2Rising")
-                    .setSmallIcon(R.drawable.ic_baseline_notification_important_24)
-                    .setContentTitle("Warning CO2 Levels Rising")
-                    .setContentText("The CO2 is currently " + CO2)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH);
-        }
 
-
-        Intent notificationIntent = new Intent(context, MainActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent,
-                PendingIntent.FLAG_IMMUTABLE);
-        builder.setContentIntent(contentIntent);
-
-        // Add as notification
-        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(0, builder.build());
 
     }
 

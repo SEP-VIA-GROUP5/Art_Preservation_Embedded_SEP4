@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment {
     private Button toNormsSettings, toDashboard;
     private TextView temperatureTextView, humidity, CO2;
     private Switch notification;
-    private Switch temperatureSwitch;
+    private Switch temperatureSwitch , notificationSwitch;
     private TextView tempSettingText;
     private Room room;
 
@@ -86,6 +86,10 @@ public class HomeFragment extends Fragment {
         tempSettingText = v.findViewById(R.id.home_cToF_Text);
         sharedPreferences = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
 
+        notificationSwitch = v.findViewById(R.id.notSw);
+
+
+
         // here i am selecting that the object room to be sent
         String humS = "N/A";
         String co2S = "N/A";
@@ -117,6 +121,7 @@ public class HomeFragment extends Fragment {
             temperatureSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+
                     if (b) {
                         setTempSetting(b, finalTemperature);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -133,6 +138,17 @@ public class HomeFragment extends Fragment {
         }
         humidity.setText(humS);
         CO2.setText(co2S);
+
+        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean onOff) {
+                if(onOff)
+                {
+                    createNotificationChannels();
+                }
+            }
+        });
+
         return v;
     }
 
@@ -210,4 +226,15 @@ public class HomeFragment extends Fragment {
         channels.add(channel3);
         return channels;
     }
-}
+
+   /* private void setNotification(boolean setting) {
+
+        Log.d("setting", String.valueOf(setting));
+        notificationSwitch.setChecked(setting);
+        if (setting) {
+            createNotificationChannels();
+        }
+*/
+    }
+
+

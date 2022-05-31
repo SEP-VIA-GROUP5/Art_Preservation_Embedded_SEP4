@@ -5,7 +5,17 @@
  *  Author: rytis
  */ 
 
+
+#include <FreeRTOS.h>
+#include <task.h>
+#include <event_groups.h>
+
+#include "TemperatureHumiditySensor.h"
+#include "Configuration.h"
+#include "Co2Sensor.h"
+#include "Setup.h"
 #include "WindowController.h"
+
 
 void createWindowController(){ //This function initializes the window controller
 	
@@ -18,7 +28,8 @@ void closeWindow(){ //This function closes the window
 	isOpen = 0;
 }
 //This task checks the parameters and compares it to norms. If the norms are overstepped, the window will open. When it goes back to normal the window will close
-void windowControllerTask(){
+void windowControllerTask()
+{
 	for(;;)
 	{
 			EventBits_t eventBits = xEventGroupWaitBits(dataReadyEventGroup,ALL_READY_BITS,pdTRUE,pdTRUE,portMAX_DELAY);
@@ -54,7 +65,8 @@ void windowControllerTask(){
 			
 	}
 }
-void createWindowControllerTask(){ //Defining the task
+void createWindowControllerTask()
+{ //Defining the task
 	while (1)
 	{
 		windowControllerTask();

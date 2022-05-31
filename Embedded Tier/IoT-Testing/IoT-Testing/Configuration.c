@@ -9,6 +9,15 @@
 * values for CO2, Temperature and humidity
 */
 
+#include <stdio.h>
+#include <stdint.h>
+#include <FreeRTOS.h>
+#include <semphr.h>
+#include <event_groups.h>
+#include <message_buffer.h>
+
+
+
 #include "Configuration.h"
 
 //Variables for norms of:
@@ -38,26 +47,29 @@ void createConfiguration(){
 }
 
 //Getters for norm values
-uint16_t getCo2Norm(){
+uint16_t getCo2Norm()
+{
 	return co2Norm;
 }
-uint16_t getTempNorm(){
+uint16_t getTempNorm()
+{
 	return tempNorm;
 }
-uint16_t getHumNorm(){
+uint16_t getHumNorm()
+{
 	return humNorm;
 }
 
 //Setters for norm values
-uint16_t setCo2Norm(uint16_t norm)
+void setCo2Norm(uint16_t norm)
 {
 	co2Norm = norm;
 }
-uint16_t setTempNorm(uint16_t norm)
+void setTempNorm(uint16_t norm)
 {
 	tempNorm = norm;
 }
-uint16_t setHumNorm(uint16_t norm)
+void setHumNorm(uint16_t norm)
 {
 	humNorm = norm;
 }

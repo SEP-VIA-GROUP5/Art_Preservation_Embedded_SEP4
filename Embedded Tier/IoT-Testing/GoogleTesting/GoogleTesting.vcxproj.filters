@@ -2,37 +2,46 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="setupTesting.cpp" />
+    <ClCompile Include="..\IoT-Testing\Setup.c" />
+    <ClCompile Include="FreeRTOS_MOCK_FFF.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="FreeRTOS">
+    <Filter Include="FreeeRTOS">
       <UniqueIdentifier>{6c169800-3057-492d-8e85-22db05c45e26}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FreeRTOS\src">
-      <UniqueIdentifier>{179e1d47-eb2f-4a72-afc6-4df61ed71ea9}</UniqueIdentifier>
+    <Filter Include="FreeeRTOS\Header">
+      <UniqueIdentifier>{3b9b37fd-e6a6-47b7-a7ec-c57b07060ef8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FreeRTOS.h">
-      <Filter>FreeRTOS\src</Filter>
-    </ClInclude>
+    <ClInclude Include="..\fff\fff.h" />
+    <ClInclude Include="FreeRTOS_MOCK_FFF.h" />
     <ClInclude Include="event_groups.h">
-      <Filter>FreeRTOS\src</Filter>
+      <Filter>FreeeRTOS\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="das.h">
+      <Filter>FreeeRTOS\Header</Filter>
     </ClInclude>
     <ClInclude Include="message_buffer.h">
-      <Filter>FreeRTOS\src</Filter>
+      <Filter>FreeeRTOS\Header</Filter>
     </ClInclude>
     <ClInclude Include="queue.h">
-      <Filter>FreeRTOS\src</Filter>
+      <Filter>FreeeRTOS\Header</Filter>
     </ClInclude>
     <ClInclude Include="semphr.h">
-      <Filter>FreeRTOS\src</Filter>
+      <Filter>FreeeRTOS\Header</Filter>
     </ClInclude>
     <ClInclude Include="task.h">
-      <Filter>FreeRTOS\src</Filter>
+      <Filter>FreeeRTOS\Header</Filter>
     </ClInclude>
     <ClInclude Include="timers.h">
-      <Filter>FreeRTOS\src</Filter>
+      <Filter>FreeeRTOS\Header</Filter>
     </ClInclude>
-    <ClInclude Include="..\fff\fff.h" />
+    <ClInclude Include="FreeRTOS.h">
+      <Filter>FreeeRTOS\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

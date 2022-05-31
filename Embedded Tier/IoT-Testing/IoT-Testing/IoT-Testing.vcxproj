@@ -143,7 +143,6 @@
     <ClCompile Include="Application.c" />
     <ClCompile Include="Co2Sensor.c" />
     <ClCompile Include="Configuration.c" />
-    <ClCompile Include="DownLinkHandler.c" />
     <ClCompile Include="SensorDataPackageHandler.c" />
     <ClCompile Include="Setup.c" />
     <ClCompile Include="TemperatureHumiditySensor.c" />
@@ -161,7 +160,6 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="Co2Sensor.h" />
     <ClInclude Include="Configuration.h" />
-    <ClInclude Include="DownLinkHandler.h" />
     <ClInclude Include="FreeRTOSConfig.h" />
     <ClInclude Include="SensorDataPackageHandler.h" />
     <ClInclude Include="Setup.h" />

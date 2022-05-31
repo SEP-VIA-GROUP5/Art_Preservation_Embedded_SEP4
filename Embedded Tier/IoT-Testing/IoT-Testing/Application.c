@@ -1,6 +1,6 @@
 #include "Application.h"
 
-
+lora_driver_payload_t* _uplink_payload;
 //method for receiving and setting the metrics
 void ApplicationTask()
 {
@@ -24,7 +24,7 @@ void ApplicationTask()
 			
 			
 			//When metrics are set, they are sent as a payload package to UpLinkHandler with a MessageBuffer.
-			lora_driver_payload_t _uplink_payload = sensorDataPackageHandler_getLoRaPayload(2);
+			
 			xMessageBufferSend(upLinkMessageBuffer,&_uplink_payload,sizeof(_uplink_payload),portMAX_DELAY);
 											
 			//Application is delayed with 2 minutes until the next measurement starts.										

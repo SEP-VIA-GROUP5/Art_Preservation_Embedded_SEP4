@@ -88,17 +88,15 @@ public class HomeFragment extends Fragment {
 
         notificationSwitch = v.findViewById(R.id.notSw);
 
-
-
         // here i am selecting that the object room to be sent
         String humS = "N/A";
         String co2S = "N/A";
-        if (viewModel.getSingleRoom(2) == null) {
+        if (viewModel.getSingleRoom(1) == null) {
             Toast.makeText(getContext(), R.string.fail_connectServer, Toast.LENGTH_LONG).show();
             toNormsSettings.setVisibility(View.GONE);
             toDashboard.setVisibility(View.GONE);
         } else {
-            room = viewModel.getSingleRoom(2);
+            room = viewModel.getSingleRoom(1);
             Metrics[] metrics = room.getMetrics();
             Temperature temperature = null;
             if (metrics.length != 0) {
@@ -107,7 +105,10 @@ public class HomeFragment extends Fragment {
                 co2S = String.valueOf(metrics[0].getCO2().getCo2());
             }
             boolean settingTemp = sharedPreferences.getBoolean("temperature", true);
-            setTempSetting(settingTemp, temperature);
+            if (temperature != null){
+                setTempSetting(settingTemp, temperature);
+            }
+
 
             toNormsSettings.setOnClickListener(new View.OnClickListener() {
                 @Override

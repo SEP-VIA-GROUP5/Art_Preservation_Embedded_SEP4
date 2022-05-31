@@ -41,7 +41,7 @@ public class DataRepository {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/rooms");
+                    URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/rooms");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setDoOutput(false);
                     connection.setDoInput(true);
@@ -93,7 +93,7 @@ public class DataRepository {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/room/" + id);
+                    URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/room/" + id);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setDoOutput(false);
                     connection.setDoInput(true);
@@ -145,6 +145,7 @@ public class DataRepository {
         return room[0];
     }
 
+    //never used
     public Metrics getMetricsSingleRoom(int number) {
         final Metrics[] metrics = new Metrics[1];
         final String[] msg = {""};
@@ -198,6 +199,7 @@ public class DataRepository {
         return metrics[0];
     }
 
+    //never used
     public String getMetricsByRoomString(int id) {
         final String[] strings = new String[1];
         new Thread(new Runnable() {
@@ -255,7 +257,7 @@ public class DataRepository {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/room/" + id);
+                    URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/room/" + id);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setDoOutput(false);
                     connection.setDoInput(true);
@@ -288,7 +290,7 @@ public class DataRepository {
             public void run() {
                 StringBuffer sb = new StringBuffer();
                 try {
-                    URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/room");
+                    URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/room");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     conn.setDoOutput(true);
@@ -402,8 +404,6 @@ public class DataRepository {
             public void run() {
                 StringBuffer sb = new StringBuffer();
                 try {
-
-                    
                     URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/temperatures" + max);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("PUT");
@@ -457,8 +457,6 @@ public class DataRepository {
             public void run() {
                 StringBuffer sb = new StringBuffer();
                 try {
-
-
                     URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/humidities" + max);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("PUT");

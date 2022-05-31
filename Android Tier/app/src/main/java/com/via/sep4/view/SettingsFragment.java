@@ -18,12 +18,10 @@ import com.via.sep4.R;
 import com.via.sep4.model.Metrics;
 import com.via.sep4.model.Room;
 import com.via.sep4.viewModel.DataViewModel;
-import com.via.sep4.viewModel.SettingsViewModel;
 
 public class SettingsFragment extends Fragment {
 
     private DataViewModel viewModel;
-    private SettingsViewModel viewSmodel;
     private Room room;
     private TextView roomId;
     private int id;

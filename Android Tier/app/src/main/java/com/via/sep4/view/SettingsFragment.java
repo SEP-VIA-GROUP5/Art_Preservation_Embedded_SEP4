@@ -26,10 +26,11 @@ public class SettingsFragment extends Fragment {
     private SettingsViewModel viewSmodel;
     private Room room;
     private TextView roomId;
-    private int id, finalValue;
+    private int id;
+    private Metrics[] metrics;
 
     private Button setBtn;
-    private EditText maxTemp, minTemp, maxHum, minHum, maxCO2, minCO2;
+    private EditText maxTemp, maxHum, maxCO2;
 
 
     @Override
@@ -49,13 +50,12 @@ public class SettingsFragment extends Fragment {
         roomId = v.findViewById(R.id.settingsRoom_id);
         room = viewModel.getSingleRoom(id);
         roomId.setText(String.valueOf(id));
-
+        metrics = room.getMetrics();
         initView(v);
 
         setBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Metrics[] metrics = room.getMetrics();
                 Log.d("metrics", String.valueOf(metrics.length));
                 if (metrics.length > 0) {
                     new Thread(new Runnable() {
@@ -94,7 +94,9 @@ public class SettingsFragment extends Fragment {
         //    minCO2 = view.findViewById(R.id.MinC);
         setBtn = view.findViewById(R.id.settings_save);
 
-
+        maxCO2.setText(String.valueOf(metrics[0].getCO2().getMax()));
+        maxHum.setText(String.valueOf(metrics[0].getHumidity().getMax()));
+        maxTemp.setText(String.valueOf(metrics[0].getTemperature().getMax()));
     }
 
     public int toInt(EditText edtext) {

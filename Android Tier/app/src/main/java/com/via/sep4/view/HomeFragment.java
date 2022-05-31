@@ -109,7 +109,6 @@ public class HomeFragment extends Fragment {
                 setTempSetting(settingTemp, temperature);
             }
 
-
             toNormsSettings.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

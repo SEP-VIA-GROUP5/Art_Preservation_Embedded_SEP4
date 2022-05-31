@@ -4,7 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/drawable-v24/alert_icon.xml" value="0.2235" />
+        <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2235" />
         <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/drawable/ic_baseline_notification_important_24.xml" value="0.2235" />
+        <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/drawable/ic_large_icon.xml" value="0.2235" />
+        <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2235" />
+        <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/drawable/ic_launcher_final_foreground_final.xml" value="0.2235" />
         <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/layout/activity_about_us.xml" value="0.5575181159420289" />
         <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/layout/activity_contact_us.xml" value="0.5575181159420289" />
         <entry key="..\:/Users/fhuur/OneDrive/AndroidCodes/SEP4-Project/Android Tier/app/src/main/res/layout/activity_main.xml" value="0.2672239108409321" />

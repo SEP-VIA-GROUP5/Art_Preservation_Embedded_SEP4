@@ -174,7 +174,8 @@ public class HomeFragment extends Fragment {
                             .setContentText(getText(R.string.notification_channel_display_temp))
                             .setWhen(System.currentTimeMillis())
                             .setSmallIcon(R.drawable.ic_notification)
-                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.thermometer));
+                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.thermometer))
+                            .setAutoCancel(true);
                     notificationManager.notify(1, builder.build());
                 } else if (humidity.getHumidity() > humidity.getMax()) {
                     notificationManager.createNotificationChannel(channels.get(2));
@@ -183,7 +184,8 @@ public class HomeFragment extends Fragment {
                             .setContentText(getText(R.string.notification_channel_display_hum))
                             .setWhen(System.currentTimeMillis())
                             .setSmallIcon(R.drawable.ic_notification)
-                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.thermometer));
+                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.thermometer))
+                            .setAutoCancel(true);
                     notificationManager.notify(2, builder.build());
                 } else if (co2.getCo2() > co2.getMax()) {
                     notificationManager.createNotificationChannel(channels.get(3));
@@ -192,7 +194,8 @@ public class HomeFragment extends Fragment {
                             .setContentText(getText(R.string.notification_channel_display_co2))
                             .setWhen(System.currentTimeMillis())
                             .setSmallIcon(R.drawable.ic_notification)
-                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.thermometer));
+                            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.thermometer))
+                            .setAutoCancel(true);
                     notificationManager.notify(3, builder.build());
                 }
             }

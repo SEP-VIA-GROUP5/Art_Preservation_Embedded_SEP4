@@ -4,6 +4,8 @@
     <ClCompile Include="setupTesting.cpp" />
     <ClCompile Include="..\IoT-Testing\Setup.c" />
     <ClCompile Include="FreeRTOS_MOCK_FFF.cpp" />
+    <ClCompile Include="applicationTesting.cpp" />
+    <ClCompile Include="..\IoT-Testing\Application.c" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="FreeeRTOS">

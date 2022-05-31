@@ -3,10 +3,9 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#include <FreeRTOS.h>
-#include <task.h>
-#include <stdio.h>
-#include <event_groups.h>
+#include <../GoogleTesting/FreeRTOS.h>
+#include <../GoogleTesting/task.h>
+#include <../GoogleTesting/event_groups.h>
 #include "Setup.h"
 
 

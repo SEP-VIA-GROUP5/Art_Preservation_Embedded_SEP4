@@ -9,10 +9,10 @@
 
 #pragma once
 
-#include <FreeRTOS.h>
-#include <message_buffer.h>
-#include <semphr.h>
-#include <event_groups.h>
+#include <../GoogleTesting/FreeRTOS.h>
+#include <../GoogleTesting/message_buffer.h>
+#include <../GoogleTesting/semphr.h>
+#include <../GoogleTesting/event_groups.h>
 //Variables for norms of:
 //CO2 measurements
 extern uint16_t co2Norm;

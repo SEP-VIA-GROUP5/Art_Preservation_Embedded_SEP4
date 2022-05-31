@@ -2,10 +2,12 @@ package com.via.sep4.model;
 
 public class Temperature {
     private final int id;
+    private final int max;
     private final int temperature;
 
-    public Temperature(int id, int temperature){
+    public Temperature(int id, int max, int temperature){
         this.id = id;
+        this.max = max;
         this.temperature = temperature;
     }
 
@@ -17,11 +19,16 @@ public class Temperature {
         return id;
     }
 
+    public int getMax() {
+        return max;
+    }
+
     @Override
     public String toString() {
         return "Temperature{" +
                 "id=" + id +
-                ", value=" + temperature +
+                ", max=" + max +
+                ", temperature=" + temperature +
                 '}';
     }
 }

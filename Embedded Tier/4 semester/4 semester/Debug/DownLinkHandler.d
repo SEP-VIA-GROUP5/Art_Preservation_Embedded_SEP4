@@ -1,5 +1,5 @@
 DownLinkHandler.d DownLinkHandler.o: .././DownLinkHandler.c \
- .././DownlinkHandler.h \
+ .././DownLinkHandler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
@@ -28,7 +28,7 @@ DownLinkHandler.d DownLinkHandler.o: .././DownLinkHandler.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  .././Configuration.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h
 
-.././DownlinkHandler.h:
+.././DownLinkHandler.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
 

@@ -1,0 +1,29 @@
+﻿  Application.c
+  Co2Sensor.c
+  Setup.c
+D:\SEM4\SEP\SEP4-Project\Embedded Tier\IoT-Testing\IoT-Testing\Setup.c(26,9): warning C4013: 'printf' undefined; assuming extern returning int
+  TemperatureHumiditySensor.c
+  WindowController.c
+D:\SEM4\SEP\SEP4-Project\Embedded Tier\IoT-Testing\IoT-Testing\WindowController.c(32,1): warning C4026: function declared with formal parameter list
+D:\SEM4\SEP\SEP4-Project\Embedded Tier\IoT-Testing\IoT-Testing\WindowController.c(69,1): warning C4026: function declared with formal parameter list
+  Generating Code...
+Application.obj : error LNK2019: unresolved external symbol _xEventGroupWaitBits referenced in function _ApplicationTask
+Co2Sensor.obj : error LNK2001: unresolved external symbol _xEventGroupWaitBits
+TemperatureHumiditySensor.obj : error LNK2001: unresolved external symbol _xEventGroupWaitBits
+WindowController.obj : error LNK2001: unresolved external symbol _xEventGroupWaitBits
+Application.obj : error LNK2019: unresolved external symbol _xEventGroupSetBits referenced in function _ApplicationTask
+Co2Sensor.obj : error LNK2001: unresolved external symbol _xEventGroupSetBits
+TemperatureHumiditySensor.obj : error LNK2001: unresolved external symbol _xEventGroupSetBits
+Application.obj : error LNK2019: unresolved external symbol _xMessageBufferSend referenced in function _ApplicationTask
+Application.obj : error LNK2019: unresolved external symbol _vTaskDelay referenced in function _ApplicationTask
+Co2Sensor.obj : error LNK2001: unresolved external symbol _vTaskDelay
+TemperatureHumiditySensor.obj : error LNK2001: unresolved external symbol _vTaskDelay
+WindowController.obj : error LNK2001: unresolved external symbol _vTaskDelay
+Configuration.obj : error LNK2019: unresolved external symbol _xSemaphoreCreateMutex referenced in function _createConfiguration
+Configuration.obj : error LNK2019: unresolved external symbol _xSemaphoreGive referenced in function _createConfiguration
+WindowController.obj : error LNK2001: unresolved external symbol _xSemaphoreGive
+Setup.obj : error LNK2019: unresolved external symbol _xEventGroupCreate referenced in function _initializeEventGroup
+Setup.obj : error LNK2019: unresolved external symbol _xMessageBufferCreate referenced in function _createDownLinkMessageBuffer
+WindowController.obj : error LNK2019: unresolved external symbol _xSemaphoreTake referenced in function _windowControllerTask
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol _main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+D:\SEM4\SEP\SEP4-Project\Embedded Tier\IoT-Testing\Debug\IoT-Testing.exe : fatal error LNK1120: 10 unresolved externals

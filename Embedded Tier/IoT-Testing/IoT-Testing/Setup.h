@@ -1,9 +1,9 @@
 #pragma once
-#include <FreeRTOS.h>
-#include <event_groups.h>
-#include <message_buffer.h>
-#include "SensorDataPackageHandler.h"
-
+#include <../GoogleTesting/FreeRTOS.h>
+#include <../GoogleTesting/semphr.h>
+#include <../GoogleTesting/queue.h>
+#include <../GoogleTesting/event_groups.h>
+#include <../GoogleTesting/message_buffer.h>
 
 #define HUMIDITY_TEMPERATURE_MEASURE_BIT (1<<0)
 #define HUMIDITY_TEMPERATURE_READY_BIT (1<<1)

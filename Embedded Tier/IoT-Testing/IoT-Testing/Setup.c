@@ -1,8 +1,9 @@
+#include <../GoogleTesting/FreeRTOS.h>
+#include <../GoogleTesting/semphr.h>
+#include <../GoogleTesting/queue.h>
+#include <../GoogleTesting/event_groups.h>
+#include <../GoogleTesting/message_buffer.h>
 #include "Setup.h"
-#include <FreeRTOS.h>
-#include <event_groups.h>
-#include <message_buffer.h>
-#include "SensorDataPackageHandler.h"
 
 EventGroupHandle_t measureEventGroup;
 EventGroupHandle_t dataReadyEventGroup;
@@ -20,7 +21,7 @@ void createUpLinkMessageBuffer() //Created a buffer for messages so it can be up
 {
 	
 	upLinkMessageBuffer = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2);
-	if(upLinkMessageBuffer == NULL )
+	if(upLinkMessageBuffer == NULL)
 	{
 		printf("Not enough heap memory for uplink message buffer");
 	}
@@ -34,7 +35,7 @@ void createDownLinkMessageBuffer() //Created a buffer for messages so it can be 
 {
 	
 	downLinkMessageBuffer = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2);
-	if(downLinkMessageBuffer == NULL )
+	if(downLinkMessageBuffer == NULL)
 	{
 		printf("Not enough heap memory for downlink message buffer");
 	}

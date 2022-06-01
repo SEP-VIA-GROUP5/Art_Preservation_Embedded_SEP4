@@ -26,9 +26,9 @@ public class TemperatureController {
         return repo.save(newTemperature);
     }
 
-    @PostMapping("/temperatures")
-    Temperature setNorm(@RequestBody Temperature newTemperature, @RequestParam double min, @RequestParam double max) {
-        newTemperature.setNorm(min, max);
+    @PutMapping("/temperatures")
+    Temperature setNorm(@RequestBody Temperature newTemperature, @RequestParam double max) {
+        newTemperature.setMax(max);
         return repo.save(newTemperature);
     }
 
@@ -38,18 +38,14 @@ public class TemperatureController {
                 -> new TemperatureNotFoundException(id));
     }
 
-//    @PutMapping("/temperature/{id}")
-//    Temperature update(@RequestBody Temperature newTemperature, @PathVariable Long id) {
-//        return repo.findById(id)
-//                .map(temperature -> {
-//                    temperature.setValue(newTemperature.getValue());
-//                    return repo.save(temperature);
-//                })
-//                .orElseGet(() -> {
-//                    newTemperature.setId(id);
-//                    return repo.save(newTemperature);
-//                });
-//    }
+    @GetMapping("/temperature")
+    double getMax(){
+        List<Temperature> all = repo.findAll();
+        Temperature max = repo.findById((long) all.size()).orElseThrow(
+                () -> new TemperatureNotFoundException((long) all.size())
+        );
+        return max.getMax();
+    }
 
     @DeleteMapping("temperature/{id}")
     void delete(@PathVariable Long id) {

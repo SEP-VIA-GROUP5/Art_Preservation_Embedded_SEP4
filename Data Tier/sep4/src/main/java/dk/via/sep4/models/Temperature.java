@@ -26,7 +26,7 @@ public class Temperature {
   private double temperature;
 
   @Column
-  private double min, max;
+  private double max;
 
   @OneToOne(mappedBy = "temperature")
   private Metrics metrics;
@@ -36,7 +36,6 @@ public class Temperature {
 
   public Temperature(double temperature) {
     this.temperature = temperature;
-    min = 0;
     max = 0;
   }
 
@@ -56,8 +55,11 @@ public class Temperature {
     this.temperature = temperature;
   }
 
-  public void setNorm(double min, double max) {
-    this.min = min;
+  public double getMax() {
+    return max;
+  }
+
+  public void setMax(double max) {
     this.max = max;
   }
 
@@ -66,7 +68,6 @@ public class Temperature {
     return "Temperature{" +
             "id: " + id +
             ", temperature: " + temperature +
-            ", min: " + min +
             ", max: " + max +
             '}';
   }

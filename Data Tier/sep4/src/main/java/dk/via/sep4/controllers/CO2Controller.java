@@ -26,9 +26,9 @@ public class CO2Controller {
         return repo.save(newCO2);
     }
 
-    @PostMapping("/co2s")
-    CO2 setNorm(@RequestBody CO2 newCO2, @RequestParam double min, @RequestParam double max) {
-        newCO2.setNorm(min, max);
+    @PutMapping("/co2s")
+    CO2 setNorm(@RequestBody CO2 newCO2, @RequestParam double max) {
+        newCO2.setMax(max);
         return repo.save(newCO2);
     }
 
@@ -39,18 +39,14 @@ public class CO2Controller {
         );
     }
 
-//    @PutMapping("/co2/{id}")
-//    CO2 update(@RequestBody CO2 newCO2, @PathVariable Long id) {
-//        return repo.findById(id)
-//                .map(co2 -> {
-//                    co2.setValue(newCO2.getValue());
-//                    return repo.save(newCO2);
-//                })
-//                .orElseGet(() -> {
-//                    newCO2.setId(id);
-//                    return repo.save(newCO2);
-//                });
-//    }
+    @GetMapping("/co2")
+    double getMax() {
+        List<CO2> all = repo.findAll();
+        CO2 co2 = repo.findById((long) all.size()).orElseThrow(
+                () -> new CO2NotFoundException((long) all.size())
+        );
+        return co2.getMax();
+    }
 
     @DeleteMapping("/co2/{id}")
     void delete(@PathVariable Long id) {

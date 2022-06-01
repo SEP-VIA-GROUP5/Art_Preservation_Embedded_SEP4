@@ -27,14 +27,14 @@ public class CO2 {
   private double CO2;
 
   @Column
-  private double min, max;
+  private double max;
 
   @OneToOne(mappedBy = "co2")
   private Metrics metrics;
 
   public CO2(double CO2) {
     this.CO2 = CO2;
-    min = 0;
+    max = 0;
   }
   public CO2() {
   }
@@ -59,8 +59,11 @@ public class CO2 {
     this.CO2 = CO2;
   }
 
-  public void setNorm(double min, double max) {
-    this.min = min;
+  public double getMax() {
+    return max;
+  }
+
+  public void setMax(double max) {
     this.max = max;
   }
 
@@ -69,7 +72,6 @@ public class CO2 {
     return "CO2{" +
             "id: " + id +
             ", CO2: " + CO2 +
-            ", min: " + min +
             ", max: " + max +
             '}';
   }

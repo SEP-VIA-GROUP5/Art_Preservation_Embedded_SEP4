@@ -73,4 +73,12 @@
         android:id="@+id/settingsFragment"
         android:name="com.via.sep4.view.SettingsFragment"
         android:label="Notification Settings" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.via.sep4.view.AboutUsFragment"
+        android:label="AboutUsFragment" />
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.via.sep4.view.ContactUsFragment"
+        android:label="ContactUsFragment" />
 </navigation>

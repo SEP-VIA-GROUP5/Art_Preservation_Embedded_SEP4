@@ -3,13 +3,13 @@ An Embedded system for Art galleries. The main purpose - present the data of the
 
 ## Teams:
 
-####IOT team. 
+### IOT team. 
 Responsible for the embedded part of the system.
 
-####DataWarehouse team. 
+### DataWarehouse team. 
 Responsible for getting the data from embedded system and storing it in a data warehouse. Also making a web service to make the data accesible.
 - [Timothy Johan Engkar](https://github.com/AsuraEyes) - AsuraEyes  
 - [Rytis Ziaukas](https://github.com/rycka13) - rycka13
 
-####Android team. 
+### Android team. 
 Responsible for making an android application that will present the data received from the data warehouse in various ways.

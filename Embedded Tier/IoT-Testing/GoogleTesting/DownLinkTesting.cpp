@@ -51,7 +51,7 @@ TEST_F(DownLinkTesting, DownLinkMessageReceivedbutSemaphoreNotGiven) {
 	lora_downLink_task();
 	ASSERT_EQ(1, xMessageBufferReceive_fake.call_count);
 	ASSERT_EQ(1, xSemaphoreTake_fake.call_count);
-	ASSERT_EQ(1, xSemaphoreGive_fake.call_count);
+	ASSERT_EQ(1, xSemaphoreGive_fake.call_count); // from createConfiguration
 	ASSERT_EQ(1, vTaskDelay_fake.call_count);
 }
 

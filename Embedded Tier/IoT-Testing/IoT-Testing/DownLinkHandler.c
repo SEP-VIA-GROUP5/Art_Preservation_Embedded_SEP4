@@ -33,7 +33,7 @@ void setPayLoadLen(int length)
 void lora_downLink_task()
 {
 		xMessageBufferReceive(downLinkMessageBuffer, &lora_downlink_payload, sizeof(lora_driver_payload_t), portMAX_DELAY);
-		if (lora_downlink_payload.len != 0)
+		if (lora_downlink_payload.len == 5)
 		{
 			if( xSemaphoreTake( configMutex, ( TickType_t ) 10 ) == pdTRUE )
 			{

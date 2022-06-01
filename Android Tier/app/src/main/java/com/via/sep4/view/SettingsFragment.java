@@ -57,16 +57,16 @@ public class SettingsFragment extends Fragment {
                 Log.d("metrics", String.valueOf(metrics.length));
                 if (metrics.length > 0) {
                     //temperature
-                    metrics[3].getTemperature().setMax(toInt(maxTemp));
-                    viewModel.addTempNorm(metrics[3].getTemperature(), toInt(maxTemp));
+                    metrics[1].getTemperature().setMax(toInt(maxTemp));
+                    viewModel.addTempNorm(metrics[1].getTemperature(), toInt(maxTemp));
 
                     //humidity
-                    metrics[3].getHumidity().setMax(toInt(maxHum));
-                    viewModel.addHumNorm(metrics[3].getHumidity(), toInt(maxHum));
+                    metrics[1].getHumidity().setMax(toInt(maxHum));
+                    viewModel.addHumNorm(metrics[1].getHumidity(), toInt(maxHum));
 
                     //co2
-                    metrics[3].getCO2().setMax(toInt(maxCO2));
-                    viewModel.addCO2Norm(metrics[3].getCO2(), toInt(maxCO2));
+                    metrics[1].getCO2().setMax(toInt(maxCO2));
+                    viewModel.addCO2Norm(metrics[1].getCO2(), toInt(maxCO2));
 
                     Toast.makeText(getContext(), R.string.settings_saveChange, Toast.LENGTH_SHORT).show();
                 } else {
@@ -88,9 +88,9 @@ public class SettingsFragment extends Fragment {
         //    minCO2 = view.findViewById(R.id.MinC);
         setBtn = view.findViewById(R.id.settings_save);
 
-        maxCO2.setText(String.valueOf(metrics[3].getCO2().getMax()));
-        maxHum.setText(String.valueOf(metrics[3].getHumidity().getMax()));
-        maxTemp.setText(String.valueOf(metrics[3].getTemperature().getMax()));
+        maxCO2.setText(String.valueOf(metrics[1].getCO2().getMax()));
+        maxHum.setText(String.valueOf(metrics[1].getHumidity().getMax()));
+        maxTemp.setText(String.valueOf(metrics[1].getTemperature().getMax()));
     }
 
     public int toInt(EditText edtext) {

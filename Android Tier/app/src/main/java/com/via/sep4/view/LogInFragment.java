@@ -168,9 +168,8 @@ public class LogInFragment extends Fragment {
     }
 
     private void checkUser(FirebaseUser user) {
-
         if (user != null) {
-            getActivity().onBackPressed();
+            NavHostFragment.findNavController(LogInFragment.this).navigate(R.id.action_signIn_fragment_to_nav_home);
         }
     }
 }

@@ -4,21 +4,29 @@
  * Created: 05/24/22 3:47:14 PM
  *  Author: rytis
  */ 
-
-#include "Co2Sensor.h"
-#include <FreeRTOS.h>
-#include <task.h>
 #include <stdio.h>
+
+#include <../GoogleTesting/FreeRTOS.h>
+#include <../GoogleTesting/task.h>
+#include <../GoogleTesting/event_groups.h>
 #include "Setup.h"
-#include <event_groups.h>
+#include "Co2Sensor.h"
 
 void myCo2CallBack(uint16_t ppm);
 
 uint16_t co2Ppm = 0;
 
+//Gets CO2 data
+uint16_t getCo2() 
+{
+	return co2Ppm;
+}
+
+
+
 //Task for handling measurements when Application asks
-void Co2Task(){
-	while(1){
+void Co2Task()
+{
 		
 		//EventGroup waits until Application sends MEASURE_BIT and tells each of the sensors to start measuring the metrics
 		EventBits_t eventBits = xEventGroupWaitBits(measureEventGroup,CO2_MEASURE_BIT,pdTRUE,pdTRUE,portMAX_DELAY);
@@ -38,7 +46,6 @@ void Co2Task(){
 			//Task is delayed with 10 milliseconds.
 			vTaskDelay(pdMS_TO_TICKS(10));
 		}
-	}
 }
 
 //Callback to set the CO2 data
@@ -50,7 +57,8 @@ void myCo2CallBack(uint16_t ppm)
 
 
 //creates the Co2Task which is used in main.c class
-void createCo2Task(){
+void createCo2Task()
+{
 	while (1)
 	{
 		Co2Task();

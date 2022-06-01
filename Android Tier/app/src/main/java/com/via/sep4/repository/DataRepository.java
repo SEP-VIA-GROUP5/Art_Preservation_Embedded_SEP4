@@ -41,7 +41,7 @@ public class DataRepository {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/rooms");
+                    URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/rooms");
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setDoOutput(false);
                     connection.setDoInput(true);
@@ -78,7 +78,7 @@ public class DataRepository {
                 e.printStackTrace();
             }
         }
-        if (!msg[0].contains("Code")){
+        if (!msg[0].contains("Code")) {
             Gson gson = new Gson();
             rooms = gson.fromJson(msg[0], new TypeToken<List<Room>>() {
             }.getType());
@@ -93,7 +93,7 @@ public class DataRepository {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/room/" + id);
+                    URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/room/" + id);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setDoOutput(false);
                     connection.setDoInput(true);
@@ -129,23 +129,23 @@ public class DataRepository {
                 }
             }
         }).start();
-        while (msg[0] == ""){
+        while (msg[0] == "") {
             try {
                 Thread.sleep(30);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        if (!msg[0].contains("Code")){
+        if (!msg[0].contains("Code")) {
             Gson gson = new Gson();
             room[0] = gson.fromJson(msg[0], Room.class);
             msg[0] = room[0].toString();
             Log.d("room get", msg[0]);
         }
-
         return room[0];
     }
 
+    //never used
     public Metrics getMetricsSingleRoom(int number) {
         final Metrics[] metrics = new Metrics[1];
         final String[] msg = {""};
@@ -199,6 +199,7 @@ public class DataRepository {
         return metrics[0];
     }
 
+    //never used
     public String getMetricsByRoomString(int id) {
         final String[] strings = new String[1];
         new Thread(new Runnable() {
@@ -256,7 +257,7 @@ public class DataRepository {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/room/" + id);
+                    URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/room/" + id);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setDoOutput(false);
                     connection.setDoInput(true);
@@ -266,7 +267,6 @@ public class DataRepository {
                     connection.setConnectTimeout(3000);
                     connection.connect();
                     code[0] = connection.getResponseCode();
-
                     connection.disconnect();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -290,7 +290,7 @@ public class DataRepository {
             public void run() {
                 StringBuffer sb = new StringBuffer();
                 try {
-                    URL url = new URL("http://sep4data-env.eba-hxyfmrv6.us-west-1.elasticbeanstalk.com/api/room");
+                    URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/room");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     conn.setDoOutput(true);
@@ -393,6 +393,163 @@ public class DataRepository {
             }
         }).start();
         return code[0];
+    }
+
+    public void setTempNorm(JSONObject jsonParam, int max) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (this) {
+                    HttpURLConnection conn = null;
+                    StringBuffer sb = new StringBuffer();
+                    try {
+                        URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/temperatures?max=" + max);
+                        conn = (HttpURLConnection) url.openConnection();
+                        conn.setRequestMethod("PUT");
+                        conn.setDoOutput(true);
+                        conn.setDoInput(true);
+                        conn.setUseCaches(false);
+                        conn.setRequestProperty("Connection", "Keep-Alive");
+                        conn.setRequestProperty("Charset", "UTF-8");
+                        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        conn.setRequestProperty("accept", "application/json");
+                        conn.connect();
+                        OutputStream out = new DataOutputStream(conn.getOutputStream());
+                        out.write((jsonParam.toString()).getBytes("UTF-8"));
+                        out.flush();
+                        out.close();
+
+                        System.out.println(conn.getResponseCode());
+                        if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
+                            InputStream in1 = conn.getInputStream();
+                            try {
+                                String readLine = new String();
+                                BufferedReader responseReader = new BufferedReader(new InputStreamReader(in1, "UTF-8"));
+                                while ((readLine = responseReader.readLine()) != null) {
+                                    sb.append(readLine).append("\n");
+                                }
+                                responseReader.close();
+                                System.out.println(sb.toString());
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
+                        } else {
+                            System.out.println("error");
+                        }
+
+                    } catch (Exception e) {
+                        Log.d("getString e", e.getMessage());
+                    } finally {
+                        if (conn != null) {
+                            conn.disconnect();
+                        }
+                    }
+                }
+
+            }
+        }).start();
+    }
+
+
+    public void setHumNorm(JSONObject jsonParam, int max) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (this) {
+                    StringBuffer sb = new StringBuffer();
+                    try {
+                        URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/humidities?max=" + max);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        conn.setRequestMethod("PUT");
+                        conn.setDoOutput(true);
+                        conn.setDoInput(true);
+                        conn.setUseCaches(false);
+                        conn.setRequestProperty("Connection", "Keep-Alive");
+                        conn.setRequestProperty("Charset", "UTF-8");
+                        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        conn.setRequestProperty("accept", "application/json");
+                        conn.connect();
+                        OutputStream out = new DataOutputStream(conn.getOutputStream());
+                        out.write((jsonParam.toString()).getBytes("UTF-8"));
+                        out.flush();
+                        out.close();
+
+                        System.out.println(conn.getResponseCode());
+                        if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
+                            InputStream in1 = conn.getInputStream();
+                            try {
+                                String readLine = new String();
+                                BufferedReader responseReader = new BufferedReader(new InputStreamReader(in1, "UTF-8"));
+                                while ((readLine = responseReader.readLine()) != null) {
+                                    sb.append(readLine).append("\n");
+                                }
+                                responseReader.close();
+                                System.out.println(sb.toString());
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
+                        } else {
+                            System.out.println("error");
+                        }
+                        conn.disconnect();
+                    } catch (Exception e) {
+                        Log.d("getString e", e.getMessage());
+                    }
+                }
+
+            }
+        }).start();
+    }
+
+
+    public void setCO2Norm(JSONObject jsonParam, int max) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (this) {
+                    StringBuffer sb = new StringBuffer();
+                    try {
+                        URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/co2s?max=" + max);
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        conn.setRequestMethod("PUT");
+                        conn.setDoOutput(true);
+                        conn.setDoInput(true);
+                        conn.setUseCaches(false);
+                        conn.setRequestProperty("Connection", "Keep-Alive");
+                        conn.setRequestProperty("Charset", "UTF-8");
+                        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        conn.setRequestProperty("accept", "application/json");
+                        conn.connect();
+                        OutputStream out = new DataOutputStream(conn.getOutputStream());
+                        out.write((jsonParam.toString()).getBytes("UTF-8"));
+                        out.flush();
+                        out.close();
+
+                        System.out.println(conn.getResponseCode());
+                        if (HttpURLConnection.HTTP_OK == conn.getResponseCode()) {
+                            InputStream in1 = conn.getInputStream();
+                            try {
+                                String readLine = new String();
+                                BufferedReader responseReader = new BufferedReader(new InputStreamReader(in1, "UTF-8"));
+                                while ((readLine = responseReader.readLine()) != null) {
+                                    sb.append(readLine).append("\n");
+                                }
+                                responseReader.close();
+                                System.out.println(sb.toString());
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            }
+                        } else {
+                            System.out.println("error");
+                        }
+                        conn.disconnect();
+                    } catch (Exception e) {
+                        Log.d("getString e", e.getMessage());
+                    }
+                }
+
+            }
+        }).start();
     }
 
 }

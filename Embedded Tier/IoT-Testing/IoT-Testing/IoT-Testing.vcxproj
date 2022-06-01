@@ -144,10 +144,8 @@
     <ClCompile Include="Co2Sensor.c" />
     <ClCompile Include="Configuration.c" />
     <ClCompile Include="DownLinkHandler.c" />
-    <ClCompile Include="SensorDataPackageHandler.c" />
     <ClCompile Include="Setup.c" />
     <ClCompile Include="TemperatureHumiditySensor.c" />
-    <ClCompile Include="UpLinkHandler.c" />
     <ClCompile Include="WindowController.c" />
   </ItemGroup>
   <ItemGroup>
@@ -163,10 +161,8 @@
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="DownLinkHandler.h" />
     <ClInclude Include="FreeRTOSConfig.h" />
-    <ClInclude Include="SensorDataPackageHandler.h" />
     <ClInclude Include="Setup.h" />
     <ClInclude Include="TemperatureHumiditySensor.h" />
-    <ClInclude Include="UpLinkHandler.h" />
     <ClInclude Include="windowController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

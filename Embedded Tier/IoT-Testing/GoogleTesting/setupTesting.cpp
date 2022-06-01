@@ -2,12 +2,9 @@
 #include "FreeRTOS_MOCK_FFF.h"
 
 extern "C" {
-#include "Setup.h"
+#include <Setup.h>
 #include "FreeRTOS.h"
-#include "task.h"
-#include "semphr.h"
-#include "event_groups.h"
-#include "queue.h"
+#include "message_buffer.h"
 }
 
 class SetupTesting : public::testing::Test
@@ -16,9 +13,6 @@ protected:
 	void SetUp() override
 	{
 		RESET_FAKE(xMessageBufferCreate);
-		RESET_FAKE(xSemaphoreCreateBinary);
-		RESET_FAKE(xSemaphoreGive);
-		RESET_FAKE(xQueueCreate);
 		RESET_FAKE(xEventGroupCreate);
 		FFF_RESET_HISTORY();
 
@@ -34,7 +28,19 @@ protected:
 TEST_F(SetupTesting, Initialise_DownLinkMessageBuffer) {
 	createDownLinkMessageBuffer();
 
-	ASSERT_EQ(1, xMessageBufferCreate_Fake.call_count);
-	ASSERT_EQ(40, xMessageBufferCreate_Fake.arg0_val);
+	ASSERT_EQ(1, xMessageBufferCreate_fake.call_count);
+	ASSERT_EQ(44, xMessageBufferCreate_fake.arg0_val);
+}
 
+TEST_F(SetupTesting, Initialise_UpLinkMessageBuffer) {
+	createUpLinkMessageBuffer();
+
+	ASSERT_EQ(1, xMessageBufferCreate_fake.call_count);
+	ASSERT_EQ(44, xMessageBufferCreate_fake.arg0_val);
+}
+
+TEST_F(SetupTesting, Initialise_EventGroup) {
+	initializeEventGroup();
+
+	ASSERT_EQ(2, xEventGroupCreate_fake.call_count);
 }

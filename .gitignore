@@ -1,3 +1,10 @@
 Embedded Tier/IoT-Testing/.vs/IoT-Testing/v17/Browse.VC.opendb
 Embedded Tier/IoT-Testing/.vs/IoT-Testing/v17/Solution.VC.opendb
 Android Tier/.idea/misc.xml
+*.db
+Embedded Tier/IoT-Testing/.vs/IoT-Testing/v17/.suo
+*.db-shm
+*.db-shm
+*.pdb
+*.log
+*.db-shm

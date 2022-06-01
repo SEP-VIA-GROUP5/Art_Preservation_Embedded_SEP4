@@ -9,6 +9,15 @@
 * values for CO2, Temperature and humidity
 */
 
+#include <stdio.h>
+#include <stdint.h>
+#include <../GoogleTesting/FreeRTOS.h>
+#include <../GoogleTesting/semphr.h>
+#include <../GoogleTesting/event_groups.h>
+#include <../GoogleTesting/message_buffer.h>
+
+
+
 #include "Configuration.h"
 
 //Variables for norms of:
@@ -27,37 +36,37 @@ SemaphoreHandle_t configMutex;
 * and the norm default values
 */
 void createConfiguration(){
-	
-	printf("Mutex was created\n");
 	co2Norm = 1000;
 	tempNorm = 0x1A;
-	printf("Config norm: %x\n", tempNorm);
 	humNorm = 1000;
 	configMutex = xSemaphoreCreateMutex();
 	xSemaphoreGive(configMutex);
 }
 
 //Getters for norm values
-uint16_t getCo2Norm(){
+uint16_t getCo2Norm()
+{
 	return co2Norm;
 }
-uint16_t getTempNorm(){
+uint16_t getTempNorm()
+{
 	return tempNorm;
 }
-uint16_t getHumNorm(){
+uint16_t getHumNorm()
+{
 	return humNorm;
 }
 
 //Setters for norm values
-uint16_t setCo2Norm(uint16_t norm)
+void setCo2Norm(uint16_t norm)
 {
 	co2Norm = norm;
 }
-uint16_t setTempNorm(uint16_t norm)
+void setTempNorm(uint16_t norm)
 {
 	tempNorm = norm;
 }
-uint16_t setHumNorm(uint16_t norm)
+void setHumNorm(uint16_t norm)
 {
 	humNorm = norm;
 }

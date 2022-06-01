@@ -1,10 +1,3 @@
-/*
- * WindowController.c
- *
- * Created: 05/27/22 12:39:22 PM
- *  Author: rytis
- */ 
-
 #include "WindowController.h"
 
 void createWindowController(){ //This function initializes the window controller
@@ -28,20 +21,17 @@ void windowControllerTask(void *pvpParameter){
 		{
 			if( xSemaphoreTake( configMutex, ( TickType_t ) 50 ) == pdTRUE ) //Check if the configuration mutex is available
 		{
-		printf("Norm: %u, Actual temp: %u\n", (unsigned int)getTempNorm(), (unsigned int)getTemperature());	
 			if(getTempNorm()<=(getTemperature()/10) || getHumNorm()<=(getHumidity()/10) || getCo2Norm()<=(getCo2()/10)) //Comparing norms and actual measured values
 			{
 				openWindow();
-				printf("Is it open?: %d", isOpen);
-				
-				printf("Window is opened");
+				printf("Window is opened\n");
 			}
 			else
 			{
 				if(isOpen==1)
 				{
 					closeWindow();
-					printf("Window is closed");
+					printf("Window is closed\n");
 				}
 			}
 			xSemaphoreGive(configMutex); //Giving back the configuration mutex to other classes

@@ -7,9 +7,10 @@
 
 #pragma once
 
-#include <FreeRTOS.h>
-#include <task.h>
-#include <event_groups.h>
+#include <stdint.h>
+#include <../GoogleTesting/FreeRTOS.h>
+#include <../GoogleTesting/task.h>
+#include <../GoogleTesting/event_groups.h>
 
 #include "TemperatureHumiditySensor.h"
 #include "Configuration.h"
@@ -19,10 +20,11 @@
 
 int isOpen;
 
+int getOpen();
 void createWindowController();
 void openWindow();
 void closeWindow();
-void windowControllerTask(void *pvpParameter);
-void createWindowControllerTask(UBaseType_t TaskPriority);
+void windowControllerTask();
+void createWindowControllerTask();
 
 

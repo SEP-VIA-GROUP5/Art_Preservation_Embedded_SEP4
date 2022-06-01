@@ -1,10 +1,3 @@
-/*
- * Co2Sensor.h
- *
- * Created: 05/24/22 2:48:55 PM
- *  Author: rytis
- */ 
-
 #pragma once
 
 #include <stdint.h>

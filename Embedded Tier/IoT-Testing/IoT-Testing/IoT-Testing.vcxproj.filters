@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="FreeRTOS">
-      <UniqueIdentifier>{ca0ca6f1-7332-4a56-ae2c-02a71bcc0802}</UniqueIdentifier>
+    <Filter Include="FreeeRTOS">
+      <UniqueIdentifier>{8007742d-fb59-48c7-98ee-644e53f96dc8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FreeRTOS\src">
-      <UniqueIdentifier>{7964c503-ed5f-4c29-a9f5-006473d36977}</UniqueIdentifier>
+    <Filter Include="FreeeRTOS\Header">
+      <UniqueIdentifier>{6dbef13a-7ea6-4731-93a8-9d31ee03da8e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -30,22 +30,16 @@
     <ClCompile Include="Configuration.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DownLinkHandler.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SensorDataPackageHandler.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Setup.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TemperatureHumiditySensor.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UpLinkHandler.c">
+    <ClCompile Include="WindowController.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WindowController.c">
+    <ClCompile Include="DownLinkHandler.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,19 +53,10 @@
     <ClInclude Include="Configuration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DownLinkHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SensorDataPackageHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Setup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TemperatureHumiditySensor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UpLinkHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="windowController.h">
@@ -81,25 +66,28 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\GoogleTesting\event_groups.h">
-      <Filter>FreeRTOS\src</Filter>
+      <Filter>FreeeRTOS\Header</Filter>
     </ClInclude>
     <ClInclude Include="..\GoogleTesting\FreeRTOS.h">
-      <Filter>FreeRTOS\src</Filter>
+      <Filter>FreeeRTOS\Header</Filter>
     </ClInclude>
     <ClInclude Include="..\GoogleTesting\message_buffer.h">
-      <Filter>FreeRTOS\src</Filter>
+      <Filter>FreeeRTOS\Header</Filter>
     </ClInclude>
     <ClInclude Include="..\GoogleTesting\queue.h">
-      <Filter>FreeRTOS\src</Filter>
+      <Filter>FreeeRTOS\Header</Filter>
     </ClInclude>
     <ClInclude Include="..\GoogleTesting\semphr.h">
-      <Filter>FreeRTOS\src</Filter>
+      <Filter>FreeeRTOS\Header</Filter>
     </ClInclude>
     <ClInclude Include="..\GoogleTesting\task.h">
-      <Filter>FreeRTOS\src</Filter>
+      <Filter>FreeeRTOS\Header</Filter>
     </ClInclude>
     <ClInclude Include="..\GoogleTesting\timers.h">
-      <Filter>FreeRTOS\src</Filter>
+      <Filter>FreeeRTOS\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DownLinkHandler.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

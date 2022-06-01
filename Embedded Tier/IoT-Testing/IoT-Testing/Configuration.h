@@ -9,9 +9,10 @@
 
 #pragma once
 
-#include <FreeRTOS.h>
-#include <semphr.h>
-
+#include <../GoogleTesting/FreeRTOS.h>
+#include <../GoogleTesting/message_buffer.h>
+#include <../GoogleTesting/semphr.h>
+#include <../GoogleTesting/event_groups.h>
 //Variables for norms of:
 //CO2 measurements
 extern uint16_t co2Norm;
@@ -31,6 +32,6 @@ uint16_t getTempNorm();
 uint16_t getHumNorm();
 
 //Setters for norms
-uint16_t setCo2Norm(uint16_t norm);
-uint16_t setTempNorm(uint16_t norm);
-uint16_t setHumNorm(uint16_t norm);
+void setCo2Norm(uint16_t norm);
+void setTempNorm(uint16_t norm);
+void setHumNorm(uint16_t norm);

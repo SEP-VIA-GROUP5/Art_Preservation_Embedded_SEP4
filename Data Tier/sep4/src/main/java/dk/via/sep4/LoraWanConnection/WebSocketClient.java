@@ -17,27 +17,25 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 /**
- * @author $(Alina Chelmus)
+ * @author Alina Chelmus
+ * @author Timothy Engkar
  */
-
 
 public class WebSocketClient implements WebSocket.Listener
 {
 
   private WebSocket server;
   private Gson gson = new Gson();
-  private MetricsRepository repo;
+  private final MetricsRepository repo;
+  private final RoomRepository roomRep;
   HexaConverter convertorHex = new HexaConverter();
-  private RoomRepository roomRepository;
-
-  private Room roomDB;
 
 
   public WebSocket getServer()
   {
     return server;
   }
-  public void DataReceivedMessage(String jsonTelegram)
+  public void sendDownLink(String jsonTelegram)
   {
     server.sendText(jsonTelegram, true);
   }
@@ -47,8 +45,7 @@ public class WebSocketClient implements WebSocket.Listener
             buildAsync(URI.create(url), this);
     server = ws.join();
     repo = (MetricsRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("metricsRepository");
-    roomRepository = (RoomRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("roomRepository");
-    roomDB = new Room();
+    roomRep = (RoomRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("roomRepository");
   }
 
   //onOpen()
@@ -97,13 +94,6 @@ public class WebSocketClient implements WebSocket.Listener
       DataReceivedMessage dataReceivedMessage =  gson.fromJson(indented, DataReceivedMessage.class);
       Metrics metricsDB = convertorHex.convertFromHexaToInt(dataReceivedMessage);
       repo.save(metricsDB);
-
-      roomDB = roomRepository.getById((long)1);
-      System.out.println(roomDB.getName());
-      roomDB.addMetrics(metricsDB);
-
-      roomRepository.save(roomDB);
-
     }
     catch (JSONException e)
     {
@@ -114,9 +104,5 @@ public class WebSocketClient implements WebSocket.Listener
     webSocket.request(1);
     return new CompletableFuture().completedFuture("onText() completed.").thenAccept(System.out::println);
   }
-
-
-
-
 
 }

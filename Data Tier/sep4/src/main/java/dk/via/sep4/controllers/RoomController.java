@@ -28,17 +28,6 @@ public class RoomController
         return repo.save(room);
     }
 
-    @PutMapping("/addMetrics/{id}")
-    Room addMetrics(@RequestBody Metrics metrics, @PathVariable Long id){
-        return repo.findById(id)
-                .map(room -> {
-                    metrics.setTime();
-                    room.addMetrics(metrics);
-                    return repo.save(room);
-                })
-                .orElseThrow(() -> new MetricsNotFoundException(id));
-    }
-
     @GetMapping("/room/{id}")
     Room get(@PathVariable Long id)
     {

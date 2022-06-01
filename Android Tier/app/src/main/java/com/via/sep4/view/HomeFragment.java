@@ -143,7 +143,7 @@ public class HomeFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void loadDataForMain() {
         Log.d("home loading", "load data");
-        room = viewModel.getSingleRoom(2);
+        room = viewModel.getSingleRoom(1);
         String humS = "N/A";
         String co2S = "N/A";
         try {
@@ -155,9 +155,9 @@ public class HomeFragment extends Fragment {
             } else {
                 if (metrics.length != 0) {
                     Log.d("metrics length", String.valueOf(metrics.length));
-                    Humidity humidity = metrics[1].getHumidity();
-                    com.via.sep4.model.CO2 co2 = metrics[1].getCO2();
-                    temperature = metrics[1].getTemperature();
+                    Humidity humidity = metrics[3].getHumidity();
+                    com.via.sep4.model.CO2 co2 = metrics[3].getCO2();
+                    temperature = metrics[3].getTemperature();
                     humS = String.valueOf(humidity.getHumidity());
                     co2S = String.valueOf(co2.getCo2());
                     boolean settingTemp = sharedPreferences.getBoolean("temperature", true);

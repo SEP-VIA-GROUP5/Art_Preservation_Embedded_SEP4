@@ -1,6 +1,8 @@
 # SEP4-Project
 An Embedded system for Art galleries. The main purpose - present the data of the room on an Android app (temperature, humidity, CO2) and act accordingly (open a window, etc.).
 
+## Video presentation
+https://youtu.be/lSn7cLdbTo8
 ## Teams:
 
 ####IOT team. 

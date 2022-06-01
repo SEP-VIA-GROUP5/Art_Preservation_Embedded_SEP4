@@ -26,8 +26,7 @@ public class WebSocketClient implements WebSocket.Listener
 
   private WebSocket server;
   private Gson gson = new Gson();
-  private final MetricsRepository repo;
-  private final RoomRepository roomRep;
+  private final RoomRepository repo;
   HexaConverter convertorHex = new HexaConverter();
 
 
@@ -44,8 +43,7 @@ public class WebSocketClient implements WebSocket.Listener
     CompletableFuture<WebSocket> ws = client.newWebSocketBuilder().
             buildAsync(URI.create(url), this);
     server = ws.join();
-    repo = (MetricsRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("metricsRepository");
-    roomRep = (RoomRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("roomRepository");
+    repo = (RoomRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("roomRepository");
   }
 
   //onOpen()
@@ -92,8 +90,8 @@ public class WebSocketClient implements WebSocket.Listener
     try{
       indented = (new JSONObject(data.toString())).toString(4);
       DataReceivedMessage dataReceivedMessage =  gson.fromJson(indented, DataReceivedMessage.class);
-      Metrics metricsDB = convertorHex.convertFromHexaToInt(dataReceivedMessage);
-      repo.save(metricsDB);
+      Room room = convertorHex.convertFromHexaToInt(dataReceivedMessage);
+      repo.save(room);
     }
     catch (JSONException e)
     {

@@ -8,6 +8,5 @@ import java.util.List;
 
 @Component
 public interface MetricsRepository extends JpaRepository<Metrics, Long> {
-    List<Metrics> findMetricsByRoomId(Long roomId);
-    Metrics findDistinctLastByRoomId(long roomId);
+    List<Metrics> findMetricsByRoomIs(Long roomId);
 }

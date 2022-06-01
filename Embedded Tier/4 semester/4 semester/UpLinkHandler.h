@@ -1,10 +1,3 @@
-/*
- * UpLinkHandler.h
- *
- * Created: 23.05.2022 13:30:58
- *  Author: baico
- */ 
-
 #include <stddef.h>
 #include <stdio.h>
 

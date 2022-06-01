@@ -6,15 +6,18 @@ import android.content.Context;
 
 import android.content.SharedPreferences;
 
-import android.hardware.SensorManager;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,28 +31,32 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.via.sep4.DataHandler;
+import com.via.sep4.NotificationHandler;
 import com.via.sep4.R;
+import com.via.sep4.model.CO2;
+import com.via.sep4.model.Humidity;
 import com.via.sep4.model.Metrics;
-import com.via.sep4.model.Notification;
 import com.via.sep4.model.Room;
 import com.via.sep4.model.Temperature;
 import com.via.sep4.viewModel.DataViewModel;
+
+import java.util.List;
 
 public class HomeFragment extends Fragment {
 
     private FirebaseAuth auth;
     private DataViewModel viewModel;
     private Button toNormsSettings, toDashboard;
-    private TextView temperatureTextView, humidity, CO2;
-    private Switch notification;
-    private Switch temperatureSwitch;
+    private TextView temperatureTextView, humidityTextView, CO2TextView;
+    private Switch temperatureSwitch, notificationSwitch;
     private TextView tempSettingText;
     private Room room;
-public static final String CHANNEL_1_ID="tempChannel";
-    public static final String CHANNEL_2_ID="humChannel";
-    public static final String CHANNEL_3_ID="CO2Channel";
+    private Temperature temperature = null;
+    private NotificationManager notificationManager;
 
-
+    public static final String CHANNEL_1_ID = "tempChannel";
+    public static final String CHANNEL_2_ID = "humChannel";
+    public static final String CHANNEL_3_ID = "CO2Channel";
 
     private SharedPreferences sharedPreferences;
 
@@ -66,103 +73,103 @@ public static final String CHANNEL_1_ID="tempChannel";
         createNotificationChannels();
     }
 
-    private void createNotificationChannels() {
-        //notification channel is not available on low api levels ( here i check for it)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-        {
-            NotificationChannel tempChannel = new NotificationChannel(
-                    CHANNEL_1_ID, "Temperature is rising", NotificationManager.IMPORTANCE_HIGH
-            );
-            tempChannel.setDescription("Temperature is high");
-
-            NotificationChannel humChannel = new NotificationChannel(
-            CHANNEL_2_ID, "Humidity is rising", NotificationManager.IMPORTANCE_HIGH
-            );
-            humChannel.setDescription("Humidity is high");
-
-            NotificationChannel CO2Channel = new NotificationChannel(
-                    CHANNEL_3_ID, "C02 is rising", NotificationManager.IMPORTANCE_HIGH
-            );
-            CO2Channel.setDescription("C02 is high");
-
-            sensorManager = (SensorManager)
-                    requireActivity().getSystemService(Context.SENSOR_SERVICE);
-
-            SensorManager sm = (SensorManager) getLayoutInflater().getContext().getSystemService(Context.SENSOR_SERVICE);
-          NotificationManager manager = getSystemService(NotificationManager.class);
-
-            manager.createNotificationChannels(tempChannel);
-            manager.createNotificationChannels(humChannel);
-            manager.createNotificationChannels(CO2Channel);
-
-
-        }
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         temperatureTextView = v.findViewById(R.id.dbtemperature);
-        humidity = v.findViewById(R.id.dbhumidity);
-        CO2 = v.findViewById(R.id.dbCO2);
+        humidityTextView = v.findViewById(R.id.dbhumidity);
+        CO2TextView = v.findViewById(R.id.dbCO2);
         toNormsSettings = v.findViewById(R.id.toNorms);
         toDashboard = v.findViewById(R.id.toDashboradGraph);
-        notification = v.findViewById(R.id.notSw);
         temperatureSwitch = v.findViewById(R.id.CtoFSw);
         tempSettingText = v.findViewById(R.id.home_cToF_Text);
         sharedPreferences = getContext().getSharedPreferences("settings", Context.MODE_PRIVATE);
+        notificationSwitch = v.findViewById(R.id.notSw);
 
-        // here i am selecting that the object room to be sent
+
+        Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            public void run() {
+                loadDataForMain();
+                handler.postDelayed(this, 120000);//set timer
+            }
+        };
+        handler.removeCallbacks(runnable);
+        handler.postDelayed(runnable, 1000);
+
+        toNormsSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle id = new Bundle();
+                id.putInt("roomId", room.getId());
+
+                NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_nav_home_to_settingsFragment, id);
+            }
+        });
+        Temperature finalTemperature = temperature;
+        temperatureSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b) {
+                    setTempSetting(b, finalTemperature);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("temperature", true);
+                    editor.commit();
+                } else {
+                    setTempSetting(b, finalTemperature);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("temperature", false);
+                    editor.commit();
+                }
+            }
+        });
+
+        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean onOff) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("notification", onOff);
+                editor.commit();
+            }
+        });
+
+        return v;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void loadDataForMain() {
+        Log.d("home loading", "load data");
+        room = viewModel.getSingleRoom(1);
         String humS = "N/A";
         String co2S = "N/A";
-        if (viewModel.getSingleRoom(2) == null) {
-            Toast.makeText(getContext(), R.string.fail_connectServer, Toast.LENGTH_LONG).show();
+        if (room.getMetrics().length == 0) {
             toNormsSettings.setVisibility(View.GONE);
             toDashboard.setVisibility(View.GONE);
+            Toast.makeText(getContext(), R.string.home_no_values, Toast.LENGTH_LONG).show();
         } else {
-            room = viewModel.getSingleRoom(2);
             Metrics[] metrics = room.getMetrics();
-            Temperature temperature = null;
             if (metrics.length != 0) {
-                temperature = metrics[0].getTemperature();
-                humS = String.valueOf(metrics[0].getHumidity().getHumidity());
-                co2S = String.valueOf(metrics[0].getCO2().getCo2());
-            }
-            boolean settingTemp = sharedPreferences.getBoolean("temperature", true);
-            setTempSetting(settingTemp, temperature);
+                Humidity humidity = metrics[0].getHumidity();
+                com.via.sep4.model.CO2 co2 = metrics[0].getCO2();
 
-            toNormsSettings.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Bundle id = new Bundle();
-                    id.putInt("roomId", room.getId());
-                    NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_nav_home_to_settingsFragment, id);
+                temperature = metrics[0].getTemperature();
+                humS = String.valueOf(humidity.getHumidity());
+                co2S = String.valueOf(co2.getCo2());
+                boolean settingTemp = sharedPreferences.getBoolean("temperature", true);
+                if (temperature != null) {
+                    setTempSetting(settingTemp, temperature);
                 }
-            });
-            Temperature finalTemperature = temperature;
-            temperatureSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (b) {
-                        setTempSetting(b, finalTemperature);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean("temperature", true);
-                        editor.commit();
-                    } else {
-                        setTempSetting(b, finalTemperature);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean("temperature", false);
-                        editor.commit();
-                    }
-                }
-            });
+                boolean settingNotification = sharedPreferences.getBoolean("notification", true);
+                notificationSwitch.setChecked(settingNotification);
+
+                setNotificationChannel(temperature, humidity, co2);
+            }
         }
-        humidity.setText(humS);
-        CO2.setText(co2S);
-        return v;
+        humidityTextView.setText(humS);
+        CO2TextView.setText(co2S);
     }
 
     private void checkUser(FirebaseUser user, Context context) {
@@ -191,4 +198,70 @@ public static final String CHANNEL_1_ID="tempChannel";
                     .setText(String.valueOf(DataHandler.CelsiusToFahrenheit(temperature.getTemperature())));
         }
     }
+
+    private void createNotificationChannels() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            notificationManager = getContext().getSystemService(NotificationManager.class);
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setNotificationChannel(Temperature temperature, Humidity humidity, CO2 co2) {
+        NotificationHandler handler = new NotificationHandler(getContext());
+        List<NotificationChannel> channels = handler.getChannels();
+        boolean settingNotification = sharedPreferences.getBoolean("notification", true);
+
+        if (temperature.getTemperature() > temperature.getMax()) {
+            temperatureTextView.setTextColor(getResources().getColor(R.color.r_red, getContext().getTheme()));
+            notificationManager.createNotificationChannel(channels.get(0));
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), CHANNEL_1_ID)
+                    .setContentTitle(getText(R.string.notification_channel1))
+                    .setContentText(getText(R.string.notification_channel_display_temp))
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.drawable.ic_notification)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.thermometer))
+                    .setAutoCancel(true);
+            if (settingNotification) {
+                enableNotification(builder, 1);
+            }
+        }
+        if (humidity.getHumidity() > humidity.getMax()) {
+            humidityTextView.setTextColor(getResources().getColor(R.color.r_red, getContext().getTheme()));
+            notificationManager.createNotificationChannel(channels.get(1));
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), CHANNEL_2_ID)
+                    .setContentTitle(getText(R.string.notification_channel2))
+                    .setContentText(getText(R.string.notification_channel_display_hum))
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.drawable.ic_notification)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.thermometer))
+                    .setAutoCancel(true);
+            if (settingNotification) {
+                enableNotification(builder, 2);
+            }
+        }
+        if (co2.getCo2() > co2.getMax()) {
+            CO2TextView.setTextColor(getResources().getColor(R.color.r_red, getContext().getTheme()));
+            notificationManager.createNotificationChannel(channels.get(2));
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(), CHANNEL_3_ID)
+                    .setContentTitle(getText(R.string.notification_channel3))
+                    .setContentText(getText(R.string.notification_channel_display_co2))
+                    .setWhen(System.currentTimeMillis())
+                    .setSmallIcon(R.drawable.ic_notification)
+                    .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.thermometer))
+                    .setAutoCancel(true);
+            if (settingNotification) {
+                enableNotification(builder, 3);
+            }
+        }
+    }
+
+    private void enableNotification(NotificationCompat.Builder builder, int id) {
+        notificationManager.notify(id, builder.build());
+    }
 }
+
+

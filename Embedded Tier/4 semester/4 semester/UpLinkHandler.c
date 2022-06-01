@@ -1,9 +1,3 @@
-/*
- * UpLinkHandler.c
- *
- * Created: 23.05.2022 13:30:06
- *  Author: baico
- */
 #include "UpLinkHandler.h"
 
 lora_driver_payload_t uplink_payload;

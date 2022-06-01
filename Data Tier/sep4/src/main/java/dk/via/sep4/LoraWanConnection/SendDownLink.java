@@ -1,61 +1,61 @@
 package dk.via.sep4.LoraWanConnection;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * @author $(Alina Chelmus)
+ * @author Timothy Engkar
  */
-public class SendDownLink
-{
-  @JsonProperty
-  private final String cmd = "tx";
-  @JsonProperty
-  private final String EUI = "0004A30B00F398F2";
-  @JsonProperty
-  private final int port = 2;
-  @JsonProperty
+public class SendDownLink {
+  private String cmd;
+  private String EUI;
+  private int port;
   private boolean confirmed;
-  @JsonProperty
   private String data;
 
-  public SendDownLink(boolean confirmed, String data) {
+  public SendDownLink(String cmd, String EUI, int port, boolean confirmed, String data) {
+    this.cmd = cmd;
+    this.EUI = EUI;
+    this.port = port;
     this.confirmed = confirmed;
     this.data = data;
   }
 
-  public String getCmd()
-  {
-    return cmd;
-  }
-
-  public String getEUI()
-  {
-    return EUI;
-  }
-
-  public int getPort()
-  {
-    return port;
-  }
-
-  public boolean isConfirmed()
-  {
-    return confirmed;
-  }
-
-  public void setConfirmed(boolean confirmed)
-  {
-    this.confirmed = confirmed;
-  }
-
-  public String getData()
-  {
+  public String getData() {
     return data;
   }
 
-  public void setData(String data)
-  {
+  public void setData(String data) {
     this.data = data;
   }
 
+  public String getCmd() {
+    return cmd;
+  }
 
+  public void setCmd(String cmd) {
+    this.cmd = cmd;
+  }
 
+  public String getEUI() {
+    return EUI;
+  }
+
+  public void setEUI(String EUI) {
+    this.EUI = EUI;
+  }
+
+  public int getPort() {
+    return port;
+  }
+
+  public void setPort(int port) {
+    this.port = port;
+  }
+
+  public boolean isConfirmed() {
+    return confirmed;
+  }
+
+  public void setConfirmed(boolean confirmed) {
+    this.confirmed = confirmed;
+  }
 }

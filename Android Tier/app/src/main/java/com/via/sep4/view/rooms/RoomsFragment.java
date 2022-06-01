@@ -28,9 +28,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.via.sep4.R;
 import com.via.sep4.model.Room;
-import com.via.sep4.view.HomeFragment;
-import com.via.sep4.view.LogInFragment;
-import com.via.sep4.view.SettingsFragment;
 import com.via.sep4.viewModel.DataViewModel;
 
 import org.json.JSONException;
@@ -86,7 +83,7 @@ public class RoomsFragment extends Fragment {
     private void loadData() {
         roomList.clear();
         if (mViewModel.getRooms().size() == 0) {
-            Toast.makeText(getContext(), R.string.fail_connectServer, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), R.string.home_no_values, Toast.LENGTH_LONG).show();
         } else {
             roomList = mViewModel.getRooms();
             roomList.remove(0);

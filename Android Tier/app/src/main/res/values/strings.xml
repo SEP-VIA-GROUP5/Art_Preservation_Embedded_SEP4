@@ -12,11 +12,21 @@
     <string name="side_header_username">Welcome back</string>
     <string name="side_header_email">Email</string>
 
-    <string name="fail_connectServer">Fail to connect to server</string>
+    <string name="home_no_values">No metric values for this room !</string>
 
+    <!-- home -->
     <string name="home_notification">Turn On or Off the notifications</string>
     <string name="home_tC">Display temperature in C</string>
     <string name="home_tF">Display temperature in F</string>
+    <string name="notification_channel1">Temperature warning</string>
+    <string name="notification_channel2">Humidity warning</string>
+    <string name="notification_channel3">CO2 warning</string>
+    <string name="notification_channel_display_temp">The temperature is over the warning value!</string>
+    <string name="notification_channel_display_hum">The humidity is over the warning value!</string>
+    <string name="notification_channel_display_co2">The CO2 is over the warning value!</string>
+    <string name="notification_channel1_desc">Alerts the user when the temperature exceeds the set value</string>
+    <string name="notification_channel2_desc">Alerts the user when the humidity exceeds the set value</string>
+    <string name="notification_channel3_desc">Alerts the user when the CO2 exceeds the set value</string>
 
     <!-- single room -->
     <string name="single_id">Room id :</string>
@@ -43,6 +53,7 @@
     <string name="MaxC">Maximum C02 (ppm):</string>
     <string name="MinC">Minimum C02 (ppm):</string>
     <string name="settings_saveChange">Save changes</string>
+    <string name="set_error">No metric values for this room</string>
 
     <!-- register error label -->
     <string name="R_passwordLengthE">Password should be more than 6 characters</string>
@@ -71,7 +82,6 @@
     <!--Make bold-->
     <string name="don_t_have_an_account_sign_up">Don\'t have an account? <b>Sign Up</b> </string>
     <string name="already_have_an_account_sign_in">Already have an account? <b>Sign in</b> </string>
-
 
     <string name="firebase_dbLink">https://sep4-ed4e9-default-rtdb.europe-west1.firebasedatabase.app/</string>
     .

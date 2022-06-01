@@ -17,27 +17,24 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 /**
- * @author $(Alina Chelmus)
+ * @author Alina Chelmus
+ * @author Timothy Engkar
  */
-
 
 public class WebSocketClient implements WebSocket.Listener
 {
 
   private WebSocket server;
   private Gson gson = new Gson();
-  private MetricsRepository repo;
+  private final RoomRepository repo;
   HexaConverter convertorHex = new HexaConverter();
-  private RoomRepository roomRepository;
-
-  private Room roomDB;
 
 
   public WebSocket getServer()
   {
     return server;
   }
-  public void DataReceivedMessage(String jsonTelegram)
+  public void sendDownLink(String jsonTelegram)
   {
     server.sendText(jsonTelegram, true);
   }
@@ -46,9 +43,7 @@ public class WebSocketClient implements WebSocket.Listener
     CompletableFuture<WebSocket> ws = client.newWebSocketBuilder().
             buildAsync(URI.create(url), this);
     server = ws.join();
-    repo = (MetricsRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("metricsRepository");
-    roomRepository = (RoomRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("roomRepository");
-    roomDB = new Room();
+    repo = (RoomRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("roomRepository");
   }
 
   //onOpen()
@@ -95,15 +90,8 @@ public class WebSocketClient implements WebSocket.Listener
     try{
       indented = (new JSONObject(data.toString())).toString(4);
       DataReceivedMessage dataReceivedMessage =  gson.fromJson(indented, DataReceivedMessage.class);
-      Metrics metricsDB = convertorHex.convertFromHexaToInt(dataReceivedMessage);
-      repo.save(metricsDB);
-
-      roomDB = roomRepository.getById((long)1);
-      System.out.println(roomDB.getName());
-      roomDB.addMetrics(metricsDB);
-
-      roomRepository.save(roomDB);
-
+      Room room = convertorHex.convertFromHexaToInt(dataReceivedMessage);
+      repo.save(room);
     }
     catch (JSONException e)
     {
@@ -114,9 +102,5 @@ public class WebSocketClient implements WebSocket.Listener
     webSocket.request(1);
     return new CompletableFuture().completedFuture("onText() completed.").thenAccept(System.out::println);
   }
-
-
-
-
 
 }

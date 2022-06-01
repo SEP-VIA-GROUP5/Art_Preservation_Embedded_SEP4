@@ -15,8 +15,8 @@ void lora_downLink_task()
 	for(;;)
 	{	
 		xMessageBufferReceive(downLinkMessageBuffer, &lora_downlink_payload, sizeof(lora_driver_payload_t), portMAX_DELAY);
-		printf("DOWN LINK<<<<<: from port: %d with %d bytes received!",lora_downlink_payload->portNo, lora_downlink_payload->len);
-		if (lora_downlink_payload->len == 5)
+		printf("DOWN LINK<<<<<: from port: %d with %d bytes received!",lora_downlink_payload.portNo, lora_downlink_payload.len);
+		if (lora_downlink_payload.len == 5)
 		{
 			if( xSemaphoreTake( configMutex, ( TickType_t ) 10 ) == pdTRUE )
 			{		

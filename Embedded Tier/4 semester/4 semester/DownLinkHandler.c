@@ -21,8 +21,8 @@ void lora_downLink_task()
 			{		
 				setCo2Norm((lora_downlink_payload.bytes[0]<<8) + (lora_downlink_payload.bytes[1]));
 				setHumNorm(lora_downlink_payload.bytes[2]);
-				setTempNorm((lora_downlink_payload.bytes[3]<<8) + (lora_downlink_payload.bytes[4]));
-				printf("CO2 norm: %d Hum norm: %d Temp norm: %d", getCo2Norm(), getHumNorm(), getTempNorm());
+				setTempNorm((lora_downlink_payload.bytes[3]<<8) + (lora_downlink_payload.bytes[4])/10);
+				printf("Received from downlink - CO2 norm: %d Hum norm: %d Temp norm: %d\n", getCo2Norm(), getHumNorm(), getTempNorm());
 				xSemaphoreGive(configMutex);
 			}
 			else{

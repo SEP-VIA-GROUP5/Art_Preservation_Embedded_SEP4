@@ -1,6 +1,5 @@
 package com.via.sep4.viewModel;
 
-import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
@@ -11,7 +10,6 @@ import com.via.sep4.model.Metrics;
 import com.via.sep4.model.Room;
 import com.via.sep4.model.Temperature;
 import com.via.sep4.repository.DataRepository;
-import com.via.sep4.repository.SettingsRepository;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,11 +18,9 @@ import java.util.ArrayList;
 
 public class DataViewModel extends ViewModel {
     DataRepository repository;
-    SettingsRepository setRepository;
 
     public DataViewModel() {
         repository = DataRepository.getInstance();
-        setRepository = SettingsRepository.getInstance();
     }
 
     public ArrayList<Room> getRooms() {
@@ -96,11 +92,6 @@ public class DataViewModel extends ViewModel {
             Log.d("set norms on co2", e.getMessage());
         }
         repository.setCO2Norm(jsonObject, maxCo2);
-    }
-
-    public void setNorms(Room room, int maxTemp, int maxHum, int maxC02) {
-        setRepository.setNorms(room, maxTemp,maxHum, maxC02);
-
     }
 
 

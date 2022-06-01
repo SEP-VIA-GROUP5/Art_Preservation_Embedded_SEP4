@@ -26,12 +26,6 @@ public class CO2Controller {
         return repo.save(newCO2);
     }
 
-    @PutMapping("/co2s")
-    CO2 setNorm(@RequestBody CO2 newCO2, @RequestParam double max) {
-        newCO2.setMax(max);
-        return repo.save(newCO2);
-    }
-
     @GetMapping("/co2/{id}")
     CO2 get(@PathVariable Long id) {
         return repo.findById(id).orElseThrow(

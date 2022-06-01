@@ -143,35 +143,43 @@ public class HomeFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void loadDataForMain() {
         Log.d("home loading", "load data");
-        room = viewModel.getSingleRoom(1);
+        room = viewModel.getSingleRoom(2);
         String humS = "N/A";
         String co2S = "N/A";
-        if (room.getMetrics().length == 0) {
+        try {
+            Metrics[] metrics = room.getMetrics();
+            if (metrics.length == 0) {
+                toNormsSettings.setVisibility(View.GONE);
+                toDashboard.setVisibility(View.GONE);
+                Toast.makeText(getContext(), R.string.home_no_values, Toast.LENGTH_LONG).show();
+            } else {
+                if (metrics.length != 0) {
+                    Log.d("metrics length", String.valueOf(metrics.length));
+                    Humidity humidity = metrics[1].getHumidity();
+                    com.via.sep4.model.CO2 co2 = metrics[1].getCO2();
+                    temperature = metrics[1].getTemperature();
+                    humS = String.valueOf(humidity.getHumidity());
+                    co2S = String.valueOf(co2.getCo2());
+                    boolean settingTemp = sharedPreferences.getBoolean("temperature", true);
+                    if (temperature != null) {
+                        setTempSetting(settingTemp, temperature);
+                    }
+                    boolean settingNotification = sharedPreferences.getBoolean("notification", true);
+                    notificationSwitch.setChecked(settingNotification);
+
+                    setNotificationChannel(temperature, humidity, co2);
+                }
+            }
+            humidityTextView.setText(humS);
+            CO2TextView.setText(co2S);
+        } catch (NullPointerException e){
             toNormsSettings.setVisibility(View.GONE);
             toDashboard.setVisibility(View.GONE);
             Toast.makeText(getContext(), R.string.home_no_values, Toast.LENGTH_LONG).show();
-        } else {
-            Metrics[] metrics = room.getMetrics();
-            if (metrics.length != 0) {
-                Humidity humidity = metrics[0].getHumidity();
-                com.via.sep4.model.CO2 co2 = metrics[0].getCO2();
-
-                temperature = metrics[0].getTemperature();
-                humS = String.valueOf(humidity.getHumidity());
-                co2S = String.valueOf(co2.getCo2());
-                boolean settingTemp = sharedPreferences.getBoolean("temperature", true);
-                if (temperature != null) {
-                    setTempSetting(settingTemp, temperature);
-                }
-                boolean settingNotification = sharedPreferences.getBoolean("notification", true);
-                notificationSwitch.setChecked(settingNotification);
-
-                setNotificationChannel(temperature, humidity, co2);
-            }
+            Log.d("load data null error", e.getMessage());
         }
-        humidityTextView.setText(humS);
-        CO2TextView.setText(co2S);
-        Snackbar.make(getView(), getString(R.string.home_load_ok), Snackbar.LENGTH_SHORT).show();
+
+        //Snackbar.make(getView(), getString(R.string.home_load_ok), Snackbar.LENGTH_SHORT).show();
     }
 
     private void checkUser(FirebaseUser user, Context context) {

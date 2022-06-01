@@ -26,12 +26,6 @@ public class TemperatureController {
         return repo.save(newTemperature);
     }
 
-    @PutMapping("/temperatures")
-    Temperature setNorm(@RequestBody Temperature newTemperature, @RequestParam double max) {
-        newTemperature.setMax(max);
-        return repo.save(newTemperature);
-    }
-
     @GetMapping("/temperature/{id}")
     Temperature one(@PathVariable Long id) {
         return repo.findById(id).orElseThrow(()

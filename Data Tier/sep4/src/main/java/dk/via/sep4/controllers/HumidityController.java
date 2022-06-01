@@ -26,12 +26,6 @@ public class HumidityController {
         return repo.save(newHumidity);
     }
 
-    @PutMapping("/humidities")
-    Humidity setNorm(@RequestBody Humidity newHumidity, @RequestParam double max) {
-        newHumidity.setMax(max);
-        return repo.save(newHumidity);
-    }
-
     @GetMapping("/humidity/{id}")
     Humidity get(@PathVariable Long id) {
         return repo.findById(id).orElseThrow(

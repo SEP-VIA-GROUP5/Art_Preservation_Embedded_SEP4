@@ -28,6 +28,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.via.sep4.DataHandler;
@@ -170,6 +171,7 @@ public class HomeFragment extends Fragment {
         }
         humidityTextView.setText(humS);
         CO2TextView.setText(co2S);
+        Snackbar.make(getView(), getString(R.string.home_load_ok), Snackbar.LENGTH_SHORT).show();
     }
 
     private void checkUser(FirebaseUser user, Context context) {

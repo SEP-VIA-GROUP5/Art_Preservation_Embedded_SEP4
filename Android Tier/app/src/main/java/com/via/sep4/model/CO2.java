@@ -3,9 +3,9 @@ package com.via.sep4.model;
 public class CO2 {
     private final int id;
     private int max;
-    private final int co2;
+    private final float co2;
 
-    public CO2(int id, int max,  int co2){
+    public CO2(int id, int max, float co2){
         this.id = id;
         this.max = max;
         this.co2 = co2;
@@ -15,7 +15,7 @@ public class CO2 {
         return max;
     }
 
-    public int getCo2() {
+    public float getCo2() {
         return co2;
     }
 

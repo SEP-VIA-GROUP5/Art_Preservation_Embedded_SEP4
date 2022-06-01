@@ -30,12 +30,7 @@ public class ContactUsFragment extends Fragment implements OnMapReadyCallback {
         String MAP_FRAGMENT = "fragment_contact_us";
         FragmentManager fragmentManager = getChildFragmentManager();
         SupportMapFragment mapFragment = (SupportMapFragment) fragmentManager.findFragmentByTag(MAP_FRAGMENT);
-        if(mapFragment == null){
-            mapFragment = SupportMapFragment.newInstance();
-            fragmentManager.beginTransaction().replace(R.id.map, mapFragment, MAP_FRAGMENT)
-                    .commit();
-        }
-        mapFragment.getMapAsync(this);
+
 
         return inflater.inflate(R.layout.fragment_contact_us, container, false);
     }

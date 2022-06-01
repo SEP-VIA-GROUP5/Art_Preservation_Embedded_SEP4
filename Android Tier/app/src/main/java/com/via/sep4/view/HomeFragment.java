@@ -28,6 +28,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.via.sep4.DataHandler;
@@ -40,6 +41,7 @@ import com.via.sep4.model.Room;
 import com.via.sep4.model.Temperature;
 import com.via.sep4.viewModel.DataViewModel;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -109,23 +111,6 @@ public class HomeFragment extends Fragment {
                 NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_nav_home_to_settingsFragment, id);
             }
         });
-        Temperature finalTemperature = temperature;
-        temperatureSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    setTempSetting(b, finalTemperature);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("temperature", true);
-                    editor.commit();
-                } else {
-                    setTempSetting(b, finalTemperature);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("temperature", false);
-                    editor.commit();
-                }
-            }
-        });
 
         notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -142,34 +127,67 @@ public class HomeFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void loadDataForMain() {
         Log.d("home loading", "load data");
-        room = viewModel.getSingleRoom(1);
+
         String humS = "N/A";
         String co2S = "N/A";
-        if (room.getMetrics().length == 0) {
-            toNormsSettings.setVisibility(View.GONE);
-            toDashboard.setVisibility(View.GONE);
-            Toast.makeText(getContext(), R.string.home_no_values, Toast.LENGTH_LONG).show();
-        } else {
+        try {
+            room = viewModel.getSingleRoom(1);
             Metrics[] metrics = room.getMetrics();
-            if (metrics.length != 0) {
-                Humidity humidity = metrics[0].getHumidity();
-                com.via.sep4.model.CO2 co2 = metrics[0].getCO2();
+            if (metrics.length == 0 || viewModel.getSingleRoom(1).getId() == 100) {
+                initDataLocal();
+                Toast.makeText(getContext(), R.string.home_no_values, Toast.LENGTH_LONG).show();
+            } else {
+                if (metrics.length != 0) {
+                    Log.d("metrics length", String.valueOf(metrics.length));
+                    Humidity humidity = metrics[0].getHumidity();
+                    com.via.sep4.model.CO2 co2 = metrics[0].getCO2();
+                    temperature = metrics[0].getTemperature();
+                    humS = String.valueOf(humidity.getHumidity());
+                    co2S = String.valueOf(co2.getCo2());
 
-                temperature = metrics[0].getTemperature();
-                humS = String.valueOf(humidity.getHumidity());
-                co2S = String.valueOf(co2.getCo2());
-                boolean settingTemp = sharedPreferences.getBoolean("temperature", true);
-                if (temperature != null) {
-                    setTempSetting(settingTemp, temperature);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putFloat("temperatureValue", temperature.getTemperature());
+                    editor.putFloat("humidityValue", humidity.getHumidity());
+                    editor.putFloat("co2Value", co2.getCo2());
+                    editor.commit();
+
+                    boolean settingTemp = sharedPreferences.getBoolean("temperatureSwitch", true);
+                    if (temperature != null) {
+                        setTempSetting(settingTemp, temperature);
+                    }
+                    boolean settingNotification = sharedPreferences.getBoolean("notification", true);
+                    notificationSwitch.setChecked(settingNotification);
+
+                    setNotificationChannel(temperature, humidity, co2);
                 }
-                boolean settingNotification = sharedPreferences.getBoolean("notification", true);
-                notificationSwitch.setChecked(settingNotification);
-
-                setNotificationChannel(temperature, humidity, co2);
             }
+            humidityTextView.setText(humS);
+            CO2TextView.setText(co2S);
+
+            Temperature finalTemperature = temperature;
+            temperatureSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        setTempSetting(b, finalTemperature);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("temperatureSwitch", true);
+                        editor.commit();
+                    } else {
+                        setTempSetting(b, finalTemperature);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("temperatureSwitch", false);
+                        editor.commit();
+                    }
+                }
+            });
+        } catch (Exception e) {
+            initDataLocal();
+            Toast.makeText(getContext(), R.string.home_no_values, Toast.LENGTH_LONG).show();
+            Log.d("load data null error", e.getMessage());
         }
-        humidityTextView.setText(humS);
-        CO2TextView.setText(co2S);
+
+        //Snackbar.make(getView(), getString(R.string.home_load_ok), Snackbar.LENGTH_SHORT).show();
     }
 
     private void checkUser(FirebaseUser user, Context context) {
@@ -191,6 +209,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadTemp(boolean setting, Temperature temperature) {
+        Log.d("temp home", temperature.toString());
         if (setting) {
             temperatureTextView.setText(String.valueOf(temperature.getTemperature()));
         } else {
@@ -261,6 +280,24 @@ public class HomeFragment extends Fragment {
 
     private void enableNotification(NotificationCompat.Builder builder, int id) {
         notificationManager.notify(id, builder.build());
+    }
+
+    private void initDataLocal(){
+        float t = sharedPreferences.getFloat("temperatureValue", 0);
+        float h = sharedPreferences.getFloat("humidityValue", 0);
+        float c = sharedPreferences.getFloat("co2Value", 0);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("temperatureStringValue", String.valueOf(t));
+        editor.putString("humidityStringStringValue", String.valueOf(h));
+        editor.putString("co2StringValue", String.valueOf(c));
+        editor.commit();
+
+        temperatureTextView.setText(String.valueOf(t));
+        humidityTextView.setText(String.valueOf(h));
+        CO2TextView.setText(String.valueOf(c));
+        toNormsSettings.setVisibility(View.GONE);
+        toDashboard.setVisibility(View.GONE);
     }
 }
 

@@ -3,15 +3,15 @@ package com.via.sep4.model;
 public class Humidity {
     private final int id;
     private int max;
-    private final int humidity;
+    private final float humidity;
 
-    public Humidity(int id, int max, int humidity) {
+    public Humidity(int id, int max, float humidity) {
         this.id = id;
         this.max = max;
         this.humidity = humidity;
     }
 
-    public int getHumidity() {
+    public float getHumidity() {
         return humidity;
     }
 

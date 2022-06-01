@@ -94,5 +94,8 @@ public class DataViewModel extends ViewModel {
         repository.setCO2Norm(jsonObject, maxCo2);
     }
 
+    public int setAllNorms(int id, int temMax, int humMax, int co2Max){
+        return repository.setAllNorms(id, temMax, humMax, co2Max);
+    }
 
 }

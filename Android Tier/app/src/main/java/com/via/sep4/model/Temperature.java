@@ -3,15 +3,15 @@ package com.via.sep4.model;
 public class Temperature {
     private final int id;
     private int max;
-    private final int temperature;
+    private final float temperature;
 
-    public Temperature(int id, int max, int temperature){
+    public Temperature(int id, int max, float temperature){
         this.id = id;
         this.max = max;
         this.temperature = temperature;
     }
 
-    public int getTemperature() {
+    public float getTemperature() {
         return temperature;
     }
 

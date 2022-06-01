@@ -27,11 +27,11 @@
         <menu>
             <group android:id="@+id/sideMenu_group2">
                 <item
-                    android:id="@+id/sideMenu_about"
+                    android:id="@+id/aboutUsFragment"
                     android:icon="@drawable/ic_about_us"
                     android:title="@string/sideMenu_about" />
                 <item
-                    android:id="@+id/sideMenu_contact"
+                    android:id="@+id/contactUsFragment"
                     android:icon="@drawable/ic_contact"
                     android:title="@string/sideMenu_contact" />
             </group>

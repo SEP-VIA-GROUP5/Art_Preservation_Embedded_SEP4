@@ -58,15 +58,12 @@ public class SettingsFragment extends Fragment {
                 if (metrics.length > 0) {
                     //temperature
                     metrics[0].getTemperature().setMax(toInt(maxTemp));
-                    viewModel.addTempNorm(metrics[0].getTemperature(), toInt(maxTemp));
-
                     //humidity
                     metrics[0].getHumidity().setMax(toInt(maxHum));
-                    viewModel.addHumNorm(metrics[0].getHumidity(), toInt(maxHum));
-
                     //co2
                     metrics[0].getCO2().setMax(toInt(maxCO2));
-                    viewModel.addCO2Norm(metrics[0].getCO2(), toInt(maxCO2));
+
+                    viewModel.setAllNorms(1, toInt(maxTemp), toInt(maxHum), toInt(maxCO2));
 
                     Toast.makeText(getContext(), R.string.settings_saveChange, Toast.LENGTH_SHORT).show();
                 } else {

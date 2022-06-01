@@ -14,7 +14,8 @@
     <ClCompile Include="..\IoT-Testing\WindowController.c" />
     <ClCompile Include="configurationTesting.cpp" />
     <ClCompile Include="windowControllerTesting.cpp" />
-    <ClCompile Include="downLinkHandlerTesting.cpp" />
+    <ClCompile Include="DownLinkTesting.cpp" />
+    <ClCompile Include="..\IoT-Testing\DownLinkHandler.c" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="FreeeRTOS">

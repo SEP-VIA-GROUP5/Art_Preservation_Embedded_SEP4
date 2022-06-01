@@ -39,13 +39,14 @@
     <ClCompile Include="..\IoT-Testing\Application.c" />
     <ClCompile Include="..\IoT-Testing\Co2Sensor.c" />
     <ClCompile Include="..\IoT-Testing\Configuration.c" />
+    <ClCompile Include="..\IoT-Testing\DownLinkHandler.c" />
     <ClCompile Include="..\IoT-Testing\Setup.c" />
     <ClCompile Include="..\IoT-Testing\TemperatureHumiditySensor.c" />
     <ClCompile Include="..\IoT-Testing\WindowController.c" />
     <ClCompile Include="applicationTesting.cpp" />
     <ClCompile Include="Co2Testing.cpp" />
     <ClCompile Include="configurationTesting.cpp" />
-    <ClCompile Include="downLinkHandlerTesting.cpp" />
+    <ClCompile Include="DownLinkTesting.cpp" />
     <ClCompile Include="FreeRTOS_MOCK_FFF.cpp" />
     <ClCompile Include="setupTesting.cpp" />
     <ClCompile Include="TemperatureAndHumidityTesting.cpp" />

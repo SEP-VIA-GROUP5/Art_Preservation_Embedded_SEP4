@@ -19,9 +19,11 @@
 #include <../GoogleTesting/FreeRTOS.h>
 #include <../GoogleTesting/task.h>
 #include <../GoogleTesting/message_buffer.h>
+#include <../GoogleTesting/semphr.h>
 #include "Setup.h"
 #include "Configuration.h"
 
-//Function for down link handler task creation
+void setPayLoadLen(int length);
 void lora_downLink_task();
+//Function for down link handler task creation
 void lora_downlink_handler_create();

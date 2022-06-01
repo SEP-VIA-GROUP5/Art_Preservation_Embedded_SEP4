@@ -125,7 +125,9 @@ public class DataRepository {
                     }
                     Log.d("message room", msg[0]);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    msg[0] = "fail";
+                    Room room1 = new Room(100, "Main", 101, null);
+                    room[0] = room1;
                 }
             }
         }).start();
@@ -141,6 +143,9 @@ public class DataRepository {
             room[0] = gson.fromJson(msg[0], Room.class);
             msg[0] = room[0].toString();
             Log.d("room get", msg[0]);
+        } else {
+            Room room1 = new Room(100, "Main", 101, null);
+            room[0] = room1;
         }
         return room[0];
     }
@@ -343,7 +348,6 @@ public class DataRepository {
     }
 
     public int addMetricsToRoom(int id) {
-        //TODO only get metrics (id=3), change it in the future
         final int[] code = new int[1];
         String metricsGet = getMetricsByRoomString(4);
         new Thread(new Runnable() {
@@ -500,7 +504,6 @@ public class DataRepository {
             }
         }).start();
     }
-
 
     public void setCO2Norm(JSONObject jsonParam, int max) {
         new Thread(new Runnable() {

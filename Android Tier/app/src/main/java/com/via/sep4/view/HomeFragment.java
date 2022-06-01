@@ -41,6 +41,7 @@ import com.via.sep4.model.Room;
 import com.via.sep4.model.Temperature;
 import com.via.sep4.viewModel.DataViewModel;
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -117,12 +118,12 @@ public class HomeFragment extends Fragment {
                 if (b) {
                     setTempSetting(b, finalTemperature);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("temperature", true);
+                    editor.putBoolean("temperatureSwitch", true);
                     editor.commit();
                 } else {
                     setTempSetting(b, finalTemperature);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("temperature", false);
+                    editor.putBoolean("temperatureSwitch", false);
                     editor.commit();
                 }
             }
@@ -143,14 +144,14 @@ public class HomeFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void loadDataForMain() {
         Log.d("home loading", "load data");
-        room = viewModel.getSingleRoom(1);
+
         String humS = "N/A";
         String co2S = "N/A";
         try {
+            room = viewModel.getSingleRoom(1);
             Metrics[] metrics = room.getMetrics();
-            if (metrics.length == 0) {
-                toNormsSettings.setVisibility(View.GONE);
-                toDashboard.setVisibility(View.GONE);
+            if (metrics.length == 0 || viewModel.getSingleRoom(1).getId() == 100) {
+                initDataLocal();
                 Toast.makeText(getContext(), R.string.home_no_values, Toast.LENGTH_LONG).show();
             } else {
                 if (metrics.length != 0) {
@@ -160,7 +161,14 @@ public class HomeFragment extends Fragment {
                     temperature = metrics[1].getTemperature();
                     humS = String.valueOf(humidity.getHumidity());
                     co2S = String.valueOf(co2.getCo2());
-                    boolean settingTemp = sharedPreferences.getBoolean("temperature", true);
+
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putFloat("temperatureValue", temperature.getTemperature());
+                    editor.putFloat("humidityValue", humidity.getHumidity());
+                    editor.putFloat("co2Value", co2.getCo2());
+                    editor.commit();
+
+                    boolean settingTemp = sharedPreferences.getBoolean("temperatureSwitch", true);
                     if (temperature != null) {
                         setTempSetting(settingTemp, temperature);
                     }
@@ -172,9 +180,8 @@ public class HomeFragment extends Fragment {
             }
             humidityTextView.setText(humS);
             CO2TextView.setText(co2S);
-        } catch (NullPointerException e){
-            toNormsSettings.setVisibility(View.GONE);
-            toDashboard.setVisibility(View.GONE);
+        } catch (Exception e) {
+            initDataLocal();
             Toast.makeText(getContext(), R.string.home_no_values, Toast.LENGTH_LONG).show();
             Log.d("load data null error", e.getMessage());
         }
@@ -271,6 +278,24 @@ public class HomeFragment extends Fragment {
 
     private void enableNotification(NotificationCompat.Builder builder, int id) {
         notificationManager.notify(id, builder.build());
+    }
+
+    private void initDataLocal(){
+        float t = sharedPreferences.getFloat("temperatureValue", 0);
+        float h = sharedPreferences.getFloat("humidityValue", 0);
+        float c = sharedPreferences.getFloat("co2Value", 0);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("temperatureStringValue", String.valueOf(t));
+        editor.putString("humidityStringStringValue", String.valueOf(h));
+        editor.putString("co2StringValue", String.valueOf(c));
+        editor.commit();
+
+        temperatureTextView.setText(String.valueOf(t));
+        humidityTextView.setText(String.valueOf(h));
+        CO2TextView.setText(String.valueOf(c));
+        toNormsSettings.setVisibility(View.GONE);
+        toDashboard.setVisibility(View.GONE);
     }
 }
 

@@ -24,7 +24,7 @@ public class HexaConverter {
     temperatureRep = (TemperatureRepository) SpringConfiguration.contextProvider().getApplicationContext().getBean("temperatureRepository");
   }
 
-  public Metrics convertFromHexaToInt(DataReceivedMessage data)
+  public Room convertFromHexaToInt(DataReceivedMessage data)
   {
     int Co2;
     int temperature;
@@ -48,7 +48,7 @@ public class HexaConverter {
     metrics = new Metrics(co2Measurement, humidityMeasurement, temperatureMeasurement);
     r1.addMetrics(metrics);
 
-    return metrics;
+    return r1;
   }
 }
 

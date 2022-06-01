@@ -34,101 +34,12 @@ public class DataReceivedMessage {
     this.snr = snr;
   }
 
-  public String getCmd() {
-    return cmd;
-  }
-
-  public void setCmd(String cmd) {
-    this.cmd = cmd;
-  }
-
-  public String getEUI() {
-    return EUI;
-  }
-
-
-  public void setEUI(String EUI) {
-    this.EUI = EUI;
-  }
-
-  public long getTs() {
-    return ts;
-  }
-
-  public void setTs(long ts) {
-    this.ts = ts;
-  }
-
-  public boolean isAck() {
-    return ack;
-  }
-
-  public void setAck(boolean ack) {
-    this.ack = ack;
-  }
-
-  public int getFcnt() {
-    return fcnt;
-  }
-
-  public void setFcnt(int fcnt) {
-    this.fcnt = fcnt;
-  }
-
-  public int getPort() {
-    return port;
-  }
-
-  public void setPort(int port) {
-    this.port = port;
-  }
-
-  public String getEncdata() {
-    return encdata;
-  }
-
-  public void setEncdata(String encdata) {
-    this.encdata = encdata;
-  }
-
   public String getData() {
     return data;
   }
 
   public void setData(String data) {
     this.data = data;
-  }
-
-  public int getFreq() {
-    return freq;
-  }
-
-  public void setFreq(int freq) {
-    this.freq = freq;
-  }
-
-  public String getDr() {
-    return dr;
-  }
-
-  public void setDr(String dr) {
-    this.dr = dr;
-  }
-
-  public int getRssi() {
-    return rssi;
-  }
-
-  public void setRssi(int rssi) {
-    this.rssi = rssi;
-  }
-
-  public double getSnr() {
-    return snr;
-  }
-
-  public void setSnr(double snr) {
-    this.snr = snr;
   }
 
   @Override

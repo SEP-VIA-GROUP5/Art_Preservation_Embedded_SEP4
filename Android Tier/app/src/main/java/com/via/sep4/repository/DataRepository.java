@@ -555,4 +555,39 @@ public class DataRepository {
         }).start();
     }
 
+    public int setAllNorms(int id, int temMax, int humMax, int co2Max){
+        final int[] code = {0};
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL("http://sep4-env.eba-icktypmd.us-west-1.elasticbeanstalk.com/api/norms/" + id + "?cO2Max=" + co2Max + "&humidityMax=" + humMax + "&tempMax=" + temMax);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("PUT");
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    conn.setUseCaches(false);
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.setRequestProperty("Charset", "UTF-8");
+                    conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                    conn.setRequestProperty("accept", "application/json");
+                    conn.connect();
+                    System.out.println(conn.getResponseCode());
+                    code[0] = conn.getResponseCode();
+
+                    conn.disconnect();
+                } catch (Exception e) {
+                    Log.d("getString e", e.getMessage());
+                }
+            }
+        }).start();
+        while (code[0] == 0) {
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return code[0];
+    }
 }

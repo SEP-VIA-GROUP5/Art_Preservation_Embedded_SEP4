@@ -156,9 +156,9 @@ public class HomeFragment extends Fragment {
             } else {
                 if (metrics.length != 0) {
                     Log.d("metrics length", String.valueOf(metrics.length));
-                    Humidity humidity = metrics[1].getHumidity();
-                    com.via.sep4.model.CO2 co2 = metrics[1].getCO2();
-                    temperature = metrics[1].getTemperature();
+                    Humidity humidity = metrics[0].getHumidity();
+                    com.via.sep4.model.CO2 co2 = metrics[0].getCO2();
+                    temperature = metrics[0].getTemperature();
                     humS = String.valueOf(humidity.getHumidity());
                     co2S = String.valueOf(co2.getCo2());
 

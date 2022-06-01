@@ -3,9 +3,12 @@ An Embedded system for Art galleries. The main purpose - present the data of the
 
 ## Teams:
 
-###IOT team. Responsible for the embedded part of the system.
+####IOT team. 
+Responsible for the embedded part of the system.
 
-###DataWarehouse team. Responsible for getting the data from embedded system and storing it in a data warehouse. Also making a web service to make the data accesible.
+####DataWarehouse team. 
+Responsible for getting the data from embedded system and storing it in a data warehouse. Also making a web service to make the data accesible.
 - [Timothy Johan Engkar](https://github.com/AsuraEyes) - AsuraEyes  
 
-###Android team. Responsible for making an android application that will present the data received from the data warehouse in various ways.
+####Android team. 
+Responsible for making an android application that will present the data received from the data warehouse in various ways.

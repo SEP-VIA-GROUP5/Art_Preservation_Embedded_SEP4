@@ -111,23 +111,6 @@ public class HomeFragment extends Fragment {
                 NavHostFragment.findNavController(HomeFragment.this).navigate(R.id.action_nav_home_to_settingsFragment, id);
             }
         });
-        Temperature finalTemperature = temperature;
-        temperatureSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    setTempSetting(b, finalTemperature);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("temperatureSwitch", true);
-                    editor.commit();
-                } else {
-                    setTempSetting(b, finalTemperature);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putBoolean("temperatureSwitch", false);
-                    editor.commit();
-                }
-            }
-        });
 
         notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -180,6 +163,24 @@ public class HomeFragment extends Fragment {
             }
             humidityTextView.setText(humS);
             CO2TextView.setText(co2S);
+
+            Temperature finalTemperature = temperature;
+            temperatureSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        setTempSetting(b, finalTemperature);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("temperatureSwitch", true);
+                        editor.commit();
+                    } else {
+                        setTempSetting(b, finalTemperature);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("temperatureSwitch", false);
+                        editor.commit();
+                    }
+                }
+            });
         } catch (Exception e) {
             initDataLocal();
             Toast.makeText(getContext(), R.string.home_no_values, Toast.LENGTH_LONG).show();
@@ -208,6 +209,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadTemp(boolean setting, Temperature temperature) {
+        Log.d("temp home", temperature.toString());
         if (setting) {
             temperatureTextView.setText(String.valueOf(temperature.getTemperature()));
         } else {

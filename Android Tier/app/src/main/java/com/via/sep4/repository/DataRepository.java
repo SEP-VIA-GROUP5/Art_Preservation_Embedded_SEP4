@@ -454,7 +454,6 @@ public class DataRepository {
         }).start();
     }
 
-
     public void setHumNorm(JSONObject jsonParam, int max) {
         new Thread(new Runnable() {
             @Override

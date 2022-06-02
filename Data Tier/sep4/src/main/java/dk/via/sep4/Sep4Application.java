@@ -1,6 +1,5 @@
 package dk.via.sep4;
 
-import com.google.gson.Gson;
 import dk.via.sep4.LoraWanConnection.WebSocketClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

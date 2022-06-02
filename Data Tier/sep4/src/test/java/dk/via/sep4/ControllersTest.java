@@ -3,7 +3,6 @@ package dk.via.sep4;
 import dk.via.sep4.models.*;
 import dk.via.sep4.repo.BuildingRepository;
 import dk.via.sep4.repo.MetricsRepository;
-import dk.via.sep4.repo.RoomRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

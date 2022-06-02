@@ -1,7 +1,6 @@
 package dk.via.sep4.controllers;
 
 import com.google.gson.Gson;
-import dk.via.sep4.models.Norms;
 import dk.via.sep4.LoraWanConnection.SendDownLink;
 import dk.via.sep4.LoraWanConnection.WebSocketClient;
 import dk.via.sep4.exceptions.CO2NotFoundException;
@@ -9,6 +8,7 @@ import dk.via.sep4.exceptions.HumidityNotFoundException;
 import dk.via.sep4.exceptions.TemperatureNotFoundException;
 import dk.via.sep4.models.CO2;
 import dk.via.sep4.models.Humidity;
+import dk.via.sep4.models.Norms;
 import dk.via.sep4.models.Temperature;
 import dk.via.sep4.repo.CO2Repository;
 import dk.via.sep4.repo.HumidityRepository;

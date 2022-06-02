@@ -99,7 +99,11 @@ public class LogInFragment extends Fragment {
                                     Snackbar.make(v, task.getException().toString(), Snackbar.LENGTH_SHORT).show();
                                 } else {
                                     FirebaseUser user = auth.getCurrentUser();
-                                    updateUI(user);
+                                    if (user != null) {
+                                        updateUI(user);
+                                    } else {
+                                        Snackbar.make(v, R.string.login_wrongPassword, Snackbar.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
                         });

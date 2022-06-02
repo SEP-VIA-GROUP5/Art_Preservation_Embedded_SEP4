@@ -72,6 +72,7 @@
     <string name="account_save">Save changes</string>
     <string name="account_save_ok">Change saved!</string>
 
+    <string name="login_wrongPassword">Wrong password or email</string>
     <!-- register -->
     <string name="signup_label">Create new account</string>
 

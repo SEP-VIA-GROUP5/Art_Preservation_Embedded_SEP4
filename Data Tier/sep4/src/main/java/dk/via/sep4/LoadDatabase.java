@@ -1,9 +1,7 @@
 package dk.via.sep4;
 
 import dk.via.sep4.models.*;
-import dk.via.sep4.models.Metrics;
 import dk.via.sep4.repo.BuildingRepository;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

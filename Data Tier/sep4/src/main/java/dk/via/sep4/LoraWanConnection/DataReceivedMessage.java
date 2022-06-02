@@ -1,7 +1,5 @@
 package dk.via.sep4.LoraWanConnection;
 
-import org.apache.catalina.Service;
-
 /**
  * @author $(Alina Chelmus)
  */

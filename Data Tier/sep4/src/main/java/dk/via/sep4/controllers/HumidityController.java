@@ -1,7 +1,7 @@
 package dk.via.sep4.controllers;
 
-import dk.via.sep4.models.Humidity;
 import dk.via.sep4.exceptions.HumidityNotFoundException;
+import dk.via.sep4.models.Humidity;
 import dk.via.sep4.repo.HumidityRepository;
 import org.springframework.web.bind.annotation.*;
 

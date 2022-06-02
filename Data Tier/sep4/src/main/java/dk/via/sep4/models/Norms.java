@@ -1,10 +1,5 @@
 package dk.via.sep4.models;
 
-import dk.via.sep4.SpringConfiguration;
-import dk.via.sep4.repo.CO2Repository;
-import dk.via.sep4.repo.HumidityRepository;
-import dk.via.sep4.repo.TemperatureRepository;
-
 public class Norms {
     int co2Max;
     int humidity;

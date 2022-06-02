@@ -1,7 +1,7 @@
 package dk.via.sep4.controllers;
 
-import dk.via.sep4.exceptions.*;
-import dk.via.sep4.models.*;
+import dk.via.sep4.exceptions.RoomNotFoundException;
+import dk.via.sep4.models.Room;
 import dk.via.sep4.repo.RoomRepository;
 import org.springframework.web.bind.annotation.*;
 

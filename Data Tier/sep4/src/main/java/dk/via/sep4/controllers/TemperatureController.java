@@ -1,7 +1,7 @@
 package dk.via.sep4.controllers;
 
-import dk.via.sep4.models.Temperature;
 import dk.via.sep4.exceptions.TemperatureNotFoundException;
+import dk.via.sep4.models.Temperature;
 import dk.via.sep4.repo.TemperatureRepository;
 import org.springframework.web.bind.annotation.*;
 

@@ -2,9 +2,7 @@ package dk.via.sep4.LoraWanConnection;
 
 import com.google.gson.Gson;
 import dk.via.sep4.SpringConfiguration;
-import dk.via.sep4.models.Metrics;
 import dk.via.sep4.models.Room;
-import dk.via.sep4.repo.MetricsRepository;
 import dk.via.sep4.repo.RoomRepository;
 import org.json.JSONException;
 import org.json.JSONObject;
